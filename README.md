@@ -26,20 +26,15 @@ but this could be any `css` you want.
 
 [demo](https://haroen.me/pagesearch/)
 
-Make sure you have an `input` or `contenteditable` field for the search bar.
-
 ```js
-const pagesearch = require('pagesearch');
-
 pagesearch({
   input: '.search input', // queryselector for the input
-  find: [{
-    query: '.repos--list h2 a', // queryselector for element to search in
-    parents: 2, // the amount of parents to the element to hide
-  },{
-    query: '.repos--list p.main', // another element to search in
-    // default value for parents is 1
-  }]
+  find: [
+  '.results article h2', // queryselector for element to search in
+  '.results article p', // another element to search in
+  '.results article ul li',
+  ],
+  parents: 1 // the amount of parents from the first element in find to the first to the removed element
 });
 ```
 

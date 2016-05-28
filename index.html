@@ -15,6 +15,18 @@
   input {
     font-size: 1em;
   }
+  .results {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .results article {
+    flex: 1 0 10em;
+    border: 1px solid black;
+    padding: 1em;
+  }
+  .hidden {
+    display: none;
+  }
   </style>
 </head>
 
@@ -24,10 +36,90 @@
     <p>A simple solution for instant search for elements on your page.</p>
     <p>by <a href="https://haroen.me">Haroen Viaene</a></p>
     <input type="search" placeholder="search here">
+    <div class="results">
+      <article>
+        <h2>bla</h2>
+        <p>words words words</p>
+        <ul>
+          <li>it's</li>
+        </ul>
+      </article>
+      <article>
+        <h2>hello</h2>
+        <p>Haroen</p>
+        <ul>
+          <li>also</li>
+        </ul>
+      </article>
+      <article>
+        <h2>test</h2>
+        <p>test this</p>
+        <ul>
+          <li>possible</li>
+        </ul>
+      </article>
+      <article>
+        <h2>result</h2>
+        <p>I did this</p>
+        <ul>
+          <li>to</li>
+        </ul>
+      </article>
+      <article>
+        <h2>something</h2>
+        <p>demo for pagesearch</p>
+        <ul>
+          <li>have</li>
+        </ul>
+      </article>
+      <article>
+        <h2>nothing</h2>
+        <p>lorem ipsum</p>
+        <ul>
+          <li>very</li>
+        </ul>
+      </article>
+      <article>
+        <h2>word!</h2>
+        <p>shoutout</p>
+        <ul>
+          <li>nested</li>
+        </ul>
+      </article>
+      <article>
+        <h2>it's something</h2>
+        <p>test test test</p>
+        <ul>
+          <li>elements</li>
+        </ul>
+      </article>
+      <article>
+        <h2>here's a thing</h2>
+        <p>content to this thing</p>
+        <ul>
+          <li>with</li>
+        </ul>
+      </article>
+      <article>
+        <h2>thing</h2>
+        <p>here's something</p>
+        <ul>
+          <li>pagesearch</li>
+        </ul>
+      </article>
+    </div>
   </div>
   <script src="pagesearch.js"></script>
   <script>
-    pagesearch({});
+    pagesearch({
+      input: 'input',
+      find: [
+        '.results article h2',
+        '.results article p',
+        '.results article ul li',
+      ],
+      parents: 1
+    });
   </script>
 </body>
 
