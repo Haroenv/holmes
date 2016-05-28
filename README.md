@@ -2,6 +2,8 @@
 
 > simple search based on the dom
 
+[![Build Status](https://travis-ci.org/Haroenv/pagesearch.svg?branch=gh-pages)](https://travis-ci.org/Haroenv/pagesearch)[![npm version](https://badge.fury.io/js/pagesearch.svg)](https://www.npmjs.com/package/pagesearch)
+
 ## Installation
 
 ```

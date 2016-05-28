@@ -1,6 +1,6 @@
 {
   "name": "pagesearch",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "hide and show elements based on search",
   "main": "pagesearch.js",
   "scripts": {
