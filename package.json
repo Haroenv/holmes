@@ -1,0 +1,33 @@
+{
+  "name": "pagesearch",
+  "version": "0.0.1",
+  "description": "hide and show elements based on search",
+  "main": "pagesearch.js",
+  "scripts": {
+    "lint": "eslint pagesearch.js",
+    "test": "npm run lint"
+  },
+  "keywords": ["search", "dom"],
+  "author": "Haroen Viaene <hello@haroen.me>",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Haroenv/pagesearch.git"
+  },
+  "scripts": {
+    "test": "npm run lint",
+    "lint": "eslint floating.js"
+  },
+  "eslintConfig": {
+    "env": {
+      "es6": true
+    }
+  },
+  "bugs": {
+    "url": "https://github.com/Haroenv/pagesearch/issues"
+  },
+  "homepage": "https://haroen.me/pagesearch/",
+  "devDependencies": {
+    "eslint": "^2.9.0"
+  }
+}
