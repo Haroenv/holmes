@@ -40,27 +40,25 @@
    * search for dom elements on your page
    * @param  {object} options
    * options: {
-   *  input: '.search input', // queryselector for the input
-   *  find: [
-   *    '.results article h2',
-   *  ],
-   *  parents: 1
+   *  input: 'input[type=search]',
+   *  find: '.results article',
+   *  parents: 0
    *}
    */
   var pagesearch = function(options) {
     window.addEventListener('DOMContentLoaded',function(){
+      options.parents = options.parents || 0;
+      options.input = options.input || 'input[type=search]';
       var search = document.querySelector(options.input);
-      for (var query of options.find) {
-        document.querySelector(query);
-      }
+      var elements = document.querySelectorAll(options.find);
 
       search.addEventListener('input',function(){
-        for (var i = 0; i < courseNames.length; i++) {
+        for (var i = 0; i < elements.length; i++) {
           var searchString = search.value.toLowerCase();
-          if (courseNames[i].innerHTML.toLowerCase().indexOf(searchString) === -1 && courseDescriptions[i].innerHTML.toLowerCase().indexOf(searchString) === -1) {
-            courseNames[i].parentNode.parentNode.classList.add('hidden');
+          if (elements[i].textContent.toLowerCase().indexOf(searchString) === -1) {
+            elements[i].classList.add('hidden');
           } else {
-            courseNames[i].parentNode.parentNode.classList.remove('hidden');
+            elements[i].classList.remove('hidden');
           }
         };
       });

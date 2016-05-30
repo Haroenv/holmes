@@ -29,16 +29,14 @@ but this could be any `css` you want.
 ```js
 pagesearch({
   input: '.search input', // queryselector for the input
-  find: [
-  '.results article h2', // queryselector for element to search in
-  '.results article p', // another element to search in
-  '.results article ul li',
-  ],
-  parents: 1 // the amount of parents from the first element in find to the first to the removed element
+  find: '.results article', // queryselector for element to search in
+  parents: 1 // the amount of parents from the first element in find to the first to the removed element (default 0)
 });
 ```
 
 ### Questions?
+
+Compatible up to IE9.
 
 Let me know on twitter: [@haroenv](https://twitter.com/haroenv).
 
