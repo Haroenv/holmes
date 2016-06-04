@@ -1,13 +1,13 @@
-# Pagesearch
+# Holmes.js
 
 > simple search based on the dom
 
-[![Build Status](https://travis-ci.org/Haroenv/pagesearch.svg?branch=gh-pages)](https://travis-ci.org/Haroenv/pagesearch)[![npm version](https://badge.fury.io/js/pagesearch.svg)](https://www.npmjs.com/package/pagesearch)
+[![Build Status](https://travis-ci.org/Haroenv/holmes.svg?branch=gh-pages)](https://travis-ci.org/Haroenv/holmes)[![npm version](https://badge.fury.io/js/holmes.svg)](https://www.npmjs.com/package/holmes)
 
 ## Installation
 
 ```
-$ npm install --save pagesearch
+$ npm install --save holmes.js
 ```
 
 After which you can add it in your page with i.e. browserify or loading the module in a different script tag.
@@ -24,10 +24,10 @@ but this could be any `css` you want.
 
 ## Usage
 
-[demo](https://haroen.me/pagesearch/)
+[demo](https://haroen.me/holmes/)
 
 ```js
-pagesearch({
+holmes({
   input: '.search input', // queryselector for the input
   find: '.results article', // queryselector for element to search in
   parents: 1 // the amount of parents from the first element in find to the first to the removed element (default 0)

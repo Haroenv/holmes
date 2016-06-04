@@ -1,10 +1,10 @@
 {
-  "name": "pagesearch",
+  "name": "holmes.js",
   "version": "0.0.0",
   "description": "hide and show elements based on search",
-  "main": "pagesearch.js",
+  "main": "holmes.js",
   "scripts": {
-    "lint": "eslint pagesearch.js",
+    "lint": "eslint holmes.js",
     "test": "npm run lint"
   },
   "keywords": ["search", "dom"],
@@ -12,7 +12,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Haroenv/pagesearch.git"
+    "url": "git+https://github.com/Haroenv/holmes.git"
   },
   "scripts": {
     "test": "npm run lint",
@@ -24,9 +24,9 @@
     }
   },
   "bugs": {
-    "url": "https://github.com/Haroenv/pagesearch/issues"
+    "url": "https://github.com/Haroenv/holmes/issues"
   },
-  "homepage": "https://haroen.me/pagesearch/",
+  "homepage": "https://haroen.me/holmes/",
   "devDependencies": {
     "eslint": "^2.9.0"
   }
