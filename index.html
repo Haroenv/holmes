@@ -11,194 +11,197 @@
 </head>
 
 <body>
-  <div class="full">
-    <h1><a href="https://github.com/Haroenv/holmes/">Holmes</a></h1>
-    <p>A simple solution to add search to instantly find the elements on your page.</p>
-    <span class="separator" data-category="Installation"></span>
-    <pre><code class="microlight">
+  <h1><a href="https://github.com/Haroenv/holmes/">Holmes</a></h1>
+  <p>A simple solution to add search to instantly find the elements on your page.</p>
+  <span class="separator" data-category="Installation"></span>
+  <pre><code class="microlight">
 $ npm install holmes.js
     </code></pre>
-    <pre><code class="microlight">
+  <pre><code class="microlight">
 holmes({
   input: 'input',
   find: '.results blockquote'
 });
     </code></pre>
-    <span class="separator" data-category="Demo"></span>
-    <input type="search" placeholder="search here">
-    <div class="results">
-      <blockquote>
-        ‘My name is Sherlock Holmes. It is my business to know what other people don’t know.’
-        <cite>&nbsp;&ndash;&nbsp;The Adventure of the Blue Carbuncle</cite>
-      </blockquote>
-      <blockquote>
-        ‘I am the last and highest court of appeal in detection.’
-        <cite>&nbsp;&ndash;&nbsp;The Sign of Four Chapter 1: “The Science of Deduction”</cite>
-      </blockquote>
-      <blockquote>
-        ‘There is nothing like first-hand evidence.’
-        <cite>&nbsp;&ndash;&nbsp;A Study in Scarlet</cite>
-      </blockquote>
-      <blockquote>
-        “The world is full of obvious things which nobody by any chance ever observes.”
-        <cite>&nbsp;&ndash;&nbsp;The Hound of the Baskervilles Chapter 3: “The Problem”</cite>
-      </blockquote>
-      <blockquote>
-        ‘You see, but you do not observe. The distinction is clear.’
-        <cite>&nbsp;&ndash;&nbsp;A Scandal in Bohemia</cite>
-      </blockquote>
-      <blockquote>
-        ‘It is a capital mistake to theorize before one has data. Insensibly one begins to twist facts to suit theories, instead of theories to suit facts.’
-        <cite>&nbsp;&ndash;&nbsp;A Scandal in Bohemia</cite>
-      </blockquote>
-      <blockquote>
-        ‘I never guess. It is a shocking habit,&ndash;destructive to the logical faculty.’
-        <cite>&nbsp;&ndash;&nbsp;The Sign of Four Chapter 2: “The Science of Deduction”</cite>
-      </blockquote>
-      <blockquote>
-        ‘You know my method. It is founded upon the observation of trifles.’
-        <cite>&nbsp;&ndash;&nbsp;The Bascombe Valley Mystery</cite>
-      </blockquote>
-      <blockquote>
-        ‘There is nothing more deceptive than an obvious fact.’
-        <cite>&nbsp;&ndash;&nbsp;The Bascombe Valley Mystery</cite>
-      </blockquote>
-      <blockquote>
-        “‘Is there any point to which you would wish to draw my attention?’ ‘To the curious incident of the dog in the night-time.’ ‘The dog did nothing in the night-time.’ ‘That was the curious incident,’ remarked Sherlock Holmes.'” Exchange between Inspector Gregory &Sherlock Holmes
-        <cite>&nbsp;&ndash;&nbsp;Silver Blaze</cite>
-      </blockquote>
-      <blockquote>
-        ‘Eliminate all other factors, and the one which remains must be the truth.’
-        <cite>&nbsp;&ndash;&nbsp;The Sign of Four Chapter 1: “The Science of Deduction”</cite>
-      </blockquote>
-      <blockquote>
-        ‘How often have I said to you that when you have eliminated the impossible, whatever remains,however improbable, must be the truth?’
-        <cite>&nbsp;&ndash;&nbsp;The Sign of Four Chapter 6: “Sherlock Holmes Gives a Demonstration</cite>
-      </blockquote>
-      <blockquote>
-        ‘…when you have eliminated all which is impossible, then whatever remains, however improbable, must be the truth.’
-        <cite>&nbsp;&ndash;&nbsp;The Blanched Soldier</cite>
-      </blockquote>
-      <blockquote>
-        ‘It is an old maxim of mine that when you have excluded the impossible, whatever remains, however improbable, must be the truth.’
-        <cite>&nbsp;&ndash;&nbsp;The Beryl Coronet</cite>
-      </blockquote>
-      <blockquote>
-        ‘Come, Watson, come!’ he cried. ‘The game is afoot. Not a word! Into your clothes and come!’
-        <cite>&nbsp;&ndash;&nbsp;The Adventure of the The Abbey Grange</cite>
-      </blockquote>
-      <blockquote>
-        “Data! Data! Data!” he cried impatiently. “I can’t make bricks without clay.”
-        <cite>&nbsp;&ndash;&nbsp;The Adventure of the Copper Beeches &ndash; ‘I cannot live without brain-work. What else is there to live for?’
-          <cite>&nbsp;&ndash;&nbsp;The Sign of Four</cite>
-      </blockquote>
-      <blockquote>
-        ‘They say that genius is an infinite capacity for taking pains,’ he remarked with a smile. ‘It’s a very bad definition, but it does apply to detective work.’
-        <cite>&nbsp;&ndash;&nbsp;A Study in Scarlet</cite>
-      </blockquote>
-      <blockquote>
-        ‘There is nothing new under the sun. It has all been done before.’
-        <cite>&nbsp;&ndash;&nbsp;A Study in Scarlet</cite>
-      </blockquote>
-      <blockquote>
-        ‘I ought to know by this time that when a fact appears to be opposed to a long train of deductions it invariably proves to be capable of bearing some other interpretation.’
-        <cite>&nbsp;&ndash;&nbsp;A Study in Scarlet Chapter 3: “Light in the Darkness” &ndash; ‘Which is it today,’ I asked, ‘morphine or cocaine?’ He raised his eyes languidly from the old black-leather volume which he had opened. ‘It is cocaine,’ he said, ‘a seven-per-cent solution. Would you like to try it?’ Dr. Watson and
-          <cite>&nbsp;&ndash;&nbsp;The Sign of Four Chapter 1: “The Science of Deduction”</cite>
-      </blockquote>
-      <blockquote>
-        ‘I never make exceptions. An exception disproves the rule.’
-        <cite>&nbsp;&ndash;&nbsp;The Sign of Four Chapter 2: “The Statement of the Case’</cite>
-      </blockquote>
-      <blockquote>
-        Holmes took his revolver from his drawer and slipped it in his pocket. It was clear that he thought that our night’s work might be a serious one. Observation of Dr. Watson
-        <cite>&nbsp;&ndash;&nbsp;The Sign of Four Chapter 3: “In Quest of a Solution”</cite>
-      </blockquote>
-      <blockquote>
-        So silent and furtive were his movements, like those of a trained bloodhound picking out a scent, that I could not but think what a terrible criminal he would have made had he turned his energy and sagacity against the law instead of exerting them in its defence. Observation of Dr. Watson
-        <cite>&nbsp;&ndash;&nbsp;The Sign of Four Chapter 6: “Sherlock Holmes Gives a Demonstration”</cite>
-      </blockquote>
-      <blockquote>
-        ‘I listen to their story, they listen to my comments, and then I pocket my fee.’
-        <cite>&nbsp;&ndash;&nbsp;A Study in Scarlet Chapter 2: “The Science of Deduction”</cite>
-      </blockquote>
-      <blockquote>
-        ‘What one man can invent another can discover.’
-        <cite>&nbsp;&ndash;&nbsp;The Adventure of the Dancing Man</cite>
-      </blockquote>
-      <blockquote>
-        ‘The emotional qualities are atagonistic to clear reasoning.’
-        <cite>&nbsp;&ndash;&nbsp;The Sign of Four</cite>
-      </blockquote>
-      <blockquote>
-        ‘I think that there are certain crimes which the law cannot touch, and which therefore, to some extent, justify private revenge.’
-        <cite>&nbsp;&ndash;&nbsp;The Adventure of Charles Augustus Milverton</cite>
-      </blockquote>
-      <blockquote>
-        ‘What object is served by this circle of misery and violence and fear? It must tend to some end, or else our universe is ruled by chance, which is unthinkable.’
-        <cite>&nbsp;&ndash;&nbsp;The Cardboard Box</cite>
-      </blockquote>
-      <blockquote>
-        When I glanced again his face had resumed that red-Indian composure which had made so many regard him as a machine rather than a man. Dr. Watson Observing Sherlock Holmes
-        <cite>&nbsp;&ndash;&nbsp;The Crooked Man</cite>
-      </blockquote>
-      <blockquote>
-        ‘Having gathered these facts, Watson, I smoked several pipes over them, trying to separate those which were crucial from others which were merely incidental.’
-        <cite>&nbsp;&ndash;&nbsp;The Crooked Man</cite>
-      </blockquote>
-      <blockquote>
-        He [Holmes] loved to lie in the very centre of five millions of people, with his filaments stretching out and running through them, responsive to every little rumor or suspicion of unsolved crime. Dr. Watson’s Observation of Sherlock Holmes
-        <cite>&nbsp;&ndash;&nbsp;The Resident Patient</cite>
-      </blockquote>
-      <blockquote>
-        ‘My mind is like a racing engine, tearing itself to pieces because it is not connected up with the work for which it was built.’
-        <cite>&nbsp;&ndash;&nbsp;The Man with the Twisted Lip</cite>
-      </blockquote>
-      <blockquote>
-        “My mind,” he said, “rebels at stagnation. Give me problems, give me work, give me the most abstruse cryptogram or the most intricate analysis, and I am in my own proper atmosphere. I can dispense then with artificial stimulants. But I abhor the dull routine of existence. I crave for mental exaltation. That is why I have chosen my own particular profession,&ndash;or rather created it, for I am the only one in the world.”
-        <cite>&nbsp;&ndash;&nbsp;The Sign of Four Chapter 1: “The Science of Deduction”</cite>
-      </blockquote>
-      <blockquote>
-        ‘When a doctor does go wrong, he is the first of criminals. He has the nerve and he has the knowledge.’
-        <cite>&nbsp;&ndash;&nbsp;The Adventure of the Speckled Band</cite>
-      </blockquote>
-      <blockquote>
-        ‘Nothing clears up a case so much as stating it to another person.’
-        <cite>&nbsp;&ndash;&nbsp;Silver Blaze</cite>
-      </blockquote>
-      <blockquote>
-        ‘I think that you know me well enough, Watson, to understand that I am by no means a nervous man. At the same time, it is stupidity rather than courage to refuse to recognize danger when it is close upon you.’
-        <cite>&nbsp;&ndash;&nbsp;The Final Problem</cite>
-      </blockquote>
-      <blockquote>
-        ‘I confess that I have been blind as a mole, but it is better to learn wisdom late than never to learn it at all.’
-        <cite>&nbsp;&ndash;&nbsp;The Man with the Twisted Lip</cite>
-      </blockquote>
-      <blockquote>
-        ‘A man should keep his little brain attic stocked with all the furniture that he is likely to use, and the rest he can put away in the lumber-room of his library where he can get it if he wants.’
-        <cite>&nbsp;&ndash;&nbsp;The Five Orange Pips</cite>
-      </blockquote>
-      <blockquote>
-        ‘It has long been an axiom of mine that the little things are infinitely the most important.’
-        <cite>&nbsp;&ndash;&nbsp;A Case of Identity</cite>
-      </blockquote>
-      </blockquote>
-      <blockquote>
-        ‘It is my belief, Watson, founded upon my experience, that the lowest and vilest alleys in London do not present a more dreadful record of sin than does the smiling and beautiful countryside.’
-        <cite>&nbsp;&ndash;&nbsp;The Copper Beeches</cite>
-      </blockquote>
-    </div>
-    </section>
-    <footer>
-      <p>by <a href="https://haroen.me">Haroen Viaene</a> - <a href="https://github.com/Haroenv/holmes/blob/gh-pages/.credits">credits</a></p>
-    </footer>
-    <script src="js/holmes.js"></script>
-    <script src="js/microlight.js"></script>
-    <script>
-    holmes({
-      input: 'input',
-      find: '.results blockquote'
-    });
-    </script>
+  <span class="separator" data-category="Demo"></span>
+  <input type="search" placeholder="search here">
+  <div class="results">
+    <blockquote>
+      ‘My name is Sherlock Holmes. It is my business to know what other people don’t know.’
+      <cite>&nbsp;&ndash;&nbsp;The Adventure of the Blue Carbuncle</cite>
+    </blockquote>
+    <blockquote>
+      ‘I am the last and highest court of appeal in detection.’
+      <cite>&nbsp;&ndash;&nbsp;The Sign of Four Chapter 1: “The Science of Deduction”</cite>
+    </blockquote>
+    <blockquote>
+      ‘There is nothing like first-hand evidence.’
+      <cite>&nbsp;&ndash;&nbsp;A Study in Scarlet</cite>
+    </blockquote>
+    <blockquote>
+      “The world is full of obvious things which nobody by any chance ever observes.”
+      <cite>&nbsp;&ndash;&nbsp;The Hound of the Baskervilles Chapter 3: “The Problem”</cite>
+    </blockquote>
+    <blockquote>
+      ‘You see, but you do not observe. The distinction is clear.’
+      <cite>&nbsp;&ndash;&nbsp;A Scandal in Bohemia</cite>
+    </blockquote>
+    <blockquote>
+      ‘It is a capital mistake to theorize before one has data. Insensibly one begins to twist facts to suit theories, instead of theories to suit facts.’
+      <cite>&nbsp;&ndash;&nbsp;A Scandal in Bohemia</cite>
+    </blockquote>
+    <blockquote>
+      ‘I never guess. It is a shocking habit,&ndash;destructive to the logical faculty.’
+      <cite>&nbsp;&ndash;&nbsp;The Sign of Four Chapter 2: “The Science of Deduction”</cite>
+    </blockquote>
+    <blockquote>
+      ‘You know my method. It is founded upon the observation of trifles.’
+      <cite>&nbsp;&ndash;&nbsp;The Bascombe Valley Mystery</cite>
+    </blockquote>
+    <blockquote>
+      ‘There is nothing more deceptive than an obvious fact.’
+      <cite>&nbsp;&ndash;&nbsp;The Bascombe Valley Mystery</cite>
+    </blockquote>
+    <blockquote>
+      “‘Is there any point to which you would wish to draw my attention?’ ‘To the curious incident of the dog in the night-time.’ ‘The dog did nothing in the night-time.’ ‘That was the curious incident,’ remarked Sherlock Holmes.'” Exchange between Inspector Gregory &Sherlock Holmes
+      <cite>&nbsp;&ndash;&nbsp;Silver Blaze</cite>
+    </blockquote>
+    <blockquote>
+      ‘Eliminate all other factors, and the one which remains must be the truth.’
+      <cite>&nbsp;&ndash;&nbsp;The Sign of Four Chapter 1: “The Science of Deduction”</cite>
+    </blockquote>
+    <blockquote>
+      ‘How often have I said to you that when you have eliminated the impossible, whatever remains,however improbable, must be the truth?’
+      <cite>&nbsp;&ndash;&nbsp;The Sign of Four Chapter 6: “Sherlock Holmes Gives a Demonstration</cite>
+    </blockquote>
+    <blockquote>
+      ‘…when you have eliminated all which is impossible, then whatever remains, however improbable, must be the truth.’
+      <cite>&nbsp;&ndash;&nbsp;The Blanched Soldier</cite>
+    </blockquote>
+    <blockquote>
+      ‘It is an old maxim of mine that when you have excluded the impossible, whatever remains, however improbable, must be the truth.’
+      <cite>&nbsp;&ndash;&nbsp;The Beryl Coronet</cite>
+    </blockquote>
+    <blockquote>
+      ‘Come, Watson, come!’ he cried. ‘The game is afoot. Not a word! Into your clothes and come!’
+      <cite>&nbsp;&ndash;&nbsp;The Adventure of the The Abbey Grange</cite>
+    </blockquote>
+    <blockquote>
+      “Data! Data! Data!” he cried impatiently. “I can’t make bricks without clay.”
+      <cite>&nbsp;&ndash;&nbsp;The Adventure of the Copper Beeches</cite>
+    </blockquote>
+    <blockquote>
+      ‘I cannot live without brain-work. What else is there to live for?’
+      <cite>&nbsp;&ndash;&nbsp;The Sign of Four</cite>
+    </blockquote>
+    <blockquote>
+      ‘They say that genius is an infinite capacity for taking pains,’ he remarked with a smile. ‘It’s a very bad definition, but it does apply to detective work.’
+      <cite>&nbsp;&ndash;&nbsp;A Study in Scarlet</cite>
+    </blockquote>
+    <blockquote>
+      ‘There is nothing new under the sun. It has all been done before.’
+      <cite>&nbsp;&ndash;&nbsp;A Study in Scarlet</cite>
+    </blockquote>
+    <blockquote>
+      ‘I ought to know by this time that when a fact appears to be opposed to a long train of deductions it invariably proves to be capable of bearing some other interpretation.’
+      <cite>&nbsp;&ndash;&nbsp;A Study in Scarlet Chapter 3: “Light in the Darkness”</cite>
+    </blockquote>
+    <blockquote>
+      ‘Which is it today,’ I asked, ‘morphine or cocaine?’ He raised his eyes languidly from the old black-leather volume which he had opened. ‘It is cocaine,’ he said, ‘a seven-per-cent solution. Would you like to try it?’ Dr. Watson and
+      <cite>&nbsp;&ndash;&nbsp;The Sign of Four Chapter 1: “The Science of Deduction”</cite>
+    </blockquote>
+    <blockquote>
+      ‘I never make exceptions. An exception disproves the rule.’
+      <cite>&nbsp;&ndash;&nbsp;The Sign of Four Chapter 2: “The Statement of the Case’</cite>
+    </blockquote>
+    <blockquote>
+      Holmes took his revolver from his drawer and slipped it in his pocket. It was clear that he thought that our night’s work might be a serious one. Observation of Dr. Watson
+      <cite>&nbsp;&ndash;&nbsp;The Sign of Four Chapter 3: “In Quest of a Solution”</cite>
+    </blockquote>
+    <blockquote>
+      So silent and furtive were his movements, like those of a trained bloodhound picking out a scent, that I could not but think what a terrible criminal he would have made had he turned his energy and sagacity against the law instead of exerting them in its defence. Observation of Dr. Watson
+      <cite>&nbsp;&ndash;&nbsp;The Sign of Four Chapter 6: “Sherlock Holmes Gives a Demonstration”</cite>
+    </blockquote>
+    <blockquote>
+      ‘I listen to their story, they listen to my comments, and then I pocket my fee.’
+      <cite>&nbsp;&ndash;&nbsp;A Study in Scarlet Chapter 2: “The Science of Deduction”</cite>
+    </blockquote>
+    <blockquote>
+      ‘What one man can invent another can discover.’
+      <cite>&nbsp;&ndash;&nbsp;The Adventure of the Dancing Man</cite>
+    </blockquote>
+    <blockquote>
+      ‘The emotional qualities are atagonistic to clear reasoning.’
+      <cite>&nbsp;&ndash;&nbsp;The Sign of Four</cite>
+    </blockquote>
+    <blockquote>
+      ‘I think that there are certain crimes which the law cannot touch, and which therefore, to some extent, justify private revenge.’
+      <cite>&nbsp;&ndash;&nbsp;The Adventure of Charles Augustus Milverton</cite>
+    </blockquote>
+    <blockquote>
+      ‘What object is served by this circle of misery and violence and fear? It must tend to some end, or else our universe is ruled by chance, which is unthinkable.’
+      <cite>&nbsp;&ndash;&nbsp;The Cardboard Box</cite>
+    </blockquote>
+    <blockquote>
+      When I glanced again his face had resumed that red-Indian composure which had made so many regard him as a machine rather than a man. Dr. Watson Observing Sherlock Holmes
+      <cite>&nbsp;&ndash;&nbsp;The Crooked Man</cite>
+    </blockquote>
+    <blockquote>
+      ‘Having gathered these facts, Watson, I smoked several pipes over them, trying to separate those which were crucial from others which were merely incidental.’
+      <cite>&nbsp;&ndash;&nbsp;The Crooked Man</cite>
+    </blockquote>
+    <blockquote>
+      He [Holmes] loved to lie in the very centre of five millions of people, with his filaments stretching out and running through them, responsive to every little rumor or suspicion of unsolved crime. Dr. Watson’s Observation of Sherlock Holmes
+      <cite>&nbsp;&ndash;&nbsp;The Resident Patient</cite>
+    </blockquote>
+    <blockquote>
+      ‘My mind is like a racing engine, tearing itself to pieces because it is not connected up with the work for which it was built.’
+      <cite>&nbsp;&ndash;&nbsp;The Man with the Twisted Lip</cite>
+    </blockquote>
+    <blockquote>
+      “My mind,” he said, “rebels at stagnation. Give me problems, give me work, give me the most abstruse cryptogram or the most intricate analysis, and I am in my own proper atmosphere. I can dispense then with artificial stimulants. But I abhor the dull routine of existence. I crave for mental exaltation. That is why I have chosen my own particular profession,&ndash;or rather created it, for I am the only one in the world.”
+      <cite>&nbsp;&ndash;&nbsp;The Sign of Four Chapter 1: “The Science of Deduction”</cite>
+    </blockquote>
+    <blockquote>
+      ‘When a doctor does go wrong, he is the first of criminals. He has the nerve and he has the knowledge.’
+      <cite>&nbsp;&ndash;&nbsp;The Adventure of the Speckled Band</cite>
+    </blockquote>
+    <blockquote>
+      ‘Nothing clears up a case so much as stating it to another person.’
+      <cite>&nbsp;&ndash;&nbsp;Silver Blaze</cite>
+    </blockquote>
+    <blockquote>
+      ‘I think that you know me well enough, Watson, to understand that I am by no means a nervous man. At the same time, it is stupidity rather than courage to refuse to recognize danger when it is close upon you.’
+      <cite>&nbsp;&ndash;&nbsp;The Final Problem</cite>
+    </blockquote>
+    <blockquote>
+      ‘I confess that I have been blind as a mole, but it is better to learn wisdom late than never to learn it at all.’
+      <cite>&nbsp;&ndash;&nbsp;The Man with the Twisted Lip</cite>
+    </blockquote>
+    <blockquote>
+      ‘A man should keep his little brain attic stocked with all the furniture that he is likely to use, and the rest he can put away in the lumber-room of his library where he can get it if he wants.’
+      <cite>&nbsp;&ndash;&nbsp;The Five Orange Pips</cite>
+    </blockquote>
+    <blockquote>
+      ‘It has long been an axiom of mine that the little things are infinitely the most important.’
+      <cite>&nbsp;&ndash;&nbsp;A Case of Identity</cite>
+    </blockquote>
+    <blockquote>
+      ‘It is my belief, Watson, founded upon my experience, that the lowest and vilest alleys in London do not present a more dreadful record of sin than does the smiling and beautiful countryside.’
+      <cite>&nbsp;&ndash;&nbsp;The Copper Beeches</cite>
+    </blockquote>
+  </div>
+  <footer>
+    <p>by <a href="https://haroen.me">Haroen Viaene</a> - <a href="https://github.com/Haroenv/holmes/blob/gh-pages/.credits">credits</a></p>
+  </footer>
+  <script src="js/holmes.js"></script>
+  <script src="js/microlight.js"></script>
+  <script>
+  holmes({
+    input: 'input',
+    find: '.results blockquote'
+  });
+  </script>
 </body>
 
 </html>
