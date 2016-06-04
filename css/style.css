@@ -99,10 +99,9 @@ pre:first-of-type {
   flex-direction: row;
 }
 
-.results article {
-  -webkit-flex: 1 0 8em;
-  -ms-flex: 1 0 8em;
-  flex: 1 0 8em;
+.results blockquote {
+  flex-basis: 8em;
+  flex-grow: 1;
   border: 1px solid black;
   padding: 1em;
   border-radius: .25em;
