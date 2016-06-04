@@ -8,6 +8,10 @@
   font-size: 16px;
 }
 
+html {
+  padding: 0 1em;
+}
+
 body {
   font-family: system, -apple-system, sans-serif;
   max-width: 40rem;
@@ -18,7 +22,7 @@ body {
 }
 
 h1 {
-  font-family: "Vidaloka", serif;
+  font-family: Didot, "Vidaloka", serif;
   font-size: 3em;
   color: #000000;
   display: inline-block;
@@ -43,7 +47,7 @@ h1 a {
 }
 
 a {
-  font-family: "Vidaloka", serif;
+  font-family: Didot, "Vidaloka", serif;
   color: #000000;
   text-decoration: none;
   padding-bottom: 0.16rem;
@@ -87,6 +91,7 @@ pre:first-of-type {
   -moz-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   -o-flex-wrap: wrap;
+  flex-wrap: wrap;
   -webkit-flex-direction: row;
   -moz-flex-direction: row;
   -ms-flex-direction: row;
@@ -112,7 +117,7 @@ pre:first-of-type {
 }
 
 span.separator {
-  font-family: "Vidaloka", serif;
+  font-family: Didot, "Vidaloka", serif;
   font-size: 2.2em;
   vertical-align: bottom;
   position: relative;
