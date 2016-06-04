@@ -1,6 +1,6 @@
 # [<img alt="Holmes.js" src="https://haroen.me/holmes/images/logo.png" height="50px"></img>](https://www.npmjs.com/package/holmes.js)
 
-> simple search based on the dom
+> Fast and easy searching inside a page.
 
 [![Build Status](https://travis-ci.org/Haroenv/holmes.svg?branch=gh-pages)](https://travis-ci.org/Haroenv/holmes)[![npm version](https://badge.fury.io/js/holmes.js.svg)](https://www.npmjs.com/package/holmes.js)
 
