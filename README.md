@@ -1,4 +1,4 @@
-# <img alt="Holmes.js" src="https://haroen.me/holmes/images/logo.png" height="50px"></img>
+# [<img alt="Holmes.js" src="https://haroen.me/holmes/images/logo.png" height="50px"></img>](https://www.npmjs.com/package/holmes.js)
 
 > simple search based on the dom
 
