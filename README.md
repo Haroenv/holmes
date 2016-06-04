@@ -1,4 +1,4 @@
-# Holmes.js
+# ![Holmes.js](http://puu.sh/pgBsm/c63088a07f.png)
 
 > simple search based on the dom
 
