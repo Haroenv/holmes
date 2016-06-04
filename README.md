@@ -30,6 +30,7 @@ but this could be any `css` you want.
 holmes({
   input: '.search input', // queryselector for the input
   find: '.results article', // queryselector for element to search in
+  placeholder: 'no results' // (optional) text to show when no results
 });
 ```
 
