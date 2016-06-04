@@ -3,45 +3,28 @@
 <html lang="en">
 
 <head>
-  <title>holmes</title>
+  <title>Holmes</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-  <style>
-  body {
-    font-family: -apple-system, sans-serif;
-    max-width: 40rem;
-    margin: 1em auto;
-  }
-  input {
-    font-size: 1em;
-  }
-  .results {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .results article {
-    flex: 1 0 10em;
-    border: 1px solid black;
-    padding: 1em;
-  }
-  .hidden {
-    display: none;
-  }
-  </style>
+  <link href='https://fonts.googleapis.com/css?family=Vidaloka' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
   <div class="full">
-    <h1><a href="https://github.com/Haroenv/holmes/">holmes</a></h1>
-    <p>A simple solution for instant search for elements on your page.</p>
-    <pre><code>
+    <h1><a href="https://github.com/Haroenv/holmes/">Holmes</a></h1>
+    <p>A simple solution to add search to instantly find the elements on your page.</p>
+    <span class="separator" data-category="Installation"></span>
+    <pre><code class="microlight">
+$ npm install holmes.js
+    </code></pre>
+    <pre><code class="microlight">
 holmes({
   input: 'input',
-  find: '.results article',
-  parents: 0
+  find: '.results article'
 });
     </code></pre>
-    <p>by <a href="https://haroen.me">Haroen Viaene</a></p>
+    <span class="separator" data-category="Demo"></span>
     <input type="search" placeholder="search here">
     <div class="results">
       <article>
@@ -114,15 +97,34 @@ holmes({
           <li>holmes</li>
         </ul>
       </article>
+      <article>
+        <h2>foo bar</h2>
+        <p>baz qux</p>
+        <ul>
+          <li>Lorem ipsum dolor sit amet, </li>
+          <li>consectetur adipisicing elit.</li>
+        </ul>
+      </article>
+      <article>
+        <h2>foo</h2>
+        <p>toto</p>
+        <ul>
+          <li>bolo, </li>
+          <li>bullgit</li>
+        </ul>
+      </article>
     </div>
-  </div>
-  <script src="holmes.js"></script>
+  </section>
+  <footer>
+    <p>by <a href="https://haroen.me">Haroen Viaene</a> - <a href="https://github.com/Haroenv/holmes/blob/gh-pages/.credits">credits</a></p>
+  </footer>
+  <script src="js/holmes.js"></script>
+  <script src="js/microlight.js"></script>
   <script>
-    holmes({
-      input: 'input',
-      find: '.results article',
-      parents: 0
-    });
+  holmes({
+    input: 'input',
+    find: '.results article'
+  });
   </script>
 </body>
 

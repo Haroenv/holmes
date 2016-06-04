@@ -1,8 +1,8 @@
-# Holmes.js
+# <img alt="Holmes.js" src="images/logo.png" height="50px"></img>
 
 > simple search based on the dom
 
-[![Build Status](https://travis-ci.org/Haroenv/holmes.svg?branch=gh-pages)](https://travis-ci.org/Haroenv/holmes)[![npm version](https://badge.fury.io/js/holmes.svg)](https://www.npmjs.com/package/holmes)
+[![Build Status](https://travis-ci.org/Haroenv/holmes.svg?branch=gh-pages)](https://travis-ci.org/Haroenv/holmes)[![npm version](https://badge.fury.io/js/holmes.js.svg)](https://www.npmjs.com/package/holmes.js)
 
 ## Installation
 
@@ -30,7 +30,6 @@ but this could be any `css` you want.
 holmes({
   input: '.search input', // queryselector for the input
   find: '.results article', // queryselector for element to search in
-  parents: 1 // the amount of parents from the first element in find to the first to the removed element (default 0)
 });
 ```
 
