@@ -1,8 +1,8 @@
-# Holmes.js
+# <img alt="Holmes.js" src="http://puu.sh/pgBsm/c63088a07f.png" height="50px"></img>
 
 > simple search based on the dom
 
-[![Build Status](https://travis-ci.org/Haroenv/holmes.svg?branch=gh-pages)](https://travis-ci.org/Haroenv/holmes)[![npm version](https://badge.fury.io/js/holmes.svg)](https://www.npmjs.com/package/holmes)
+[![Build Status](https://travis-ci.org/Haroenv/holmes.svg?branch=gh-pages)](https://travis-ci.org/Haroenv/holmes)[![npm version](https://badge.fury.io/js/holmes.js.svg)](https://www.npmjs.com/package/holmes.js)
 
 ## Installation
 
