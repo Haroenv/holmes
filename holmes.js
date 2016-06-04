@@ -4,7 +4,7 @@
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define([], function() {
-      return (root.pagesearch = factory());
+      return (root.holmes = factory());
     });
   } else if (typeof exports === 'object') {
     // Node. Does not work with strict CommonJS, but
@@ -13,7 +13,7 @@
     module.exports = factory();
   } else {
     // Browser globals
-    root.pagesearch = factory();
+    root.holmes = factory();
   }
 })(this, function() {
   // UMD Definition above, do not remove this line
@@ -32,7 +32,7 @@
    *  parents: 0
    *}
    */
-  var pagesearch = function(options) {
+  var holmes = function(options) {
     window.addEventListener('DOMContentLoaded',function(){
       options.parents = options.parents || 0;
       options.input = options.input || 'input[type=search]';
@@ -52,6 +52,6 @@
     });
   };
 
-  return pagesearch;
+  return holmes;
 
 });
