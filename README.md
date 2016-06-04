@@ -1,4 +1,4 @@
-# <img alt="Holmes.js" src="images/logo.png" height="50px"></img>
+# <img alt="Holmes.js" src="https://haroen.me/holmes/images/logo.png" height="50px"></img>
 
 > simple search based on the dom
 
