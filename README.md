@@ -30,7 +30,6 @@ but this could be any `css` you want.
 holmes({
   input: '.search input', // queryselector for the input
   find: '.results article', // queryselector for element to search in
-  parents: 1 // the amount of parents from the first element in find to the first to the removed element (default 0)
 });
 ```
 

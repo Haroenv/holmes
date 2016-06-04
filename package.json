@@ -2,9 +2,9 @@
   "name": "holmes.js",
   "version": "0.0.0",
   "description": "hide and show elements based on search",
-  "main": "holmes.js",
+  "main": "js/holmes.js",
   "scripts": {
-    "lint": "eslint holmes.js",
+    "lint": "eslint js/holmes.js",
     "test": "npm run lint"
   },
   "keywords": ["search", "dom"],

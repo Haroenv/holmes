@@ -1,22 +1,26 @@
+/**
+ * Styles for Holmes.js
+ * Original by Lucas Bonomi
+ * Changes by Haroen Viaene
+ */
+
 :root {
   font-size: 16px;
 }
-* {
+
+body {
+  font-family: system, -apple-system, sans-serif;
+  max-width: 40rem;
+  margin: 1em auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscaled;
   font-weight: 300;
 }
 
-body {
-  font-family: -apple-system, sans-serif;
-  max-width: 40rem;
-  margin: 1em auto;
-}
-
 h1 {
   font-family: "Vidaloka", serif;
-  font-size: 3rem;
-  color: #000;
+  font-size: 3em;
+  color: #000000;
   display: inline-block;
   position: relative;
 }
@@ -24,55 +28,60 @@ h1 {
 h1:after {
   content: '';
   display: block;
-  width: 50px;
-  height: 50px;
+  width: 1em;
+  height: 1em;
   position: absolute;
-  background: url(../images/holmes.svg)no-repeat center center / contain;
-  top: 4px;
-  right: -60px;
+  background: url(../images/holmes.svg) no-repeat center center / contain;
+  top: .25rem;
+  right: -1.4em;
 }
 
 h1 a {
-  color: #000;
+  color: #000000;
   text-decoration: none;
   border-bottom: none;
 }
 
 a {
   font-family: "Vidaloka", serif;
-  color: #000;
+  color: #000000;
   text-decoration: none;
   padding-bottom: 0.16rem;
-  border-bottom: 1px solid rgba(0,0,0,0.3);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 }
+
 input {
   font-size: 1.4em;
-  border-radius: 4px;
+  border-radius: .25em;
   background-color: #ffffff;
   background-image: url(../images/search-icon.svg);
   background-repeat: no-repeat;
   background-position: center right 8px;
   background-size: 4%;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.1);
-  border: solid 1px rgba(0,0,0,0.2);
-  padding: 12px 6px;
+  box-shadow: 0 .1em .1em 0 rgba(0, 0, 0, 0.1);
+  border: solid 1px rgba(0, 0, 0, 0.2);
+  padding: .4em;
   width: 100%;
   margin: 1em 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 pre {
   background: #333;
   color: #fff;
-  padding: 0 16px;
-  border-radius: 4px;
+  padding: 0 1em;
+  border-radius: .25em;
 }
 
 pre:first-of-type {
   margin-top: 2em;
 }
 
-
 .results {
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
   -webkit-flex-wrap: wrap;
   -moz-flex-wrap: wrap;
@@ -86,28 +95,25 @@ pre:first-of-type {
 }
 
 .results article {
+  -webkit-flex: 1 0 8em;
+  -ms-flex: 1 0 8em;
   flex: 1 0 8em;
   border: 1px solid black;
   padding: 1em;
-  border-radius: 4px;
+  border-radius: .25em;
   background-color: #ffffff;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.1);
-  border: solid 1px rgba(155,155,155,0.2);
-  margin: 16px auto;
-  margin-right: 16px;
-  width: 10px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+  border: solid 1px rgba(155, 155, 155, 0.2);
+  margin: 0.5em;
 }
-.results article:nth-child(3n) {
-  margin-right: 0;
-}
+
 .hidden {
   display: none;
 }
 
-
 span.separator {
-  font-family:"Vidaloka", serif;
-  font-size:2.2em;
+  font-family: "Vidaloka", serif;
+  font-size: 2.2em;
   vertical-align: bottom;
   position: relative;
   display: block;
@@ -124,16 +130,18 @@ span.separator:after {
   right: 0;
   opacity: 0.55;
 }
+
 span.separator:nth-child(odd) {
   background: url(../images/footprint-2.svg) no-repeat center center / contain;
 }
+
 span.separator:nth-child(odd):after {
   left: 0;
   right: inherit;
 }
 
 .microlight {
-    font-family : monospace;
-    white-space : pre;
-    color       : #fff;
+  font-family: 'Courier New', monospace;
+  white-space: pre;
+  color: #fff;
 }
