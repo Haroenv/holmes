@@ -145,11 +145,11 @@ span.separator:after {
   opacity: 0.55;
 }
 
-span.separator:nth-child(odd) {
+span.separator:nth-of-type(odd) {
   background: url(../images/footprint-2.svg) no-repeat center center / contain;
 }
 
-span.separator:nth-child(odd):after {
+span.separator:nth-of-type(odd):after {
   left: 0;
   right: inherit;
 }
