@@ -1,3 +1,7 @@
+/**
+ * search for dom elements on your page
+ * @module holmes
+ */
 (function(root, factory) {
   'use strict';
 
@@ -25,14 +29,16 @@
 
   /**
    * search for dom elements on your page
-   * @param  {object} options
-   * options: {
-   *  input: 'input[type=search]',
-   *  find: '.results article',
-   *  placeholder: 'no results'
-   *}
+   * @alias module:holmes
+   * @param {Object} options
+   * @param {string} [options.input='input[type=search]']
+   *   A querySelector to find the input
+   * @param {string} options.find
+   *   A querySelectorAll rule to find each of the find terms
+   * @param {string=} options.placeholder
+   *   Text to show when there are no results
    */
-  var holmes = function(options) {
+  function holmes(options) {
     window.addEventListener('DOMContentLoaded',function(){
       options.parents = options.parents || 0;
       options.input = options.input || 'input[type=search]';
