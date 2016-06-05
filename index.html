@@ -21,7 +21,11 @@ $ npm install holmes.js
 holmes({
   input: 'input',
   find: '.results blockquote',
-  placeholder: 'no results'
+  placeholder: 'no results', //optional
+  class: {
+    visible: 'visible', //optional
+    hidden: 'hidden' //optional
+  }
 });
     </code></pre>
   <span class="separator" data-category="Demo"></span>
@@ -202,7 +206,11 @@ holmes({
   holmes({
     input: 'input',
     find: '.results blockquote',
-    placeholder: '<h3 style="display: block;width: 40rem;text-align: center;">— No results, my dear Watson. — </h3>'
+    placeholder: '<h3 style="display: block;width: 40rem;text-align: center;">— No results, my dear Watson. — </h3>',
+    class: {
+      visible: 'visible',
+      hidden: 'hidden'
+    }
   });
   </script>
 </body>

@@ -37,37 +37,61 @@
    *   A querySelectorAll rule to find each of the find terms
    * @param {string=} options.placeholder
    *   Text to show when there are no results (innerHTML)
+   * @param {Object=} options.class classes to add
+   * @param {string} [options.class.visible=false]
+   *   class to add to matched items
+   * @param {string} [options.class.hidden='hidden']
+   *   class to add to non-matched items
    */
   function holmes(options) {
-    window.addEventListener('DOMContentLoaded',function(){
-      options.parents = options.parents || 0;
-      options.input = options.input || 'input[type=search]';
-      options.placeholder = options.placeholder || false;
+    window.addEventListener('DOMContentLoaded', function() {
+      if (typeof options.input == 'undefined') {
+        options.input = 'input[type=search]'
+      }
+      if (typeof options.placeholder == 'undefined') {
+        options.placeholder = false;
+      }
+      if (typeof options.class == 'undefined') {
+        options.class = {};
+      }
+      if (typeof options.class.visible == 'undefined') {
+        options.class.visible = '';
+      }
+      if (typeof options.class.hidden == 'undefined') {
+        options.class.hidden = 'hidden';
+      }
+
       var search = document.querySelector(options.input);
       var elements = document.querySelectorAll(options.find);
 
       if (options.placeholder) {
-        var placeholder = document.createElement('span');
-        placeholder.classList.add('hidden');
+        var placeholder = document.createElement('div');
+        placeholder.classList.add(options.class.hidden);
         placeholder.innerHTML = options.placeholder;
         elements[0].parentNode.appendChild(placeholder);
       }
 
-      search.addEventListener('input',function(){
+      search.addEventListener('input', function() {
         var found = false;
         for (var i = 0; i < elements.length; i++) {
           var searchString = search.value.toLowerCase();
           if (elements[i].textContent.toLowerCase().indexOf(searchString) === -1) {
-            elements[i].classList.add('hidden');
+            elements[i].classList.add(options.class.hidden);
+            try {
+              elements[i].classList.remove(options.class.visible);
+            } catch(e) {}
           } else {
-            elements[i].classList.remove('hidden');
+            elements[i].classList.remove(options.class.hidden);
+            try {
+              elements[i].classList.add(options.class.visible);
+            } catch(e) {}
             found = true;
           }
         };
         if (!found && options.placeholder) {
-          placeholder.classList.remove('hidden');
+          placeholder.classList.remove(options.class.hidden);
         } else {
-          placeholder.classList.add('hidden');
+          placeholder.classList.add(options.class.hidden);
         }
       });
     });
