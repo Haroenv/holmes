@@ -30,14 +30,12 @@
   /**
    * search for dom elements on your page
    * @alias module:holmes
-   * @param {Object} options
    * @param {string} [options.input='input[type=search]']
    *   A querySelector to find the input
    * @param {string} options.find
    *   A querySelectorAll rule to find each of the find terms
    * @param {string=} options.placeholder
    *   Text to show when there are no results (innerHTML)
-   * @param {Object=} options.class classes to add
    * @param {string} [options.class.visible=false]
    *   class to add to matched items
    * @param {string} [options.class.hidden='hidden']
