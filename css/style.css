@@ -4,7 +4,7 @@
  * Changes by Haroen Viaene
  */
 
-:root {
+ :root {
   font-size: 16px;
 }
 
@@ -71,10 +71,20 @@ a {
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 }
 
-
 /**
  * Input
  */
+@media (max-width: 640px) {
+  h1 {
+    text-align: center;
+    width: 80%;
+    padding-right: 20%;
+  }
+  h1:after {
+    right: 0.5em;
+  }
+}
+
 
 input[type="search"] {
   font-size: 1.4em;
@@ -114,6 +124,7 @@ pre {
   color: #fff;
   padding: 0 1em;
   border-radius: .25em;
+  overflow: auto;
 }
 
 pre:first-of-type {
@@ -187,6 +198,19 @@ footer {
   padding: 2em 0 0;
 }
 
+@media (max-width: 640px) {
+  footer {
+    font-size: 12px;
+    padding: 1em 0;
+    line-height: 2;
+    text-align: center;
+  }
+
+  footer .pull-right {
+    width: 100%;
+    float: left;
+  }
+}
 
 /**
  * Generic classes
@@ -233,4 +257,10 @@ span.separator:nth-of-type(odd):after {
   font-family: 'Courier New', monospace;
   white-space: pre;
   color: #fff;
+}
+
+@media (max-width: 640px) {
+  span.separator:after {
+    font-size: 0.8em;
+  }
 }
