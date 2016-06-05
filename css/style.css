@@ -42,7 +42,9 @@ h3 {
   font-size: 2.2em;
 }
 
+
 /* todo: don't need a media query */
+
 @media (max-width: 640px) {
   h3 {
     font-size: 5vw;
@@ -139,6 +141,55 @@ pre:first-of-type {
   margin-top: 2em;
 }
 
+/**
+ * Search
+ */
+
+.search {
+  position: relative;
+}
+
+.search .toggle {
+  position: absolute;
+  top: 64%;
+  right: 7%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  font-size: 3.5em;
+  color: rgba(0, 0, 0, 0.25);
+  display: block;
+  width: 1em;
+  height: 1em;
+  text-align: center;
+  line-height: 1em;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  font-family: Didot, "Vidaloka", serif;
+}
+
+.search .toggle:hover:after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: -46px;
+  left: -96px;
+  color: #fff;
+  border-radius: .25em;
+  padding: 0.35rem;
+  background: rgba(0, 0, 0, 0.8);
+  font-size: 1rem;
+  width: 170px;
+  opacity: 2;
+  font-family: system, -apple-system, sans-serif;
+  line-height: 1;
+}
+
+.search .toggle.clicked {
+  color: rgba(0, 0, 0, 0.5);
+}
+
 
 /**
  * Results
@@ -203,6 +254,20 @@ pre:first-of-type {
   -webkit-font-smoothing: subpixel-antialiased;
 }
 
+.results.classes blockquote.visible {
+  border-bottom: 5px solid #86BA68;
+  -webkit-order: 1;
+  -ms-flex-order: 1;
+  order: 1;
+}
+
+.results.classes blockquote.hidden {
+  border-bottom: 5px solid #D15E39;
+  display: block;
+  -webkit-order: 2;
+  -ms-flex-order: 2;
+  order: 2;
+}
 
 /**
  * Footer
