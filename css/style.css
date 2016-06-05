@@ -154,6 +154,10 @@ pre:first-of-type {
     line-height: 40px;
 }
 
+.search a::selection {
+  background: transparent;
+}
+
 .search a:hover:after {
   content: attr(data-tooltip);
   position: absolute;
