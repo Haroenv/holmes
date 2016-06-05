@@ -4,7 +4,7 @@
  * Changes by Haroen Viaene
  */
 
-:root {
+ :root {
   font-size: 16px;
 }
 
@@ -27,7 +27,7 @@ body {
  * Typography
  */
 
-h1 {
+ h1 {
   font-family: Didot, "Vidaloka", serif;
   font-size: 3em;
   color: #000000;
@@ -71,10 +71,20 @@ a {
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 }
 
-
 /**
  * Input
  */
+ @media (max-width: 640px) {
+  h1 {
+    text-align: center;
+    width: 80%;
+    padding-right: 20%;
+  }
+  h1:after {
+    right: 0.5em;
+  }
+}
+
 
 input[type="search"] {
   font-size: 1.4em;
@@ -109,11 +119,12 @@ input[type="search"]:not(:invalid) {
  * Code block
  */
 
-pre {
+ pre {
   background: #333;
   color: #fff;
   padding: 0 1em;
   border-radius: .25em;
+  overflow: auto;
 }
 
 pre:first-of-type {
@@ -125,12 +136,11 @@ pre:first-of-type {
  * Results
  */
 
-.results {
+ .results {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-flex-wrap: wrap;
-  -moz-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   -o-flex-wrap: wrap;
   flex-wrap: wrap;
@@ -139,6 +149,9 @@ pre:first-of-type {
   -ms-flex-direction: row;
   -o-flex-direction: row;
   flex-direction: row;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 
@@ -146,8 +159,12 @@ pre:first-of-type {
  * Results Cards
  */
 
-.results blockquote {
+ .results blockquote {
+  -webkit-flex-basis: 8em;
+  -ms-flex-preferred-size: 8em;
   flex-basis: 8em;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
   flex-grow: 1;
   border: 1px solid black;
   padding: 1em;
@@ -183,16 +200,29 @@ pre:first-of-type {
  * Footer
  */
 
-footer {
+ footer {
   padding: 2em 0 0;
 }
 
+@media (max-width: 640px) {
+  footer {
+    font-size: .8em;
+    padding: 1em 0;
+    line-height: 2;
+    text-align: center;
+  }
+
+  footer .pull-right {
+    width: 100%;
+    float: left;
+  }
+}
 
 /**
  * Generic classes
  */
 
-.hidden {
+ .hidden {
   display: none;
 }
 
@@ -218,6 +248,12 @@ span.separator:after {
   bottom: 0;
   right: 0;
   opacity: 0.55;
+}
+
+@media (max-width: 640px) {
+  span.separator:after {
+    font-size: .8em;
+  }
 }
 
 span.separator:nth-of-type(odd) {
