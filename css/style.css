@@ -23,7 +23,9 @@ body {
 }
 
 
-/*=================== Typography =*/
+/**
+ * Typography
+ */
 
 h1 {
   font-family: Didot, "Vidaloka", serif;
@@ -71,7 +73,9 @@ a {
 
 
 
-/*=================== Input =*/
+/**
+ * Input
+ */
 
 input[type="search"] {
   font-size: 1.4em;
@@ -103,7 +107,9 @@ input[type="search"]:not(:invalid){
 
 
 
-/*=================== Code bloc =*/
+/**
+ * Code bloc
+ */
 
 pre {
   background: #333;
@@ -118,7 +124,9 @@ pre:first-of-type {
 
 
 
-/*=================== Results =*/
+/**
+ * Results
+ */
 
 .results {
   display: -webkit-flex;
@@ -136,7 +144,9 @@ pre:first-of-type {
   flex-direction: row;
 }
 
-/*=================== Results Cards =*/
+/**
+ * Results Cards
+ */
 .results blockquote {
   flex-basis: 8em;
   flex-grow: 1;
@@ -169,13 +179,17 @@ pre:first-of-type {
 
 
 
-/*=================== Footer =*/
+/**
+ * Footer
+ */
 footer {
   padding: 2em 0 0;
 }
 
 
-/*=================== Generic classes =*/
+/**
+ * Generic classes
+ */
 
 .hidden {
   display: none;
