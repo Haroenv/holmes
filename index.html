@@ -33,9 +33,8 @@ holmes({
 
   <div class="search">
     <input type="search" placeholder="search here" required>
-    <a href="javascript:void(0)" data-tooltip="Use of the .visible class" onclick="this.classList.toggle('clicked');var res = document.querySelector('.results');if(!res.classList.contains('classes')){ res.classList.add('classes')} else {res.classList.remove('classes')}">*</a>
+    <button class="toggle" data-tooltip="Use of the .visible class">*</button>
   </div>
-
   <div class="results">
     <blockquote>
       ‘My name is Sherlock Holmes. It is my business to know what other people don’t know.’
@@ -209,14 +208,21 @@ holmes({
   <script src="js/holmes.js"></script>
   <script src="js/microlight.js"></script>
   <script>
+  // holmes setup
   holmes({
-    input: 'input',
+    input: '.search input',
     find: '.results blockquote',
-    placeholder: '<h3>— No results, my dear Watson. — </h3>',
+    placeholder: '<h3>— No results, my dear Watson. —</h3>',
     class: {
       visible: 'visible',
       hidden: 'hidden'
     }
+  });
+
+  // toggle for showing hidden elements
+  document.querySelector('.toggle').addEventListener('click', function(e) {
+    e.target.classList.toggle('clicked');
+    document.querySelector('.results').classList.toggle('classes');
   });
   </script>
 </body>
