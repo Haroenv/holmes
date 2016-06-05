@@ -27,7 +27,7 @@ body {
  * Typography
  */
 
-h1 {
+ h1 {
   font-family: Didot, "Vidaloka", serif;
   font-size: 3em;
   color: #000000;
@@ -74,7 +74,7 @@ a {
 /**
  * Input
  */
-@media (max-width: 640px) {
+ @media (max-width: 640px) {
   h1 {
     text-align: center;
     width: 80%;
@@ -119,7 +119,7 @@ input[type="search"]:not(:invalid) {
  * Code block
  */
 
-pre {
+ pre {
   background: #333;
   color: #fff;
   padding: 0 1em;
@@ -136,12 +136,11 @@ pre:first-of-type {
  * Results
  */
 
-.results {
+ .results {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-flex-wrap: wrap;
-  -moz-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   -o-flex-wrap: wrap;
   flex-wrap: wrap;
@@ -150,6 +149,9 @@ pre:first-of-type {
   -ms-flex-direction: row;
   -o-flex-direction: row;
   flex-direction: row;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 
@@ -157,8 +159,12 @@ pre:first-of-type {
  * Results Cards
  */
 
-.results blockquote {
+ .results blockquote {
+  -webkit-flex-basis: 8em;
+  -ms-flex-preferred-size: 8em;
   flex-basis: 8em;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
   flex-grow: 1;
   border: 1px solid black;
   padding: 1em;
@@ -194,13 +200,13 @@ pre:first-of-type {
  * Footer
  */
 
-footer {
+ footer {
   padding: 2em 0 0;
 }
 
 @media (max-width: 640px) {
   footer {
-    font-size: 12px;
+    font-size: .8em;
     padding: 1em 0;
     line-height: 2;
     text-align: center;
@@ -216,7 +222,7 @@ footer {
  * Generic classes
  */
 
-.hidden {
+ .hidden {
   display: none;
 }
 
@@ -244,6 +250,12 @@ span.separator:after {
   opacity: 0.55;
 }
 
+@media (max-width: 640px) {
+  span.separator:after {
+    font-size: .8em;
+  }
+}
+
 span.separator:nth-of-type(odd) {
   background: url(../images/footprint-2.svg) no-repeat center center / contain;
 }
@@ -257,10 +269,4 @@ span.separator:nth-of-type(odd):after {
   font-family: 'Courier New', monospace;
   white-space: pre;
   color: #fff;
-}
-
-@media (max-width: 640px) {
-  span.separator:after {
-    font-size: 0.8em;
-  }
 }
