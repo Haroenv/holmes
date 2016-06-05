@@ -33,7 +33,7 @@ h1 {
   color: #000000;
   display: inline-block;
   position: relative;
-  text-shadow: 1px 1px 0 #EDEDED, 3px 3px 0 rgba(0,0,0,0.05)
+  text-shadow: 1px 1px 0 #EDEDED, 3px 3px 0 rgba(0, 0, 0, 0.05)
 }
 
 h3 {
@@ -43,7 +43,7 @@ h3 {
 }
 
 h1:hover {
-  text-shadow: 1px 1px 0 #EDEDED, 3px 3px 0 rgba(0,0,0,0.2)
+  text-shadow: 1px 1px 0 #EDEDED, 3px 3px 0 rgba(0, 0, 0, 0.2)
 }
 
 h1:after {
@@ -72,7 +72,6 @@ a {
 }
 
 
-
 /**
  * Input
  */
@@ -87,7 +86,7 @@ input[type="search"] {
   background-size: 4%;
   box-shadow: 0 .1em .1em 0 rgba(0, 0, 0, 0.1);
   border: solid 1px rgba(0, 0, 0, 0.2);
-  border-bottom: 1px solid rgba(0,0,0,0.3);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   padding: .4em;
   width: 100%;
   margin: 1em 0;
@@ -101,14 +100,13 @@ input[type="search"]::-webkit-search-cancel-button {
   position: relative;
 }
 
-input[type="search"]:not(:invalid){
+input[type="search"]:not(:invalid) {
   background: #fff;
 }
 
 
-
 /**
- * Code bloc
+ * Code block
  */
 
 pre {
@@ -121,7 +119,6 @@ pre {
 pre:first-of-type {
   margin-top: 2em;
 }
-
 
 
 /**
@@ -144,9 +141,11 @@ pre:first-of-type {
   flex-direction: row;
 }
 
+
 /**
  * Results Cards
  */
+
 .results blockquote {
   flex-basis: 8em;
   flex-grow: 1;
@@ -161,12 +160,14 @@ pre:first-of-type {
   line-height: 1.3em;
   font-weight: 400;
 }
+
 .results blockquote:first-letter,
 .results cite {
-  font-family:  Didot, "Vidaloka", serif;
+  font-family: Didot, "Vidaloka", serif;
   font-weight: bold;
   font-size: 1.4em;
 }
+
 .results cite {
   font-size: 0.95em;
   vertical-align: bottom;
@@ -178,10 +179,10 @@ pre:first-of-type {
 }
 
 
-
 /**
  * Footer
  */
+
 footer {
   padding: 2em 0 0;
 }
@@ -197,7 +198,6 @@ footer {
 
 .pull-right {
   float: right;
-
 }
 
 span.separator {
