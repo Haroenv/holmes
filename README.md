@@ -34,6 +34,8 @@ holmes({
 });
 ```
 
+[full documentation](https://haroen.me/holmes/doc)
+
 ### Questions?
 
 Compatible up to IE9.
