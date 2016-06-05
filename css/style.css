@@ -4,7 +4,7 @@
  * Changes by Haroen Viaene
  */
 
- :root {
+:root {
   font-size: 16px;
 }
 
@@ -27,7 +27,7 @@ body {
  * Typography
  */
 
- h1 {
+h1 {
   font-family: Didot, "Vidaloka", serif;
   font-size: 3em;
   color: #000000;
@@ -71,10 +71,12 @@ a {
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 }
 
+
 /**
  * Input
  */
- @media (max-width: 640px) {
+
+@media (max-width: 640px) {
   h1 {
     text-align: center;
     width: 80%;
@@ -84,7 +86,6 @@ a {
     right: 0.5em;
   }
 }
-
 
 input[type="search"] {
   font-size: 1.4em;
@@ -119,7 +120,7 @@ input[type="search"]:not(:invalid) {
  * Code block
  */
 
- pre {
+pre {
   background: #333;
   color: #fff;
   padding: 0 1em;
@@ -131,57 +132,61 @@ pre:first-of-type {
   margin-top: 2em;
 }
 
+
 /**
 * Search
 */
+
 .search {
   position: relative;
 }
 
-.search a {
+.search .toggle {
   position: absolute;
   top: 64%;
   right: 7%;
+  -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
   font-size: 3.5em;
-  text-decoration: none;
-  border-bottom: none;
-  color: rgba(0,0,0,0.25);
+  color: rgba(0, 0, 0, 0.25);
   display: block;
-    width: 40px;
-    height: 40px;
-    text-align: center;
-    line-height: 40px;
+  width: 1em;
+  height: 1em;
+  text-align: center;
+  line-height: 1em;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  font-family: Didot, "Vidaloka", serif;
 }
 
-.search a::selection {
-  background: transparent;
-}
-
-.search a:hover:after {
+.search .toggle:hover:after {
   content: attr(data-tooltip);
   position: absolute;
   top: -46px;
   left: -96px;
   color: #fff;
-  border-radius: 4px;
+  border-radius: .25em;
   padding: 0.35rem;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0, 0, 0, 0.8);
   font-size: 1rem;
   width: 170px;
   opacity: 2;
-  font-family: Helvetica;
+  font-family: system, -apple-system, sans-serif;
   line-height: 1;
 }
 
-.search a.clicked {
-  color: rgba(0,0,0,0.5);
+.search .toggle.clicked {
+  color: rgba(0, 0, 0, 0.5);
 }
+
+
 /**
  * Results
  */
-
- .results {
+.results {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -204,9 +209,9 @@ pre:first-of-type {
  * Results Cards
  */
 
- .results blockquote {
-  -webkit-flex-basis: 8em;
+.results blockquote {
   -ms-flex-preferred-size: 8em;
+  -webkit-flex-basis: 8em;
   flex-basis: 8em;
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
@@ -242,20 +247,25 @@ pre:first-of-type {
 
 .results.classes blockquote.visible {
   border-bottom: 5px solid #86BA68;
+  -webkit-order: 1;
+  -ms-flex-order: 1;
   order: 1;
 }
 
 .results.classes blockquote.hidden {
   border-bottom: 5px solid #D15E39;
   display: block;
+  -webkit-order: 2;
+  -ms-flex-order: 2;
   order: 2;
 }
+
 
 /**
  * Footer
  */
 
- footer {
+footer {
   padding: 2em 0 0;
 }
 
@@ -266,18 +276,18 @@ pre:first-of-type {
     line-height: 2;
     text-align: center;
   }
-
   footer .pull-right {
     width: 100%;
     float: left;
   }
 }
 
+
 /**
  * Generic classes
  */
 
- .hidden {
+.hidden {
   display: none;
 }
 
