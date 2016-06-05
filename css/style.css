@@ -19,9 +19,15 @@ body {
   margin: 1em auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscaled;
+  box-sizing: border-box;
   font-weight: 300;
 }
 
+button {
+  outline: none;
+  padding: 0;
+  margin: 0;
+}
 
 /**
  * Typography
@@ -113,6 +119,7 @@ input[type="search"] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  outline: none;
 }
 
 input[type="search"]::-webkit-search-cancel-button {
@@ -142,8 +149,8 @@ pre:first-of-type {
 }
 
 /**
- * Search
- */
+* Search
+*/
 
 .search {
   position: relative;
