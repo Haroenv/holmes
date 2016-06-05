@@ -4,7 +4,7 @@
  * Changes by Haroen Viaene
  */
 
- :root {
+:root {
   font-size: 16px;
 }
 
@@ -27,7 +27,7 @@ body {
  * Typography
  */
 
- h1 {
+h1 {
   font-family: Didot, "Vidaloka", serif;
   font-size: 3em;
   color: #000000;
@@ -40,6 +40,13 @@ h3 {
   font-family: Didot, "Vidaloka", serif;
   font-weight: bold;
   font-size: 2.2em;
+}
+
+/* todo: don't need a media query */
+@media (max-width: 640px) {
+  h3 {
+    font-size: 5vw;
+  }
 }
 
 h1:hover {
@@ -71,10 +78,12 @@ a {
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 }
 
+
 /**
  * Input
  */
- @media (max-width: 640px) {
+
+@media (max-width: 640px) {
   h1 {
     text-align: center;
     width: 80%;
@@ -84,7 +93,6 @@ a {
     right: 0.5em;
   }
 }
-
 
 input[type="search"] {
   font-size: 1.4em;
@@ -119,7 +127,7 @@ input[type="search"]:not(:invalid) {
  * Code block
  */
 
- pre {
+pre {
   background: #333;
   color: #fff;
   padding: 0 1em;
@@ -136,7 +144,7 @@ pre:first-of-type {
  * Results
  */
 
- .results {
+.results {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -159,7 +167,7 @@ pre:first-of-type {
  * Results Cards
  */
 
- .results blockquote {
+.results blockquote {
   -webkit-flex-basis: 8em;
   -ms-flex-preferred-size: 8em;
   flex-basis: 8em;
@@ -200,7 +208,7 @@ pre:first-of-type {
  * Footer
  */
 
- footer {
+footer {
   padding: 2em 0 0;
 }
 
@@ -211,18 +219,18 @@ pre:first-of-type {
     line-height: 2;
     text-align: center;
   }
-
   footer .pull-right {
     width: 100%;
     float: left;
   }
 }
 
+
 /**
  * Generic classes
  */
 
- .hidden {
+.hidden {
   display: none;
 }
 
