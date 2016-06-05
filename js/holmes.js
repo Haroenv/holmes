@@ -36,7 +36,7 @@
    * @param {string} options.find
    *   A querySelectorAll rule to find each of the find terms
    * @param {string=} options.placeholder
-   *   Text to show when there are no results
+   *   Text to show when there are no results (innerHTML)
    */
   function holmes(options) {
     window.addEventListener('DOMContentLoaded',function(){
@@ -49,7 +49,7 @@
       if (options.placeholder) {
         var placeholder = document.createElement('span');
         placeholder.classList.add('hidden');
-        placeholder.textContent = options.placeholder;
+        placeholder.innerHTML = options.placeholder;
         elements[0].parentNode.appendChild(placeholder);
       }
 
