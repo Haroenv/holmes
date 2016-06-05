@@ -77,14 +77,14 @@
           var searchString = search.value.toLowerCase();
           if (elements[i].textContent.toLowerCase().indexOf(searchString) === -1) {
             elements[i].classList.add(options.class.hidden);
-            try {
+            if (options.class.visible) {
               elements[i].classList.remove(options.class.visible);
-            } catch(e) {}
+            }
           } else {
             elements[i].classList.remove(options.class.hidden);
-            try {
+            if (options.class.visible) {
               elements[i].classList.add(options.class.visible);
-            } catch(e) {}
+            }
             found = true;
           }
         };
