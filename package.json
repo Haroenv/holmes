@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npm run lint",
     "lint": "eslint js/holmes.js",
-    "doc": "jsdoc -R README.md -d doc js/holmes.js "
+    "doc": "jsdoc -R README.md -d doc js/holmes.js"
   },
   "keywords": [
     "search",
