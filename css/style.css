@@ -47,7 +47,8 @@ h1 {
   color: #000000;
   display: inline-block;
   position: relative;
-  text-shadow: 1px 1px 0 #EDEDED, 3px 3px 0 rgba(0, 0, 0, 0.05)
+  filter: drop-shadow(3px 3px 0 rgba(0, 0, 0, 0.05));
+  transition: .2s filter ease-in-out;
 }
 
 h3 {
@@ -56,6 +57,9 @@ h3 {
   font-size: 2.2em;
 }
 
+h1:hover {
+  filter: drop-shadow(3px 3px 0 rgba(0, 0, 0, 0.2));
+}
 
 /* todo: don't need a media query */
 
@@ -65,9 +69,7 @@ h3 {
   }
 }
 
-h1:hover {
-  text-shadow: 1px 1px 0 #EDEDED, 3px 3px 0 rgba(0, 0, 0, 0.2)
-}
+
 
 h1 a {
   color: #000000;
