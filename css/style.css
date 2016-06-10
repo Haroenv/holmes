@@ -23,6 +23,14 @@ body {
   font-weight: 300;
 }
 
+header {
+  text-align: center;
+}
+
+header img {
+  height: .8em;
+}
+
 button {
   outline: none;
   padding: 0;
@@ -59,17 +67,6 @@ h3 {
 
 h1:hover {
   text-shadow: 1px 1px 0 #EDEDED, 3px 3px 0 rgba(0, 0, 0, 0.2)
-}
-
-h1:after {
-  content: '';
-  display: block;
-  width: 1em;
-  height: 1em;
-  position: absolute;
-  background: url(../images/holmes_logo-hover.svg) no-repeat center center / contain;
-  top: .25rem;
-  right: -1.4em;
 }
 
 h1 a {
