@@ -40,6 +40,15 @@ holmes({
 
 [full documentation](https://haroen.me/holmes/doc)
 
+### Showcase
+
+What|who|image
+---|---|---
+[bullg.it](https://bullg.it)|[@haroenv](https://github.com/haroenv)|![screenshot of bullg.it](https://haroen.me/holmes/images/screen-bullgit.png)
+[family.scss](https://lukyvj.github.io/family.scss)|[@lukyvj](https://github.com/lukyvj)|![screenshot of family.scss](https://haroen.me/holmes/images/screen-family.png)
+
+I'd love to find out how people use my project, let me know if you want to be featured!
+
 ### Questions?
 
 Compatible up to IE9.
