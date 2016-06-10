@@ -88,17 +88,6 @@ a {
  * Input
  */
 
-@media (max-width: 640px) {
-  h1 {
-    text-align: center;
-    width: 80%;
-    padding-right: 20%;
-  }
-  h1:after {
-    right: 0.5em;
-  }
-}
-
 input[type="search"] {
   font-size: 1.4em;
   border-radius: .25em;
