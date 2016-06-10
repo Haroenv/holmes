@@ -36,6 +36,8 @@
    *   A querySelectorAll rule to find each of the find terms
    * @param {string=} options.placeholder
    *   Text to show when there are no results (innerHTML)
+   * @param {bool} [options.placeholder=false]
+   *   Whether to <mark></mark> the match
    * @param {string} [options.class.visible=false]
    *   class to add to matched items
    * @param {string} [options.class.hidden='hidden']
@@ -49,6 +51,9 @@
       }
       if (typeof options.placeholder == 'undefined') {
         options.placeholder = false;
+      }
+      if (typeof options.mark == 'undefined') {
+        options.mark = false;
       }
       if (typeof options.class == 'undefined') {
         options.class = {};
@@ -109,6 +114,10 @@
             }
             // the element is now found at least once
             found = true;
+            if (options.mark) {
+              elements[i].innerHTML = elements[i].innerHTML.replace(/<\/?mark>/g,'');
+              elements[i].innerHTML = elements[i].innerHTML.replace(new RegExp(searchString,'gi'),'<mark>'+searchString+'</mark>');
+            }
           }
         };
         // if the element wasn't found
