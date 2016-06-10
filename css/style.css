@@ -299,12 +299,8 @@ footer {
 span.separator {
   font-family: Didot, "Vidaloka", serif;
   font-size: 2.2em;
-  vertical-align: bottom;
-  position: relative;
   display: block;
-  width: 100%;
   min-height: 100px;
-  background: url(../images/footprint.svg) no-repeat center center / contain;
   position: relative;
 }
 
@@ -322,8 +318,21 @@ span.separator:after {
   }
 }
 
-span.separator:nth-of-type(odd) {
-  background: url(../images/footprint-2.svg) no-repeat center center / contain;
+span.separator:before {
+  content: '';
+  position: absolute;
+  background: url(../images/footprint.svg) no-repeat center center / contain;
+  width: 100%;
+  height: 100%;
+}
+
+span.separator:nth-of-type(odd):before {
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  filter: FlipH;
+  -ms-filter: "FlipH";
 }
 
 span.separator:nth-of-type(odd):after {
