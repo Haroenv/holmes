@@ -91,37 +91,43 @@
 
         // early return if search string is empty
         if (!searchString) {
-          return;
+          listAllElements();
         }
 
         // loop over all the elements
         // in case this should become dynamic, query for the elements here
-        for (var i = 0; i < elements.length; i++) {
+        function listAllElements() {
+          for (var i = 0; i < elements.length; i++) {
 
-          // if the current element doesn't containt the search string
-          // add the hidden class and remove the visbible class
-          if (elements[i].textContent.toLowerCase().indexOf(searchString) === -1) {
-            elements[i].classList.add(options.class.hidden);
-            if (options.class.visible) {
-              elements[i].classList.remove(options.class.visible);
+            // if the current element doesn't containt the search string
+            // add the hidden class and remove the visbible class
+            if (elements[i].textContent.toLowerCase().indexOf(searchString) === -1) {
+              elements[i].classList.add(options.class.hidden);
+              if (options.class.visible) {
+                elements[i].classList.remove(options.class.visible);
+              }
+              // else
+              // remove the hidden class and add the visible
+            } else {
+              elements[i].classList.remove(options.class.hidden);
+              if (options.class.visible) {
+                elements[i].classList.add(options.class.visible);
+              }
+              // the element is now found at least once
+              found = true;
             }
-          // else
-          // remove the hidden class and add the visible
-          } else {
-            elements[i].classList.remove(options.class.hidden);
-            if (options.class.visible) {
-              elements[i].classList.add(options.class.visible);
-            }
-            // the element is now found at least once
-            found = true;
           }
-        };
+
+        }
+
+        listAllElements();
+
         // if the element wasn't found
         // and a placeholder is given,
         // stop hiding it now
         if (!found && options.placeholder) {
           placeholder.classList.remove(options.class.hidden);
-        // otherwise hide it again
+          // otherwise hide it again
         } else {
           placeholder.classList.add(options.class.hidden);
         }
