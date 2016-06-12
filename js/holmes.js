@@ -89,11 +89,6 @@
         // search in lowercase
         var searchString = search.value.toLowerCase();
 
-        // early return if search string is empty
-        if (!searchString) {
-          return;
-        }
-
         // loop over all the elements
         // in case this should become dynamic, query for the elements here
         for (var i = 0; i < elements.length; i++) {
