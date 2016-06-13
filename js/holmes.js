@@ -8,16 +8,16 @@
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define([], function() {
-      return (root.holmes = factory());
+      return (root.holmes = factory(document));
     });
   } else if (typeof exports === 'object') {
     // Node. Does not work with strict CommonJS, but
     // only CommonJS-like environments that support module.exports,
     // like Node.
-    module.exports = factory();
+    module.exports = factory(document);
   } else {
     // Browser globals
-    root.holmes = factory();
+    root.holmes = factory(document);
   }
 })(this, function(document) {
   // UMD Definition above, do not remove this line
