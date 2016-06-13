@@ -1,0 +1,24 @@
+{
+  "name": "holmes.js",
+  "description": "Fast and easy searching inside a page.",
+  "main": "js/holmes.js",
+  "authors": [
+    "Haroen Viaene <hello@haroen.me>"
+  ],
+  "license": "Apache-2.0",
+  "keywords": [
+    "search",
+    "dom",
+    "easy",
+    "find",
+    "input"
+  ],
+  "homepage": "https://github.com/Haroenv/holmes",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
