@@ -19,7 +19,7 @@
     // Browser globals
     root.holmes = factory();
   }
-})(this, function() {
+})(this, function(document) {
   // UMD Definition above, do not remove this line
 
   // To get to know more about the Universal Module Definition
@@ -75,7 +75,9 @@
 
       // if a visible class is given, give it to everything
       if (options.class.visible) {
-        for (var i = 0; i < elements.length; i++) {
+        var i;
+        var elementsLength = elements.length;
+        for (i = 0; i < elementsLength; i++) {
           elements[i].classList.add(options.class.visible);
         }
       }
@@ -89,9 +91,12 @@
         // search in lowercase
         var searchString = search.value.toLowerCase();
 
+        var i;
+        var elementsLength = elements.length;
+
         // loop over all the elements
         // in case this should become dynamic, query for the elements here
-        for (var i = 0; i < elements.length; i++) {
+        for (i = 0; i < elementsLength; i++) {
 
           // if the current element doesn't containt the search string
           // add the hidden class and remove the visbible class
