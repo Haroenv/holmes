@@ -64,6 +64,7 @@
       // in case you would support dynamic content, the elements qs needs to be moved
       var search = document.querySelector(options.input);
       var elements = document.querySelectorAll(options.find);
+      var elementsLength = elements.length;
 
       // create a container for a placeholder
       if (options.placeholder) {
@@ -76,7 +77,6 @@
       // if a visible class is given, give it to everything
       if (options.class.visible) {
         var i;
-        var elementsLength = elements.length;
         for (i = 0; i < elementsLength; i++) {
           elements[i].classList.add(options.class.visible);
         }
@@ -91,11 +91,9 @@
         // search in lowercase
         var searchString = search.value.toLowerCase();
 
-        var i;
-        var elementsLength = elements.length;
-
         // loop over all the elements
         // in case this should become dynamic, query for the elements here
+        var i;
         for (i = 0; i < elementsLength; i++) {
 
           // if the current element doesn't containt the search string
