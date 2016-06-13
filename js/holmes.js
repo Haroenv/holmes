@@ -8,18 +8,18 @@
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define([], function() {
-      return (root.holmes = factory());
+      return (root.holmes = factory(document));
     });
   } else if (typeof exports === 'object') {
     // Node. Does not work with strict CommonJS, but
     // only CommonJS-like environments that support module.exports,
     // like Node.
-    module.exports = factory();
+    module.exports = factory(document);
   } else {
     // Browser globals
-    root.holmes = factory();
+    root.holmes = factory(document);
   }
-})(this, function() {
+})(this, function(document) {
   // UMD Definition above, do not remove this line
 
   // To get to know more about the Universal Module Definition
@@ -72,6 +72,7 @@
       // in case you would support dynamic content, the elements qs needs to be moved
       var search = document.querySelector(options.input);
       var elements = document.querySelectorAll(options.find);
+      var elementsLength = elements.length;
 
       // create a container for a placeholder
       if (options.placeholder) {
@@ -83,7 +84,8 @@
 
       // if a visible class is given, give it to everything
       if (options.class.visible) {
-        for (var i = 0; i < elements.length; i++) {
+        var i;
+        for (i = 0; i < elementsLength; i++) {
           elements[i].classList.add(options.class.visible);
         }
       }
@@ -105,7 +107,8 @@
 
         // loop over all the elements
         // in case this should become dynamic, query for the elements here
-        for (var i = 0; i < elements.length; i++) {
+        var i;
+        for (i = 0; i < elementsLength; i++) {
 
           // if the current element doesn't containt the search string
           // add the hidden class and remove the visbible class
