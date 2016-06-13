@@ -103,6 +103,7 @@
         // for the contents of `elements` on every input
         if (options.dynamic) {
           elements = document.querySelectorAll(options.find);
+          elementsLength = elements.length;
         }
 
         // loop over all the elements
