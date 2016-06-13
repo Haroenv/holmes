@@ -40,7 +40,7 @@
    *   class to add to matched items
    * @param {string} [options.class.hidden='hidden']
    *   class to add to non-matched items
-   * @param {boolean} [dynamic=false]
+   * @param {boolean} [options.dynamic=false]
    *   Whether to query for the content of the elements on every input.
    *   If this is false, then only when initializing the script will
    *   fetch the content of the elements to search in. If this is true
