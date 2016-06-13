@@ -37,6 +37,7 @@ button {
   margin: 0;
 }
 
+
 /**
  * Typography
  */
@@ -47,13 +48,21 @@ h1 {
   color: #000000;
   display: inline-block;
   position: relative;
-  text-shadow: 1px 1px 0 #EDEDED, 3px 3px 0 rgba(0, 0, 0, 0.05)
+  -webkit-filter: drop-shadow(3px 3px 0 rgba(0, 0, 0, 0.05));
+  filter: drop-shadow(3px 3px 0 rgba(0, 0, 0, 0.05));
+  /*text-shadow: 1px 1px 0 #EDEDED;*/
+  transition: .2s filter ease-in-out;
 }
 
 h3 {
   font-family: Didot, "Vidaloka", serif;
   font-weight: bold;
   font-size: 2.2em;
+}
+
+h1:hover {
+  -webkit-filter: drop-shadow(3px 3px 0 rgba(0, 0, 0, 0.2));
+  filter: drop-shadow(3px 3px 0 rgba(0, 0, 0, 0.2));
 }
 
 
@@ -63,10 +72,6 @@ h3 {
   h3 {
     font-size: 5vw;
   }
-}
-
-h1:hover {
-  text-shadow: 1px 1px 0 #EDEDED, 3px 3px 0 rgba(0, 0, 0, 0.2)
 }
 
 h1 a {
@@ -133,6 +138,7 @@ pre {
 pre:first-of-type {
   margin-top: 2em;
 }
+
 
 /**
 * Search
@@ -212,8 +218,8 @@ pre:first-of-type {
  */
 
 .results blockquote {
-  -webkit-flex-basis: 8em;
   -ms-flex-preferred-size: 8em;
+  -webkit-flex-basis: 8em;
   flex-basis: 8em;
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
@@ -261,6 +267,7 @@ pre:first-of-type {
   -ms-flex-order: 2;
   order: 2;
 }
+
 
 /**
  * Footer
@@ -327,8 +334,6 @@ span.separator:before {
 }
 
 span.separator:nth-of-type(odd):before {
-  -moz-transform: scaleX(-1);
-  -o-transform: scaleX(-1);
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
   filter: FlipH;
