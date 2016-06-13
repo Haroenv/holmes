@@ -36,7 +36,8 @@ holmes({
   class: {
     visible: 'visible', // (optional) class to add to matched elements
     hidden: 'hidden' // (optional) class to add to non-matched elements
-  }
+  },
+  dynamic: false // if true, this will refresh the content every search
 });
 ```
 

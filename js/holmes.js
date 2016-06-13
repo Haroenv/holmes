@@ -40,6 +40,11 @@
    *   class to add to matched items
    * @param {string} [options.class.hidden='hidden']
    *   class to add to non-matched items
+   * @param {boolean} [dynamic=false]
+   *   Whether to query for the content of the elements on every input.
+   *   If this is false, then only when initializing the script will
+   *   fetch the content of the elements to search in. If this is true
+   *   then it will refresh on every input
    */
   function holmes(options) {
     window.addEventListener('DOMContentLoaded', function() {
@@ -58,6 +63,9 @@
       }
       if (typeof options.class.hidden == 'undefined') {
         options.class.hidden = 'hidden';
+      }
+      if (typeof options.dynamic == 'undefined') {
+        options.dynamic = false;
       }
 
       // find the search and the elements
@@ -88,6 +96,12 @@
 
         // search in lowercase
         var searchString = search.value.toLowerCase();
+
+        // if the dynamic option is enabled, then we should query
+        // for the contents of `elements` on every input
+        if (options.dynamic) {
+          elements = document.querySelectorAll(options.find);
+        }
 
         // loop over all the elements
         // in case this should become dynamic, query for the elements here
