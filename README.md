@@ -28,16 +28,35 @@ but this could be any `css` you want.
 
 [demo](https://haroen.me/holmes/)
 
+### Simple example
+
 ```js
 holmes({
-  input: '.search input', // queryselector for the input
-  find: '.results article', // queryselector for element to search in
-  placeholder: 'no results', // (optional) text to show when no results
+  input: '.search input', // default: input[type=search]
+  find: '.results div' // querySelectorAll that matches each of the results individually
+})
+```
+
+### All options
+
+```js
+holmes({
+  // queryselector for the input
+  input: '.search input',
+  // queryselector for element to search in
+  find: '.results article',
+  // (optional) text to show when no results
+  placeholder: 'no results',
   class: {
-    visible: 'visible', // (optional) class to add to matched elements
-    hidden: 'hidden' // (optional) class to add to non-matched elements
+    // (optional) class to add to matched elements
+    visible: 'visible',
+    // (optional) class to add to non-matched elements
+    hidden: 'hidden'
   },
-  dynamic: false // if true, this will refresh the content every search
+  // (optional) if true, this will refresh the content every search
+  dynamic: false,
+  // (optional) needs to be true if the input is a contenteditable field instead of a
+  contenteditable: false
 });
 ```
 
