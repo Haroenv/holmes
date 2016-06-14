@@ -77,6 +77,17 @@ Compatible up to IE9.
 
 Let me know on twitter: [@haroenv](https://twitter.com/haroenv).
 
+## Contributing
+
+Contributions are always welcome! Here are some loose guidelines:
+
+* use `feature branches`
+* don't make it slower
+* explain why you want a feature
+* `npm run doc` to recreate the documentation
+
+But I don't bite, if you have any questions or insecurities, hit me up for example on [gitter](https://gitter.im/Haroenv/holmes?utm_source=readme&utm_medium=link&utm_content=link).
+
 ## License
 
 Apache 2.0
