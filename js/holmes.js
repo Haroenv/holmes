@@ -31,20 +31,23 @@
    * search for dom elements on your page
    * @alias module:holmes
    * @param {string} [options.input='input[type=search]']
-   *   A querySelector to find the input
+   *   A <code>querySelector</code> to find the <code>input</code>
    * @param {string} options.find
-   *   A querySelectorAll rule to find each of the find terms
+   *   A <code>querySelectorAll</code> rule to find each of the find terms
    * @param {string=} options.placeholder
-   *   Text to show when there are no results (innerHTML)
+   *   Text to show when there are no results (<code>innerHTML</code>)
    * @param {string} [options.class.visible=false]
    *   class to add to matched items
    * @param {string} [options.class.hidden='hidden']
    *   class to add to non-matched items
    * @param {boolean} [options.dynamic=false]
    *   Whether to query for the content of the elements on every input.
-   *   If this is false, then only when initializing the script will
-   *   fetch the content of the elements to search in. If this is true
-   *   then it will refresh on every input
+   *   If this is <code>false</code>, then only when initializing the script will
+   *   fetch the content of the elements to search in. If this is <code>true</code>
+   *   then it will refresh on every <code>input</code> event.
+   * @param {bollean} [options.contenteditable=false]
+   *   whether the input is a contenteditable or not. By default it's
+   *   assumed that it's <code>&lt;input&gt;</code>, <code>true</code> here will use <code>&lt;div contenteditable&gt;</code>
    */
   function holmes(options) {
     window.addEventListener('DOMContentLoaded', function() {
@@ -66,6 +69,9 @@
       }
       if (typeof options.dynamic == 'undefined') {
         options.dynamic = false;
+      }
+      if (typeof options.contenteditable == 'undefined') {
+        options.contenteditable = false;
       }
 
       // find the search and the elements
@@ -97,7 +103,12 @@
         var found = false;
 
         // search in lowercase
-        var searchString = search.value.toLowerCase();
+        var searchString;
+        if (options.contenteditable) {
+          searchString = search.textContent.toLowerCase();
+        } else {
+          searchString = search.value.toLowerCase();
+        }
 
         // if the dynamic option is enabled, then we should query
         // for the contents of `elements` on every input
