@@ -6,7 +6,7 @@
 
 ## Installation
 
-You can install `holmes` with either `npm` or `bower` under the package name `holmes.js`. For `nmp` that looks like this:
+You can install `holmes` with either `npm` or `bower` under the package name `holmes.js`. For `npm` that looks like this:
 
 ```
 $ npm install --save holmes.js

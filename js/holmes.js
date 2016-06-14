@@ -45,7 +45,7 @@
    *   If this is <code>false</code>, then only when initializing the script will
    *   fetch the content of the elements to search in. If this is <code>true</code>
    *   then it will refresh on every <code>input</code> event.
-   * @param {bollean} [options.contenteditable=false]
+   * @param {boolean} [options.contenteditable=false]
    *   whether the input is a contenteditable or not. By default it's
    *   assumed that it's <code>&lt;input&gt;</code>, <code>true</code> here will use <code>&lt;div contenteditable&gt;</code>
    */
