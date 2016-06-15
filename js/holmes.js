@@ -47,13 +47,33 @@
    *   then it will refresh on every <code>input</code> event.
    * @param {boolean} [options.contenteditable=false]
    *   whether the input is a contenteditable or not. By default it's
-   *   assumed that it's <code>&lt;input&gt;</code>, <code>true</code> here will use <code>&lt;div contenteditable&gt;</code>
+   *   assumed that it's <code>&lt;input&gt;</code>, <code>true</code> here
+   *   will use <code>&lt;div contenteditable&gt;</code>
+   * @param {boolean} [options.instant=false]
+   *   By default Holmes waits for the <code>DOMContentLoaded</code> event to fire
+   *   before listening. This is to make sure that all content is available. However
+   *   if you exactly know when all your content is available (ajax, your own event or
+   *   other situations), you can put this option on <code>true</code>.
    */
   function holmes(options) {
-    window.addEventListener('DOMContentLoaded', function() {
+
+    // whether to start immediately or wait on the load of DOMContent
+    if (typeof options.instant == 'undefined') {
+      options.instant = false;
+    }
+
+    if (options.instant) {
+      start();
+    } else {
+      window.addEventListener('DOMContentLoaded', start);
+    }
+
+    // start listening
+    function start() {
+
       // setting default values
       if (typeof options.input == 'undefined') {
-        options.input = 'input[type=search]'
+        options.input = 'input[type=search]';
       }
       if (typeof options.placeholder == 'undefined') {
         options.placeholder = false;
@@ -75,7 +95,6 @@
       }
 
       // find the search and the elements
-      // in case you would support dynamic content, the elements qs needs to be moved
       var search = document.querySelector(options.input);
       var elements = document.querySelectorAll(options.find);
       var elementsLength = elements.length;
@@ -150,7 +169,7 @@
           placeholder.classList.add(options.class.hidden);
         }
       });
-    });
+    };
   };
 
   return holmes;
