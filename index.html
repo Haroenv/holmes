@@ -24,16 +24,32 @@ $ npm install holmes.js
     </code></pre>
   <pre><code class="microlight">
 holmes({
-  input: 'input',
-  find: '.results blockquote',
-  placeholder: 'no results', //optional
-  class: {
-    visible: 'visible', //optional
-    hidden: 'hidden' //optional
-  }
+  find: '.results blockquote'
 });
     </code></pre>
-  <a href="doc/">full documentation</a>
+    <pre><code class="microlight hidden" id="full-doc">
+holmes({
+  // queryselector for the input
+  input: '.search input',
+  // queryselector for element to search in
+  find: '.results article',
+  // (optional) text to show when no results
+  placeholder: 'no results',
+  class: {
+    // (optional) class to add to matched elements
+    visible: 'visible',
+    // (optional) class to add to non-matched elements
+    hidden: 'hidden'
+  },
+  // (optional) if true, this will refresh the content every search
+  dynamic: false,
+  // (optional) needs to be true if the input is a contenteditable field instead of a
+  contenteditable: false,
+  // (optional) in case you don't want to wait for DOMContentLoaded before starting Holmes:
+  instant: true
+});
+    </code></pre>
+  <a href="doc/module-holmes.html" id="more">more options</a> and <a href="doc/module-holmes.html">full documentation</a>
   <span class="separator" data-category="Demo"></span>
 
   <div class="search">
@@ -223,6 +239,12 @@ holmes({
       visible: 'visible',
       hidden: 'hidden'
     }
+  });
+
+  // show all of the options
+  document.getElementById('more').addEventListener('click',function(e){
+    e.preventDefault();
+    document.getElementById('full-doc').classList.toggle('hidden');
   });
 
   // toggle for showing hidden elements
