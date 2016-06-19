@@ -13,4 +13,4 @@ after_success:
     - npm run doc
     - git add .
     - git commit -am "Built documentation [ci skip]"
-    - if [[ $TRAVIS_PULL_REQUEST == 'false' ]]; then git push https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:gh-pages  > /dev/null 2>&1
+    - if [[ $TRAVIS_PULL_REQUEST == 'false' ]]; then git push https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:gh-pages  > /dev/null 2>&1; fi
