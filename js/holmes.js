@@ -57,6 +57,16 @@
    */
   function holmes(options) {
 
+    if (typeof options != 'object') {
+      throw new Error('The options need to be given inside an object like this:\nholmes({\n\tfind:".result",\n\tdynamic:false\n});\n see also https://haroen.me/holmes/doc/module-holmes.html');
+    }
+
+
+    // if options.find is missing, the searching won't work so we'll thrown an exceptions
+    if (typeof options.find == 'undefined') {
+      throw new Error('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nholmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/module-holmes.html');
+    }
+
     // whether to start immediately or wait on the load of DOMContent
     if (typeof options.instant == 'undefined') {
       options.instant = false;
