@@ -6,5 +6,5 @@ if [[ $TRAVIS_PULL_REQUEST == 'false' ]]; then
   git config user.name "Haroen Viaene [bot]"
   git config user.email "hello@haroen.me"
   git commit -am "Built documentation [ci skip]"
-  git push https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:gh-pages  > /dev/null 2>&1
+  git push https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:gh-pages
 fi
