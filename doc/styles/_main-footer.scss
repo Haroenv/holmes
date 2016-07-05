@@ -1,0 +1,16 @@
+.main-footer {
+  height: 6rem;
+  flex: 0 0 100%;
+  padding: 2rem 1rem;
+  background: $theme-fancy-rev;
+  color: $theme-fancy;
+
+  a {
+    color: currentColor;
+    text-decoration: underline;
+
+    &:visited {
+      color: currentColor;
+    }
+  }
+}

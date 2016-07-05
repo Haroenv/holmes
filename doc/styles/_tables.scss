@@ -1,0 +1,45 @@
+.table-scroll {
+  width: 100%;
+  overflow: auto;
+}
+
+table {
+  min-width: 100%;
+  margin: 0;
+
+  &, thead, tbody, tr, th, td {
+    border-collapse: collapse;
+    border: 0;
+    border-spacing: 2px;
+  }
+
+  th, td {
+    vertical-align: baseline;
+    padding: .5rem 0 .5em 1em;
+    text-align: left;
+
+    p {
+      &:first-child {
+        margin-top: 0;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  tr {
+    background-color: mix($theme-color, $theme-bg, 0%);
+
+    &:nth-child(even) {
+      background-color: mix($theme-color, $theme-bg, 5%);
+    }
+  }
+
+  thead {
+    th, td {
+      border-bottom: 2px solid $theme-fancy-rev;
+    }
+  }
+}

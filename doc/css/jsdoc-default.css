@@ -375,8 +375,11 @@ body, textarea, input, button, select {
 
 body {
   margin: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: wrap;
+  -ms-flex-flow: wrap;
+      flex-flow: wrap;
   height: 100vh;
   line-height: 1.3;
   overflow: hidden; }
@@ -481,7 +484,8 @@ table {
   display: block; }
 
 .nav-trigger:checked ~ .main-nav {
-  transform: translateX(0); }
+  -webkit-transform: translateX(0);
+          transform: translateX(0); }
 
 [for=nav-trigger].overlay {
   display: none;
@@ -518,7 +522,8 @@ table {
     height: 2px;
     width: 2em;
     background: currentColor;
-    transform: translate(-50%, -50%); }
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%); }
     [for=nav-trigger].navicon-button .navicon:before, [for=nav-trigger].navicon-button .navicon:after {
       content: '';
       position: absolute;
@@ -528,13 +533,17 @@ table {
       bottom: 0;
       background: inherit; }
     [for=nav-trigger].navicon-button .navicon:before {
-      transform: translateY(-300%); }
+      -webkit-transform: translateY(-300%);
+              transform: translateY(-300%); }
     [for=nav-trigger].navicon-button .navicon:after {
-      transform: translateY(300%); }
+      -webkit-transform: translateY(300%);
+              transform: translateY(300%); }
 
 .main-nav {
   height: calc(100% - 6rem);
-  flex: 0 0 20rem;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 20rem;
+          flex: 0 0 20rem;
   width: 20rem;
   background-color: #222;
   color: #f7f7f7;
@@ -542,7 +551,8 @@ table {
   @media screen and (max-width: 40rem) {
     .main-nav {
       position: absolute;
-      transform: translateX(-100%);
+      -webkit-transform: translateX(-100%);
+              transform: translateX(-100%);
       z-index: 5; } }
   .main-nav ul {
     margin: 0;
@@ -578,23 +588,31 @@ table {
         right: 0;
         bottom: 0;
         height: 1px;
+        -webkit-transition: -webkit-transform 0.2s ease-in-out;
+        transition: -webkit-transform 0.2s ease-in-out;
         transition: transform 0.2s ease-in-out;
-        transform-origin: 0% 100%;
+        transition: transform 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out;
+        -webkit-transform-origin: 0% 100%;
+                transform-origin: 0% 100%;
         background-color: #fff;
-        transform: scale(0.05, 1); }
+        -webkit-transform: scale(0.05, 1);
+                transform: scale(0.05, 1); }
       .main-nav li > a:visited {
         color: #fff; }
       .main-nav li > a:hover:before {
-        transition-delay: 0.2s; }
+        -webkit-transition-delay: 0.2s;
+                transition-delay: 0.2s; }
     .main-nav li li > a {
       padding-left: 2rem;
       font-weight: normal;
       font-family: Monacco, Consolas, monospace; }
       .main-nav li li > a:before {
-        transform: scale(0.1, 1); }
+        -webkit-transform: scale(0.1, 1);
+                transform: scale(0.1, 1); }
     .main-nav li li li > a {
       padding-left: 3rem;
-      transform: scale(0.1, 1); }
+      -webkit-transform: scale(0.1, 1);
+              transform: scale(0.1, 1); }
     .main-nav li[data-type="method"] > a {
       color: #ddd; }
       .main-nav li[data-type="method"] > a:before {
@@ -610,7 +628,8 @@ table {
     .main-nav li:hover > a {
       text-decoration: none; }
       .main-nav li:hover > a:before, .main-nav li:hover > a:hover:before {
-        transform: scale(1, 1); }
+        -webkit-transform: scale(1, 1);
+                transform: scale(1, 1); }
   .main-nav .nav-header h1, .main-nav .nav-header h2, .main-nav .nav-header h3, .main-nav .nav-header h4 {
     margin: 0;
     font-weight: normal; }
@@ -628,17 +647,25 @@ table {
       right: 0;
       bottom: 0;
       height: 2px;
+      -webkit-transition: -webkit-transform 0.2s ease-in-out;
+      transition: -webkit-transform 0.2s ease-in-out;
       transition: transform 0.2s ease-in-out;
-      transform-origin: 0% 100%;
+      transition: transform 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out;
+      -webkit-transform-origin: 0% 100%;
+              transform-origin: 0% 100%;
       background-color: #fff;
-      transform: scale(0.1, 1); }
+      -webkit-transform: scale(0.1, 1);
+              transform: scale(0.1, 1); }
     .main-nav .nav-header h1 > a:hover, .main-nav .nav-header h2 > a:hover, .main-nav .nav-header h3 > a:hover, .main-nav .nav-header h4 > a:hover {
       text-decoration: none; }
       .main-nav .nav-header h1 > a:hover:before, .main-nav .nav-header h2 > a:hover:before, .main-nav .nav-header h3 > a:hover:before, .main-nav .nav-header h4 > a:hover:before {
-        transform: scale(1, 1); }
+        -webkit-transform: scale(1, 1);
+                transform: scale(1, 1); }
 
 .main-content {
-  flex: 1 1 1%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 1%;
+          flex: 1 1 1%;
   background: #f7f7f7;
   color: #222;
   height: calc(100% - 6rem);
@@ -649,7 +676,9 @@ table {
 
 .main-footer {
   height: 6rem;
-  flex: 0 0 100%;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 100%;
+          flex: 0 0 100%;
   padding: 2rem 1rem;
   background: #222;
   color: #f7f7f7; }
@@ -662,8 +691,11 @@ table {
 dl {
   position: relative;
   margin: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   border-left: 2px solid; }
   dl dt {
     width: 10rem;
@@ -692,9 +724,15 @@ dl {
   color: #f7f7f7; }
 
 .code-source {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: flex-end; }
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end; }
   .code-source .link-box {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
     display: inline-flex; }
     .code-source .link-box a, .code-source .link-box a:visited {
       color: currentColor;
@@ -720,6 +758,8 @@ dl {
     font-family: Monacco, Consolas, monospace; }
 
 .__tag {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
   display: inline-flex;
   margin: .25rem;
   max-width: 10rem;
@@ -727,7 +767,10 @@ dl {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   cursor: default;
   border-radius: 2px;
   vertical-align: baseline;
@@ -1019,5 +1062,3 @@ ol.linenums {
       padding-top: 1rem; }
     ol.linenums li:last-child {
       padding-bottom: 1rem; }
-
-/*# sourceMappingURL=_prettify-tomorrow.css.map */

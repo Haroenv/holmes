@@ -1,0 +1,59 @@
+h1 {
+  font-size: 3rem;
+  margin: 1rem 0;
+
+  &.page-title {
+    margin: 0 1rem 2rem;
+  }
+}
+
+h2 {
+  font-size: 2rem;
+  margin: 1rem 0;
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin: .75rem 0;
+}
+
+h4 {
+  font-size: 1.25rem;
+  margin: .875rem 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: lighter;
+
+  &.name {
+    text-transform: initial;
+    margin: 0;
+    padding: .5rem 1rem;
+    font-family: $monospace;
+    font-weight: normal;
+    border-radius: 2px;
+    background-color: $theme-fancy;
+    color: $theme-fancy-rev;
+
+    a {
+      color: currentColor;
+      text-decoration: underline;
+    }
+  }
+
+  &.subsection-title {
+    margin: 2em 1rem;
+  }
+
+  &.section-title {
+    margin: 1em 1rem;
+  }
+
+  .ancestors {
+    a {
+      color: currentColor;
+      font-weight: normal;
+      padding: 0 1em 0 0;
+    }
+  }
+}
