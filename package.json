@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npm run lint",
     "lint": "eslint js/holmes.js",
-    "doc": "jsdoc -R README.md -d doc js/holmes.js"
+    "doc": "jsdoc -t node_modules/hopsdoc -R README.md -d doc js/holmes.js"
   },
   "keywords": [
     "search",
@@ -29,6 +29,7 @@
   "homepage": "https://haroen.me/holmes/",
   "devDependencies": {
     "eslint": "^2.9.0",
+    "hopsdoc": "^0.1.7",
     "jsdoc": "^3.4.0"
   }
 }

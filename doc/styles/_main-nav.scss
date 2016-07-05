@@ -1,0 +1,270 @@
+.nav-trigger, [for=nav-trigger] {
+  position: fixed;
+  top: 0;
+}
+
+.nav-trigger {
+  left: -2em;
+}
+
+.nav-trigger:checked {
+  ~ {
+    .navicon-button {
+      display: none;
+    }
+
+    .overlay {
+      display: block;
+    }
+
+    .main-nav {
+      transform: translateX(0);
+    }
+  }
+}
+
+[for=nav-trigger] {
+  &.overlay {
+    display: none;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(black, 0.5);
+    z-index: 5;
+
+    @media screen and (min-width: 40rem) {
+      display: none;
+      pointer-events: none;
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  &.navicon-button {
+    display: block;
+    height: 3em;
+    width: 3em;
+    right: 0;
+    background: $theme-fancy-rev;
+    color: $theme-fancy;
+
+    @media screen and (min-width: 40rem) {
+      display: none;
+      pointer-events: none;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .navicon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      height: 2px;
+      width: 2em;
+      background: currentColor;
+      transform: translate(-50%, -50%);
+
+      &:before, &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: inherit;
+      }
+
+      &:before {
+        transform: translateY(-300%);
+      }
+
+      &:after {
+        transform: translateY(300%);
+      }
+    }
+  }
+}
+
+.main-nav {
+  $header-level-color: $theme-bg;
+  $first-level-color: $theme-bg;
+  $method-color: $theme-method;
+  $typedef-color: $theme-typedef;
+  $member-color: $theme-member;
+  $speed: 0.2s;
+
+  height: calc(100% - 6rem);
+  flex: 0 0 20rem;
+  width: 20rem;
+
+  @media screen and (max-width: 40rem) {
+    position: absolute;
+    transform: translateX(-100%);
+    z-index: 5;
+  }
+
+  background-color: $theme-fancy-rev;
+  color: $theme-fancy;
+  overflow: auto;
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-type-header {
+    padding: 2rem 1rem 1rem 2rem;
+    &:before {
+      content:'';
+      display: inline-block;
+      height: 0;
+      width: 0;
+      border: .25rem solid transparent;
+      border-left-color: currentColor;
+      border-left-width: .25rem * 1.732050808;
+      margin-right: .5rem;
+      vertical-align: baseline;
+    }
+  }
+
+  li {
+    margin: .5em 0 2em;
+
+    li {
+      margin: 0;
+    }
+
+    > a {
+      display: block;
+      padding: .5rem 1rem;
+      font-weight: bold;
+      color: $first-level-color;
+      position: relative;
+      overflow: hidden;
+
+      &:before {
+        content: '';
+        position: absolute;
+        z-index: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 1px;
+        transition: transform $speed ease-in-out;
+        transform-origin: 0% 100%;
+        background-color: $first-level-color;
+
+        $scale: 1 / 20;
+
+        transform: scale($scale, 1);
+      }
+
+      &:before {}
+
+      &:visited {
+        color: $first-level-color;
+      }
+
+      &:hover {
+        &:before {
+          transition-delay: $speed;
+        }
+      }
+    }
+
+    li > a {
+      padding-left: 2rem;
+      font-weight: normal;
+      font-family: $monospace;
+
+      &:before {
+        $scale: 1 / 10;
+
+        transform: scale($scale, 1);
+      }
+    }
+
+    li li > a {
+      padding-left: 3rem;
+
+      $scale: 1 / 10;
+
+      transform: scale($scale, 1);
+    }
+
+    &[data-type="method"] > a {
+      color: $method-color;
+
+      &:before {
+        background-color: $method-color;
+      }
+    }
+
+    &[data-type="typedef"] > a {
+      color: $typedef-color;
+
+      &:before {
+        background-color: $typedef-color;
+      }
+    }
+
+    &[data-type="member"] > a {
+      color: $member-color;
+
+      &:before {
+        background-color: $member-color;
+      }
+    }
+
+    &:hover > a {
+      text-decoration: none;
+
+      &:before, &:hover:before {
+        transform: scale(1, 1);
+      }
+    }
+  }
+
+  .nav-header {
+    h1, h2, h3, h4 {
+      margin: 0;
+      font-weight: normal;
+
+      > a, > span {
+        color: $header-level-color;
+        display: block;
+        font-weight: normal;
+        padding: .5rem 1rem;
+        position: relative;
+      }
+
+      > a {
+        &:before {
+          content: '';
+          position: absolute;
+          z-index: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          height: 2px;
+          transition: transform $speed ease-in-out;
+          transform-origin: 0% 100%;
+          background-color: $header-level-color;
+
+          $scale: 1 / 10;
+
+          transform: scale($scale, 1);
+        }
+
+        &:hover {
+          text-decoration: none;
+
+          &:before {
+            transform: scale(1, 1);
+          }
+        }
+      }
+    }
+  }
+}

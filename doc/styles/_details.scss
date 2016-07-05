@@ -1,0 +1,35 @@
+dl {
+  position: relative;
+  margin: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  border-left: 2px solid;
+
+  dt {
+    width: 10rem;
+    margin: 0;
+    padding: .5rem 1rem;
+  }
+
+  dd {
+    width: calc(100% - 10rem);
+    margin: 0;
+    padding: .5rem 1rem;
+  }
+
+  &.details {
+    border-color: $theme-fancy-rev;
+  }
+
+  &.classes {
+    border-color: $theme-color;
+  }
+
+  &.namespaces {
+    border-color: $theme-color;
+  }
+
+  &.mixins {
+    border-color: $theme-color;
+  }
+}
