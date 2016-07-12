@@ -28,7 +28,7 @@
   },
   "homepage": "https://haroen.me/holmes/",
   "devDependencies": {
-    "eslint": "^2.9.0",
+    "eslint": "^3.0.1",
     "hopsdoc": "^0.1.7",
     "jsdoc": "^3.4.0"
   }
