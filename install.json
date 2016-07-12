@@ -2,7 +2,7 @@
   "resources": {
     "body": [{
       "type": "script",
-      "src": "holmes.js"
+      "src": "js/holmes.js"
     }, {
       "type": "script",
       "contents": "holmes(INSTALL_OPTIONS)"
