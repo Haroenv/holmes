@@ -1,0 +1,60 @@
+{
+  "resources": {
+    "body": [{
+      "type": "script",
+      "src": "holmes.js"
+    }, {
+      "type": "script",
+      "contents": "holmes(INSTALL_OPTIONS)"
+    }]
+  },
+  "options": {
+    "properties": {
+      "input": {
+        "title": "input",
+        "description": "A querySelector to find the input",
+        "type": "string",
+        "format": "selector",
+        "default": "input[type=search]"
+      },
+      "find": {
+        "type": "string",
+        "format": "selector",
+        "description": "A querySelectorAll rule to find each of the find terms"
+      },
+      "placeholder": {
+        "type": "string",
+        "format": "element",
+        "description": "text to show when no results"
+      },
+      "class": {
+        "visible": {
+          "type": "string",
+          "format": "selector",
+          "description": "class to add to matched elements"
+        },
+        "hidden": {
+          "type": "string",
+          "format": "selector",
+          "default": "hidden",
+          "description": "class to add to non-matched elements"
+        }
+      },
+      "dynamic": {
+        "type": "boolean",
+        "default": false,
+        "description": "if true, this will refresh the content every search"
+      },
+      "contenteditable": {
+        "type": "boolean",
+        "default": false,
+        "description": "needs to be true if the input is a contenteditable field instead of an input"
+      },
+      "instant": {
+        "type": "boolean",
+        "default": true,
+        "description": "in case you don't want to wait for DOMContentLoaded before starting Holmes"
+      }
+    }
+  }
+}
