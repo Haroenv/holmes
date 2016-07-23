@@ -175,7 +175,7 @@
         if (!found && options.placeholder) {
           placeholder.classList.remove(options.class.hidden);
         // otherwise hide it again
-        } else {
+        } else if (options.placeholder) {
           placeholder.classList.add(options.class.hidden);
         }
       });
