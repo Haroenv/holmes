@@ -61,7 +61,9 @@ holmes({
   // (optional) needs to be true if the input is a contenteditable field instead of a
   contenteditable: false,
   // (optional) in case you don't want to wait for DOMContentLoaded before starting Holmes:
-  instant: true
+  instant: true,
+  // (optional) if you want to start searching after a certain amount of characters are typed
+  minCharacters: 5
 });
 ```
 

@@ -54,13 +54,14 @@
    *   before listening. This is to make sure that all content is available. However
    *   if you exactly know when all your content is available (ajax, your own event or
    *   other situations), you can put this option on <code>true</code>.
+   * @param {number} [minCharacters=0] The minimum amount of characters to be typed before
+   *   Holmes starts searching. Beware that this also counts when backspacing.
    */
   function holmes(options) {
 
     if (typeof options != 'object') {
       throw new Error('The options need to be given inside an object like this:\nholmes({\n\tfind:".result",\n\tdynamic:false\n});\n see also https://haroen.me/holmes/doc/module-holmes.html');
     }
-
 
     // if options.find is missing, the searching won't work so we'll thrown an exceptions
     if (typeof options.find == 'undefined') {
@@ -103,6 +104,9 @@
       if (typeof options.contenteditable == 'undefined') {
         options.contenteditable = false;
       }
+      if (typeof options.minCharacters == 'undefined') {
+        options.minCharacters = 0;
+      }
 
       // find the search and the elements
       var search = document.querySelector(options.input);
@@ -130,6 +134,14 @@
 
         // by default the value isn't found
         var found = false;
+
+        // if a minimum of characters is required
+        // check if that limit has been reached
+        if (options.minCharacters) {
+          if (options.minCharacters > search.value.length) {
+            return;
+          }
+        }
 
         // search in lowercase
         var searchString;
