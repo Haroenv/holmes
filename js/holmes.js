@@ -180,6 +180,20 @@
         }
       });
     };
+
+    /**
+     * empty the search string programmatically
+     * This avoids having to send a new `input` event
+     */
+    var clear = function() {
+      var search = document.querySelector(options.input);
+      if (options.contenteditable) {
+        search.textContent = '';
+      } else {
+        search.value = '';
+      }
+    };
+    // this.clear = clear();
   };
 
   return holmes;
