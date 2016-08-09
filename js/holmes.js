@@ -126,6 +126,7 @@
       // create a container for a placeholder
       if (options.placeholder) {
         var placeholder = document.createElement('div');
+        placeholder.id = "holmes-placeholder";
         placeholder.classList.add(options.class.hidden);
         placeholder.innerHTML = options.placeholder;
         elements[0].parentNode.appendChild(placeholder);
@@ -226,6 +227,37 @@
         }
       });
     };
+
+    /**
+     * empty the search string programmatically.
+     * This avoids having to send a new `input` event
+     */
+    holmes.prototype.clear = function() {
+      var search = document.querySelector(options.input);
+      if (options.contenteditable) {
+        search.textContent = '';
+      } else {
+        search.value = '';
+      }
+      // if a visible class is given, give it to everything
+      if (options.class.visible) {
+        var i,
+          elements = document.querySelectorAll(options.find),
+          elementsLength = elements.length;
+        for (i = 0; i < elementsLength; i++) {
+          elements[i].classList.remove(options.class.hidden);
+          elements[i].classList.add(options.class.visible);
+        }
+      }
+      if (options.placeholder) {
+        var placeholder = document.getElementById('holmes-placeholder');
+        placeholder.classList.add(options.class.hidden);
+        if (options.class.visible) {
+          placeholder.classList.remove(options.class.visible);
+        }
+      }
+    };
+
   };
 
   /**
