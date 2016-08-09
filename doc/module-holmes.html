@@ -21,7 +21,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav class="main-nav">
-    <header class="nav-header"><h2><a href="index.html">Home</a></h2></header><header class="nav-header"><h3><span>Modules</span></h3></header><ul><li><a href="module-holmes.html">holmes</a></li></ul>
+    <header class="nav-header"><h2><a href="index.html">Home</a></h2></header><header class="nav-header"><h3><span>Modules</span></h3></header><ul><li><a href="module-holmes.html">holmes</a><ul class='typedefs'><li class='nav-type-header'>Typedefs</li><li data-type='typedef'><a href="module-holmes.html#~onChange">onChange</a></li></ul></li></ul>
 </nav>
 
 <main id="main" class="main-content">
@@ -147,7 +147,7 @@
 <section class="code-source">
   <div class="link-box">
     
-    <a href="holmes.js.html">holmes.js</a> <a href="holmes.js.html#line58">line 58</a>
+    <a href="holmes.js.html">holmes.js</a> <a href="holmes.js.html#line66">line 66</a>
     
   </div>
 </section>
@@ -543,6 +543,158 @@
         </tr>
 
     
+
+        <tr>
+            
+                <td class="name"><code>options.onHidden</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="__tag param-type param-type-onchange">onChange</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    <span class="__tag attr attr-optional">optional</span><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Callback for when an item is hidden.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options.onVisible</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="__tag param-type param-type-onchange">onChange</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    <span class="__tag attr attr-optional">optional</span><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Callback for when an item is visible again.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options.onEmpty</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="__tag param-type param-type-onchange">onChange</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    <span class="__tag attr attr-optional">optional</span><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Callback for when no items were found.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options.onFound</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="__tag param-type param-type-onchange">onChange</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    <span class="__tag attr attr-optional">optional</span><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Callback for when items are found after being empty.</td>
+        </tr>
+
+    
     </tbody>
 </table>
 </div>
@@ -618,6 +770,171 @@
     
 
     
+        <h3 class="subsection-title">Type Definitions</h3>
+
+        
+                
+<article class="card card__typedef" id="~onChange">
+
+
+<section class="code-source">
+  <div class="link-box">
+    
+    <a href="holmes.js.html">holmes.js</a> <a href="holmes.js.html#line219">line 219</a>
+    
+  </div>
+</section>
+
+
+    
+      <h2 >onChange</h2>
+    
+    
+        
+
+        <h4 class="name"><span class="type-signature"></span>onChange<span class="signature">(element<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+    
+    <div class="description">
+        Callback used for changes in item en list states.
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+<div class="table-scroll">
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>element</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="__tag param-type param-type-object"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank">object</a>
+
+</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    <span class="__tag attr attr-optional">optional</span><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Element affected by the event. This is the item found by
+  <code>onVisible</code> and <code>onHidden</code> and the placeholder
+  (or <code>undefined</code>) for <code>onEmpty</code> and
+  <code>onFound</code>.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+</div>
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </article>
+
+            
+    
 
     
 </article>
@@ -632,7 +949,7 @@
 
 
 <footer class="main-footer">
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sat Jul 23 2016 14:27:21 GMT+0000 (UTC)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Mon Aug 08 2016 20:49:38 GMT+0000 (UTC)
 </footer>
 
 <script>prettyPrint();</script>
