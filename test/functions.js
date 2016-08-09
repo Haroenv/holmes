@@ -1,12 +1,19 @@
 describe("Executing all of Holmes' functions", function() {
   var _h = new holmes({find:'.results'});
+
   it("Initialises a new instance", function() {
-    console.log(_h);
-    expect(_h).toExist();
+    expect(_h).toBeDefined();
   });
-//   it(".clear() sets all classes to visible", function() {
-//     var _h = new holmes({find:'.results'});
-//     _h.clear();
-//     expect(_h).not.toThrow();
-//   });
+
+  it(".clear() sets all classes to visible", function() {
+    _h.clear();
+    var all = true;
+    var results = document.getElementsByClassName('result');
+    for (var i = 0; i < results.length; i++) {
+      if (!results[i].classList.contains('visible')) {
+        all = false
+      }
+    }
+    expect(all).toBe(true);
+  });
 });
