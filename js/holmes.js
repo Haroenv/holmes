@@ -158,8 +158,8 @@
             if (options.class.visible) {
               elements[i].classList.remove(options.class.visible);
             }
-          // else
-          // remove the hidden class and add the visible
+            // else
+            // remove the hidden class and add the visible
           } else {
             elements[i].classList.remove(options.class.hidden);
             if (options.class.visible) {
@@ -174,26 +174,30 @@
         // stop hiding it now
         if (!found && options.placeholder) {
           placeholder.classList.remove(options.class.hidden);
-        // otherwise hide it again
+          // otherwise hide it again
         } else if (options.placeholder) {
           placeholder.classList.add(options.class.hidden);
         }
       });
     };
 
-    /**
-     * empty the search string programmatically
-     * This avoids having to send a new `input` event
-     */
-    var clear = function() {
-      var search = document.querySelector(options.input);
-      if (options.contenteditable) {
-        search.textContent = '';
-      } else {
-        search.value = '';
+    holmes.prototype = {
+      /**
+       * empty the search string programmatically
+       * This avoids having to send a new `input` event
+       */
+      clear: function() {
+        var search = document.querySelector(options.input);
+        if (options.contenteditable) {
+          search.textContent = '';
+        } else {
+          search.value = '';
+        }
+        // run the search again
+        // possible optimisation: only add classes
+        start();
       }
-    };
-    // this.clear = clear();
+    }
   };
 
   return holmes;
