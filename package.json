@@ -4,7 +4,8 @@
   "description": "Fast and easy searching inside a page.",
   "main": "js/holmes.js",
   "scripts": {
-    "test": "npm run lint",
+    "test": "npm run lint && npm run karma",
+    "karma": "karma start --single-run",
     "lint": "eslint js/holmes.js",
     "doc": "jsdoc -t node_modules/hopsdoc -R README.md -d doc js/holmes.js"
   },
@@ -30,6 +31,10 @@
   "devDependencies": {
     "eslint": "^2.9.0",
     "hopsdoc": "^0.1.7",
-    "jsdoc": "^3.4.0"
+    "jasmine-core": "^2.4.1",
+    "jsdoc": "^3.4.0",
+    "karma": "^1.1.2",
+    "karma-jasmine": "^1.0.2",
+    "karma-phantomjs-launcher": "^1.0.1"
   }
 }
