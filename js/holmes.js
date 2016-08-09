@@ -70,7 +70,7 @@
     var empty = false;
 
     if (typeof options != 'object') {
-      throw new Error('The options need to be given inside an object like this:\nholmes({\n\tfind:".result",\n\tdynamic:false\n});\n see also https://haroen.me/holmes/doc/module-holmes.html');
+      throw new Error('The options need to be given inside an object like this:\nholmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/module-holmes.html');
     }
 
     // if options.find is missing, the searching won't work so we'll thrown an exceptions
