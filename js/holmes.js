@@ -54,13 +54,24 @@
    *   before listening. This is to make sure that all content is available. However
    *   if you exactly know when all your content is available (ajax, your own event or
    *   other situations), you can put this option on <code>true</code>.
+   * @param {number} [minCharacters=0] The minimum amount of characters to be typed before
+   *   Holmes starts searching. Beware that this also counts when backspacing.
+   * @param {onChange} [options.onHidden]
+   *   Callback for when an item is hidden.
+   * @param {onChange} [options.onVisible]
+   *   Callback for when an item is visible again.
+   * @param {onChange} [options.onEmpty]
+   *   Callback for when no items were found.
+   * @param {onChange} [options.onFound]
+   *   Callback for when items are found after being empty.
    */
   function holmes(options) {
+
+    var empty = false;
 
     if (typeof options != 'object') {
       throw new Error('The options need to be given inside an object like this:\nholmes({\n\tfind:".result",\n\tdynamic:false\n});\n see also https://haroen.me/holmes/doc/module-holmes.html');
     }
-
 
     // if options.find is missing, the searching won't work so we'll thrown an exceptions
     if (typeof options.find == 'undefined') {
@@ -103,6 +114,9 @@
       if (typeof options.contenteditable == 'undefined') {
         options.contenteditable = false;
       }
+      if (typeof options.minCharacters == 'undefined') {
+        options.minCharacters = 0;
+      }
 
       // find the search and the elements
       var search = document.querySelector(options.input);
@@ -132,6 +146,14 @@
         // by default the value isn't found
         var found = false;
 
+        // if a minimum of characters is required
+        // check if that limit has been reached
+        if (options.minCharacters) {
+          if (options.minCharacters > search.value.length) {
+            return;
+          }
+        }
+
         // search in lowercase
         var searchString;
         if (options.contenteditable) {
@@ -152,32 +174,56 @@
         var i;
         for (i = 0; i < elementsLength; i++) {
 
-          // if the current element doesn't containt the search string
+          // if the current element doesn't contain the search string
           // add the hidden class and remove the visbible class
           if (elements[i].textContent.toLowerCase().indexOf(searchString) === -1) {
-            elements[i].classList.add(options.class.hidden);
             if (options.class.visible) {
               elements[i].classList.remove(options.class.visible);
             }
-            // else
-            // remove the hidden class and add the visible
+            if (!elements[i].classList.contains(options.class.hidden)) {
+              elements[i].classList.add(options.class.hidden);
+
+              if (typeof options.onHidden === 'function') {
+                options.onHidden(elements[i]);
+              }
+            }
+          // else
+          // remove the hidden class and add the visible
           } else {
-            elements[i].classList.remove(options.class.hidden);
             if (options.class.visible) {
               elements[i].classList.add(options.class.visible);
             }
+            if (elements[i].classList.contains(options.class.hidden)) {
+              elements[i].classList.remove(options.class.hidden);
+
+              if (empty && typeof options.onFound === 'function') {
+                options.onFound(placeholder);
+              }
+              if (typeof options.onVisible === 'function') {
+                options.onVisible(elements[i]);
+              }
+              empty = false;
+            }
+
             // the element is now found at least once
             found = true;
           }
         };
-        // if the element wasn't found
-        // and a placeholder is given,
-        // stop hiding it now
-        if (!found && options.placeholder) {
-          placeholder.classList.remove(options.class.hidden);
-          // otherwise hide it again
-        } else if (options.placeholder) {
-          placeholder.classList.add(options.class.hidden);
+
+        // No results were found and last time we checked it wasn't empty
+        if (!found && !empty) {
+          empty = true;
+
+          if (options.placeholder) {
+            placeholder.classList.remove(options.class.hidden);
+          }
+          if (typeof options.onEmpty === 'function') {
+            options.onEmpty(placeholder);
+          }
+        } else if(!empty) {
+          if (options.placeholder) {
+            placeholder.classList.add(options.class.hidden);
+          }
         }
       });
     };
@@ -213,6 +259,16 @@
     };
 
   };
+
+  /**
+   * Callback used for changes in item en list states.
+   * @callback onChange
+   * @param {object} [element]
+   *   Element affected by the event. This is the item found by
+   *   <code>onVisible</code> and <code>onHidden</code> and the placeholder
+   *   (or <code>undefined</code>) for <code>onEmpty</code> and
+   *   <code>onFound</code>.
+   */
 
   return holmes;
 
