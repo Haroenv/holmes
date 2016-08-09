@@ -69,6 +69,13 @@ holmes({
 
 [full documentation](https://haroen.me/holmes/doc)
 
+You can also clear a holmes input programmatically, by using:
+
+```js
+var h = new holmes({options});
+h.clear();
+```
+
 ### Showcase
 
 What|who|image
