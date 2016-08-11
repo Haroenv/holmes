@@ -8,7 +8,11 @@ describe("Starting up Holmes", function() {
   });
 
   it("with just .find sets all .result to also .visible", function() {
-    holmes({find:'.result'});
+    holmes({
+      find: '.result',
+      input: '#search'
+    });
+    console.log('find:',document.getElementsByClassName('result'));
     var all = true;
     var results = document.getElementsByClassName('result');
     for (var i = 0; i < results.length; i++) {
