@@ -123,6 +123,12 @@
       var elements = document.querySelectorAll(options.find);
       var elementsLength = elements.length;
 
+      /**
+       * The amount of elements that are hidden
+       * @type {Number}
+       */
+      holmes.prototype.hidden = 0;
+
       // create a container for a placeholder
       if (options.placeholder) {
         var placeholder = document.createElement('div');
@@ -182,6 +188,7 @@
             }
             if (!elements[i].classList.contains(options.class.hidden)) {
               elements[i].classList.add(options.class.hidden);
+              holmes.prototype.hidden++;
 
               if (typeof options.onHidden === 'function') {
                 options.onHidden(elements[i]);
@@ -195,6 +202,7 @@
             }
             if (elements[i].classList.contains(options.class.hidden)) {
               elements[i].classList.remove(options.class.hidden);
+              holmes.prototype.hidden--;
 
               if (empty && typeof options.onFound === 'function') {
                 options.onFound(placeholder);
@@ -257,6 +265,22 @@
         }
       }
     };
+
+    /**
+     * Show the amount of elements, and those hidden and visible
+     * @return {object} all matching elements, the amount of hidden and the amount of visible elements
+     */
+    holmes.prototype.count = function() {
+      var find = document.querySelectorAll(options.find);
+      var all = find.length;
+      var hidden = holmes.prototype.hidden;
+      var visible = all - hidden;
+      return {
+        all,
+        hidden,
+        visible
+      };
+    }
 
   };
 
