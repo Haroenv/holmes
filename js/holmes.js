@@ -149,7 +149,7 @@
         // if a minimum of characters is required
         // check if that limit has been reached
         if (options.minCharacters) {
-          if (options.minCharacters > search.value.length) {
+          if (options.minCharacters > search.value.length && search.value.length !== 0) {
             return;
           }
         }
