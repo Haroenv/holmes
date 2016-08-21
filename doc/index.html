@@ -21,7 +21,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav class="main-nav">
-    <header class="nav-header"><h2><a href="index.html">Home</a></h2></header><header class="nav-header"><h3><span>Modules</span></h3></header><ul><li><a href="module-holmes.html">holmes</a><ul class='members'><li class='nav-type-header'>Members</li><li data-type='member'><a href="module-holmes.html#hidden">hidden</a></li></ul><ul class='methods'><li class='nav-type-header'>Methods</li><li data-type='method'><a href="module-holmes.html#clear">clear</a></li><li data-type='method'><a href="module-holmes.html#count">count</a></li></ul><ul class='typedefs'><li class='nav-type-header'>Typedefs</li><li data-type='typedef'><a href="module-holmes.html#~onChange">onChange</a></li></ul></li></ul>
+    <header class="nav-header"><h2><a href="index.html">Home</a></h2></header><header class="nav-header"><h3><span>Modules</span></h3></header><ul><li><a href="module-holmes.html">holmes</a><ul class='members'><li class='nav-type-header'>Members</li><li data-type='member'><a href="module-holmes.html#elements">elements</a></li><li data-type='member'><a href="module-holmes.html#elementsLength">elementsLength</a></li><li data-type='member'><a href="module-holmes.html#hidden">hidden</a></li><li data-type='member'><a href="module-holmes.html#input">input</a></li><li data-type='member'><a href="module-holmes.html#options">options</a></li><li data-type='member'><a href="module-holmes.html#placeholder">placeholder</a></li><li data-type='member'><a href="module-holmes.html#searchString">searchString</a></li></ul><ul class='methods'><li class='nav-type-header'>Methods</li><li data-type='method'><a href="module-holmes.html#clear">clear</a></li><li data-type='method'><a href="module-holmes.html#count">count</a></li><li data-type='method'><a href="module-holmes.html#start">start</a></li><li data-type='method'><a href="module-holmes.html#stop">stop</a></li><li data-type='method'><a href="module-holmes.html#~inputHandler">inputHandler</a></li></ul><ul class='typedefs'><li class='nav-type-header'>Typedefs</li><li data-type='typedef'><a href="module-holmes.html#~onChange">onChange</a></li></ul></li></ul>
 </nav>
 
 <main id="main" class="main-content">
@@ -52,6 +52,7 @@
 <a href="https://www.npmjs.com/package/holmes.js"><img src="https://badge.fury.io/js/holmes.js.svg" alt="npm version"></a>
 <a href="https://badge.fury.io/bo/holmes.js"><img src="https://badge.fury.io/bo/holmes.js.svg" alt="Bower version"></a>
 <a href="https://gitter.im/Haroenv/holmes?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/Haroenv/holmes.svg" alt="Join the chat at https://gitter.im/Haroenv/holmes"></a></p>
+<p>Holmes filters a list of elements based on the value of a <code>input</code> in just ~13KB (5KB minified).</p>
 <h2>Installation</h2><p>You can install <code>holmes</code> with either <code>npm</code> or <code>bower</code> under the package name <code>holmes.js</code>. For <code>npm</code> that looks like this:</p>
 <pre class="prettyprint source"><code>$ npm install --save holmes.js</code></pre><p>After which you can add it in your page with i.e. browserify or loading the module in a different script tag.</p>
 <p>You have to make sure that you have a <code>css</code> rule for the class <code>.hidden</code> that hides elements however you want. One option is to have this:</p>
@@ -84,12 +85,24 @@
   // (optional) if you want to start searching after a certain amount of characters are typed
   minCharacters: 5
 });</code></pre><p><a href="https://haroen.me/holmes/doc">full documentation</a></p>
-<h2>Methods</h2><p>For all of the methods you should initialise a new instance of <code>holmes</code> like this:</p>
+<h2>Methods and members</h2><p>For all of the methods you should initialise a new instance of <code>holmes</code> like this:</p>
 <pre class="prettyprint source lang-js"><code>var h = new holmes(options);</code></pre><p>Then you can use the following methods:</p>
 <h3><code>.clear()</code></h3><p>You can clear a holmes input programmatically, by using:</p>
 <pre class="prettyprint source lang-js"><code>h.clear();</code></pre><h3><code>.count()</code></h3><p>You can receive informations on what elements are visible, hidden and in total at any point:</p>
-<pre class="prettyprint source lang-js"><code>h.count(); // {all: 41, hidden: 34, visible: 7}</code></pre><p>There's also a member <code>.hidden</code> that gives the count without a function call:</p>
-<pre class="prettyprint source lang-js"><code>console.log(h.hidden); // 34</code></pre><h3>Showcase</h3><table>
+<pre class="prettyprint source lang-js"><code>h.count(); // {all: 41, hidden: 34, visible: 7}</code></pre><h3><code>.start()</code></h3><p>Start an even listener for the specified options. Holmes <strong>always</strong> has <code>.start()</code> running on initialisation.</p>
+<pre class="prettyprint source lang-js"><code>h.start();</code></pre><h3><code>.stop()</code></h3><p>Stops the current running event listener. Resolves a Promise when this has been completed.</p>
+<pre class="prettyprint source lang-js"><code>h.stop();
+h.start(); // could accidentally start too soon
+
+h.stop().then(h.start); // might take a small time</code></pre><h3><code>.hidden</code></h3><p>There's also a member <code>.hidden</code> that gives the count without a function call:</p>
+<pre class="prettyprint source lang-js"><code>console.log(h.hidden); // 34</code></pre><h3><code>.elements</code></h3><p>All of the elements that holmes considers. There's also <code>.elementsLength</code></p>
+<h3><code>.input</code></h3><p>The input that holmes looks in. There's also the last search string as <code>.searchString</code></p>
+<h3><code>.placeholder</code></h3><p>The current placeholder (DOM Node).</p>
+<h3><code>.options</code></h3><p>Shows the options chosen chosen for this instance of holmes. You can also set options like this after initialisation.</p>
+<pre class="prettyprint source lang-js"><code>console.log(h.options); // specified options</code></pre><blockquote>
+<p>note: setting options after it's running might require <code>h.stop().then(h.start)</code></p>
+</blockquote>
+<h3>Showcase</h3><table>
 <thead>
 <tr>
 <th>What</th>
@@ -139,7 +152,7 @@
 
 
 <footer class="main-footer">
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sun Aug 21 2016 11:23:45 GMT+0000 (UTC)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sun Aug 21 2016 13:36:53 GMT+0000 (UTC)
 </footer>
 
 <script>prettyPrint();</script>
