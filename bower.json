@@ -20,7 +20,7 @@
     "bower_components",
     "test",
     "tests",
-    "docs/",
+    "doc/",
     "css/",
     "images/",
     "js/microlight.js",
