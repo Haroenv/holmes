@@ -7,6 +7,8 @@
 [![Bower version](https://badge.fury.io/bo/holmes.js.svg)](https://badge.fury.io/bo/holmes.js)
 [![Join the chat at https://gitter.im/Haroenv/holmes](https://badges.gitter.im/Haroenv/holmes.svg)](https://gitter.im/Haroenv/holmes?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+Holmes filters a list of elements based on the value of a `input` in just ~13KB (5KB minified).
+
 ## Installation
 
 You can install `holmes` with either `npm` or `bower` under the package name `holmes.js`. For `npm` that looks like this:
@@ -69,7 +71,7 @@ holmes({
 
 [full documentation](https://haroen.me/holmes/doc)
 
-## Methods
+## Methods and members
 
 For all of the methods you should initialise a new instance of `holmes` like this:
 
@@ -95,11 +97,54 @@ You can receive informations on what elements are visible, hidden and in total a
 h.count(); // {all: 41, hidden: 34, visible: 7}
 ```
 
+### `.start()`
+
+Start an even listener for the specified options. Holmes **always** has `.start()` running on initialisation.
+
+```js
+h.start();
+```
+
+### `.stop()`
+
+Stops the current running event listener. Resolves a Promise when this has been completed.
+
+```js
+h.stop();
+h.start(); // could accidentally start too soon
+
+h.stop().then(h.start); // might take a small time
+```
+
+### `.hidden`
+
 There's also a member `.hidden` that gives the count without a function call:
 
 ```js
 console.log(h.hidden); // 34
 ```
+
+### `.elements`
+
+All of the elements that holmes considers. There's also `.elementsLength`
+
+### `.input`
+
+The input that holmes looks in. There's also the last search string as `.searchString`
+
+### `.placeholder`
+
+The current placeholder (DOM Node).
+
+### `.options`
+
+Shows the options chosen chosen for this instance of holmes. You can also set options like this after initialisation.
+
+```js
+console.log(h.options); // specified options
+```
+
+> note: setting options after it's running might require `h.stop().then(h.start)`
 
 ### Showcase
 

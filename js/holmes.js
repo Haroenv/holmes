@@ -73,55 +73,64 @@
       throw new Error('The options need to be given inside an object like this:\nholmes({\n\tfind:".result",\n\tdynamic:false\n});\n see also https://haroen.me/holmes/doc/module-holmes.html');
     }
 
-    // if options.find is missing, the searching won't work so we'll thrown an exceptions
-    if (typeof options.find == 'undefined') {
+    /**
+     * Options
+     * @type {Object}
+     */
+    holmes.prototype.options = options;
+
+    // if holmes.prototype.options.find is missing, the searching won't work so we'll thrown an exceptions
+    if (typeof holmes.prototype.options.find == 'undefined') {
       throw new Error('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nholmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/module-holmes.html');
     }
 
-    // whether to start immediately or wait on the load of DOMContent
-    if (typeof options.instant == 'undefined') {
-      options.instant = false;
-    }
 
-    if (options.instant) {
-      start();
-    } else {
-      window.addEventListener('DOMContentLoaded', start);
-    }
-
-    // start listening
-    function start() {
+    /**
+     * Start an event listener with the specified options
+     */
+    holmes.prototype.start = function() {
 
       // setting default values
-      if (typeof options.input == 'undefined') {
-        options.input = 'input[type=search]';
+      if (typeof holmes.prototype.options.input == 'undefined') {
+        holmes.prototype.options.input = 'input[type=search]';
       }
-      if (typeof options.placeholder == 'undefined') {
-        options.placeholder = false;
+      if (typeof holmes.prototype.options.placeholder == 'undefined') {
+        holmes.prototype.options.placeholder = false;
       }
-      if (typeof options.class == 'undefined') {
-        options.class = {};
+      if (typeof holmes.prototype.options.class == 'undefined') {
+        holmes.prototype.options.class = {};
       }
-      if (typeof options.class.visible == 'undefined') {
-        options.class.visible = false;
+      if (typeof holmes.prototype.options.class.visible == 'undefined') {
+        holmes.prototype.options.class.visible = false;
       }
-      if (typeof options.class.hidden == 'undefined') {
-        options.class.hidden = 'hidden';
+      if (typeof holmes.prototype.options.class.hidden == 'undefined') {
+        holmes.prototype.options.class.hidden = 'hidden';
       }
-      if (typeof options.dynamic == 'undefined') {
-        options.dynamic = false;
+      if (typeof holmes.prototype.options.dynamic == 'undefined') {
+        holmes.prototype.options.dynamic = false;
       }
-      if (typeof options.contenteditable == 'undefined') {
-        options.contenteditable = false;
+      if (typeof holmes.prototype.options.contenteditable == 'undefined') {
+        holmes.prototype.options.contenteditable = false;
       }
-      if (typeof options.minCharacters == 'undefined') {
-        options.minCharacters = 0;
+      if (typeof holmes.prototype.options.minCharacters == 'undefined') {
+        holmes.prototype.options.minCharacters = 0;
       }
 
-      // find the search and the elements
-      var search = document.querySelector(options.input);
-      var elements = document.querySelectorAll(options.find);
-      var elementsLength = elements.length;
+      /**
+       * The input element
+       * @type {NodeList}
+       */
+      holmes.prototype.input = document.querySelector(holmes.prototype.options.input);
+      /**
+       * All of the elements that are searched
+       * @type {NodeList}
+       */
+      holmes.prototype.elements = document.querySelectorAll(holmes.prototype.options.find);
+      /**
+       * amount of elements to search
+       * @type {Number}
+       */
+      holmes.prototype.elementsLength = holmes.prototype.elements.length;
 
       /**
        * The amount of elements that are hidden
@@ -130,109 +139,147 @@
       holmes.prototype.hidden = 0;
 
       // create a container for a placeholder
-      if (options.placeholder) {
-        var placeholder = document.createElement('div');
-        placeholder.id = "holmes-placeholder";
-        placeholder.classList.add(options.class.hidden);
-        placeholder.innerHTML = options.placeholder;
-        elements[0].parentNode.appendChild(placeholder);
+      if (holmes.prototype.options.placeholder) {
+        /**
+         * Placeholder element
+         * @type {Element}
+         */
+        holmes.prototype.placeholder = document.createElement('div');
+        holmes.prototype.placeholder.id = "holmes-placeholder";
+        holmes.prototype.placeholder.classList.add(holmes.prototype.options.class.hidden);
+        holmes.prototype.placeholder.innerHTML = holmes.prototype.options.placeholder;
+        holmes.prototype.elements[0].parentNode.appendChild(holmes.prototype.placeholder);
       }
 
       // if a visible class is given, give it to everything
-      if (options.class.visible) {
+      if (holmes.prototype.options.class.visible) {
         var i;
-        for (i = 0; i < elementsLength; i++) {
-          elements[i].classList.add(options.class.visible);
+        for (i = 0; i < holmes.prototype.elementsLength; i++) {
+          holmes.prototype.elements[i].classList.add(holmes.prototype.options.class.visible);
         }
       }
 
       // listen for input
-      search.addEventListener('input', function() {
+      holmes.prototype.input.addEventListener('input', inputHandler);
+    };
 
-        // by default the value isn't found
-        var found = false;
+    /**
+     * input event handler
+     */
+    function inputHandler() {
 
-        // if a minimum of characters is required
-        // check if that limit has been reached
-        if (options.minCharacters) {
-          if (options.minCharacters > search.value.length && search.value.length !== 0) {
-            return;
+      // by default the value isn't found
+      var found = false;
+
+      // if a minimum of characters is required
+      // check if that limit has been reached
+      if (holmes.prototype.options.minCharacters) {
+        if (holmes.prototype.options.minCharacters > holmes.prototype.input.value.length && holmes.prototype.input.value.length !== 0) {
+          return;
+        }
+      }
+
+      // search in lowercase
+      /**
+       * Lowercase string holmes searces for
+       * @type {string}
+       */
+      holmes.prototype.searchString;
+      if (holmes.prototype.options.contenteditable) {
+        holmes.prototype.searchString = holmes.prototype.input.textContent.toLowerCase();
+      } else {
+        holmes.prototype.searchString = holmes.prototype.input.value.toLowerCase();
+      }
+
+      // if the dynamic option is enabled, then we should query
+      // for the contents of `elements` on every input
+      if (holmes.prototype.options.dynamic) {
+        holmes.prototype.elements = document.querySelectorAll(holmes.prototype.options.find);
+        holmes.prototype.elementsLength = holmes.prototype.elements.length;
+      }
+
+      // loop over all the elements
+      // in case this should become dynamic, query for the elements here
+      var i;
+      for (i = 0; i < holmes.prototype.elementsLength; i++) {
+
+        // if the current element doesn't contain the search string
+        // add the hidden class and remove the visbible class
+        if (holmes.prototype.elements[i].textContent.toLowerCase().indexOf(holmes.prototype.searchString) === -1) {
+          if (holmes.prototype.options.class.visible) {
+            holmes.prototype.elements[i].classList.remove(holmes.prototype.options.class.visible);
           }
-        }
+          if (!holmes.prototype.elements[i].classList.contains(holmes.prototype.options.class.hidden)) {
+            holmes.prototype.elements[i].classList.add(holmes.prototype.options.class.hidden);
+            holmes.prototype.hidden++;
 
-        // search in lowercase
-        var searchString;
-        if (options.contenteditable) {
-          searchString = search.textContent.toLowerCase();
-        } else {
-          searchString = search.value.toLowerCase();
-        }
-
-        // if the dynamic option is enabled, then we should query
-        // for the contents of `elements` on every input
-        if (options.dynamic) {
-          elements = document.querySelectorAll(options.find);
-          elementsLength = elements.length;
-        }
-
-        // loop over all the elements
-        // in case this should become dynamic, query for the elements here
-        var i;
-        for (i = 0; i < elementsLength; i++) {
-
-          // if the current element doesn't contain the search string
-          // add the hidden class and remove the visbible class
-          if (elements[i].textContent.toLowerCase().indexOf(searchString) === -1) {
-            if (options.class.visible) {
-              elements[i].classList.remove(options.class.visible);
+            if (typeof holmes.prototype.options.onHidden === 'function') {
+              holmes.prototype.options.onHidden(holmes.prototype.elements[i]);
             }
-            if (!elements[i].classList.contains(options.class.hidden)) {
-              elements[i].classList.add(options.class.hidden);
-              holmes.prototype.hidden++;
-
-              if (typeof options.onHidden === 'function') {
-                options.onHidden(elements[i]);
-              }
-            }
+          }
           // else
           // remove the hidden class and add the visible
-          } else {
-            if (options.class.visible) {
-              elements[i].classList.add(options.class.visible);
+        } else {
+          if (holmes.prototype.options.class.visible) {
+            holmes.prototype.elements[i].classList.add(holmes.prototype.options.class.visible);
+          }
+          if (holmes.prototype.elements[i].classList.contains(holmes.prototype.options.class.hidden)) {
+            holmes.prototype.elements[i].classList.remove(holmes.prototype.options.class.hidden);
+            holmes.prototype.hidden--;
+
+            if (empty && typeof holmes.prototype.options.onFound === 'function') {
+              holmes.prototype.options.onFound(placeholder);
             }
-            if (elements[i].classList.contains(options.class.hidden)) {
-              elements[i].classList.remove(options.class.hidden);
-              holmes.prototype.hidden--;
-
-              if (empty && typeof options.onFound === 'function') {
-                options.onFound(placeholder);
-              }
-              if (typeof options.onVisible === 'function') {
-                options.onVisible(elements[i]);
-              }
-              empty = false;
+            if (typeof holmes.prototype.options.onVisible === 'function') {
+              holmes.prototype.options.onVisible(holmes.prototype.elements[i]);
             }
+            empty = false;
+          }
 
-            // the element is now found at least once
-            found = true;
-          }
-        };
-
-        // No results were found and last time we checked it wasn't empty
-        if (!found && !empty) {
-          empty = true;
-
-          if (options.placeholder) {
-            placeholder.classList.remove(options.class.hidden);
-          }
-          if (typeof options.onEmpty === 'function') {
-            options.onEmpty(placeholder);
-          }
-        } else if(!empty) {
-          if (options.placeholder) {
-            placeholder.classList.add(options.class.hidden);
-          }
+          // the element is now found at least once
+          found = true;
         }
+      };
+
+      // No results were found and last time we checked it wasn't empty
+      if (!found && !empty) {
+        empty = true;
+
+        if (holmes.prototype.options.placeholder) {
+          holmes.prototype.placeholder.classList.remove(holmes.prototype.options.class.hidden);
+        }
+        if (typeof holmes.prototype.options.onEmpty === 'function') {
+          holmes.prototype.options.onEmpty(holmes.prototype.placeholder);
+        }
+      } else if (!empty) {
+        if (holmes.prototype.options.placeholder) {
+          holmes.prototype.placeholder.classList.add(holmes.prototype.options.class.hidden);
+        }
+      }
+    }
+
+
+    // whether to start immediately or wait on the load of DOMContent
+    if (typeof holmes.prototype.options.instant == 'undefined') {
+      holmes.prototype.options.instant = false;
+    }
+
+    if (holmes.prototype.options.instant) {
+      holmes.prototype.start();
+    } else {
+      window.addEventListener('DOMContentLoaded', holmes.prototype.start);
+    }
+
+    /**
+     * remove the current event listener
+     * @see holmes.prototype.start
+     * @return {Promise} resolves when the event is removed
+     */
+    holmes.prototype.stop = function() {
+      return new Promise(function(resolve, reject) {
+        holmes.prototype.input.removeEventListener('input', inputHandler);
+        holmes.prototype.placeholder.parentNode.removeChild(holmes.prototype.placeholder);
+        resolve();
       });
     };
 
@@ -241,27 +288,22 @@
      * This avoids having to send a new `input` event
      */
     holmes.prototype.clear = function() {
-      var search = document.querySelector(options.input);
-      if (options.contenteditable) {
-        search.textContent = '';
+      if (holmes.prototype.options.contenteditable) {
+        holmes.prototype.input.textContent = '';
       } else {
-        search.value = '';
+        holmes.prototype.input.value = '';
       }
       // if a visible class is given, give it to everything
-      if (options.class.visible) {
-        var i,
-          elements = document.querySelectorAll(options.find),
-          elementsLength = elements.length;
-        for (i = 0; i < elementsLength; i++) {
-          elements[i].classList.remove(options.class.hidden);
-          elements[i].classList.add(options.class.visible);
+      if (holmes.prototype.options.class.visible) {
+        for (i = 0; i < holmes.prototype.elementsLength; i++) {
+          holmes.prototype.elements[i].classList.remove(holmes.prototype.options.class.hidden);
+          holmes.prototype.elements[i].classList.add(holmes.prototype.options.class.visible);
         }
       }
-      if (options.placeholder) {
-        var placeholder = document.getElementById('holmes-placeholder');
-        placeholder.classList.add(options.class.hidden);
-        if (options.class.visible) {
-          placeholder.classList.remove(options.class.visible);
+      if (holmes.prototype.options.placeholder) {
+        holmes.prototype.placeholder.classList.add(holmes.prototype.options.class.hidden);
+        if (holmes.prototype.options.class.visible) {
+          holmes.prototype.placeholder.classList.remove(holmes.prototype.options.class.visible);
         }
       }
     };
@@ -271,14 +313,10 @@
      * @return {object} all matching elements, the amount of hidden and the amount of visible elements
      */
     holmes.prototype.count = function() {
-      var find = document.querySelectorAll(options.find);
-      var all = find.length;
-      var hidden = holmes.prototype.hidden;
-      var visible = all - hidden;
       return {
-        all,
-        hidden,
-        visible
+        all: holmes.prototype.elementsLength,
+        hidden: holmes.prototype.hidden,
+        visible: holmes.prototype.elementsLength - holmes.prototype.hidden
       };
     }
 
