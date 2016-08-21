@@ -1,6 +1,6 @@
 # [<img alt="Holmes.js" src="https://haroen.me/holmes/images/logo.png" height="50px"></img>](https://www.npmjs.com/package/holmes.js)
 
-> Fast and easy searching inside a page.
+> Fast and easy searching inside a page. (only ~5KB)
 
 [![Build Status](https://travis-ci.org/Haroenv/holmes.svg?branch=gh-pages)](https://travis-ci.org/Haroenv/holmes)
 [![npm version](https://badge.fury.io/js/holmes.js.svg)](https://www.npmjs.com/package/holmes.js)
@@ -69,7 +69,7 @@ holmes({
 
 [full documentation](https://haroen.me/holmes/doc)
 
-## Methods
+## Methods and members
 
 For all of the methods you should initialise a new instance of `holmes` like this:
 
@@ -95,11 +95,54 @@ You can receive informations on what elements are visible, hidden and in total a
 h.count(); // {all: 41, hidden: 34, visible: 7}
 ```
 
+### `.start()`
+
+Start an even listener for the specified options. Holmes **always** has `.start()` running on initialisation.
+
+```js
+h.start();
+```
+
+### `.stop()`
+
+Stops the current running event listener. Resolves a Promise when this has been completed.
+
+```js
+h.stop();
+h.start(); // could accidentally start too soon
+
+h.stop().then(h.start); // might take a small time
+```
+
+### `.hidden`
+
 There's also a member `.hidden` that gives the count without a function call:
 
 ```js
 console.log(h.hidden); // 34
 ```
+
+### `.elements`
+
+All of the elements that holmes considers. There's also `.elementsLength`
+
+### `.input`
+
+The input that holmes looks in. There's also the last search string as `.searchString`
+
+### `.placeholder`
+
+The current placeholder (DOM Node).
+
+### `.options`
+
+Shows the options chosen chosen for this instance of holmes. You can also set options like this after initialisation.
+
+```js
+console.log(h.options); // specified options
+```
+
+> note: setting options after it's running might require `h.stop().then(h.start)`
 
 ### Showcase
 
