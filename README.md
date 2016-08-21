@@ -1,11 +1,13 @@
 # [<img alt="Holmes.js" src="https://haroen.me/holmes/images/logo.png" height="50px"></img>](https://www.npmjs.com/package/holmes.js)
 
-> Fast and easy searching inside a page. (only ~5KB)
+> Fast and easy searching inside a page.
 
 [![Build Status](https://travis-ci.org/Haroenv/holmes.svg?branch=gh-pages)](https://travis-ci.org/Haroenv/holmes)
 [![npm version](https://badge.fury.io/js/holmes.js.svg)](https://www.npmjs.com/package/holmes.js)
 [![Bower version](https://badge.fury.io/bo/holmes.js.svg)](https://badge.fury.io/bo/holmes.js)
 [![Join the chat at https://gitter.im/Haroenv/holmes](https://badges.gitter.im/Haroenv/holmes.svg)](https://gitter.im/Haroenv/holmes?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+Holmes filters a list of elements based on the value of a `input` in just ~13KB (5KB minified).
 
 ## Installation
 
