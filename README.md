@@ -69,19 +69,45 @@ holmes({
 
 [full documentation](https://haroen.me/holmes/doc)
 
-You can also clear a holmes input programmatically, by using:
+## Methods
+
+For all of the methods you should initialise a new instance of `holmes` like this:
 
 ```js
-var h = new holmes({options});
+var h = new holmes(options);
+```
+
+Then you can use the following methods:
+
+### `.clear()`
+
+You can clear a holmes input programmatically, by using:
+
+```js
 h.clear();
+```
+
+### `.count()`
+
+You can receive informations on what elements are visible, hidden and in total at any point:
+
+```js
+h.count(); // {all: 41, hidden: 34, visible: 7}
+```
+
+There's also a member `.hidden` that gives the count without a function call:
+
+```js
+console.log(h.hidden); // 34
 ```
 
 ### Showcase
 
 What|who|image
 ---|---|---
-[bullg.it](https://bullg.it)|[@haroenv](https://github.com/haroenv)|<img alt="screenshot of bullg.it" src="https://haroen.me/holmes/images/screen-bullgit.png" width="100%" />
-[family.scss](https://lukyvj.github.io/family.scss)|[@lukyvj](https://github.com/lukyvj)|<img alt="screenshot of family.scss" src="https://haroen.me/holmes/images/screen-family.png" width="100%" />
+[bullg.it](https://bullg.it)|[@haroenv](https://github.com/haroenv)|<img alt="screenshot of bullg.it" src="images/screen-bullgit.gif" width="100%" />
+[family.scss](https://lukyvj.github.io/family.scss)|[@lukyvj](https://github.com/lukyvj)|<img alt="screenshot of family.scss" src="images/screen-family.gif" width="100%" />
+[wikeo.be](https://wikeo.be)|[@bistory](https://github.com/bistory)|<img src="images/screen-wikeo.gif" alt="searching on wikeo.be for pages" width="100%">
 
 I'd love to find out how people use my project, [let me know](https://github.com/Haroenv/holmes/issues/new?title=add+my+project+to+usages&body=who%7Cwhat%0D%0A---%7C---%0D%0A%40myusername%7C%5Bmy+project%5D%28https%3A%2F%2Flink-to-project.com%29%0D%0A%0D%0ASome+explanation+what+it+is) if you want to be featured!
 
