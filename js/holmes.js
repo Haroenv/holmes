@@ -299,6 +299,10 @@
           holmes.prototype.elements[i].classList.remove(holmes.prototype.options.class.hidden);
           holmes.prototype.elements[i].classList.add(holmes.prototype.options.class.visible);
         }
+      } else {
+        for (var i = 0; i < holmes.prototype.elementsLength; i++) {
+          holmes.prototype.elements[i].classList.remove(holmes.prototype.options.class.hidden);
+        }
       }
       if (holmes.prototype.options.placeholder) {
         holmes.prototype.placeholder.classList.add(holmes.prototype.options.class.hidden);
@@ -306,6 +310,8 @@
           holmes.prototype.placeholder.classList.remove(holmes.prototype.options.class.visible);
         }
       }
+
+      holmes.prototype.hidden = 0;
     };
 
     /**
