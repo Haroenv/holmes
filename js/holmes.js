@@ -295,7 +295,7 @@
       }
       // if a visible class is given, give it to everything
       if (holmes.prototype.options.class.visible) {
-        for (i = 0; i < holmes.prototype.elementsLength; i++) {
+        for (var i = 0; i < holmes.prototype.elementsLength; i++) {
           holmes.prototype.elements[i].classList.remove(holmes.prototype.options.class.hidden);
           holmes.prototype.elements[i].classList.add(holmes.prototype.options.class.visible);
         }
