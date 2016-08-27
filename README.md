@@ -60,7 +60,7 @@ holmes({
   },
   // (optional) if true, this will refresh the content every search
   dynamic: false,
-  // (optional) needs to be true if the input is a contenteditable field instead of a
+  // (deprecated) needs to be true if the input is a contenteditable field instead of a
   contenteditable: false,
   // (optional) in case you don't want to wait for DOMContentLoaded before starting Holmes:
   instant: true,
