@@ -176,7 +176,15 @@
       // if a minimum of characters is required
       // check if that limit has been reached
       if (holmes.prototype.options.minCharacters) {
-        if (holmes.prototype.options.minCharacters > holmes.prototype.input.value.length && holmes.prototype.input.value.length !== 0) {
+        var length;
+        if (holmes.prototype.input instanceof HTMLInputElement) {
+          length = holmes.prototype.input.value.toLowerCase().length;
+        } else if (holmes.prototype.input.contentEditable) {
+          length = holmes.prototype.input.textContent.toLowerCase().length;
+        } else {
+          throw new Error("The Holmes input was no <input> or contenteditable.");
+        }
+        if (holmes.prototype.options.minCharacters > length && length !== 0) {
           return;
         }
       }
