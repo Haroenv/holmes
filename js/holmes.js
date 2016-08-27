@@ -6,9 +6,11 @@
 (function(root, factory) {
   'use strict';
 
+  /* $FlowIssue - doesn't work with umd */
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define([], function() {
+      /* $FlowIssue - doesn't work with umd */
       return (root.holmes = factory(document));
     });
   } else if (typeof exports === 'object') {
@@ -18,6 +20,7 @@
     module.exports = factory(document);
   } else {
     // Browser globals
+    /* $FlowIssue - doesn't work with umd */
     root.holmes = factory(document);
   }
 })(this, function(document) {
@@ -290,7 +293,11 @@
     holmes.prototype.stop = function() {
       return new Promise(function(resolve, reject) {
         holmes.prototype.input.removeEventListener('input', inputHandler);
-        holmes.prototype.placeholder.parentNode.removeChild(holmes.prototype.placeholder);
+        if (holmes.prototype.placeholder.parentNode) {
+          holmes.prototype.placeholder.parentNode.removeChild(holmes.prototype.placeholder);
+        } else {
+          throw new Error('The Holmes placeholder has no parent.');
+        }
         resolve();
       });
     };
