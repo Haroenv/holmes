@@ -146,7 +146,11 @@
         holmes.prototype.placeholder.id = "holmes-placeholder";
         holmes.prototype.placeholder.classList.add(holmes.prototype.options.class.hidden);
         holmes.prototype.placeholder.innerHTML = holmes.prototype.options.placeholder;
-        holmes.prototype.elements[0].parentNode.appendChild(holmes.prototype.placeholder);
+        if (holmes.prototype.elements[0].parentNode) {
+          holmes.prototype.elements[0].parentNode.appendChild(holmes.prototype.placeholder);
+        } else {
+          throw new Error('The Holmes placeholder could\'t be put; the elements had no parent.');
+        }
       }
 
       // if a visible class is given, give it to everything
