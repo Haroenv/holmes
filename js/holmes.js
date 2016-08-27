@@ -228,7 +228,7 @@
             holmes.prototype.hidden--;
 
             if (empty && typeof holmes.prototype.options.onFound === 'function') {
-              holmes.prototype.options.onFound(placeholder);
+              holmes.prototype.options.onFound(holmes.prototype.placeholder);
             }
             if (typeof holmes.prototype.options.onVisible === 'function') {
               holmes.prototype.options.onVisible(holmes.prototype.elements[i]);
