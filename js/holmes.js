@@ -6,9 +6,11 @@
 (function(root, factory) {
   'use strict';
 
+  /* $FlowIssue - doesn't work with umd */
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define([], function() {
+      /* $FlowIssue - doesn't work with umd */
       return (root.holmes = factory(document));
     });
   } else if (typeof exports === 'object') {
@@ -18,6 +20,7 @@
     module.exports = factory(document);
   } else {
     // Browser globals
+    /* $FlowIssue - doesn't work with umd */
     root.holmes = factory(document);
   }
 })(this, function(document) {
@@ -146,7 +149,11 @@
         holmes.prototype.placeholder.id = "holmes-placeholder";
         holmes.prototype.placeholder.classList.add(holmes.prototype.options.class.hidden);
         holmes.prototype.placeholder.innerHTML = holmes.prototype.options.placeholder;
-        holmes.prototype.elements[0].parentNode.appendChild(holmes.prototype.placeholder);
+        if (holmes.prototype.elements[0].parentNode) {
+          holmes.prototype.elements[0].parentNode.appendChild(holmes.prototype.placeholder);
+        } else {
+          throw new Error('The Holmes placeholder could\'t be put; the elements had no parent.');
+        }
       }
 
       // if a visible class is given, give it to everything
@@ -172,7 +179,15 @@
       // if a minimum of characters is required
       // check if that limit has been reached
       if (holmes.prototype.options.minCharacters) {
-        if (holmes.prototype.options.minCharacters > holmes.prototype.input.value.length && holmes.prototype.input.value.length !== 0) {
+        var length;
+        if (holmes.prototype.input instanceof HTMLInputElement) {
+          length = holmes.prototype.input.value.toLowerCase().length;
+        } else if (holmes.prototype.input.contentEditable) {
+          length = holmes.prototype.input.textContent.toLowerCase().length;
+        } else {
+          throw new Error("The Holmes input was no <input> or contenteditable.");
+        }
+        if (holmes.prototype.options.minCharacters > length && length !== 0) {
           return;
         }
       }
@@ -228,7 +243,7 @@
             holmes.prototype.hidden--;
 
             if (empty && typeof holmes.prototype.options.onFound === 'function') {
-              holmes.prototype.options.onFound(placeholder);
+              holmes.prototype.options.onFound(holmes.prototype.placeholder);
             }
             if (typeof holmes.prototype.options.onVisible === 'function') {
               holmes.prototype.options.onVisible(holmes.prototype.elements[i]);
@@ -278,7 +293,11 @@
     holmes.prototype.stop = function() {
       return new Promise(function(resolve, reject) {
         holmes.prototype.input.removeEventListener('input', inputHandler);
-        holmes.prototype.placeholder.parentNode.removeChild(holmes.prototype.placeholder);
+        if (holmes.prototype.placeholder.parentNode) {
+          holmes.prototype.placeholder.parentNode.removeChild(holmes.prototype.placeholder);
+        } else {
+          throw new Error('The Holmes placeholder has no parent.');
+        }
         resolve();
       });
     };

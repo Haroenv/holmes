@@ -7,8 +7,9 @@
     "js/holmes.js"
   ],
   "scripts": {
-    "test": "npm run lint",
+    "test": "npm run lint && npm run flow",
     "lint": "eslint js/holmes.js",
+    "flow": "flow",
     "doc": "jsdoc -t node_modules/hopsdoc -R README.md -d doc js/holmes.js"
   },
   "keywords": [
@@ -33,6 +34,7 @@
   "devDependencies": {
     "eslint": "^2.9.0",
     "hopsdoc": "^0.1.7",
+    "flow-bin": "0.31.1",
     "jsdoc": "^3.4.0"
   }
 }
