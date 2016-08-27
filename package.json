@@ -7,8 +7,9 @@
     "js/holmes.js"
   ],
   "scripts": {
-    "test": "npm run lint",
-    "lint": "flow",
+    "test": "npm run lint && npm run flow",
+    "lint": "eslint js/holmes.js",
+    "flow": "flow",
     "doc": "jsdoc -t node_modules/hopsdoc -R README.md -d doc js/holmes.js"
   },
   "keywords": [
