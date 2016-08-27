@@ -1,3 +1,4 @@
+// @flow
 /**
  * search for dom elements on your page
  * @module holmes
@@ -46,8 +47,8 @@
    *   fetch the content of the elements to search in. If this is <code>true</code>
    *   then it will refresh on every <code>input</code> event.
    * @param {boolean} [options.contenteditable=false]
-   *   whether the input is a contenteditable or not. By default it's
-   *   assumed that it's <code>&lt;input&gt;</code>, <code>true</code> here
+   *   DEPRECATED (now handled automatically) whether the input is a contenteditable or
+   *   not. By default it's assumed that it's <code>&lt;input&gt;</code>, <code>true</code> here
    *   will use <code>&lt;div contenteditable&gt;</code>
    * @param {boolean} [options.instant=false]
    *   By default Holmes waits for the <code>DOMContentLoaded</code> event to fire
@@ -108,9 +109,6 @@
       }
       if (typeof holmes.prototype.options.dynamic == 'undefined') {
         holmes.prototype.options.dynamic = false;
-      }
-      if (typeof holmes.prototype.options.contenteditable == 'undefined') {
-        holmes.prototype.options.contenteditable = false;
       }
       if (typeof holmes.prototype.options.minCharacters == 'undefined') {
         holmes.prototype.options.minCharacters = 0;
@@ -185,10 +183,12 @@
        * @type {string}
        */
       holmes.prototype.searchString;
-      if (holmes.prototype.options.contenteditable) {
+      if (holmes.prototype.input instanceof HTMLInputElement) {
+        holmes.prototype.searchString = holmes.prototype.input.value.toLowerCase();
+      } else if (holmes.prototype.input.contentEditable) {
         holmes.prototype.searchString = holmes.prototype.input.textContent.toLowerCase();
       } else {
-        holmes.prototype.searchString = holmes.prototype.input.value.toLowerCase();
+        throw new Error("The Holmes input was no <input> or contenteditable.");
       }
 
       // if the dynamic option is enabled, then we should query
@@ -288,10 +288,13 @@
      * This avoids having to send a new `input` event
      */
     holmes.prototype.clear = function() {
-      if (holmes.prototype.options.contenteditable) {
+      console.log(holmes.prototype.input);
+      if (holmes.prototype.input instanceof HTMLInputElement) {
+        holmes.prototype.input.value = '';
+      } else if (holmes.prototype.input.contentEditable) {
         holmes.prototype.input.textContent = '';
       } else {
-        holmes.prototype.input.value = '';
+        throw new Error("The Holmes input was no <input> or contenteditable.");
       }
       // if a visible class is given, give it to everything
       if (holmes.prototype.options.class.visible) {
