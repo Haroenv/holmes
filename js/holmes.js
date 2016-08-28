@@ -222,7 +222,7 @@
       // loop over all the elements
       // in case this should become dynamic, query for the elements here
       var i;
-      var regex = new RegExp('('+holmes.prototype.searchString+')(?![^< ]*>)','gi');
+      var regex = new RegExp('('+holmes.prototype.searchString+')(?![^<]*>)','gi');
       for (i = 0; i < holmes.prototype.elementsLength; i++) {
 
         // if the current element doesn't contain the search string
