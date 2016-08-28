@@ -222,6 +222,7 @@
       // loop over all the elements
       // in case this should become dynamic, query for the elements here
       var i;
+      var regex = new RegExp('('+holmes.prototype.searchString+')(?![^< ]*>)','gi');
       for (i = 0; i < holmes.prototype.elementsLength; i++) {
 
         // if the current element doesn't contain the search string
@@ -264,7 +265,7 @@
           if (holmes.prototype.options.mark) {
             holmes.prototype.elements[i].innerHTML = holmes.prototype.elements[i].innerHTML.replace(/<\/?mark>/g, '');
             if (holmes.prototype.searchString.length) {
-              holmes.prototype.elements[i].innerHTML = holmes.prototype.elements[i].innerHTML.replace(new RegExp('(<.+?>[^<>]*?)('+holmes.prototype.searchString+')([^<>]*?<.+?>)', 'gi'), '<mark>' + holmes.prototype.searchString + '</mark>');
+              holmes.prototype.elements[i].innerHTML = holmes.prototype.elements[i].innerHTML.replace(regex, '<mark>$1</mark>');
             }
           }
 
