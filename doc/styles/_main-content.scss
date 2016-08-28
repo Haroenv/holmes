@@ -1,0 +1,12 @@
+.main-content {
+  flex: 1 1 1%;
+  background: $theme-fancy;
+  color: $theme-fancy-rev;
+  height: calc(100% - 6rem);
+  padding: .5rem 1rem;
+  overflow: auto;
+
+  > section {
+    margin: 2rem auto;
+  }
+}

@@ -1,0 +1,62 @@
+.__tag {
+  $padding-y: 0.5em;
+  $padding-x: 1.5em;
+  $font-size: 0.5rem;
+
+  display: inline-flex;
+  margin: .25rem;
+  max-width: 10rem;
+  padding: $padding-y $padding-x;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  user-select: none;
+  cursor: default;
+  border-radius: 2px;
+  vertical-align: baseline;
+  font-size: $font-size;
+  font-family: $monospace;
+  line-height: 1;
+  font-weight: bold;
+  box-shadow: 0 1px 2px rgba(black, 0.4);
+
+  //background-image: linear-gradient(rgba(black, 0.1), rgba(black, 0.3));
+  background-color: #eee;
+  color: #555;
+
+  //text-shadow: 1px 1px rgba(white, 0.3);
+
+  a {
+    display: inline-block;
+    margin: (-1 * $padding-y) (-1 * $padding-x);
+    padding: $padding-y $padding-x;
+    border-radius: inherit;
+    color: currentColor;
+    width: calc(100% + #{$padding-x * 2});
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &:hover {
+      text-decoration: none;
+      background-color: rgba(black, 0.5);
+      color: white;
+
+      //text-shadow: -1px -1px rgba(black, 0.3);
+   
+    }
+  }
+}
+
+@mixin tag-colors($colors, $types) {
+  @for $i from 1 through length($types) {
+    $type: nth($types, $i);
+
+    &-#{$type} {
+      $color: map-get($colors, $type);
+
+      background-color: $color;
+      color: mix(black, $color, 40%);
+    }
+  }
+}

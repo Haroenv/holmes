@@ -1,0 +1,69 @@
+@import "normalize";
+
+$theme-bg: #fff;
+$theme-color: #000;
+
+$theme-fancy: #f7f7f7;
+$theme-fancy-rev: #222;
+
+$link-color: $theme-color;
+$link-visited-color: $theme-color;
+
+$theme-code: #fff;
+$theme-code-color: #000;
+
+$theme-member: #eee;
+$theme-method: #ddd;
+$theme-typedef: #ccc;
+
+$monospace: Monacco, Consolas, monospace;
+$sans-serif: Arial, Verdana, sans-serif;
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+html {
+  $base-size: 100% / 16 * 12;
+
+  font-size: $base-size;
+}
+
+body, textarea, input, button, select {
+  font-family: $sans-serif;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  flex-flow: wrap;
+  height: 100vh;
+  line-height: 1.3;
+  overflow: hidden;
+}
+
+// base elements
+@import "links";
+@import "lists";
+@import "headlines";
+@import "tables";
+
+@import "main-nav";
+@import "main-content";
+@import "main-footer";
+
+@import "details";
+@import "overview";
+@import "signature";
+@import "code-source";
+
+// cards
+@import "cards";
+
+// tags
+@import "tag";
+@import "attrs";
+@import "params";
+
+// code highlighting
+@import "prettyprint";

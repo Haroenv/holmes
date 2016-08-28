@@ -3,3 +3,11 @@ language: node_js
 branches:
   only:
     - gh-pages
+env:
+  global:
+    - secure: "MUJEQLKoC7ZMyzk7pr2SJI/tZfeMHsWIwGq9mTtVpUjXOB/Nn/dSMz74j4b01Hqn0mPEbd7XZO7PMuwhoGboyXSgFQNIOTieGST3OrDDR2bKOH3eh77NkrFBGQp+woszVRlyrpPpAwhxlWm/Wg+a9AEEM4Q53tDcCI3ezrtQ4OJ4BlyUEmzzz+T3jKtu6ICv33sqv644yKKqFiaUo5wbj+TkdTW4NZQsTPtgecOYbSEF1OUxO2hyjs+aagk5rJZmolyagfi8DlX++7kHUOtqeQMvPcrlTKJUAoOS1/dAdUm8STrzQ64gcI0+TmWokwSKg8XD61J7+8UYS7jUo9tFMVpqKAbJCzZxEzYc9oS8RS8Nq1rvjRtKC/+ymMnYSPjZRnMQoguxUuuKPiz2EBOtNweJErzu8CUTFwx6OOJ6e5Yn5Y/b1oSo5Iil034l59LSnxWSc98erOa0MMXL+gat3S5LVW9NiMCoAq+uICL2otNpLKQqyWSnvPzMWvJCTULVLhg8YaR2ST1PkQ68ki4t3Mbtm4KDtBHc2hzSNO7z2zjE9JgxtUPSM0Af4WrxQqPLK70fy53lLJxqfrqmt/JrQObLVMDAyrQfwtw/pS2/9pu0n71cc9m2ieG6YrI9zALjRmhG1zanN/5XgcQWQ31HIi7BZ6wZ2xjhQqRkUgqG3e8="
+    - GH_OWNER=haroenv
+    - GH_PROJECT=holmes
+after_success:
+    # Any command that using GH_OAUTH_TOKEN must pipe the output to /dev/null to not expose your oauth token
+    - ./deploy.sh
