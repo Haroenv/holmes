@@ -19,6 +19,13 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "doc/",
+    "css/",
+    "images/",
+    "js/microlight.js",
+    "index.html",
+    "deploy.sh",
+    "install.json"
   ]
 }

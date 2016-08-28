@@ -1,12 +1,16 @@
 {
   "name": "holmes.js",
-  "version": "1.11.0",
+  "version": "1.13.0",
   "description": "Fast and easy searching inside a page.",
   "main": "js/holmes.js",
+  "files": [
+    "js/holmes.js"
+  ],
   "scripts": {
-    "test": "npm run lint && npm run karma",
+    "test": "npm run lint && npm run flow && npm run karma",
     "karma": "karma start --single-run",
     "lint": "eslint js/holmes.js",
+    "flow": "flow",
     "doc": "jsdoc -t node_modules/hopsdoc -R README.md -d doc js/holmes.js"
   },
   "keywords": [
@@ -38,6 +42,7 @@
     "karma-html2js-preprocessor": "^1.0.0",
     "karma-jasmine": "^1.0.2",
     "karma-phantomjs-launcher": "^1.0.1",
-    "karma-verbose-reporter": "0.0.3"
+    "karma-verbose-reporter": "0.0.3",
+    "flow-bin": "0.31.1"
   }
 }
