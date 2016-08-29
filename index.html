@@ -55,6 +55,7 @@ holmes({
   <div class="search">
     <input type="search" placeholder="search here" required>
     <button class="toggle" data-tooltip="Use of the .visible class">*</button>
+    <button class="mark">🔆</button>
   </div>
   <div class="results">
     <blockquote>
@@ -235,7 +236,7 @@ holmes({
     input: '.search input',
     find: '.results blockquote',
     placeholder: '<h3>— No results, my dear Watson. —</h3>',
-    mark: true,
+    mark: false,
     class: {
       visible: 'visible',
       hidden: 'hidden'
@@ -252,6 +253,13 @@ holmes({
   document.querySelector('.toggle').addEventListener('click', function(e) {
     e.target.classList.toggle('clicked');
     document.querySelector('.results').classList.toggle('classes');
+  });
+
+  document.querySelector('.mark').addEventListener('click',function(){
+    h.stop().then(function(){
+      h.options.mark = !h.options.mark;
+      h.start();
+    })
   });
   </script>
 </body>
