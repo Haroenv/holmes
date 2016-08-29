@@ -124,7 +124,7 @@ var h = new holmes(options);
 
 Then you can use the following methods:
 
-#### `.clear()`
+### `.clear()`
 
 You can clear a holmes input programmatically, by using:
 
@@ -132,7 +132,7 @@ You can clear a holmes input programmatically, by using:
 h.clear();
 ```
 
-#### `.count()`
+### `.count()`
 
 You can receive informations on what elements are visible, hidden and in total at any point:
 
@@ -140,7 +140,7 @@ You can receive informations on what elements are visible, hidden and in total a
 h.count(); // {all: 41, hidden: 34, visible: 7}
 ```
 
-#### `.start()`
+### `.start()`
 
 Start an even listener for the specified options. Holmes **always** has `.start()` running on initialisation.
 
@@ -148,7 +148,7 @@ Start an even listener for the specified options. Holmes **always** has `.start(
 h.start();
 ```
 
-#### `.stop()`
+### `.stop()`
 
 Stops the current running event listener. Resolves a Promise when this has been completed.
 
@@ -159,7 +159,7 @@ h.start(); // could accidentally start too soon
 h.stop().then(h.start); // might take a small time
 ```
 
-#### `.hidden`
+### `.hidden`
 
 There's also a member `.hidden` that gives the count without a function call:
 
@@ -167,19 +167,19 @@ There's also a member `.hidden` that gives the count without a function call:
 console.log(h.hidden); // 34
 ```
 
-#### `.elements`
+### `.elements`
 
 All of the elements that holmes considers. There's also `.elementsLength`
 
-#### `.input`
+### `.input`
 
 The input that holmes looks in. There's also the last search string as `.searchString`
 
-#### `.placeholder`
+### `.placeholder`
 
 The current placeholder (DOM Node).
 
-#### `.options`
+### `.options`
 
 Shows the options chosen chosen for this instance of holmes. You can also set options like this after initialisation.
 
