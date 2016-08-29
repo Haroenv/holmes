@@ -39,6 +39,9 @@
    * @param {string} options.find
    *   A <code>querySelectorAll</code> rule to find each of the find terms
    * @param {string=} options.placeholder
+   *   Text to show when there are no results (innerHTML)
+   * @param {bool} [options.mark=false]
+   *   Whether to <code>&lt;mark&gt;&lt;/mark&gt;</code> the matching text
    *   Text to show when there are no results (<code>innerHTML</code>)
    * @param {string} [options.class.visible=false]
    *   class to add to matched items
@@ -100,6 +103,9 @@
       }
       if (typeof holmes.prototype.options.placeholder == 'undefined') {
         holmes.prototype.options.placeholder = false;
+      }
+      if (typeof holmes.prototype.options.mark == 'undefined') {
+        holmes.prototype.options.mark = false;
       }
       if (typeof holmes.prototype.options.class == 'undefined') {
         holmes.prototype.options.class = {};
@@ -216,6 +222,7 @@
       // loop over all the elements
       // in case this should become dynamic, query for the elements here
       var i;
+      var regex = new RegExp('(' + holmes.prototype.searchString + ')(?![^<]*>)', 'gi');
       for (i = 0; i < holmes.prototype.elementsLength; i++) {
 
         // if the current element doesn't contain the search string
@@ -248,7 +255,18 @@
             if (typeof holmes.prototype.options.onVisible === 'function') {
               holmes.prototype.options.onVisible(holmes.prototype.elements[i]);
             }
+
             empty = false;
+          }
+
+          // if we need to mark it:
+          // remove all <mark> tags
+          // add new <mark> tags around the text
+          if (holmes.prototype.options.mark) {
+            holmes.prototype.elements[i].innerHTML = holmes.prototype.elements[i].innerHTML.replace(/<\/?mark>/g, '');
+            if (holmes.prototype.searchString.length) {
+              holmes.prototype.elements[i].innerHTML = holmes.prototype.elements[i].innerHTML.replace(regex, '<mark>$1</mark>');
+            }
           }
 
           // the element is now found at least once
@@ -293,12 +311,24 @@
     holmes.prototype.stop = function() {
       return new Promise(function(resolve, reject) {
         holmes.prototype.input.removeEventListener('input', inputHandler);
+
+        // remove placeholder
         if (holmes.prototype.placeholder.parentNode) {
           holmes.prototype.placeholder.parentNode.removeChild(holmes.prototype.placeholder);
         } else {
           throw new Error('The Holmes placeholder has no parent.');
         }
-        resolve();
+
+        // remove marks
+        if (holmes.prototype.options.mark) {
+          var i;
+          for (i = 0; i < holmes.prototype.elementsLength; i++) {
+            holmes.prototype.elements[i].innerHTML = holmes.prototype.elements[i].innerHTML.replace(/<\/?mark>/g, '');
+          }
+        }
+
+        // done
+        resolve('This instance of Holmes has been stopped.');
       });
     };
 

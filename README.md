@@ -11,7 +11,7 @@ Holmes filters a list of elements based on the value of a `input` in just ~13KB 
 
 ## Installation
 
-You can install `holmes` with either `npm` or `bower` under the package name `holmes.js`. For `npm` that looks like this:
+You can install Holmes with either `npm` or `bower` under the package name `holmes.js`. For `npm` that looks like this:
 
 ```
 $ npm install --save holmes.js
@@ -42,38 +42,81 @@ holmes({
 })
 ```
 
-### All options
-
-```js
-holmes({
-  // queryselector for the input
-  input: '.search input',
-  // queryselector for element to search in
-  find: '.results article',
-  // (optional) text to show when no results
-  placeholder: 'no results',
-  class: {
-    // (optional) class to add to matched elements
-    visible: 'visible',
-    // (optional) class to add to non-matched elements
-    hidden: 'hidden'
-  },
-  // (optional) if true, this will refresh the content every search
-  dynamic: false,
-  // (deprecated) needs to be true if the input is a contenteditable field instead of a
-  contenteditable: false,
-  // (optional) in case you don't want to wait for DOMContentLoaded before starting Holmes:
-  instant: true,
-  // (optional) if you want to start searching after a certain amount of characters are typed
-  minCharacters: 5
-});
-```
+## Options
 
 [full documentation](https://haroen.me/holmes/doc)
 
+### `input`
+**default**: `input[type=search]`
+
+querySelector for the input
+
+**examples**: `input`, `.search input`
+
+### `find` **required**
+
+querySelectorAll for elements to search in
+
+**examples**: `blockquote p`, `.result`, `.results div`
+
+### `class`
+
+#### `class.hidden`
+**default**: `hidden`
+
+Class to add when the a `.find` doesn't contain the search query.
+
+**examples**: `hidden`, `dn`, `none`
+
+#### `class.visible`
+**default**: `false`
+
+Class to add to visible items if they contain the search query.
+
+**examples**: `visible`, `vis`, `nohidden`
+
+### `placeholder`
+**default**: `false`
+
+html to show when no results.
+
+**examples**: `<p> No results </p>`, `Didn't find anything.`
+
+### `dynamic`
+**default**: `false`
+
+Enable this option if you want Holmes to query the value of the `.find` at every input.
+
+**examples**: `true`, `false`
+
+### `instant`
+**default**: `false`
+
+By default Holmes will wait on a `DOMContentLoaded` event to start searching. If you're loading the elements by `AJAX` for example this event comes too early. In that case you can enable `instant`, and start Holmes when your content is ready.
+
+**examples**: `true`, `false`
+
+### `minCharacters`
+**default**: `0`
+
+A minimum amount of characters need to be typed before Holmes starts filtering.
+
+**examples**: `2`, `5`
+
+### `mark`
+**default**: `false`
+
+To start showing the result in a `<mark>` tag inside the `.find`, you should enable this. To change the colour this `match` is shown in, you should style the [`mark`](https://developer.mozilla.org/en/docs/Web/HTML/Element/mark) background-color.
+
+>:exclamation: this will break event listeners on nested content
+
+>:exclamation: this won't work if the character after the match is a literal `>`
+
+**examples**: `true`, `false`
+
 ## Methods and members
 
-For all of the methods you should initialise a new instance of `holmes` like this:
+For all of the methods you should initialise a new instance of Holmes like this:
 
 ```js
 var h = new holmes(options);
