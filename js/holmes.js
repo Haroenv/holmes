@@ -321,7 +321,10 @@
 
         // remove marks
         if (holmes.prototype.options.mark) {
-          holmes.prototype.elements[i].innerHTML = holmes.prototype.elements[i].innerHTML.replace(/<\/?mark>/g, '');
+          var i;
+          for (i = 0; i < holmes.prototype.elementsLength; i++) {
+            holmes.prototype.elements[i].innerHTML = holmes.prototype.elements[i].innerHTML.replace(/<\/?mark>/g, '');
+          }
         }
 
         // done
