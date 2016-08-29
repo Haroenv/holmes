@@ -106,7 +106,7 @@ A minimum amount of characters need to be typed before Holmes starts filtering.
 ### `mark`
 **default**: `false`
 
-To start showing the result in a `<mark>` tag inside the `.find`, you should enable this.
+To start showing the result in a `<mark>` tag inside the `.find`, you should enable this. To change the colour this `match` is shown in, you should style the [`mark`](https://developer.mozilla.org/en/docs/Web/HTML/Element/mark) background-color.
 
 >:exclamation: this will break event listeners on nested content
 
