@@ -274,6 +274,8 @@ holmes({
     h.stop().then(function(){
       h.options.mark = !h.options.mark;
       h.start();
+      // hack to make it run at button click
+      h.input.dispatchEvent(new Event('input'));
     })
   });
   </script>
