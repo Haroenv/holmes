@@ -222,7 +222,7 @@
       // loop over all the elements
       // in case this should become dynamic, query for the elements here
       var i;
-      var regex = new RegExp('('+holmes.prototype.searchString+')(?![^<]*>)','gi');
+      var regex = new RegExp('(' + holmes.prototype.searchString + ')(?![^<]*>)', 'gi');
       for (i = 0; i < holmes.prototype.elementsLength; i++) {
 
         // if the current element doesn't contain the search string
@@ -311,12 +311,21 @@
     holmes.prototype.stop = function() {
       return new Promise(function(resolve, reject) {
         holmes.prototype.input.removeEventListener('input', inputHandler);
+
+        // remove placeholder
         if (holmes.prototype.placeholder.parentNode) {
           holmes.prototype.placeholder.parentNode.removeChild(holmes.prototype.placeholder);
         } else {
           throw new Error('The Holmes placeholder has no parent.');
         }
-        resolve();
+
+        // remove marks
+        if (holmes.prototype.options.mark) {
+          holmes.prototype.elements[i].innerHTML = holmes.prototype.elements[i].innerHTML.replace(/<\/?mark>/g, '');
+        }
+
+        // done
+        resolve('This instance of Holmes has been stopped.');
       });
     };
 
