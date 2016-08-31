@@ -72,6 +72,8 @@
    *   Callback for when no items were found.
    * @param {onChange} [options.onFound]
    *   Callback for when items are found after being empty.
+   * @param {function} [options.onInput]
+   *   Callback for every input.
    */
   function holmes(options) {
 
@@ -274,6 +276,10 @@
           found = true;
         }
       };
+
+      if (typeof holmes.prototype.options.onInput === 'function') {
+        holmes.prototype.options.onInput(holmes.prototype.searchString);
+      }
 
       // No results were found and last time we checked it wasn't empty
       if (!found && !empty) {

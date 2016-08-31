@@ -114,6 +114,57 @@ To start showing the result in a `<mark>` tag inside the `.find`, you should ena
 
 **examples**: `true`, `false`
 
+
+### `onHidden`
+
+Callback for when an item is hidden.
+
+```js
+function(el) {
+  console.log('hide',el);
+}
+```
+
+### `onVisible`
+
+Callback for when an item is visible again.
+
+```js
+function(el) {
+  console.log('show',el);
+}
+```
+
+### `onEmpty`
+
+Callback for when no items were found.
+
+```js
+function(placeholder) {
+  console.log('nothing found',placeholder);
+}
+```
+
+### `onFound`
+
+Callback for when items are found after being empty.
+
+```js
+function(placeholder) {
+  console.log('something found',placeholder);
+}
+```
+
+### `onInput`
+
+Callback for every input.
+
+```js
+function(input) {
+  console.log('current input',input);
+}
+```
+
 ## Methods and members
 
 For all of the methods you should initialise a new instance of Holmes like this:
