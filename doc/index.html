@@ -21,7 +21,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav class="main-nav">
-    <header class="nav-header"><h2><a href="index.html">Home</a></h2></header><header class="nav-header"><h3><span>Modules</span></h3></header><ul><li><a href="module-holmes.html">holmes</a><ul class='members'><li class='nav-type-header'>Members</li><li data-type='member'><a href="module-holmes.html#elements">elements</a></li><li data-type='member'><a href="module-holmes.html#elementsLength">elementsLength</a></li><li data-type='member'><a href="module-holmes.html#hidden">hidden</a></li><li data-type='member'><a href="module-holmes.html#input">input</a></li><li data-type='member'><a href="module-holmes.html#options">options</a></li><li data-type='member'><a href="module-holmes.html#placeholder">placeholder</a></li><li data-type='member'><a href="module-holmes.html#searchString">searchString</a></li></ul><ul class='methods'><li class='nav-type-header'>Methods</li><li data-type='method'><a href="module-holmes.html#clear">clear</a></li><li data-type='method'><a href="module-holmes.html#count">count</a></li><li data-type='method'><a href="module-holmes.html#start">start</a></li><li data-type='method'><a href="module-holmes.html#stop">stop</a></li><li data-type='method'><a href="module-holmes.html#~inputHandler">inputHandler</a></li></ul><ul class='typedefs'><li class='nav-type-header'>Typedefs</li><li data-type='typedef'><a href="module-holmes.html#~onChange">onChange</a></li></ul></li></ul>
+    <header class="nav-header"><h2><a href="index.html">Home</a></h2></header><header class="nav-header"><h3><span>Classes</span></h3></header><ul><li><a href="module-holmes.html">holmes</a><ul class='members'><li class='nav-type-header'>Members</li><li data-type='member'><a href="module-holmes.html#elements">elements</a></li><li data-type='member'><a href="module-holmes.html#elementsLength">elementsLength</a></li><li data-type='member'><a href="module-holmes.html#hidden">hidden</a></li><li data-type='member'><a href="module-holmes.html#input">input</a></li><li data-type='member'><a href="module-holmes.html#options">options</a></li><li data-type='member'><a href="module-holmes.html#placeholder">placeholder</a></li><li data-type='member'><a href="module-holmes.html#searchString">searchString</a></li></ul><ul class='methods'><li class='nav-type-header'>Methods</li><li data-type='method'><a href="module-holmes.html#clear">clear</a></li><li data-type='method'><a href="module-holmes.html#count">count</a></li><li data-type='method'><a href="module-holmes.html#start">start</a></li><li data-type='method'><a href="module-holmes.html#stop">stop</a></li><li data-type='method'><a href="module-holmes.html#~inputHandler">inputHandler</a></li></ul><ul class='typedefs'><li class='nav-type-header'>Typedefs</li><li data-type='typedef'><a href="module-holmes.html#~onChange">onChange</a></li></ul></li></ul><header class="nav-header"><h3><span>Modules</span></h3></header><ul><li><a href="module-holmes.html">holmes</a><ul class='members'><li class='nav-type-header'>Members</li><li data-type='member'><a href="module-holmes.html#elements">elements</a></li><li data-type='member'><a href="module-holmes.html#elementsLength">elementsLength</a></li><li data-type='member'><a href="module-holmes.html#hidden">hidden</a></li><li data-type='member'><a href="module-holmes.html#input">input</a></li><li data-type='member'><a href="module-holmes.html#options">options</a></li><li data-type='member'><a href="module-holmes.html#placeholder">placeholder</a></li><li data-type='member'><a href="module-holmes.html#searchString">searchString</a></li></ul><ul class='methods'><li class='nav-type-header'>Methods</li><li data-type='method'><a href="module-holmes.html#clear">clear</a></li><li data-type='method'><a href="module-holmes.html#count">count</a></li><li data-type='method'><a href="module-holmes.html#start">start</a></li><li data-type='method'><a href="module-holmes.html#stop">stop</a></li><li data-type='method'><a href="module-holmes.html#~inputHandler">inputHandler</a></li></ul><ul class='typedefs'><li class='nav-type-header'>Typedefs</li><li data-type='typedef'><a href="module-holmes.html#~onChange">onChange</a></li></ul></li></ul>
 </nav>
 
 <main id="main" class="main-content">
@@ -94,7 +94,22 @@
 <p>:exclamation: this won't work if the character after the match is a literal <code>&gt;</code></p>
 </blockquote>
 <p><strong>examples</strong>: <code>true</code>, <code>false</code></p>
-<h2>Methods and members</h2><p>For all of the methods you should initialise a new instance of Holmes like this:</p>
+<h3><code>onHidden</code></h3><p>Callback for when an item is hidden.</p>
+<pre class="prettyprint source lang-js"><code>function(el) {
+  console.log('hide',el);
+}</code></pre><h3><code>onVisible</code></h3><p>Callback for when an item is visible again.</p>
+<pre class="prettyprint source lang-js"><code>function(el) {
+  console.log('show',el);
+}</code></pre><h3><code>onEmpty</code></h3><p>Callback for when no items were found.</p>
+<pre class="prettyprint source lang-js"><code>function(placeholder) {
+  console.log('nothing found',placeholder);
+}</code></pre><h3><code>onFound</code></h3><p>Callback for when items are found after being empty.</p>
+<pre class="prettyprint source lang-js"><code>function(placeholder) {
+  console.log('something found',placeholder);
+}</code></pre><h3><code>onInput</code></h3><p>Callback for every input.</p>
+<pre class="prettyprint source lang-js"><code>function(input) {
+  console.log('current input',input);
+}</code></pre><h2>Methods and members</h2><p>For all of the methods you should initialise a new instance of Holmes like this:</p>
 <pre class="prettyprint source lang-js"><code>var h = new holmes(options);</code></pre><p>Then you can use the following methods:</p>
 <h3><code>.clear()</code></h3><p>You can clear a holmes input programmatically, by using:</p>
 <pre class="prettyprint source lang-js"><code>h.clear();</code></pre><h3><code>.count()</code></h3><p>You can receive informations on what elements are visible, hidden and in total at any point:</p>
@@ -161,7 +176,7 @@ h.stop().then(h.start); // might take a small time</code></pre><h3><code>.hidden
 
 
 <footer class="main-footer">
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Mon Aug 29 2016 15:43:50 GMT+0000 (UTC)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Wed Aug 31 2016 08:39:22 GMT+0000 (UTC)
 </footer>
 
 <script>prettyPrint();</script>
