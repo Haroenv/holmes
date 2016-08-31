@@ -34,6 +34,8 @@
   /**
    * search for dom elements on your page
    * @alias module:holmes
+   * @constructor
+   * @param {object} options Options for Holmes are given as one object
    * @param {string} [options.input='input[type=search]']
    *   A <code>querySelector</code> to find the <code>input</code>
    * @param {string} options.find
@@ -61,7 +63,7 @@
    *   before listening. This is to make sure that all content is available. However
    *   if you exactly know when all your content is available (ajax, your own event or
    *   other situations), you can put this option on <code>true</code>.
-   * @param {number} [minCharacters=0] The minimum amount of characters to be typed before
+   * @param {number} [options.minCharacters=0] The minimum amount of characters to be typed before
    *   Holmes starts searching. Beware that this also counts when backspacing.
    * @param {onChange} [options.onHidden]
    *   Callback for when an item is hidden.
