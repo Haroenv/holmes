@@ -35,7 +35,6 @@
    * search for dom elements on your page
    * @alias module:holmes
    * @constructor
-   * @param {object} options Options for Holmes are given as one object
    * @param {string} [options.input='input[type=search]']
    *   A <code>querySelector</code> to find the <code>input</code>
    * @param {string} options.find
