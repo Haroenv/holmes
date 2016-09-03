@@ -21,7 +21,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav class="main-nav">
-    <header class="nav-header"><h2><a href="index.html">Home</a></h2></header><header class="nav-header"><h3><span>Modules</span></h3></header><ul><li><a href="module-holmes.html">holmes</a><ul class='members'><li class='nav-type-header'>Members</li><li data-type='member'><a href="module-holmes.html#elements">elements</a></li><li data-type='member'><a href="module-holmes.html#elementsLength">elementsLength</a></li><li data-type='member'><a href="module-holmes.html#hidden">hidden</a></li><li data-type='member'><a href="module-holmes.html#input">input</a></li><li data-type='member'><a href="module-holmes.html#options">options</a></li><li data-type='member'><a href="module-holmes.html#placeholder">placeholder</a></li><li data-type='member'><a href="module-holmes.html#searchString">searchString</a></li></ul><ul class='methods'><li class='nav-type-header'>Methods</li><li data-type='method'><a href="module-holmes.html#clear">clear</a></li><li data-type='method'><a href="module-holmes.html#count">count</a></li><li data-type='method'><a href="module-holmes.html#start">start</a></li><li data-type='method'><a href="module-holmes.html#stop">stop</a></li><li data-type='method'><a href="module-holmes.html#~inputHandler">inputHandler</a></li></ul><ul class='typedefs'><li class='nav-type-header'>Typedefs</li><li data-type='typedef'><a href="module-holmes.html#~onChange">onChange</a></li></ul></li></ul>
+    <header class="nav-header"><h2><a href="index.html">Home</a></h2></header><header class="nav-header"><h3><span>Classes</span></h3></header><ul><li><a href="module-holmes.html">holmes</a><ul class='members'><li class='nav-type-header'>Members</li><li data-type='member'><a href="module-holmes.html#elements">elements</a></li><li data-type='member'><a href="module-holmes.html#elementsLength">elementsLength</a></li><li data-type='member'><a href="module-holmes.html#hidden">hidden</a></li><li data-type='member'><a href="module-holmes.html#input">input</a></li><li data-type='member'><a href="module-holmes.html#options">options</a></li><li data-type='member'><a href="module-holmes.html#placeholder">placeholder</a></li><li data-type='member'><a href="module-holmes.html#searchString">searchString</a></li></ul><ul class='methods'><li class='nav-type-header'>Methods</li><li data-type='method'><a href="module-holmes.html#clear">clear</a></li><li data-type='method'><a href="module-holmes.html#count">count</a></li><li data-type='method'><a href="module-holmes.html#start">start</a></li><li data-type='method'><a href="module-holmes.html#stop">stop</a></li><li data-type='method'><a href="module-holmes.html#~inputHandler">inputHandler</a></li></ul><ul class='typedefs'><li class='nav-type-header'>Typedefs</li><li data-type='typedef'><a href="module-holmes.html#~onChange">onChange</a></li></ul></li></ul><header class="nav-header"><h3><span>Modules</span></h3></header><ul><li><a href="module-holmes.html">holmes</a><ul class='members'><li class='nav-type-header'>Members</li><li data-type='member'><a href="module-holmes.html#elements">elements</a></li><li data-type='member'><a href="module-holmes.html#elementsLength">elementsLength</a></li><li data-type='member'><a href="module-holmes.html#hidden">hidden</a></li><li data-type='member'><a href="module-holmes.html#input">input</a></li><li data-type='member'><a href="module-holmes.html#options">options</a></li><li data-type='member'><a href="module-holmes.html#placeholder">placeholder</a></li><li data-type='member'><a href="module-holmes.html#searchString">searchString</a></li></ul><ul class='methods'><li class='nav-type-header'>Methods</li><li data-type='method'><a href="module-holmes.html#clear">clear</a></li><li data-type='method'><a href="module-holmes.html#count">count</a></li><li data-type='method'><a href="module-holmes.html#start">start</a></li><li data-type='method'><a href="module-holmes.html#stop">stop</a></li><li data-type='method'><a href="module-holmes.html#~inputHandler">inputHandler</a></li></ul><ul class='typedefs'><li class='nav-type-header'>Typedefs</li><li data-type='typedef'><a href="module-holmes.html#~onChange">onChange</a></li></ul></li></ul>
 </nav>
 
 <main id="main" class="main-content">
@@ -72,11 +72,15 @@
   /**
    * search for dom elements on your page
    * @alias module:holmes
+   * @constructor
    * @param {string} [options.input='input[type=search]']
    *   A &lt;code>querySelector&lt;/code> to find the &lt;code>input&lt;/code>
    * @param {string} options.find
    *   A &lt;code>querySelectorAll&lt;/code> rule to find each of the find terms
    * @param {string=} options.placeholder
+   *   Text to show when there are no results (innerHTML)
+   * @param {bool} [options.mark=false]
+   *   Whether to &lt;code>&amp;lt;mark&amp;gt;&amp;lt;/mark&amp;gt;&lt;/code> the matching text
    *   Text to show when there are no results (&lt;code>innerHTML&lt;/code>)
    * @param {string} [options.class.visible=false]
    *   class to add to matched items
@@ -96,7 +100,7 @@
    *   before listening. This is to make sure that all content is available. However
    *   if you exactly know when all your content is available (ajax, your own event or
    *   other situations), you can put this option on &lt;code>true&lt;/code>.
-   * @param {number} [minCharacters=0] The minimum amount of characters to be typed before
+   * @param {number} [options.minCharacters=0] The minimum amount of characters to be typed before
    *   Holmes starts searching. Beware that this also counts when backspacing.
    * @param {onChange} [options.onHidden]
    *   Callback for when an item is hidden.
@@ -106,6 +110,8 @@
    *   Callback for when no items were found.
    * @param {onChange} [options.onFound]
    *   Callback for when items are found after being empty.
+   * @param {function} [options.onInput]
+   *   Callback for every input.
    */
   function holmes(options) {
 
@@ -138,6 +144,9 @@
       }
       if (typeof holmes.prototype.options.placeholder == 'undefined') {
         holmes.prototype.options.placeholder = false;
+      }
+      if (typeof holmes.prototype.options.mark == 'undefined') {
+        holmes.prototype.options.mark = false;
       }
       if (typeof holmes.prototype.options.class == 'undefined') {
         holmes.prototype.options.class = {};
@@ -254,6 +263,7 @@
       // loop over all the elements
       // in case this should become dynamic, query for the elements here
       var i;
+      var regex = new RegExp('(' + holmes.prototype.searchString + ')(?![^&lt;]*>)', 'gi');
       for (i = 0; i &lt; holmes.prototype.elementsLength; i++) {
 
         // if the current element doesn't contain the search string
@@ -286,13 +296,28 @@
             if (typeof holmes.prototype.options.onVisible === 'function') {
               holmes.prototype.options.onVisible(holmes.prototype.elements[i]);
             }
+
             empty = false;
+          }
+
+          // if we need to mark it:
+          // remove all &lt;mark> tags
+          // add new &lt;mark> tags around the text
+          if (holmes.prototype.options.mark) {
+            holmes.prototype.elements[i].innerHTML = holmes.prototype.elements[i].innerHTML.replace(/&lt;\/?mark>/g, '');
+            if (holmes.prototype.searchString.length) {
+              holmes.prototype.elements[i].innerHTML = holmes.prototype.elements[i].innerHTML.replace(regex, '&lt;mark>$1&lt;/mark>');
+            }
           }
 
           // the element is now found at least once
           found = true;
         }
       };
+
+      if (typeof holmes.prototype.options.onInput === 'function') {
+        holmes.prototype.options.onInput(holmes.prototype.searchString);
+      }
 
       // No results were found and last time we checked it wasn't empty
       if (!found &amp;&amp; !empty) {
@@ -331,12 +356,24 @@
     holmes.prototype.stop = function() {
       return new Promise(function(resolve, reject) {
         holmes.prototype.input.removeEventListener('input', inputHandler);
+
+        // remove placeholder
         if (holmes.prototype.placeholder.parentNode) {
           holmes.prototype.placeholder.parentNode.removeChild(holmes.prototype.placeholder);
         } else {
           throw new Error('The Holmes placeholder has no parent.');
         }
-        resolve();
+
+        // remove marks
+        if (holmes.prototype.options.mark) {
+          var i;
+          for (i = 0; i &lt; holmes.prototype.elementsLength; i++) {
+            holmes.prototype.elements[i].innerHTML = holmes.prototype.elements[i].innerHTML.replace(/&lt;\/?mark>/g, '');
+          }
+        }
+
+        // done
+        resolve('This instance of Holmes has been stopped.');
       });
     };
 
@@ -414,7 +451,7 @@
 
 
 <footer class="main-footer">
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sat Aug 27 2016 21:31:59 GMT+0000 (UTC)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sat Sep 03 2016 13:01:06 GMT+0000 (UTC)
 </footer>
 
 <script>prettyPrint();</script>

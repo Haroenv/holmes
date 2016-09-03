@@ -1,6 +1,6 @@
 {
   "name": "holmes.js",
-  "version": "1.13.0",
+  "version": "1.13.2",
   "description": "Fast and easy searching inside a page.",
   "main": "js/holmes.js",
   "files": [
@@ -33,7 +33,7 @@
   },
   "homepage": "https://haroen.me/holmes/",
   "devDependencies": {
-    "eslint": "^2.9.0",
+    "eslint": "^3.4.0",
     "hopsdoc": "^0.1.7",
     "jasmine-core": "^2.4.1",
     "jsdoc": "^3.4.0",
@@ -43,6 +43,6 @@
     "karma-jasmine": "^1.0.2",
     "karma-phantomjs-launcher": "^1.0.1",
     "karma-verbose-reporter": "0.0.3",
-    "flow-bin": "0.31.1"
+    "flow-bin": "^0.32.0"
   }
 }

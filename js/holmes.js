@@ -34,11 +34,15 @@
   /**
    * search for dom elements on your page
    * @alias module:holmes
+   * @constructor
    * @param {string} [options.input='input[type=search]']
    *   A <code>querySelector</code> to find the <code>input</code>
    * @param {string} options.find
    *   A <code>querySelectorAll</code> rule to find each of the find terms
    * @param {string=} options.placeholder
+   *   Text to show when there are no results (innerHTML)
+   * @param {bool} [options.mark=false]
+   *   Whether to <code>&lt;mark&gt;&lt;/mark&gt;</code> the matching text
    *   Text to show when there are no results (<code>innerHTML</code>)
    * @param {string} [options.class.visible=false]
    *   class to add to matched items
@@ -58,7 +62,7 @@
    *   before listening. This is to make sure that all content is available. However
    *   if you exactly know when all your content is available (ajax, your own event or
    *   other situations), you can put this option on <code>true</code>.
-   * @param {number} [minCharacters=0] The minimum amount of characters to be typed before
+   * @param {number} [options.minCharacters=0] The minimum amount of characters to be typed before
    *   Holmes starts searching. Beware that this also counts when backspacing.
    * @param {onChange} [options.onHidden]
    *   Callback for when an item is hidden.
@@ -68,6 +72,8 @@
    *   Callback for when no items were found.
    * @param {onChange} [options.onFound]
    *   Callback for when items are found after being empty.
+   * @param {function} [options.onInput]
+   *   Callback for every input.
    */
   function holmes(options) {
 
@@ -100,6 +106,9 @@
       }
       if (typeof holmes.prototype.options.placeholder == 'undefined') {
         holmes.prototype.options.placeholder = false;
+      }
+      if (typeof holmes.prototype.options.mark == 'undefined') {
+        holmes.prototype.options.mark = false;
       }
       if (typeof holmes.prototype.options.class == 'undefined') {
         holmes.prototype.options.class = {};
@@ -216,6 +225,7 @@
       // loop over all the elements
       // in case this should become dynamic, query for the elements here
       var i;
+      var regex = new RegExp('(' + holmes.prototype.searchString + ')(?![^<]*>)', 'gi');
       for (i = 0; i < holmes.prototype.elementsLength; i++) {
 
         // if the current element doesn't contain the search string
@@ -248,13 +258,28 @@
             if (typeof holmes.prototype.options.onVisible === 'function') {
               holmes.prototype.options.onVisible(holmes.prototype.elements[i]);
             }
+
             empty = false;
+          }
+
+          // if we need to mark it:
+          // remove all <mark> tags
+          // add new <mark> tags around the text
+          if (holmes.prototype.options.mark) {
+            holmes.prototype.elements[i].innerHTML = holmes.prototype.elements[i].innerHTML.replace(/<\/?mark>/g, '');
+            if (holmes.prototype.searchString.length) {
+              holmes.prototype.elements[i].innerHTML = holmes.prototype.elements[i].innerHTML.replace(regex, '<mark>$1</mark>');
+            }
           }
 
           // the element is now found at least once
           found = true;
         }
       };
+
+      if (typeof holmes.prototype.options.onInput === 'function') {
+        holmes.prototype.options.onInput(holmes.prototype.searchString);
+      }
 
       // No results were found and last time we checked it wasn't empty
       if (!found && !empty) {
@@ -293,12 +318,24 @@
     holmes.prototype.stop = function() {
       return new Promise(function(resolve, reject) {
         holmes.prototype.input.removeEventListener('input', inputHandler);
+
+        // remove placeholder
         if (holmes.prototype.placeholder.parentNode) {
           holmes.prototype.placeholder.parentNode.removeChild(holmes.prototype.placeholder);
         } else {
           throw new Error('The Holmes placeholder has no parent.');
         }
-        resolve();
+
+        // remove marks
+        if (holmes.prototype.options.mark) {
+          var i;
+          for (i = 0; i < holmes.prototype.elementsLength; i++) {
+            holmes.prototype.elements[i].innerHTML = holmes.prototype.elements[i].innerHTML.replace(/<\/?mark>/g, '');
+          }
+        }
+
+        // done
+        resolve('This instance of Holmes has been stopped.');
       });
     };
 
