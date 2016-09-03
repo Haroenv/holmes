@@ -32,9 +32,9 @@
   },
   "homepage": "https://haroen.me/holmes/",
   "devDependencies": {
-    "eslint": "^2.9.0",
+    "eslint": "^3.4.0",
     "hopsdoc": "^0.1.7",
-    "flow-bin": "0.31.1",
+    "flow-bin": "^0.32.0",
     "jsdoc": "^3.4.0"
   }
 }
