@@ -7,7 +7,8 @@
     "js/holmes.js"
   ],
   "scripts": {
-    "test": "npm run lint && npm run flow",
+    "test": "npm run lint && npm run flow && npm run karma",
+    "karma": "karma start --single-run",
     "lint": "eslint js/holmes.js",
     "flow": "flow",
     "doc": "jsdoc -t node_modules/hopsdoc -R README.md -d doc js/holmes.js"
@@ -34,7 +35,14 @@
   "devDependencies": {
     "eslint": "^3.4.0",
     "hopsdoc": "^0.1.7",
-    "flow-bin": "^0.32.0",
-    "jsdoc": "^3.4.0"
+    "jasmine-core": "^2.4.1",
+    "jsdoc": "^3.4.0",
+    "karma": "^1.1.2",
+    "karma-fixture": "^0.2.6",
+    "karma-html2js-preprocessor": "^1.0.0",
+    "karma-jasmine": "^1.0.2",
+    "karma-phantomjs-launcher": "^1.0.1",
+    "karma-verbose-reporter": "0.0.3",
+    "flow-bin": "^0.32.0"
   }
 }
