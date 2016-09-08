@@ -118,10 +118,18 @@ describe('Usage with instance', () => {
     setStub();
     const _h = new Holmes({
       find: '.result',
-      instant: true
+      instant: true,
+      class: {
+        visible: 'visible'
+      }
     });
 
-    console.log(_h.running);
+    expect(document.getElementById('search').value).toBe('');
+
+    const all = document.querySelectorAll('.result');
+    const visible = document.querySelectorAll('.result' + '.visible');
+
+    expect(all).toEqual(visible);
   });
 
   // test('.stop() stops reacting to input', () => {
