@@ -1,8 +1,14 @@
 const fs = require('fs');
-const stub = fs.readFileSync('./__tests__/stub.html').toString();
-document.body.innerHTML = stub;
 
 const Holmes = require('../js/holmes.js');
+
+/**
+ * Set the html stub
+ */
+const stub = fs.readFileSync('./__tests__/stub.html').toString();
+function setStub() {
+  document.body.innerHTML = stub;
+}
 
 /**
  * Enter a string into this Holmes input
@@ -20,6 +26,7 @@ function input(text) {
 
 describe('Instance-less usage', () => {
   test('throws without options', () => {
+    setStub();
     function init() {
       Holmes();
     }
@@ -28,6 +35,7 @@ describe('Instance-less usage', () => {
   });
 
   test('doesn\'t throw with .find given', () => {
+    setStub();
     Holmes({
       find: '.result'
     })
@@ -36,7 +44,8 @@ describe('Instance-less usage', () => {
 
 describe('options', () => {
   test('.visible on initialisation', () => {
-    const find = '.result'
+    setStub();
+    const find = '.result';
     Holmes({
       find,
       instant: true,
@@ -52,6 +61,7 @@ describe('options', () => {
   });
 
   describe('.placeholder', () => {
+    setStub();
     test('gets added', () => {
       Holmes({
         find: '.result',
@@ -65,6 +75,7 @@ describe('options', () => {
     });
 
     test('initially hidden', () => {
+      setStub();
       Holmes({
         find: '.result',
         instant: true,
@@ -77,6 +88,7 @@ describe('options', () => {
     });
 
     test('not hidden when no results', () => {
+      setStub();
       Holmes({
         find: '.result',
         instant: true,
@@ -94,6 +106,7 @@ describe('options', () => {
 
 describe('Usage with instance', () => {
   test('Initialisation works', () => {
+    setStub();
     const _h = new Holmes({
       find: '.result'
     });
@@ -102,6 +115,7 @@ describe('Usage with instance', () => {
   });
 
   test('.clear() empties the input and shows everything', () => {
+    setStub();
     const _h = new Holmes({
       find: '.result',
       instant: true
@@ -111,20 +125,24 @@ describe('Usage with instance', () => {
   });
 
   // test('.stop() stops reacting to input', () => {
+  //   setStub();
 
   // });
 
   // test('.start() after .stop() resumes normal activity', () => {
+  //   setStub();
 
   // });
 
   describe('.count()', () => {
 
     // test('before input', () => {
+    //   setStub();
 
     // });
 
     // test('updates on input', () => {
+    //   setStub();
 
     // });
 

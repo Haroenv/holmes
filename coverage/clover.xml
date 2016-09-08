@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1473353847134" clover="3.2.0">
-  <project timestamp="1473353847134" name="All files">
-    <metrics statements="138" coveredstatements="71" conditionals="102" coveredconditionals="40" methods="10" coveredmethods="5" elements="250" coveredelements="116" complexity="0" loc="138" ncloc="138" packages="1" files="1" classes="1">
+<coverage generated="1473366403376" clover="3.2.0">
+  <project timestamp="1473366403376" name="All files">
+    <metrics statements="138" coveredstatements="71" conditionals="102" coveredconditionals="39" methods="10" coveredmethods="5" elements="250" coveredelements="115" complexity="0" loc="138" ncloc="138" packages="1" files="1" classes="1">
       <file name="holmes.js" path="/Users/haroenv/git/holmes/js/holmes.js">
-        <metrics statements="138" coveredstatements="71" conditionals="102" coveredconditionals="40" methods="10" coveredmethods="5"/>
+        <metrics statements="138" coveredstatements="71" conditionals="102" coveredconditionals="39" methods="10" coveredmethods="5"/>
         <line num="6" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
         <line num="12" count="0" type="stmt"/>
@@ -51,8 +51,8 @@
         <line num="173" count="1" type="stmt"/>
         <line num="174" count="50" type="stmt"/>
         <line num="179" count="5" type="stmt"/>
-        <line num="188" count="4" type="stmt"/>
-        <line num="192" count="4" type="stmt"/>
+        <line num="188" count="1" type="stmt"/>
+        <line num="192" count="1" type="stmt"/>
         <line num="194" count="0" type="stmt"/>
         <line num="195" count="0" type="stmt"/>
         <line num="196" count="0" type="stmt"/>
@@ -60,21 +60,21 @@
         <line num="199" count="0" type="stmt"/>
         <line num="201" count="0" type="stmt"/>
         <line num="202" count="0" type="stmt"/>
-        <line num="211" count="4" type="stmt"/>
-        <line num="212" count="4" type="stmt"/>
-        <line num="213" count="4" type="stmt"/>
+        <line num="211" count="1" type="stmt"/>
+        <line num="212" count="1" type="stmt"/>
+        <line num="213" count="1" type="stmt"/>
         <line num="214" count="0" type="stmt"/>
         <line num="215" count="0" type="stmt"/>
         <line num="217" count="0" type="stmt"/>
-        <line num="222" count="4" type="stmt"/>
+        <line num="222" count="1" type="stmt"/>
         <line num="223" count="0" type="stmt"/>
         <line num="224" count="0" type="stmt"/>
-        <line num="230" count="4" type="stmt"/>
-        <line num="231" count="4" type="stmt"/>
-        <line num="235" count="200" type="stmt"/>
-        <line num="236" count="200" type="stmt"/>
+        <line num="230" count="1" type="stmt"/>
+        <line num="231" count="1" type="stmt"/>
+        <line num="235" count="50" type="stmt"/>
+        <line num="236" count="50" type="stmt"/>
         <line num="237" count="0" type="stmt"/>
-        <line num="239" count="200" type="stmt"/>
+        <line num="239" count="50" type="stmt"/>
         <line num="240" count="50" type="stmt"/>
         <line num="241" count="50" type="stmt"/>
         <line num="243" count="50" type="stmt"/>
@@ -94,13 +94,13 @@
         <line num="272" count="0" type="stmt"/>
         <line num="273" count="0" type="stmt"/>
         <line num="278" count="0" type="stmt"/>
-        <line num="282" count="4" type="stmt"/>
+        <line num="282" count="1" type="stmt"/>
         <line num="283" count="0" type="stmt"/>
-        <line num="287" count="4" type="stmt"/>
-        <line num="288" count="4" type="stmt"/>
-        <line num="290" count="4" type="stmt"/>
-        <line num="291" count="4" type="stmt"/>
-        <line num="293" count="4" type="stmt"/>
+        <line num="287" count="1" type="stmt"/>
+        <line num="288" count="1" type="stmt"/>
+        <line num="290" count="1" type="stmt"/>
+        <line num="291" count="1" type="stmt"/>
+        <line num="293" count="1" type="stmt"/>
         <line num="294" count="0" type="stmt"/>
         <line num="296" count="0" type="stmt"/>
         <line num="297" count="0" type="stmt"/>
