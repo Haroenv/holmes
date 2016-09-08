@@ -12,4 +12,5 @@ env:
     - GH_PROJECT=holmes
 after_success:
     # Any command that using GH_OAUTH_TOKEN must pipe the output to /dev/null to not expose your oauth token
+    - npm run coveralls
     - ./deploy.sh
