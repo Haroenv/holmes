@@ -10,6 +10,7 @@
     "test": "npm run lint && npm run flow",
     "lint": "eslint js/holmes.js",
     "flow": "flow",
+    "jest": "jest --coverage",
     "doc": "jsdoc -t node_modules/hopsdoc -R README.md -d doc js/holmes.js"
   },
   "keywords": [
@@ -33,8 +34,9 @@
   "homepage": "https://haroen.me/holmes/",
   "devDependencies": {
     "eslint": "^3.4.0",
-    "hopsdoc": "^0.1.7",
     "flow-bin": "^0.32.0",
+    "hopsdoc": "^0.1.7",
+    "jest": "^15.1.1",
     "jsdoc": "^3.4.0"
   }
 }
