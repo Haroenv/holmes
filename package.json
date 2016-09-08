@@ -7,10 +7,12 @@
     "js/holmes.js"
   ],
   "scripts": {
-    "test": "npm run lint && npm run flow",
+    "test": "npm run lint && npm run flow && npm run jest",
     "lint": "eslint js/holmes.js",
     "flow": "flow",
-    "doc": "jsdoc -t node_modules/hopsdoc -R README.md -d doc js/holmes.js"
+    "jest": "jest --coverage",
+    "doc": "jsdoc -t node_modules/hopsdoc -R README.md -d doc js/holmes.js",
+    "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "keywords": [
     "search",
@@ -32,9 +34,11 @@
   },
   "homepage": "https://haroen.me/holmes/",
   "devDependencies": {
+    "coveralls": "^2.11.12",
     "eslint": "^3.4.0",
-    "hopsdoc": "^0.1.7",
     "flow-bin": "^0.32.0",
+    "hopsdoc": "^0.1.7",
+    "jest": "^15.1.1",
     "jsdoc": "^3.4.0"
   }
 }
