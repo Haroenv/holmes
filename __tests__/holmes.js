@@ -7,11 +7,11 @@ const Holmes = require('../js/holmes.js');
 
 describe('Instance-less usage', () => {
   test('throws without options', () => {
-    try {
+    function init() {
       Holmes();
-    } catch (e) {
-      expect(e.message).toBe('The options need to be given inside an object like this:\nholmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/module-holmes.html');
     }
+
+    expect(init).toThrowError('The options need to be given inside an object like this:\nholmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/module-holmes.html');
   });
 
   test('doesn\'t throw with .find given', () => {
@@ -47,9 +47,13 @@ describe('Usage with instance', () => {
     });
   });
 
-  // test('.clear() empties the input and shows everything', () => {
+  test('.clear() empties the input and shows everything', () => {
+    var _h = new Holmes({
+      find: '.result'
+    });
 
-  // });
+    console.log(_h);
+  });
 
   // test('.stop() stops reacting to input', () => {
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1473330339805" clover="3.2.0">
-  <project timestamp="1473330339805" name="All files">
+<coverage generated="1473348839938" clover="3.2.0">
+  <project timestamp="1473348839938" name="All files">
     <metrics statements="136" coveredstatements="18" conditionals="102" coveredconditionals="8" methods="10" coveredmethods="3" elements="248" coveredelements="29" complexity="0" loc="136" ncloc="136" packages="1" files="1" classes="1">
       <file name="holmes.js" path="/Users/haroenv/git/holmes/js/holmes.js">
         <metrics statements="136" coveredstatements="18" conditionals="102" coveredconditionals="8" methods="10" coveredmethods="3"/>
@@ -11,13 +11,13 @@
         <line num="16" count="1" type="stmt"/>
         <line num="20" count="1" type="stmt"/>
         <line num="24" count="0" type="stmt"/>
-        <line num="80" count="3" type="stmt"/>
-        <line num="82" count="3" type="stmt"/>
+        <line num="80" count="4" type="stmt"/>
+        <line num="82" count="4" type="stmt"/>
         <line num="83" count="1" type="stmt"/>
-        <line num="90" count="2" type="stmt"/>
-        <line num="93" count="2" type="stmt"/>
+        <line num="90" count="3" type="stmt"/>
+        <line num="93" count="3" type="stmt"/>
         <line num="94" count="0" type="stmt"/>
-        <line num="101" count="2" type="stmt"/>
+        <line num="101" count="3" type="stmt"/>
         <line num="104" count="0" type="stmt"/>
         <line num="105" count="0" type="stmt"/>
         <line num="107" count="0" type="stmt"/>
@@ -104,12 +104,12 @@
         <line num="294" count="0" type="stmt"/>
         <line num="295" count="0" type="stmt"/>
         <line num="296" count="0" type="stmt"/>
-        <line num="303" count="2" type="stmt"/>
-        <line num="304" count="2" type="stmt"/>
-        <line num="307" count="2" type="stmt"/>
+        <line num="303" count="3" type="stmt"/>
+        <line num="304" count="3" type="stmt"/>
+        <line num="307" count="3" type="stmt"/>
         <line num="308" count="0" type="stmt"/>
-        <line num="310" count="2" type="stmt"/>
-        <line num="318" count="2" type="stmt"/>
+        <line num="310" count="3" type="stmt"/>
+        <line num="318" count="3" type="stmt"/>
         <line num="319" count="0" type="stmt"/>
         <line num="320" count="0" type="stmt"/>
         <line num="323" count="0" type="stmt"/>
@@ -119,7 +119,7 @@
         <line num="332" count="0" type="stmt"/>
         <line num="333" count="0" type="stmt"/>
         <line num="338" count="0" type="stmt"/>
-        <line num="346" count="2" type="stmt"/>
+        <line num="346" count="3" type="stmt"/>
         <line num="347" count="0" type="stmt"/>
         <line num="348" count="0" type="stmt"/>
         <line num="349" count="0" type="stmt"/>
@@ -137,7 +137,7 @@
         <line num="368" count="0" type="stmt"/>
         <line num="369" count="0" type="stmt"/>
         <line num="373" count="0" type="stmt"/>
-        <line num="380" count="2" type="stmt"/>
+        <line num="380" count="3" type="stmt"/>
         <line num="381" count="0" type="stmt"/>
         <line num="400" count="1" type="stmt"/>
       </file>
