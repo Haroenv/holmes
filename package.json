@@ -7,7 +7,7 @@
     "js/holmes.js"
   ],
   "scripts": {
-    "test": "npm run lint && npm run flow",
+    "test": "npm run lint && npm run flow && npm run jest",
     "lint": "eslint js/holmes.js",
     "flow": "flow",
     "jest": "jest --coverage",
