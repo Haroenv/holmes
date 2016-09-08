@@ -4,6 +4,19 @@ document.body.innerHTML = stub;
 
 const Holmes = require('../js/holmes.js');
 
+/**
+ * Enter a string into this Holmes input
+ * @param  {string} text text to input
+ * @return {Promise}     resolves when the input has been doen
+ */
+function input(text) {
+  const holmesInput = document.getElementById('search');
+  return new Promise((resolve, reject) => {
+    holmesInput.value = text;
+    holmesInput.dispatchEvent(new Event('input'));
+    resolve('input dispatched.');
+  });
+}
 
 describe('Instance-less usage', () => {
   test('throws without options', () => {
@@ -22,37 +35,79 @@ describe('Instance-less usage', () => {
 });
 
 describe('options', () => {
-  // test(".visible on initialisation", function() {
-  //   const find = '.result'
-  //   Holmes({
-  //     find,
-  //     class: {
-  //       visible: 'visible'
-  //     }
-  //   });
+  test('.visible on initialisation', () => {
+    const find = '.result'
+    Holmes({
+      find,
+      instant: true,
+        class: {
+          visible: 'visible'
+        }
+    });
 
-  //   const all = document.querySelectorAll(find);
-  //   const visible = document.querySelectorAll(find+'.visible');
+    const all = document.querySelectorAll(find);
+    const visible = document.querySelectorAll(find + '.visible');
 
-  //   expect(all).toEqual(visible);
-  // });
+    expect(all).toEqual(visible);
+  });
 
-  // ...
+  describe('.placeholder', () => {
+    test('gets added', () => {
+      Holmes({
+        find: '.result',
+        instant: true,
+        placeholder: 'test'
+      });
+
+      const placeholder = document.getElementById('holmes-placeholder');
+
+      expect(placeholder.innerHTML).toEqual('test');
+    });
+
+    test('initially hidden', () => {
+      Holmes({
+        find: '.result',
+        instant: true,
+        placeholder: 'test'
+      });
+
+      const placeholder = document.getElementById('holmes-placeholder');
+
+      expect(placeholder.classList.contains('hidden')).toBe(true);
+    });
+
+    test('not hidden when no results', () => {
+      Holmes({
+        find: '.result',
+        instant: true,
+        placeholder: 'test'
+      });
+
+      const placeholder = document.getElementById('holmes-placeholder');
+
+      return input('definitely not in the list').then(() => {
+        expect(placeholder.classList.contains('hidden')).toBe(false);
+      });
+    });
+  });
 })
 
 describe('Usage with instance', () => {
   test('Initialisation works', () => {
-    var _h = new Holmes({
+    const _h = new Holmes({
       find: '.result'
     });
+
+    expect(_h).toBeDefined();
   });
 
   test('.clear() empties the input and shows everything', () => {
-    var _h = new Holmes({
-      find: '.result'
+    const _h = new Holmes({
+      find: '.result',
+      instant: true
     });
 
-    console.log(_h);
+    console.log(_h.running);
   });
 
   // test('.stop() stops reacting to input', () => {
