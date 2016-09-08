@@ -21,10 +21,8 @@ function input(text) {
   return new Promise((resolve, reject) => {
     if (holmesInput instanceof HTMLInputElement) {
       holmesInput.value = text;
-    } else if (holmesInput.contentEditable) {
-      holmesInput.textContent = text;
     } else {
-      reject('no valid input');
+      holmesInput.textContent = text;
     }
     holmesInput.dispatchEvent(new Event('input'));
     resolve('input dispatched.');
@@ -58,6 +56,20 @@ describe('Instance-less usage', () => {
       find: '.result'
     });
   });
+
+  // test('throws when .input you can\'t type in is given', () => {
+  //   setStub();
+  //   function init() {
+  //     Holmes({
+  //       find: '.result',
+  //       input: '.result'
+  //     });
+
+  //     input('bla');
+  //   }
+
+  //   expect(init).toThrowError('The Holmes input was no <input> or contenteditable.');
+  // });
 
   // test('works with contenteditable', () => {
   //   setStub();
