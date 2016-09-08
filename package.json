@@ -11,7 +11,8 @@
     "lint": "eslint js/holmes.js",
     "flow": "flow",
     "jest": "jest --coverage",
-    "doc": "jsdoc -t node_modules/hopsdoc -R README.md -d doc js/holmes.js"
+    "doc": "jsdoc -t node_modules/hopsdoc -R README.md -d doc js/holmes.js",
+    "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "keywords": [
     "search",
@@ -33,6 +34,7 @@
   },
   "homepage": "https://haroen.me/holmes/",
   "devDependencies": {
+    "coveralls": "^2.11.12",
     "eslint": "^3.4.0",
     "flow-bin": "^0.32.0",
     "hopsdoc": "^0.1.7",

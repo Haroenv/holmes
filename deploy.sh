@@ -8,5 +8,6 @@ if [[ $TRAVIS_PULL_REQUEST == 'false' ]]; then
   git commit -am "Built documentation [ci skip]"
   npm run test
   git commit -am "Build coverage [ci skip]"
+  npm run coveralls
   git push https://${GH_OAUTH_TOKEN}@github.com/Haroenv/holmes HEAD:gh-pages > /dev/null 2>&1
 fi
