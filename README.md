@@ -231,6 +231,10 @@ The input that holmes looks in. There's also the last search string as `.searchS
 
 The current placeholder (DOM Node).
 
+### `.running`
+
+Whether or not this instance is running.
+
 ### `.options`
 
 Shows the options chosen chosen for this instance of holmes. You can also set options like this after initialisation.

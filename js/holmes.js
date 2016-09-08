@@ -126,6 +126,8 @@
         holmes.prototype.options.minCharacters = 0;
       }
 
+      holmes.prototype.running = true;
+
       /**
        * The input element
        * @type {NodeList}
@@ -335,6 +337,7 @@
         }
 
         // done
+        holmes.prototype.running = false;
         resolve('This instance of Holmes has been stopped.');
       });
     };
