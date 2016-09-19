@@ -204,7 +204,7 @@
        * Lowercase string holmes searces for
        * @type {string}
        */
-      holmes.prototype.searchString = undefined;
+      holmes.prototype.searchString = "";
       if (holmes.prototype.input instanceof HTMLInputElement) {
         holmes.prototype.searchString = holmes.prototype.input.value.toLowerCase();
       } else if (holmes.prototype.input.contentEditable) {
