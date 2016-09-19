@@ -27,7 +27,8 @@
   "eslintConfig": {
     "env": {
       "es6": true
-    }
+    },
+    "extends": "xo-space/browser"
   },
   "bugs": {
     "url": "https://github.com/Haroenv/holmes/issues"
@@ -36,6 +37,7 @@
   "devDependencies": {
     "coveralls": "^2.11.12",
     "eslint": "^3.4.0",
+    "eslint-config-xo-space": "^0.14.0",
     "flow-bin": "^0.32.0",
     "hopsdoc": "^0.1.7",
     "jest": "^15.1.1",

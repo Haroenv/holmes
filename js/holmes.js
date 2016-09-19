@@ -3,27 +3,27 @@
  * search for dom elements on your page
  * @module holmes
  */
-(function(root, factory) {
+(function (root, factory) {
   'use strict';
 
   /* $FlowIssue - doesn't work with umd */
-  if (typeof define === 'function' && define.amd) {
+  if (typeof define === 'function' && define.amd) { // eslint-disable-line no-undef
     // AMD. Register as an anonymous module.
-    define([], function() {
+    define([], function () { // eslint-disable-line no-undef
       /* $FlowIssue - doesn't work with umd */
-      return (root.holmes = factory(document));
+      return (root.holmes = factory(document)); // eslint-disable-line no-undef, no-return-assign
     });
-  } else if (typeof exports === 'object') {
+  } else if (typeof exports === 'object') { // eslint-disable-line no-undef
     // Node. Does not work with strict CommonJS, but
     // only CommonJS-like environments that support module.exports,
     // like Node.
-    module.exports = factory(document);
+    module.exports = factory(document); // eslint-disable-line no-undef
   } else {
     // Browser globals
     /* $FlowIssue - doesn't work with umd */
     root.holmes = factory(document);
   }
-})(this, function(document) {
+})(this, function (document) {
   // UMD Definition above, do not remove this line
 
   // To get to know more about the Universal Module Definition
@@ -76,10 +76,9 @@
    *   Callback for every input.
    */
   function holmes(options) {
-
     var empty = false;
 
-    if (typeof options != 'object') {
+    if (typeof options !== 'object') {
       throw new Error('The options need to be given inside an object like this:\nholmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/module-holmes.html');
     }
 
@@ -90,39 +89,37 @@
     holmes.prototype.options = options;
 
     // if holmes.prototype.options.find is missing, the searching won't work so we'll thrown an exceptions
-    if (typeof holmes.prototype.options.find == 'undefined') {
+    if (typeof holmes.prototype.options.find !== 'string') {
       throw new Error('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nholmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/module-holmes.html');
     }
-
 
     /**
      * Start an event listener with the specified options
      */
-    holmes.prototype.start = function() {
-
+    holmes.prototype.start = function () {
       // setting default values
-      if (typeof holmes.prototype.options.input == 'undefined') {
+      if (typeof holmes.prototype.options.input !== 'string') {
         holmes.prototype.options.input = 'input[type=search]';
       }
-      if (typeof holmes.prototype.options.placeholder == 'undefined') {
+      if (typeof holmes.prototype.options.placeholder !== 'string') {
         holmes.prototype.options.placeholder = false;
       }
-      if (typeof holmes.prototype.options.mark == 'undefined') {
+      if (typeof holmes.prototype.options.mark !== 'boolean') {
         holmes.prototype.options.mark = false;
       }
-      if (typeof holmes.prototype.options.class == 'undefined') {
+      if (typeof holmes.prototype.options.class !== 'object') {
         holmes.prototype.options.class = {};
       }
-      if (typeof holmes.prototype.options.class.visible == 'undefined') {
+      if (typeof holmes.prototype.options.class.visible !== 'string') {
         holmes.prototype.options.class.visible = false;
       }
-      if (typeof holmes.prototype.options.class.hidden == 'undefined') {
+      if (typeof holmes.prototype.options.class.hidden !== 'string') {
         holmes.prototype.options.class.hidden = 'hidden';
       }
-      if (typeof holmes.prototype.options.dynamic == 'undefined') {
+      if (typeof holmes.prototype.options.dynamic !== 'boolean') {
         holmes.prototype.options.dynamic = false;
       }
-      if (typeof holmes.prototype.options.minCharacters == 'undefined') {
+      if (typeof holmes.prototype.options.minCharacters !== 'number') {
         holmes.prototype.options.minCharacters = 0;
       }
 
@@ -157,7 +154,7 @@
          * @type {Element}
          */
         holmes.prototype.placeholder = document.createElement('div');
-        holmes.prototype.placeholder.id = "holmes-placeholder";
+        holmes.prototype.placeholder.id = 'holmes-placeholder';
         holmes.prototype.placeholder.classList.add(holmes.prototype.options.class.hidden);
         holmes.prototype.placeholder.innerHTML = holmes.prototype.options.placeholder;
         if (holmes.prototype.elements[0].parentNode) {
@@ -183,7 +180,6 @@
      * input event handler
      */
     function inputHandler() {
-
       // by default the value isn't found
       var found = false;
 
@@ -196,7 +192,7 @@
         } else if (holmes.prototype.input.contentEditable) {
           length = holmes.prototype.input.textContent.toLowerCase().length;
         } else {
-          throw new Error("The Holmes input was no <input> or contenteditable.");
+          throw new Error('The Holmes input was no <input> or contenteditable.');
         }
         if (holmes.prototype.options.minCharacters > length && length !== 0) {
           return;
@@ -208,13 +204,13 @@
        * Lowercase string holmes searces for
        * @type {string}
        */
-      holmes.prototype.searchString;
+      holmes.prototype.searchString = '';
       if (holmes.prototype.input instanceof HTMLInputElement) {
         holmes.prototype.searchString = holmes.prototype.input.value.toLowerCase();
       } else if (holmes.prototype.input.contentEditable) {
         holmes.prototype.searchString = holmes.prototype.input.textContent.toLowerCase();
       } else {
-        throw new Error("The Holmes input was no <input> or contenteditable.");
+        throw new Error('The Holmes input was no <input> or contenteditable.');
       }
 
       // if the dynamic option is enabled, then we should query
@@ -229,7 +225,6 @@
       var i;
       var regex = new RegExp('(' + holmes.prototype.searchString + ')(?![^<]*>)', 'gi');
       for (i = 0; i < holmes.prototype.elementsLength; i++) {
-
         // if the current element doesn't contain the search string
         // add the hidden class and remove the visbible class
         if (holmes.prototype.elements[i].textContent.toLowerCase().indexOf(holmes.prototype.searchString) === -1) {
@@ -277,7 +272,7 @@
           // the element is now found at least once
           found = true;
         }
-      };
+      }
 
       if (typeof holmes.prototype.options.onInput === 'function') {
         holmes.prototype.options.onInput(holmes.prototype.searchString);
@@ -300,9 +295,8 @@
       }
     }
 
-
     // whether to start immediately or wait on the load of DOMContent
-    if (typeof holmes.prototype.options.instant == 'undefined') {
+    if (typeof holmes.prototype.options.instant === undefined) {
       holmes.prototype.options.instant = false;
     }
 
@@ -317,28 +311,32 @@
      * @see holmes.prototype.start
      * @return {Promise} resolves when the event is removed
      */
-    holmes.prototype.stop = function() {
-      return new Promise(function(resolve, reject) {
-        holmes.prototype.input.removeEventListener('input', inputHandler);
+    holmes.prototype.stop = function () {
+      return new Promise(function (resolve, reject) {
+        try {
+          holmes.prototype.input.removeEventListener('input', inputHandler);
 
-        // remove placeholder
-        if (holmes.prototype.placeholder.parentNode) {
-          holmes.prototype.placeholder.parentNode.removeChild(holmes.prototype.placeholder);
-        } else {
-          throw new Error('The Holmes placeholder has no parent.');
-        }
-
-        // remove marks
-        if (holmes.prototype.options.mark) {
-          var i;
-          for (i = 0; i < holmes.prototype.elementsLength; i++) {
-            holmes.prototype.elements[i].innerHTML = holmes.prototype.elements[i].innerHTML.replace(/<\/?mark>/g, '');
+          // remove placeholder
+          if (holmes.prototype.placeholder.parentNode) {
+            holmes.prototype.placeholder.parentNode.removeChild(holmes.prototype.placeholder);
+          } else {
+            throw new Error('The Holmes placeholder has no parent.');
           }
-        }
 
-        // done
-        holmes.prototype.running = false;
-        resolve('This instance of Holmes has been stopped.');
+          // remove marks
+          if (holmes.prototype.options.mark) {
+            var i;
+            for (i = 0; i < holmes.prototype.elementsLength; i++) {
+              holmes.prototype.elements[i].innerHTML = holmes.prototype.elements[i].innerHTML.replace(/<\/?mark>/g, '');
+            }
+          }
+
+          // done
+          holmes.prototype.running = false;
+          resolve('This instance of Holmes has been stopped.');
+        } catch (e) {
+          reject(e);
+        }
       });
     };
 
@@ -346,22 +344,23 @@
      * empty the search string programmatically.
      * This avoids having to send a new `input` event
      */
-    holmes.prototype.clear = function() {
+    holmes.prototype.clear = function () {
       if (holmes.prototype.input instanceof HTMLInputElement) {
         holmes.prototype.input.value = '';
       } else if (holmes.prototype.input.contentEditable) {
         holmes.prototype.input.textContent = '';
       } else {
-        throw new Error("The Holmes input was no <input> or contenteditable.");
+        throw new Error('The Holmes input was no <input> or contenteditable.');
       }
       // if a visible class is given, give it to everything
+      var i;
       if (holmes.prototype.options.class.visible) {
-        for (var i = 0; i < holmes.prototype.elementsLength; i++) {
+        for (i = 0; i < holmes.prototype.elementsLength; i++) {
           holmes.prototype.elements[i].classList.remove(holmes.prototype.options.class.hidden);
           holmes.prototype.elements[i].classList.add(holmes.prototype.options.class.visible);
         }
       } else {
-        for (var i = 0; i < holmes.prototype.elementsLength; i++) {
+        for (i = 0; i < holmes.prototype.elementsLength; i++) {
           holmes.prototype.elements[i].classList.remove(holmes.prototype.options.class.hidden);
         }
       }
@@ -379,15 +378,14 @@
      * Show the amount of elements, and those hidden and visible
      * @return {object} all matching elements, the amount of hidden and the amount of visible elements
      */
-    holmes.prototype.count = function() {
+    holmes.prototype.count = function () {
       return {
         all: holmes.prototype.elementsLength,
         hidden: holmes.prototype.hidden,
         visible: holmes.prototype.elementsLength - holmes.prototype.hidden
       };
-    }
-
-  };
+    };
+  }
 
   /**
    * Callback used for changes in item en list states.
@@ -400,5 +398,4 @@
    */
 
   return holmes;
-
 });
