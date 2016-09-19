@@ -89,7 +89,7 @@
     holmes.prototype.options = options;
 
     // if holmes.prototype.options.find is missing, the searching won't work so we'll thrown an exceptions
-    if (holmes.prototype.options.find === 'undefined') {
+    if (typeof holmes.prototype.options.find !== 'string') {
       throw new Error('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nholmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/module-holmes.html');
     }
 
@@ -98,28 +98,28 @@
      */
     holmes.prototype.start = function () {
       // setting default values
-      if (typeof holmes.prototype.options.input === 'undefined') {
+      if (typeof holmes.prototype.options.input !== 'string') {
         holmes.prototype.options.input = 'input[type=search]';
       }
-      if (typeof holmes.prototype.options.placeholder === 'undefined') {
+      if (typeof holmes.prototype.options.placeholder !== 'string') {
         holmes.prototype.options.placeholder = false;
       }
-      if (typeof holmes.prototype.options.mark === 'undefined') {
+      if (typeof holmes.prototype.options.mark !== 'boolean') {
         holmes.prototype.options.mark = false;
       }
-      if (typeof holmes.prototype.options.class === 'undefined') {
+      if (typeof holmes.prototype.options.class !== 'object') {
         holmes.prototype.options.class = {};
       }
-      if (typeof holmes.prototype.options.class.visible === 'undefined') {
+      if (typeof holmes.prototype.options.class.visible !== 'string') {
         holmes.prototype.options.class.visible = false;
       }
-      if (typeof holmes.prototype.options.class.hidden === 'undefined') {
+      if (typeof holmes.prototype.options.class.hidden !== 'string') {
         holmes.prototype.options.class.hidden = 'hidden';
       }
-      if (typeof holmes.prototype.options.dynamic === 'undefined') {
+      if (typeof holmes.prototype.options.dynamic !== 'boolean') {
         holmes.prototype.options.dynamic = false;
       }
-      if (typeof holmes.prototype.options.minCharacters === 'undefined') {
+      if (typeof holmes.prototype.options.minCharacters !== 'number') {
         holmes.prototype.options.minCharacters = 0;
       }
 
@@ -296,7 +296,7 @@
     }
 
     // whether to start immediately or wait on the load of DOMContent
-    if (typeof holmes.prototype.options.instant === 'undefined') {
+    if (typeof holmes.prototype.options.instant === undefined) {
       holmes.prototype.options.instant = false;
     }
 
