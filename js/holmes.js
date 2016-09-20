@@ -233,15 +233,16 @@
       // in case this should become dynamic, query for the elements here
       var i;
       var regex = new RegExp('(' + holmes.prototype.searchString + ')(?![^<]*>)', 'gi');
-      for (i = 0; i < holmes.prototype.elementsLength; i++) {
+
+      holmes.prototype.elementsArray.forEach(function (element) {
         // if the current element doesn't contain the search string
         // add the hidden class and remove the visbible class
-        if (holmes.prototype.elements[i].textContent.toLowerCase().indexOf(holmes.prototype.searchString) === -1) {
+        if (element.textContent.toLowerCase().indexOf(holmes.prototype.searchString) === -1) {
           if (holmes.prototype.options.class.visible) {
-            holmes.prototype.elements[i].classList.remove(holmes.prototype.options.class.visible);
+            element.classList.remove(holmes.prototype.options.class.visible);
           }
-          if (!holmes.prototype.elements[i].classList.contains(holmes.prototype.options.class.hidden)) {
-            holmes.prototype.elements[i].classList.add(holmes.prototype.options.class.hidden);
+          if (!element.classList.contains(holmes.prototype.options.class.hidden)) {
+            element.classList.add(holmes.prototype.options.class.hidden);
             holmes.prototype.hidden++;
 
             if (typeof holmes.prototype.options.onHidden === 'function') {
@@ -252,10 +253,10 @@
           // remove the hidden class and add the visible
         } else {
           if (holmes.prototype.options.class.visible) {
-            holmes.prototype.elements[i].classList.add(holmes.prototype.options.class.visible);
+            element.classList.add(holmes.prototype.options.class.visible);
           }
-          if (holmes.prototype.elements[i].classList.contains(holmes.prototype.options.class.hidden)) {
-            holmes.prototype.elements[i].classList.remove(holmes.prototype.options.class.hidden);
+          if (element.classList.contains(holmes.prototype.options.class.hidden)) {
+            element.classList.remove(holmes.prototype.options.class.hidden);
             holmes.prototype.hidden--;
 
             if (empty && typeof holmes.prototype.options.onFound === 'function') {
@@ -272,16 +273,16 @@
           // remove all <mark> tags
           // add new <mark> tags around the text
           if (holmes.prototype.options.mark) {
-            holmes.prototype.elements[i].innerHTML = holmes.prototype.elements[i].innerHTML.replace(/<\/?mark>/g, '');
+            element.innerHTML = element.innerHTML.replace(/<\/?mark>/g, '');
             if (holmes.prototype.searchString.length) {
-              holmes.prototype.elements[i].innerHTML = holmes.prototype.elements[i].innerHTML.replace(regex, '<mark>$1</mark>');
+              element.innerHTML = element.innerHTML.replace(regex, '<mark>$1</mark>');
             }
           }
 
           // the element is now found at least once
           found = true;
         }
-      }
+      });
 
       if (typeof holmes.prototype.options.onInput === 'function') {
         holmes.prototype.options.onInput(holmes.prototype.searchString);
