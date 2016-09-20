@@ -317,7 +317,7 @@
     }
 
     // whether to start immediately or wait on the load of DOMContent
-    if (typeof holmes.prototype.options.instant === undefined) {
+    if (typeof holmes.prototype.options.instant !== 'boolean') {
       holmes.prototype.options.instant = false;
     }
 
