@@ -130,16 +130,24 @@
        * @type {NodeList}
        */
       holmes.prototype.input = document.querySelector(holmes.prototype.options.input);
+
       /**
        * All of the elements that are searched
        * @type {NodeList}
        */
       holmes.prototype.elements = document.querySelectorAll(holmes.prototype.options.find);
+
       /**
        * amount of elements to search
        * @type {Number}
        */
       holmes.prototype.elementsLength = holmes.prototype.elements.length;
+
+      /**
+       * all of the elements that are searched as an array
+       * @type {Array}
+       */
+      holmes.prototype.elementsArray = Array.prototype.slice.call(holmes.prototype.elements);
 
       /**
        * The amount of elements that are hidden
@@ -177,40 +185,40 @@
     };
 
     /**
+     * The current search input in lower case
+     * @return {String} the input as a string
+     */
+    function inputString() {
+      if (holmes.prototype.input instanceof HTMLInputElement) {
+        return holmes.prototype.input.value.toLowerCase();
+      }
+      if (holmes.prototype.input.contentEditable) {
+        return holmes.prototype.input.textContent.toLowerCase();
+      }
+      throw new Error('The Holmes input was no <input> or contenteditable.');
+    }
+
+    /**
      * input event handler
      */
     function inputHandler() {
       // by default the value isn't found
       var found = false;
 
-      // if a minimum of characters is required
-      // check if that limit has been reached
-      if (holmes.prototype.options.minCharacters) {
-        var length;
-        if (holmes.prototype.input instanceof HTMLInputElement) {
-          length = holmes.prototype.input.value.toLowerCase().length;
-        } else if (holmes.prototype.input.contentEditable) {
-          length = holmes.prototype.input.textContent.toLowerCase().length;
-        } else {
-          throw new Error('The Holmes input was no <input> or contenteditable.');
-        }
-        if (holmes.prototype.options.minCharacters > length && length !== 0) {
-          return;
-        }
-      }
-
-      // search in lowercase
       /**
        * Lowercase string holmes searces for
        * @type {string}
        */
-      holmes.prototype.searchString = '';
-      if (holmes.prototype.input instanceof HTMLInputElement) {
-        holmes.prototype.searchString = holmes.prototype.input.value.toLowerCase();
-      } else if (holmes.prototype.input.contentEditable) {
-        holmes.prototype.searchString = holmes.prototype.input.textContent.toLowerCase();
-      } else {
-        throw new Error('The Holmes input was no <input> or contenteditable.');
+      holmes.prototype.searchString = inputString();
+
+      // if a minimum of characters is required
+      // check if that limit has been reached
+      if (holmes.prototype.options.minCharacters) {
+        if (holmes.prototype.searchString.length !== 0) {
+          if (holmes.prototype.options.minCharacters > holmes.prototype.searchString.length) {
+            return;
+          }
+        }
       }
 
       // if the dynamic option is enabled, then we should query
@@ -218,21 +226,23 @@
       if (holmes.prototype.options.dynamic) {
         holmes.prototype.elements = document.querySelectorAll(holmes.prototype.options.find);
         holmes.prototype.elementsLength = holmes.prototype.elements.length;
+        holmes.prototype.elementsArray = Array.prototype.slice.call(holmes.prototype.elements);
       }
 
       // loop over all the elements
       // in case this should become dynamic, query for the elements here
       var i;
       var regex = new RegExp('(' + holmes.prototype.searchString + ')(?![^<]*>)', 'gi');
-      for (i = 0; i < holmes.prototype.elementsLength; i++) {
+
+      holmes.prototype.elementsArray.forEach(function (element) {
         // if the current element doesn't contain the search string
         // add the hidden class and remove the visbible class
-        if (holmes.prototype.elements[i].textContent.toLowerCase().indexOf(holmes.prototype.searchString) === -1) {
+        if (element.textContent.toLowerCase().indexOf(holmes.prototype.searchString) === -1) {
           if (holmes.prototype.options.class.visible) {
-            holmes.prototype.elements[i].classList.remove(holmes.prototype.options.class.visible);
+            element.classList.remove(holmes.prototype.options.class.visible);
           }
-          if (!holmes.prototype.elements[i].classList.contains(holmes.prototype.options.class.hidden)) {
-            holmes.prototype.elements[i].classList.add(holmes.prototype.options.class.hidden);
+          if (!element.classList.contains(holmes.prototype.options.class.hidden)) {
+            element.classList.add(holmes.prototype.options.class.hidden);
             holmes.prototype.hidden++;
 
             if (typeof holmes.prototype.options.onHidden === 'function') {
@@ -243,10 +253,10 @@
           // remove the hidden class and add the visible
         } else {
           if (holmes.prototype.options.class.visible) {
-            holmes.prototype.elements[i].classList.add(holmes.prototype.options.class.visible);
+            element.classList.add(holmes.prototype.options.class.visible);
           }
-          if (holmes.prototype.elements[i].classList.contains(holmes.prototype.options.class.hidden)) {
-            holmes.prototype.elements[i].classList.remove(holmes.prototype.options.class.hidden);
+          if (element.classList.contains(holmes.prototype.options.class.hidden)) {
+            element.classList.remove(holmes.prototype.options.class.hidden);
             holmes.prototype.hidden--;
 
             if (empty && typeof holmes.prototype.options.onFound === 'function') {
@@ -263,16 +273,16 @@
           // remove all <mark> tags
           // add new <mark> tags around the text
           if (holmes.prototype.options.mark) {
-            holmes.prototype.elements[i].innerHTML = holmes.prototype.elements[i].innerHTML.replace(/<\/?mark>/g, '');
+            element.innerHTML = element.innerHTML.replace(/<\/?mark>/g, '');
             if (holmes.prototype.searchString.length) {
-              holmes.prototype.elements[i].innerHTML = holmes.prototype.elements[i].innerHTML.replace(regex, '<mark>$1</mark>');
+              element.innerHTML = element.innerHTML.replace(regex, '<mark>$1</mark>');
             }
           }
 
           // the element is now found at least once
           found = true;
         }
-      }
+      });
 
       if (typeof holmes.prototype.options.onInput === 'function') {
         holmes.prototype.options.onInput(holmes.prototype.searchString);
@@ -334,8 +344,8 @@
           // done
           holmes.prototype.running = false;
           resolve('This instance of Holmes has been stopped.');
-        } catch (e) {
-          reject(e);
+        } catch (err) {
+          reject(err);
         }
       });
     };
