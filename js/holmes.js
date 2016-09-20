@@ -197,6 +197,10 @@
       throw new Error('The Holmes input was no <input> or contenteditable.');
     }
 
+    /**
+     * hide an element
+     * @param  {HTMLElement} element the element to hide
+     */
     function hideElement(element) {
       if (holmes.prototype.options.class.visible) {
         element.classList.remove(holmes.prototype.options.class.visible);
@@ -216,8 +220,7 @@
 
     /**
      * show an element
-     * @param  {HTMLElement} element [description]
-     * @return {[type]}         [description]
+     * @param  {HTMLElement} element the element to show
      */
     function showElement(element) {
       if (holmes.prototype.options.class.visible) {
