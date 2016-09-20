@@ -174,10 +174,9 @@
 
       // if a visible class is given, give it to everything
       if (holmes.prototype.options.class.visible) {
-        var i;
-        for (i = 0; i < holmes.prototype.elementsLength; i++) {
-          holmes.prototype.elements[i].classList.add(holmes.prototype.options.class.visible);
-        }
+        holmes.prototype.elementsArray.forEach(function (element) {
+          element.classList.add(holmes.prototype.options.class.visible);
+        });
       }
 
       // listen for input
@@ -335,10 +334,9 @@
 
           // remove marks
           if (holmes.prototype.options.mark) {
-            var i;
-            for (i = 0; i < holmes.prototype.elementsLength; i++) {
-              holmes.prototype.elements[i].innerHTML = holmes.prototype.elements[i].innerHTML.replace(/<\/?mark>/g, '');
-            }
+            holmes.prototype.elementsArray.forEach(function (element) {
+              element.innerHTML = element.innerHTML.replace(/<\/?mark>/g, '');
+            });
           }
 
           // done
