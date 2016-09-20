@@ -177,40 +177,40 @@
     };
 
     /**
+     * The current search input in lower case
+     * @return {string} the input as a string
+     */
+    function inputString() {
+      if (holmes.prototype.input instanceof HTMLInputElement) {
+        return holmes.prototype.input.value.toLowerCase();
+      }
+      if (holmes.prototype.input.contentEditable) {
+        return holmes.prototype.input.textContent.toLowerCase();
+      }
+      throw new Error('The Holmes input was no <input> or contenteditable.');
+    }
+
+    /**
      * input event handler
      */
     function inputHandler() {
       // by default the value isn't found
       var found = false;
 
-      // if a minimum of characters is required
-      // check if that limit has been reached
-      if (holmes.prototype.options.minCharacters) {
-        var length;
-        if (holmes.prototype.input instanceof HTMLInputElement) {
-          length = holmes.prototype.input.value.toLowerCase().length;
-        } else if (holmes.prototype.input.contentEditable) {
-          length = holmes.prototype.input.textContent.toLowerCase().length;
-        } else {
-          throw new Error('The Holmes input was no <input> or contenteditable.');
-        }
-        if (holmes.prototype.options.minCharacters > length && length !== 0) {
-          return;
-        }
-      }
-
-      // search in lowercase
       /**
        * Lowercase string holmes searces for
        * @type {string}
        */
-      holmes.prototype.searchString = '';
-      if (holmes.prototype.input instanceof HTMLInputElement) {
-        holmes.prototype.searchString = holmes.prototype.input.value.toLowerCase();
-      } else if (holmes.prototype.input.contentEditable) {
-        holmes.prototype.searchString = holmes.prototype.input.textContent.toLowerCase();
-      } else {
-        throw new Error('The Holmes input was no <input> or contenteditable.');
+      holmes.prototype.searchString = inputString();
+
+      // if a minimum of characters is required
+      // check if that limit has been reached
+      if (holmes.prototype.options.minCharacters) {
+        if (holmes.prototype.searchString.length !== 0) {
+          if (holmes.prototype.options.minCharacters > holmes.prototype.searchString.length) {
+            return;
+          }
+        }
       }
 
       // if the dynamic option is enabled, then we should query
@@ -334,8 +334,8 @@
           // done
           holmes.prototype.running = false;
           resolve('This instance of Holmes has been stopped.');
-        } catch (e) {
-          reject(e);
+        } catch (err) {
+          reject(err);
         }
       });
     };
