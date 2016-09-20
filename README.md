@@ -222,7 +222,7 @@ console.log(h.hidden); // 34
 
 ### `.elements`
 
-All of the elements that holmes considers. There's also `.elementsLength`
+A `NodeList` of all of the elements that holmes considers. There's also `.elementsLength` for the amount of elements and `.elementsArray` with an array of the elements.
 
 ### `.input`
 

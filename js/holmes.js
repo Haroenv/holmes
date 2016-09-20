@@ -130,16 +130,24 @@
        * @type {NodeList}
        */
       holmes.prototype.input = document.querySelector(holmes.prototype.options.input);
+
       /**
        * All of the elements that are searched
        * @type {NodeList}
        */
       holmes.prototype.elements = document.querySelectorAll(holmes.prototype.options.find);
+
       /**
        * amount of elements to search
        * @type {Number}
        */
       holmes.prototype.elementsLength = holmes.prototype.elements.length;
+
+      /**
+       * all of the elements that are searched as an array
+       * @type {Array}
+       */
+      holmes.prototype.elementsArray = Array.prototype.slice.call(holmes.prototype.elements);
 
       /**
        * The amount of elements that are hidden
@@ -178,7 +186,7 @@
 
     /**
      * The current search input in lower case
-     * @return {string} the input as a string
+     * @return {String} the input as a string
      */
     function inputString() {
       if (holmes.prototype.input instanceof HTMLInputElement) {
@@ -218,6 +226,7 @@
       if (holmes.prototype.options.dynamic) {
         holmes.prototype.elements = document.querySelectorAll(holmes.prototype.options.find);
         holmes.prototype.elementsLength = holmes.prototype.elements.length;
+        holmes.prototype.elementsArray = Array.prototype.slice.call(holmes.prototype.elements);
       }
 
       // loop over all the elements
