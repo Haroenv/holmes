@@ -174,10 +174,9 @@
 
       // if a visible class is given, give it to everything
       if (holmes.prototype.options.class.visible) {
-        var i;
-        for (i = 0; i < holmes.prototype.elementsLength; i++) {
-          holmes.prototype.elements[i].classList.add(holmes.prototype.options.class.visible);
-        }
+        holmes.prototype.elementsArray.forEach(function (element) {
+          element.classList.add(holmes.prototype.options.class.visible);
+        });
       }
 
       // listen for input
@@ -196,6 +195,55 @@
         return holmes.prototype.input.textContent.toLowerCase();
       }
       throw new Error('The Holmes input was no <input> or contenteditable.');
+    }
+
+    /**
+     * hide an element
+     * @param  {HTMLElement} element the element to hide
+     */
+    function hideElement(element) {
+      if (holmes.prototype.options.class.visible) {
+        element.classList.remove(holmes.prototype.options.class.visible);
+      }
+      if (!element.classList.contains(holmes.prototype.options.class.hidden)) {
+        element.classList.add(holmes.prototype.options.class.hidden);
+        holmes.prototype.hidden++;
+
+        if (typeof holmes.prototype.options.onHidden === 'function') {
+          holmes.prototype.options.onHidden(element);
+        }
+      }
+      if (holmes.prototype.options.mark) {
+        element.innerHTML = element.innerHTML.replace(/<\/?mark>/g, '');
+      }
+    }
+
+    /**
+     * show an element
+     * @param  {HTMLElement} element the element to show
+     */
+    function showElement(element) {
+      if (holmes.prototype.options.class.visible) {
+        element.classList.add(holmes.prototype.options.class.visible);
+      }
+      if (element.classList.contains(holmes.prototype.options.class.hidden)) {
+        element.classList.remove(holmes.prototype.options.class.hidden);
+        holmes.prototype.hidden--;
+
+        if (typeof holmes.prototype.options.onVisible === 'function') {
+          holmes.prototype.options.onVisible(element);
+        }
+      }
+
+      // if we need to mark it:
+      // remove all <mark> tags
+      // add new <mark> tags around the text
+      if (holmes.prototype.options.mark) {
+        element.innerHTML = element.innerHTML.replace(/<\/?mark>/g, '');
+        if (holmes.prototype.searchString.length) {
+          element.innerHTML = element.innerHTML.replace(holmes.prototype.regex, '<mark>$1</mark>');
+        }
+      }
     }
 
     /**
@@ -231,54 +279,20 @@
 
       // loop over all the elements
       // in case this should become dynamic, query for the elements here
-      var i;
-      var regex = new RegExp('(' + holmes.prototype.searchString + ')(?![^<]*>)', 'gi');
+      holmes.prototype.regex = new RegExp('(' + holmes.prototype.searchString + ')(?![^<]*>)', 'gi');
 
       holmes.prototype.elementsArray.forEach(function (element) {
         // if the current element doesn't contain the search string
         // add the hidden class and remove the visbible class
         if (element.textContent.toLowerCase().indexOf(holmes.prototype.searchString) === -1) {
-          if (holmes.prototype.options.class.visible) {
-            element.classList.remove(holmes.prototype.options.class.visible);
-          }
-          if (!element.classList.contains(holmes.prototype.options.class.hidden)) {
-            element.classList.add(holmes.prototype.options.class.hidden);
-            holmes.prototype.hidden++;
-
-            if (typeof holmes.prototype.options.onHidden === 'function') {
-              holmes.prototype.options.onHidden(holmes.prototype.elements[i]);
-            }
-          }
-          // else
-          // remove the hidden class and add the visible
+          hideElement(element);
         } else {
-          if (holmes.prototype.options.class.visible) {
-            element.classList.add(holmes.prototype.options.class.visible);
+          showElement(element);
+
+          if (empty && typeof holmes.prototype.options.onFound === 'function') {
+            holmes.prototype.options.onFound(holmes.prototype.placeholder);
           }
-          if (element.classList.contains(holmes.prototype.options.class.hidden)) {
-            element.classList.remove(holmes.prototype.options.class.hidden);
-            holmes.prototype.hidden--;
-
-            if (empty && typeof holmes.prototype.options.onFound === 'function') {
-              holmes.prototype.options.onFound(holmes.prototype.placeholder);
-            }
-            if (typeof holmes.prototype.options.onVisible === 'function') {
-              holmes.prototype.options.onVisible(holmes.prototype.elements[i]);
-            }
-
-            empty = false;
-          }
-
-          // if we need to mark it:
-          // remove all <mark> tags
-          // add new <mark> tags around the text
-          if (holmes.prototype.options.mark) {
-            element.innerHTML = element.innerHTML.replace(/<\/?mark>/g, '');
-            if (holmes.prototype.searchString.length) {
-              element.innerHTML = element.innerHTML.replace(regex, '<mark>$1</mark>');
-            }
-          }
-
+          empty = false;
           // the element is now found at least once
           found = true;
         }
@@ -306,7 +320,7 @@
     }
 
     // whether to start immediately or wait on the load of DOMContent
-    if (typeof holmes.prototype.options.instant === undefined) {
+    if (typeof holmes.prototype.options.instant !== 'boolean') {
       holmes.prototype.options.instant = false;
     }
 
@@ -335,10 +349,9 @@
 
           // remove marks
           if (holmes.prototype.options.mark) {
-            var i;
-            for (i = 0; i < holmes.prototype.elementsLength; i++) {
-              holmes.prototype.elements[i].innerHTML = holmes.prototype.elements[i].innerHTML.replace(/<\/?mark>/g, '');
-            }
+            holmes.prototype.elementsArray.forEach(function (element) {
+              element.innerHTML = element.innerHTML.replace(/<\/?mark>/g, '');
+            });
           }
 
           // done
@@ -363,16 +376,15 @@
         throw new Error('The Holmes input was no <input> or contenteditable.');
       }
       // if a visible class is given, give it to everything
-      var i;
       if (holmes.prototype.options.class.visible) {
-        for (i = 0; i < holmes.prototype.elementsLength; i++) {
-          holmes.prototype.elements[i].classList.remove(holmes.prototype.options.class.hidden);
-          holmes.prototype.elements[i].classList.add(holmes.prototype.options.class.visible);
-        }
+        holmes.prototype.elementsArray.forEach(function (element) {
+          element.classList.remove(holmes.prototype.options.class.hidden);
+          element.classList.add(holmes.prototype.options.class.visible);
+        });
       } else {
-        for (i = 0; i < holmes.prototype.elementsLength; i++) {
-          holmes.prototype.elements[i].classList.remove(holmes.prototype.options.class.hidden);
-        }
+        holmes.prototype.elementsArray.forEach(function (element) {
+          element.classList.remove(holmes.prototype.options.class.hidden);
+        });
       }
       if (holmes.prototype.options.placeholder) {
         holmes.prototype.placeholder.classList.add(holmes.prototype.options.class.hidden);
