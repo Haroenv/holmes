@@ -116,6 +116,10 @@ To start showing the result in a `<mark>` tag inside the `.find`, you should ena
 
 **examples**: `true`, `false`
 
+### `aria`
+**default**: `true`
+
+Adds `hidden="true"` to hidden elements. [Interesting link](https://www.paciellogroup.com/blog/2012/05/html5-accessibility-chops-hidden-and-aria-hidden/) explaining its use.
 
 ### `onHidden`
 
