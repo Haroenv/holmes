@@ -23,7 +23,7 @@
     /* $FlowIssue - doesn't work with umd */
     root.holmes = factory(document);
   }
-})(this, function (document) {
+})(this, (function (document) {
   // UMD Definition above, do not remove this line
 
   // To get to know more about the Universal Module Definition
@@ -86,42 +86,45 @@
      * Options
      * @type {Object}
      */
-    holmes.prototype.options = options;
+    holmes.prototype.options = {
+      input: 'input[type=search]',
+      placeholder: '',
+      placeholderNode: null,
+      mark: false,
+      class: {
+        visible: '',
+        hidden: 'hidden'
+      },
+      dynamic: false,
+      minCharacters: 0,
+      find: ''
+    };
+
 
     // if holmes.prototype.options.find is missing, the searching won't work so we'll thrown an exceptions
     if (typeof holmes.prototype.options.find !== 'string') {
       throw new Error('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nholmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/module-holmes.html');
     }
 
+    holmes.prototype.mergeObj = function (Obj1, Obj2) {
+      var k;
+      for(k in Obj2){
+        if(Obj1.hasOwnProperty(k) && (typeof Obj2[k] === typeof Obj1[k])){
+          if(typeof Obj2[k] === 'object'){
+            holmes.prototype.mergeObj(Obj1[k], Obj2[k]);
+          }else{
+            Obj1[k] = Obj2[k];
+          }
+        }
+      }
+    };
+
     /**
      * Start an event listener with the specified options
      */
-    holmes.prototype.start = function () {
+    holmes.prototype.start = function (options) {
       // setting default values
-      if (typeof holmes.prototype.options.input !== 'string') {
-        holmes.prototype.options.input = 'input[type=search]';
-      }
-      if (typeof holmes.prototype.options.placeholder !== 'string') {
-        holmes.prototype.options.placeholder = false;
-      }
-      if (typeof holmes.prototype.options.mark !== 'boolean') {
-        holmes.prototype.options.mark = false;
-      }
-      if (typeof holmes.prototype.options.class !== 'object') {
-        holmes.prototype.options.class = {};
-      }
-      if (typeof holmes.prototype.options.class.visible !== 'string') {
-        holmes.prototype.options.class.visible = false;
-      }
-      if (typeof holmes.prototype.options.class.hidden !== 'string') {
-        holmes.prototype.options.class.hidden = 'hidden';
-      }
-      if (typeof holmes.prototype.options.dynamic !== 'boolean') {
-        holmes.prototype.options.dynamic = false;
-      }
-      if (typeof holmes.prototype.options.minCharacters !== 'number') {
-        holmes.prototype.options.minCharacters = 0;
-      }
+      holmes.prototype.mergeObj(holmes.prototype.options, options);
 
       holmes.prototype.running = true;
 
@@ -161,12 +164,12 @@
          * Placeholder element
          * @type {Element}
          */
-        holmes.prototype.placeholder = document.createElement('div');
-        holmes.prototype.placeholder.id = 'holmes-placeholder';
-        holmes.prototype.placeholder.classList.add(holmes.prototype.options.class.hidden);
-        holmes.prototype.placeholder.innerHTML = holmes.prototype.options.placeholder;
+        holmes.prototype.placeholderNode = document.createElement('div');
+        holmes.prototype.placeholderNode.id = 'holmes-placeholder';
+        holmes.prototype.placeholderNode.classList.add(holmes.prototype.options.class.hidden);
+        holmes.prototype.placeholderNode.innerHTML = holmes.prototype.options.placeholder;
         if (holmes.prototype.elements[0].parentNode) {
-          holmes.prototype.elements[0].parentNode.appendChild(holmes.prototype.placeholder);
+          holmes.prototype.elements[0].parentNode.appendChild(holmes.prototype.placeholderNode);
         } else {
           throw new Error('The Holmes placeholder could\'t be put; the elements had no parent.');
         }
@@ -174,9 +177,9 @@
 
       // if a visible class is given, give it to everything
       if (holmes.prototype.options.class.visible) {
-        holmes.prototype.elementsArray.forEach(function (element) {
+        holmes.prototype.elementsArray.forEach((function (element) {
           element.classList.add(holmes.prototype.options.class.visible);
-        });
+        }));
       }
 
       // listen for input
@@ -279,9 +282,15 @@
 
       // loop over all the elements
       // in case this should become dynamic, query for the elements here
-      holmes.prototype.regex = new RegExp('(' + holmes.prototype.searchString + ')(?![^<]*>)', 'gi');
+      if (holmes.prototype.options.mark) {
+        holmes.prototype.regex = new RegExp('(' + holmes.prototype.searchString + ')(?![^<]*>)', 'gi');
+      }
 
-      holmes.prototype.elementsArray.forEach(function (element) {
+      holmes.prototype.elementsArray.forEach((function (element) {
+        // still typing
+        if(holmes.prototype.searchString.indexOf(holmes.prototype.prevValue) !== -1){
+          if (element.classList.contains(holmes.prototype.options.class.hidden)) return;
+        }
         // if the current element doesn't contain the search string
         // add the hidden class and remove the visbible class
         if (element.textContent.toLowerCase().indexOf(holmes.prototype.searchString) === -1) {
@@ -290,13 +299,13 @@
           showElement(element);
 
           if (empty && typeof holmes.prototype.options.onFound === 'function') {
-            holmes.prototype.options.onFound(holmes.prototype.placeholder);
+            holmes.prototype.options.onFound(holmes.prototype.placeholderNode);
           }
           empty = false;
           // the element is now found at least once
           found = true;
         }
-      });
+      }));
 
       if (typeof holmes.prototype.options.onInput === 'function') {
         holmes.prototype.options.onInput(holmes.prototype.searchString);
@@ -306,17 +315,19 @@
       if (!found && !empty) {
         empty = true;
 
-        if (holmes.prototype.options.placeholder) {
-          holmes.prototype.placeholder.classList.remove(holmes.prototype.options.class.hidden);
+        if (holmes.prototype.options.placeholderNode) {
+          holmes.prototype.placeholderNode.classList.remove(holmes.prototype.options.class.hidden);
         }
         if (typeof holmes.prototype.options.onEmpty === 'function') {
-          holmes.prototype.options.onEmpty(holmes.prototype.placeholder);
+          holmes.prototype.options.onEmpty(holmes.prototype.placeholderNode);
         }
       } else if (!empty) {
-        if (holmes.prototype.options.placeholder) {
-          holmes.prototype.placeholder.classList.add(holmes.prototype.options.class.hidden);
+        if (holmes.prototype.options.placeholderNode) {
+          holmes.prototype.placeholderNode.classList.add(holmes.prototype.options.class.hidden);
         }
       }
+
+      holmes.prototype.prevValue = holmes.prototype.searchString;
     }
 
     // whether to start immediately or wait on the load of DOMContent
@@ -325,9 +336,11 @@
     }
 
     if (holmes.prototype.options.instant) {
-      holmes.prototype.start();
+      holmes.prototype.start(options);
     } else {
-      window.addEventListener('DOMContentLoaded', holmes.prototype.start);
+      window.addEventListener('DOMContentLoaded', function(){
+        holmes.prototype.start(options);
+      });
     }
 
     /**
@@ -340,11 +353,11 @@
         try {
           holmes.prototype.input.removeEventListener('input', inputHandler);
 
-          // remove placeholder
-          if (holmes.prototype.placeholder.parentNode) {
-            holmes.prototype.placeholder.parentNode.removeChild(holmes.prototype.placeholder);
+          // remove placeholderNode
+          if (holmes.prototype.placeholderNode.parentNode) {
+            holmes.prototype.placeholderNode.parentNode.removeChild(holmes.prototype.placeholderNode);
           } else {
-            throw new Error('The Holmes placeholder has no parent.');
+            throw new Error('The Holmes placeholderNode has no parent.');
           }
 
           // remove marks
@@ -386,10 +399,10 @@
           element.classList.remove(holmes.prototype.options.class.hidden);
         });
       }
-      if (holmes.prototype.options.placeholder) {
-        holmes.prototype.placeholder.classList.add(holmes.prototype.options.class.hidden);
+      if (holmes.prototype.options.placeholderNode) {
+        holmes.prototype.placeholderNode.classList.add(holmes.prototype.options.class.hidden);
         if (holmes.prototype.options.class.visible) {
-          holmes.prototype.placeholder.classList.remove(holmes.prototype.options.class.visible);
+          holmes.prototype.placeholderNode.classList.remove(holmes.prototype.options.class.visible);
         }
       }
 
@@ -420,4 +433,4 @@
    */
 
   return holmes;
-});
+}));
