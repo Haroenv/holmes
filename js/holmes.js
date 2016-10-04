@@ -213,11 +213,11 @@
     inputString.prototype.set = function (value) {
       if (holmes.prototype.input instanceof HTMLInputElement) {
         holmes.prototype.input.value = value;
-      }
-      if (holmes.prototype.input.contentEditable) {
+      } else if (holmes.prototype.input.contentEditable) {
         holmes.prototype.input.textContent = value;
+      } else {
+        throw new Error('The Holmes input was no <input> or contenteditable.');
       }
-      throw new Error('The Holmes input was no <input> or contenteditable.');
     };
 
     /**
