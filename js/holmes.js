@@ -112,8 +112,8 @@
      */
     holmes.prototype.mergeObj = function (Obj1, Obj2) {
       Object.keys(Obj1).forEach(function (k) {
-        if (Obj1.hasOwnProperty(k) && (typeof Obj2[k] === typeof Obj1[k])){
-          if (typeof Obj2[k] === 'object'){
+        if (typeof Obj2[k] === typeof Obj1[k]) {
+          if (typeof Obj2[k] === 'object') {
             holmes.prototype.mergeObj(Obj1[k], Obj2[k]);
           } else {
             Obj1[k] = Obj2[k];
