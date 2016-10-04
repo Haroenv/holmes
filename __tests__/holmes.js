@@ -99,9 +99,9 @@ describe('options', () => {
     Holmes({
       find,
       instant: true,
-        class: {
-          visible: 'visible'
-        }
+      class: {
+        visible: 'visible'
+      }
     });
 
     const all = document.querySelectorAll(find);
@@ -110,9 +110,49 @@ describe('options', () => {
     expect(all).toEqual(visible);
   });
 
-  // test('.minCharacters', () => {
-  //   setStub();
-  // });
+  describe('.minCharacters', () => {
+    test('less than minimum amount doesn\'t make anything happen', () => {
+      setStub();
+      const find = '.result';
+      Holmes({
+        find,
+        instant: true,
+        minCharacters: 5,
+        class: {
+          visible: 'visible'
+        }
+      });
+      //some short input that's surely not in the data
+      input('qsdf');
+
+      const all = document.querySelectorAll(find);
+      const visible = document.querySelectorAll(find + '.visible');
+
+      expect(all).toEqual(visible);
+    });
+
+    test('over minimum does make things happen', () => {
+      setStub();
+      const find = '.result';
+      Holmes({
+        find,
+        instant: true,
+        minCharacters: 5,
+        class: {
+          visible: 'visible'
+        }
+      });
+
+      //some short input that's surely not in the data
+      input('qsdfg');
+
+      const all = document.querySelectorAll(find);
+      const hidden = document.querySelectorAll(find + '.hidden');
+
+      expect(all).toEqual(hidden);
+    });
+  });
+
   // test('.mark', () => {
   //   setStub();
   // });
