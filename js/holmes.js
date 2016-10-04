@@ -207,6 +207,20 @@
     }
 
     /**
+     * Sets an input string
+     * @param {string} value the string to set
+     */
+    inputString.prototype.set = function (value) {
+      if (holmes.prototype.input instanceof HTMLInputElement) {
+        return holmes.prototype.input.value = value;
+      }
+      if (holmes.prototype.input.contentEditable) {
+        return holmes.prototype.input.textContent = value;
+      }
+      throw new Error('The Holmes input was no <input> or contenteditable.');
+    }
+
+    /**
      * hide an element
      * @param  {HTMLElement} element the element to hide
      */
@@ -381,13 +395,7 @@
      * This avoids having to send a new `input` event
      */
     holmes.prototype.clear = function () {
-      if (holmes.prototype.input instanceof HTMLInputElement) {
-        holmes.prototype.input.value = '';
-      } else if (holmes.prototype.input.contentEditable) {
-        holmes.prototype.input.textContent = '';
-      } else {
-        throw new Error('The Holmes input was no <input> or contenteditable.');
-      }
+      inputString.prototype.set('');
       // if a visible class is given, give it to everything
       if (holmes.prototype.options.class.visible) {
         holmes.prototype.elementsArray.forEach(function (element) {
