@@ -301,3 +301,16 @@ describe('Usage with instance', () => {
 
   });
 });
+
+
+describe('meta tests', () => {
+  test('_mergeObj doesn\'t work when one of both isn\'t an object.', () => {
+    const _h = new Holmes({find: '.result'});
+    let first = {};
+    let second = 'string';
+    function merge() {
+      _h._mergeObj(first,second);
+    }
+    expect(merge).toThrowError('One of both arguments isn\'t an object.');
+  });
+});
