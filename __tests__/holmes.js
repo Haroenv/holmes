@@ -13,11 +13,15 @@ function setStub() {
 
 /**
  * Enter a string into this Holmes input
- * @param  {string} text text to input
+ * @param  {string}      text text to input
+ * @param  {HTMLElement} element to input in (optional)
  * @return {Promise}     resolves when the input has been doen
  */
-function input(text) {
-  const holmesInput = document.getElementById('search');
+function input(text, input) {
+  let holmesInput = document.getElementById('search');
+  if (input) {
+    holmesInput = input;
+  }
   return new Promise((resolve, reject) => {
     if (holmesInput instanceof HTMLInputElement) {
       holmesInput.value = text;
@@ -60,12 +64,13 @@ describe('Instance-less usage', () => {
   // test('throws when .input you can\'t type in is given', () => {
   //   setStub();
   //   function init() {
+  //     const qs = '.result';
   //     Holmes({
   //       find: '.result',
-  //       input: '.result'
+  //       input: qs
   //     });
   //
-  //     input('bla');
+  //     input('bla', document.querySelector(qs));
   //   }
   //
   //   expect(init).toThrowError('The Holmes input was no <input> or contenteditable.');
