@@ -212,13 +212,13 @@
      */
     inputString.prototype.set = function (value) {
       if (holmes.prototype.input instanceof HTMLInputElement) {
-        return holmes.prototype.input.value = value;
+        holmes.prototype.input.value = value;
       }
       if (holmes.prototype.input.contentEditable) {
-        return holmes.prototype.input.textContent = value;
+        holmes.prototype.input.textContent = value;
       }
       throw new Error('The Holmes input was no <input> or contenteditable.');
-    }
+    };
 
     /**
      * hide an element
