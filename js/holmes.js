@@ -132,8 +132,7 @@
     /**
      * Start an event listener with the specified options
      */
-    holmes.prototype.start = function() {
-
+    holmes.prototype.start = function () {
       holmes.prototype.running = true;
 
       /**
