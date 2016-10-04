@@ -153,8 +153,10 @@ describe('options', () => {
     });
   });
 
-  // test('.mark', () => {
-  //   setStub();
+  // describe('.mark', () => {
+  //   test('', () => {
+  //     setStub();
+  //   });
   // });
 
   describe('callbacks', () => {
@@ -187,6 +189,17 @@ describe('options', () => {
       const placeholder = document.getElementById('holmes-placeholder');
 
       expect(placeholder.innerHTML).toEqual('test');
+    });
+
+    test('can\'t be added when there\'s no parent of the elements', () => {
+      function start() {
+        Holmes({
+          find: 'html',
+          instant: true,
+          placeholder: 'impossible'
+        });
+      }
+      expect(start).toThrowError('The Holmes placeholder could\'t be put; the elements had no parent.');
     });
 
     test('initially hidden', () => {

@@ -175,7 +175,7 @@
         holmes.prototype.placeholderNode.id = 'holmes-placeholder';
         holmes.prototype.placeholderNode.classList.add(holmes.prototype.options.class.hidden);
         holmes.prototype.placeholderNode.innerHTML = holmes.prototype.options.placeholder;
-        if (holmes.prototype.elements[0].parentNode) {
+        if (holmes.prototype.elements[0].parentNode instanceof Element) {
           holmes.prototype.elements[0].parentNode.appendChild(holmes.prototype.placeholderNode);
         } else {
           throw new Error('The Holmes placeholder could\'t be put; the elements had no parent.');
@@ -294,12 +294,6 @@
       }
 
       holmes.prototype.elementsArray.forEach((function (element) {
-        // still typing
-        if (holmes.prototype.searchString.indexOf(holmes.prototype.prevValue) !== -1) {
-          if (element.classList.contains(holmes.prototype.options.class.hidden)) {
-            return;
-          }
-        }
         // if the current element doesn't contain the search string
         // add the hidden class and remove the visbible class
         if (element.textContent.toLowerCase().indexOf(holmes.prototype.searchString) === -1) {
@@ -335,8 +329,6 @@
           holmes.prototype.placeholderNode.classList.add(holmes.prototype.options.class.hidden);
         }
       }
-
-      holmes.prototype.prevValue = holmes.prototype.searchString;
     }
 
     // whether to start immediately or wait on the load of DOMContent
