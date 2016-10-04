@@ -291,7 +291,7 @@
 
       holmes.prototype.elementsArray.forEach((function (element) {
         // still typing
-        if (holmes.prototype.searchString.indexOf(holmes.prototype.prevValue) !== -1){
+        if (holmes.prototype.searchString.indexOf(holmes.prototype.prevValue) !== -1) {
           if (element.classList.contains(holmes.prototype.options.class.hidden)) {
             return;
           }
