@@ -100,23 +100,26 @@
       find: ''
     };
 
-
     // if holmes.prototype.options.find is missing, the searching won't work so we'll thrown an exceptions
     if (typeof holmes.prototype.options.find !== 'string') {
       throw new Error('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nholmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/module-holmes.html');
     }
 
+    /**
+     * Merges two objects
+     * @param  {Object} Obj1 Object to merge
+     * @param  {Object} Obj2 Object to merge
+     */
     holmes.prototype.mergeObj = function (Obj1, Obj2) {
-      var k;
-      for(k in Obj2){
-        if(Obj1.hasOwnProperty(k) && (typeof Obj2[k] === typeof Obj1[k])){
-          if(typeof Obj2[k] === 'object'){
+      Object.keys(Obj1).forEach(function (k) {
+        if (Obj1.hasOwnProperty(k) && (typeof Obj2[k] === typeof Obj1[k])){
+          if (typeof Obj2[k] === 'object'){
             holmes.prototype.mergeObj(Obj1[k], Obj2[k]);
-          }else{
+          } else {
             Obj1[k] = Obj2[k];
           }
         }
-      }
+      });
     };
 
     /**
@@ -288,8 +291,10 @@
 
       holmes.prototype.elementsArray.forEach((function (element) {
         // still typing
-        if(holmes.prototype.searchString.indexOf(holmes.prototype.prevValue) !== -1){
-          if (element.classList.contains(holmes.prototype.options.class.hidden)) return;
+        if (holmes.prototype.searchString.indexOf(holmes.prototype.prevValue) !== -1){
+          if (element.classList.contains(holmes.prototype.options.class.hidden)) {
+            return;
+          }
         }
         // if the current element doesn't contain the search string
         // add the hidden class and remove the visbible class
@@ -338,7 +343,7 @@
     if (holmes.prototype.options.instant) {
       holmes.prototype.start(options);
     } else {
-      window.addEventListener('DOMContentLoaded', function(){
+      window.addEventListener('DOMContentLoaded', function () {
         holmes.prototype.start(options);
       });
     }
