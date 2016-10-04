@@ -96,6 +96,7 @@
         hidden: 'hidden'
       },
       dynamic: false,
+      instant: false,
       minCharacters: 0,
       find: ''
     };
@@ -111,6 +112,9 @@
      * @param  {Object} Obj2 Object to merge
      */
     holmes.prototype.mergeObj = function (Obj1, Obj2) {
+      if (!(Obj1 instanceof Object) || !(Obj2 instanceof Object)) {
+        throw new Error('One of both arguments isn\'t an object.');
+      }
       Object.keys(Obj1).forEach(function (k) {
         if (typeof Obj2[k] === typeof Obj1[k]) {
           if (typeof Obj2[k] === 'object') {
