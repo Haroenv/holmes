@@ -94,7 +94,6 @@
     holmes.prototype.options = {
       input: 'input[type=search]',
       placeholder: '',
-      placeholderNode: null,
       mark: false,
       class: {
         visible: '',
