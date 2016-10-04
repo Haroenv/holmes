@@ -82,6 +82,11 @@
       throw new Error('The options need to be given inside an object like this:\nholmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/module-holmes.html');
     }
 
+    // if holmes.prototype.options.find is missing, the searching won't work so we'll thrown an exceptions
+    if (typeof options.find !== 'string') {
+      throw new Error('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nholmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/module-holmes.html');
+    }
+
     /**
      * Options
      * @type {Object}
@@ -101,24 +106,19 @@
       find: ''
     };
 
-    // if holmes.prototype.options.find is missing, the searching won't work so we'll thrown an exceptions
-    if (typeof holmes.prototype.options.find !== 'string') {
-      throw new Error('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nholmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/module-holmes.html');
-    }
-
     /**
      * Merges two objects
      * @param  {Object} Obj1 Object to merge
      * @param  {Object} Obj2 Object to merge
      */
-    holmes.prototype.mergeObj = function (Obj1, Obj2) {
+    holmes.prototype._mergeObj = function (Obj1, Obj2) {
       if (!(Obj1 instanceof Object) || !(Obj2 instanceof Object)) {
         throw new Error('One of both arguments isn\'t an object.');
       }
       Object.keys(Obj1).forEach(function (k) {
         if (typeof Obj2[k] === typeof Obj1[k]) {
-          if (typeof Obj2[k] === 'object') {
-            holmes.prototype.mergeObj(Obj1[k], Obj2[k]);
+          if (Obj2[k] instanceof Object) {
+            holmes.prototype._mergeObj(Obj1[k], Obj2[k]);
           } else {
             Obj1[k] = Obj2[k];
           }
@@ -126,12 +126,13 @@
       });
     };
 
+    // set default options
+    holmes.prototype._mergeObj(holmes.prototype.options, options);
+
     /**
      * Start an event listener with the specified options
      */
-    holmes.prototype.start = function (options) {
-      // setting default values
-      holmes.prototype.mergeObj(holmes.prototype.options, options);
+    holmes.prototype.start = function() {
 
       holmes.prototype.running = true;
 
@@ -165,8 +166,8 @@
        */
       holmes.prototype.hidden = 0;
 
-      // create a container for a placeholder
-      if (holmes.prototype.options.placeholder) {
+      // create a container for a placeholder if needed
+      if (holmes.prototype.options.placeholder !== '') {
         /**
          * Placeholder element
          * @type {Element}
@@ -324,14 +325,14 @@
       if (!found && !empty) {
         empty = true;
 
-        if (holmes.prototype.options.placeholderNode) {
+        if (holmes.prototype.options.placeholder !== '') {
           holmes.prototype.placeholderNode.classList.remove(holmes.prototype.options.class.hidden);
         }
         if (typeof holmes.prototype.options.onEmpty === 'function') {
           holmes.prototype.options.onEmpty(holmes.prototype.placeholderNode);
         }
       } else if (!empty) {
-        if (holmes.prototype.options.placeholderNode) {
+        if (holmes.prototype.options.placeholder !== '') {
           holmes.prototype.placeholderNode.classList.add(holmes.prototype.options.class.hidden);
         }
       }
@@ -408,7 +409,7 @@
           element.classList.remove(holmes.prototype.options.class.hidden);
         });
       }
-      if (holmes.prototype.options.placeholderNode) {
+      if (holmes.prototype.options.placeholder !== '') {
         holmes.prototype.placeholderNode.classList.add(holmes.prototype.options.class.hidden);
         if (holmes.prototype.options.class.visible) {
           holmes.prototype.placeholderNode.classList.remove(holmes.prototype.options.class.visible);
