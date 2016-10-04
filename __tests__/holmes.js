@@ -64,10 +64,10 @@ describe('Instance-less usage', () => {
   //       find: '.result',
   //       input: '.result'
   //     });
-
+  //
   //     input('bla');
   //   }
-
+  //
   //   expect(init).toThrowError('The Holmes input was no <input> or contenteditable.');
   // });
 
@@ -80,13 +80,13 @@ describe('Instance-less usage', () => {
   //       visible: 'visible'
   //     }
   //   });
-
+  //
   //   input('special');
-
+  //
   //   const special = document.getElementById('contains-special');
   //   const notSpecial = document.querySelectorAll('.result:not(#contains-special)');
   //   const notSpecialHidden = document.querySelectorAll('.result:not(#contains-special)' + '.hidden');
-
+  //
   //   expect(special.classList.contains('visible')).toEqual(true);
   //   expect(notSpecial).toEqual(notSpecialHidden);
   // });
