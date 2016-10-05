@@ -169,14 +169,29 @@ describe('options', () => {
     //     mark: true
     //   });
     //
-    //   return input('special').then(()=>{
+    //   return input('special').then(() => {
     //     const specialContent = document.getElementById('contains-special').innerHTML;
     //     expect(specialContent).toContain('<mark>special</mark>');
     //   });
-    //
     // });
     // test('removes all of the <mark>s when there are no matches', () => {
     //   setStub();
+    //   const find = '.result';
+    //   holmes({
+    //     find,
+    //     mark: true
+    //   });
+    //
+    //   return input('special')
+    //   .then(() => {
+    //     // input empty, this will remove all <mark>s
+    //     input('');
+    //   })
+    //   .then(() => {
+    //     const allContent = document.querySelector('ul').innerHTML;
+    //     expect(allContent).not.toContain('<mark>');
+    //     expect(allContent).not.toContain('</mark>');
+    //   });
     // });
   });
 
