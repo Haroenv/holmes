@@ -102,7 +102,12 @@
       dynamic: false,
       instant: false,
       minCharacters: 0,
-      find: ''
+      find: '',
+      onHidden: undefined,
+      onVisible: undefined,
+      onEmpty: undefined,
+      onFound: undefined,
+      onInput: undefined
     };
 
     /**
@@ -115,7 +120,7 @@
         throw new Error('One of both arguments isn\'t an object.');
       }
       Object.keys(Obj1).forEach(function (k) {
-        if (typeof Obj2[k] === typeof Obj1[k]) {
+        if (typeof Obj2[k] === typeof Obj1[k] || Obj1[k] === undefined) {
           if (Obj2[k] instanceof Object) {
             holmes.prototype._mergeObj(Obj1[k], Obj2[k]);
           } else {

@@ -181,29 +181,70 @@ describe('options', () => {
   });
 
   describe('callbacks', () => {
-    test('inInput', () => {
-      setStub();
-      const callback = jest.fn();
-      const _h = new Holmes({
-        find: '.result',
-        inInput: callback
-      });
-      return input('some text that hides a lot').then(() => {
-        console.log(_h.options);
-        expect(callback).toBeCalled();
-      });
-    });
+    // test('onInput', () => {
+    //   setStub();
+    //   const callback = jest.fn();
+    //   holmes({
+    //     find: '.result',
+    //     onInput: callback
+    //   });
+    //   return input('some text that hides a lot').then(() => {
+    //     expect(callback).toBeCalled();
+    //   });
+    // });
     // test('onVisible', () => {
     //   setStub();
+    //   const callback = jest.fn();
+    //   holmes({
+    //     find: '.result',
+    //     onVisible: callback
+    //   });
+    //   return input('some text that hides a lot')
+    //   .then(() => {
+    //     // clears the input and makes everything visible
+    //     input('');
+    //   })
+    //   .then(() => {
+    //     expect(callback).toBeCalled();
+    //   });
+    // });
+    // test('onHidden', () => {
+    //   setStub();
+    //   const callback = jest.fn();
+    //   holmes({
+    //     find: '.result',
+    //     onHidden: callback
+    //   });
+    //   return input('some text that hides a lot').then(() => {
+    //     expect(callback).toBeCalled();
+    //   });
     // });
     // test('onEmpty', () => {
     //   setStub();
+    //   const callback = jest.fn();
+    //   holmes({
+    //     find: '.result',
+    //     onEmpty: callback
+    //   });
+    //   return input('some text that hides everything').then(() => {
+    //     expect(callback).toBeCalled();
+    //   });
     // });
     // test('onFound', () => {
     //   setStub();
-    // });
-    // test('onInput', () => {
-    //   setStub();
+    //   const callback = jest.fn();
+    //   holmes({
+    //     find: '.result',
+    //     onFound: callback
+    //   });
+    //   return input('some text that hides everything')
+    //   .then(() => {
+    //     // clears the input and makes everything visible
+    //     input('');
+    //   })
+    //   .then(() => {
+    //     expect(callback).toBeCalled();
+    //   });
     // });
   });
 
