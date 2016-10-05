@@ -94,7 +94,7 @@
     holmes.prototype.options = {
       input: 'input[type=search]',
       find: undefined,
-      placeholder: '',
+      placeholder: undefined,
       mark: false,
       class: {
         visible: undefined,
@@ -174,7 +174,7 @@
       holmes.prototype.hidden = 0;
 
       // create a container for a placeholder if needed
-      if (holmes.prototype.options.placeholder !== '') {
+      if (holmes.prototype.options.placeholder) {
         /**
          * Placeholder element
          * @type {Element}
@@ -340,14 +340,14 @@
       if (!found && !empty) {
         empty = true;
 
-        if (holmes.prototype.options.placeholder !== '') {
+        if (holmes.prototype.options.placeholder) {
           holmes.prototype.placeholderNode.classList.remove(holmes.prototype.options.class.hidden);
         }
         if (typeof holmes.prototype.options.onEmpty === 'function') {
           holmes.prototype.options.onEmpty(holmes.prototype.placeholderNode);
         }
       } else if (!empty) {
-        if (holmes.prototype.options.placeholder !== '') {
+        if (holmes.prototype.options.placeholder) {
           holmes.prototype.placeholderNode.classList.add(holmes.prototype.options.class.hidden);
         }
       }
@@ -418,7 +418,7 @@
           element.classList.remove(holmes.prototype.options.class.hidden);
         });
       }
-      if (holmes.prototype.options.placeholder !== '') {
+      if (holmes.prototype.options.placeholder) {
         holmes.prototype.placeholderNode.classList.add(holmes.prototype.options.class.hidden);
         if (holmes.prototype.options.class.visible) {
           holmes.prototype.placeholderNode.classList.remove(holmes.prototype.options.class.visible);

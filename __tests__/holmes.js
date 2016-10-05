@@ -82,6 +82,7 @@ describe('Instance-less usage', () => {
   //     const qs = '.result';
   //     holmes({
   //       find: '.result',
+  //       instant: true,
   //       input: qs
   //     });
   //
@@ -101,14 +102,13 @@ describe('Instance-less usage', () => {
   //     }
   //   });
   //
-  //   input('special');
-  //
-  //   const special = document.getElementById('contains-special');
-  //   const notSpecial = document.querySelectorAll('.result:not(#contains-special)');
-  //   const notSpecialHidden = document.querySelectorAll('.result:not(#contains-special)' + '.hidden');
-  //
-  //   expect(special.classList.contains('visible')).toEqual(true);
-  //   expect(notSpecial).toEqual(notSpecialHidden);
+  //   return input('special', document.getElementById('contenteditable')).then(() => {
+  //     const special = document.getElementById('contains-special');
+  //     const notSpecial = document.querySelectorAll('.result:not(#contains-special)');
+  //     const notSpecialHidden = document.querySelectorAll('.result:not(#contains-special).hidden');
+  //     expect(special.classList.contains('visible')).toEqual(true);
+  //     expect(notSpecial).toEqual(notSpecialHidden);
+  //   });
   // });
 });
 
@@ -118,7 +118,7 @@ describe('options', () => {
     expect(_h.options).toEqual({
       input: 'input[type=search]',
       find: 'something',
-      placeholder: '',
+      placeholder: undefined,
       mark: false,
       class: {
         visible: undefined,
