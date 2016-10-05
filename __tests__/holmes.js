@@ -56,6 +56,19 @@ describe('Instance-less usage', () => {
     expect(init).toThrowError('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nholmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/module-holmes.html');
   });
 
+  // test('throws when you remove .find', () => {
+  //   setStub();
+  //   const _h = new Holmes({
+  //     find: '.result',
+  //     instant: true
+  //   });
+  //
+  //   return _h.stop().then(() => {
+  //     _h.options = {};
+  //     expect(_h.start).toThrowError('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nholmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/module-holmes.html');
+  //   });
+  // });
+
   test('doesn\'t throw with .find given', () => {
     setStub();
     holmes({
@@ -373,25 +386,30 @@ describe('Usage with instance', () => {
     expect(all).toEqual(visible);
   });
 
-  test('.stop() stops reacting to input', () => {
-    setStub();
-    const result = '.result';
-    const _h = new Holmes({
-      find: result,
-      instant: true,
-      class: {
-        visible: 'visible'
-      }
+  describe('.stop()', () => {
+    test('stops reacting to input', () => {
+      setStub();
+      const result = '.result';
+      const _h = new Holmes({
+        find: result,
+        instant: true,
+        class: {
+          visible: 'visible'
+        }
+      });
+
+      _h.stop();
+
+      input('something');
+
+      const all = document.querySelectorAll(result);
+      const visible = document.querySelectorAll(result + '.visible');
+
+      expect(all).toEqual(visible);
     });
 
-    _h.stop();
-
-    input('something');
-
-    const all = document.querySelectorAll(result);
-    const visible = document.querySelectorAll(result + '.visible');
-
-    expect(all).toEqual(visible);
+    // test('removes placeholder', () => {});
+    // test('removes marks', () => {});
   });
 
   test('.start() after .stop() resumes normal activity', () => {

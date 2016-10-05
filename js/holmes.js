@@ -149,7 +149,11 @@
        * All of the elements that are searched
        * @type {NodeList}
        */
-      holmes.prototype.elements = document.querySelectorAll(holmes.prototype.options.find);
+      if (holmes.prototype.options.find) {
+        holmes.prototype.elements = document.querySelectorAll(holmes.prototype.options.find);
+      } else {
+        throw new Error('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nholmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/module-holmes.html');
+      }
 
       /**
        * amount of elements to search
@@ -373,10 +377,12 @@
           holmes.prototype.input.removeEventListener('input', inputHandler);
 
           // remove placeholderNode
-          if (holmes.prototype.placeholderNode.parentNode) {
-            holmes.prototype.placeholderNode.parentNode.removeChild(holmes.prototype.placeholderNode);
-          } else {
-            throw new Error('The Holmes placeholderNode has no parent.');
+          if (holmes.prototype.options.placeholder) {
+            if (holmes.prototype.placeholderNode.parentNode) {
+              holmes.prototype.placeholderNode.parentNode.removeChild(holmes.prototype.placeholderNode);
+            } else {
+              throw new Error('The Holmes placeholderNode has no parent.');
+            }
           }
 
           // remove marks
