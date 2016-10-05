@@ -362,28 +362,31 @@ describe('Usage with instance', () => {
 
     expect(_h).toBeDefined();
   });
+  describe('.clear()', () => {
+    test('empties the input and shows everything', () => {
+      setStub();
+      const result = '.result';
+      const _h = new Holmes({
+        find: result,
+        instant: true,
+        class: {
+          visible: 'visible'
+        }
+      });
 
-  test('.clear() empties the input and shows everything', () => {
-    setStub();
-    const result = '.result';
-    const _h = new Holmes({
-      find: result,
-      instant: true,
-      class: {
-        visible: 'visible'
-      }
+      input('something');
+
+      _h.clear();
+
+      expect(document.getElementById('search').value).toBe('');
+
+      const all = document.querySelectorAll(result);
+      const visible = document.querySelectorAll(result + '.visible');
+
+      expect(all).toEqual(visible);
     });
 
-    input('something');
-
-    _h.clear();
-
-    expect(document.getElementById('search').value).toBe('');
-
-    const all = document.querySelectorAll(result);
-    const visible = document.querySelectorAll(result + '.visible');
-
-    expect(all).toEqual(visible);
+    // test('hides placeholder', () => {});
   });
 
   describe('.stop()', () => {
