@@ -100,6 +100,28 @@ describe('Instance-less usage', () => {
 });
 
 describe('options', () => {
+  test('defaults are set', () => {
+    const _h = new Holmes({find: 'something'});
+    expect(_h.options).toEqual({
+      input: 'input[type=search]',
+      find: 'something',
+      placeholder: '',
+      mark: false,
+      class: {
+        visible: undefined,
+        hidden: 'hidden'
+      },
+      dynamic: false,
+      instant: false,
+      minCharacters: 0,
+      onHidden: undefined,
+      onVisible: undefined,
+      onEmpty: undefined,
+      onFound: undefined,
+      onInput: undefined
+    });
+  });
+
   test('.visible on initialisation', () => {
     setStub();
     const find = '.result';

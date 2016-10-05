@@ -93,16 +93,16 @@
      */
     holmes.prototype.options = {
       input: 'input[type=search]',
+      find: undefined,
       placeholder: '',
       mark: false,
       class: {
-        visible: '',
+        visible: undefined,
         hidden: 'hidden'
       },
       dynamic: false,
       instant: false,
       minCharacters: 0,
-      find: '',
       onHidden: undefined,
       onVisible: undefined,
       onEmpty: undefined,
