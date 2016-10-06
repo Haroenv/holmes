@@ -182,6 +182,7 @@
         holmes.prototype.placeholderNode = document.createElement('div');
         holmes.prototype.placeholderNode.id = 'holmes-placeholder';
         holmes.prototype.placeholderNode.classList.add(holmes.prototype.options.class.hidden);
+        /* $FlowIssue - flow assumes that placeholder can change here */
         holmes.prototype.placeholderNode.innerHTML = holmes.prototype.options.placeholder;
         if (holmes.prototype.elements[0].parentNode instanceof Element) {
           holmes.prototype.elements[0].parentNode.appendChild(holmes.prototype.placeholderNode);
