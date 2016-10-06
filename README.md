@@ -114,7 +114,7 @@ To start showing the result in a `<mark>` tag inside the `.find`, you should ena
 
 >:exclamation: this won't work if the character after the match is a literal `>`.
 
->:exclamation: If you really have to use this character, you can replace all occurences of `>` by `&gt;`
+>:speaking_head: If you really have to use this character, you can replace all occurences of `>` by `&gt;`
 
 
 **examples**: `true`, `false`
