@@ -92,24 +92,26 @@ describe('Instance-less usage', () => {
   //   expect(init).toThrowError('The Holmes input was no <input> or contenteditable.');
   // });
 
-  // test('works with contenteditable', () => {
-  //   setStub();
-  //   holmes({
-  //     find: '.result',
-  //     input: '#contenteditable',
-  //     class: {
-  //       visible: 'visible'
-  //     }
-  //   });
-  //
-  //   return input('special', document.getElementById('contenteditable')).then(() => {
-  //     const special = document.getElementById('contains-special');
-  //     const notSpecial = document.querySelectorAll('.result:not(#contains-special)');
-  //     const notSpecialHidden = document.querySelectorAll('.result:not(#contains-special).hidden');
-  //     expect(special.classList.contains('visible')).toEqual(true);
-  //     expect(notSpecial).toEqual(notSpecialHidden);
-  //   });
-  // });
+  test('works with contenteditable', () => {
+    setStub();
+    holmes({
+      instant: true,
+      find: '.result',
+      input: '#contenteditable',
+      class: {
+        visible: 'visible'
+      }
+    });
+
+    return input('special', document.getElementById('contenteditable')).then(() => {
+      const special = document.getElementById('contains-special');
+      const notSpecial = document.querySelectorAll('.result:not(#contains-special)');
+      const notSpecialHidden = document.querySelectorAll('.result');
+      console.log(notSpecial.length + 1, notSpecialHidden.length);
+      expect(special.classList.contains('visible')).toEqual(true);
+      expect(notSpecial.length + 1).toEqual(notSpecialHidden.length);
+    });
+  });
 });
 
 describe('options', () => {
