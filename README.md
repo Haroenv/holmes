@@ -112,7 +112,10 @@ To start showing the result in a `<mark>` tag inside the `.find`, you should ena
 
 >:exclamation: this will break event listeners on nested content
 
->:exclamation: this won't work if the character after the match is a literal `>`
+>:exclamation: this won't work if the character after the match is a literal `>`.
+
+>:exclamation: If you really have to use this character, you can replace all occurences of `>` by `&gt;`
+
 
 **examples**: `true`, `false`
 
