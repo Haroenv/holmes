@@ -107,7 +107,6 @@ describe('Instance-less usage', () => {
       const special = document.getElementById('contains-special');
       const notSpecial = document.querySelectorAll('.result:not(#contains-special)');
       const notSpecialHidden = document.querySelectorAll('.result');
-      console.log(notSpecial.length + 1, notSpecialHidden.length);
       expect(special.classList.contains('visible')).toEqual(true);
       expect(notSpecial.length + 1).toEqual(notSpecialHidden.length);
     });
@@ -482,6 +481,18 @@ describe('Usage with instance', () => {
       });
     });
   });
+
+  // test('input of a contenteditable is valid', () => {
+  //   setStub();
+  //   const _h = new Holmes({
+  //     instant: true,
+  //     find: '.result',
+  //     input: '#contenteditable'
+  //   });
+  //   const text = 'something';
+  //   input(text, document.getElementById('contenteditable'));
+  //   expect(_h.searchString).toEqual(text);
+  // });
 });
 
 describe('meta tests', () => {
