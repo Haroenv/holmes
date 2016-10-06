@@ -93,17 +93,21 @@
      */
     holmes.prototype.options = {
       input: 'input[type=search]',
-      placeholder: '',
-      placeholderNode: null,
+      find: undefined,
+      placeholder: undefined,
       mark: false,
       class: {
-        visible: '',
+        visible: undefined,
         hidden: 'hidden'
       },
       dynamic: false,
       instant: false,
       minCharacters: 0,
-      find: ''
+      onHidden: undefined,
+      onVisible: undefined,
+      onEmpty: undefined,
+      onFound: undefined,
+      onInput: undefined
     };
 
     /**
@@ -116,7 +120,7 @@
         throw new Error('One of both arguments isn\'t an object.');
       }
       Object.keys(Obj1).forEach(function (k) {
-        if (typeof Obj2[k] === typeof Obj1[k]) {
+        if (typeof Obj2[k] === typeof Obj1[k] || Obj1[k] === undefined) {
           if (Obj2[k] instanceof Object) {
             holmes.prototype._mergeObj(Obj1[k], Obj2[k]);
           } else {
@@ -145,7 +149,11 @@
        * All of the elements that are searched
        * @type {NodeList}
        */
-      holmes.prototype.elements = document.querySelectorAll(holmes.prototype.options.find);
+      if (holmes.prototype.options.find) {
+        holmes.prototype.elements = document.querySelectorAll(holmes.prototype.options.find);
+      } else {
+        throw new Error('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nholmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/module-holmes.html');
+      }
 
       /**
        * amount of elements to search
@@ -166,7 +174,7 @@
       holmes.prototype.hidden = 0;
 
       // create a container for a placeholder if needed
-      if (holmes.prototype.options.placeholder !== '') {
+      if (holmes.prototype.options.placeholder) {
         /**
          * Placeholder element
          * @type {Element}
@@ -174,8 +182,9 @@
         holmes.prototype.placeholderNode = document.createElement('div');
         holmes.prototype.placeholderNode.id = 'holmes-placeholder';
         holmes.prototype.placeholderNode.classList.add(holmes.prototype.options.class.hidden);
+        /* $FlowIssue - flow assumes that placeholder can change here */
         holmes.prototype.placeholderNode.innerHTML = holmes.prototype.options.placeholder;
-        if (holmes.prototype.elements[0].parentNode) {
+        if (holmes.prototype.elements[0].parentNode instanceof Element) {
           holmes.prototype.elements[0].parentNode.appendChild(holmes.prototype.placeholderNode);
         } else {
           throw new Error('The Holmes placeholder could\'t be put; the elements had no parent.');
@@ -206,6 +215,20 @@
       }
       throw new Error('The Holmes input was no <input> or contenteditable.');
     }
+
+    /**
+     * Sets an input string
+     * @param {string} value the string to set
+     */
+    inputString.prototype.set = function (value) {
+      if (holmes.prototype.input instanceof HTMLInputElement) {
+        holmes.prototype.input.value = value;
+      } else if (holmes.prototype.input.contentEditable) {
+        holmes.prototype.input.textContent = value;
+      } else {
+        throw new Error('The Holmes input was no <input> or contenteditable.');
+      }
+    };
 
     /**
      * hide an element
@@ -294,12 +317,6 @@
       }
 
       holmes.prototype.elementsArray.forEach((function (element) {
-        // still typing
-        if (holmes.prototype.searchString.indexOf(holmes.prototype.prevValue) !== -1) {
-          if (element.classList.contains(holmes.prototype.options.class.hidden)) {
-            return;
-          }
-        }
         // if the current element doesn't contain the search string
         // add the hidden class and remove the visbible class
         if (element.textContent.toLowerCase().indexOf(holmes.prototype.searchString) === -1) {
@@ -324,19 +341,17 @@
       if (!found && !empty) {
         empty = true;
 
-        if (holmes.prototype.options.placeholder !== '') {
+        if (holmes.prototype.options.placeholder) {
           holmes.prototype.placeholderNode.classList.remove(holmes.prototype.options.class.hidden);
         }
         if (typeof holmes.prototype.options.onEmpty === 'function') {
           holmes.prototype.options.onEmpty(holmes.prototype.placeholderNode);
         }
       } else if (!empty) {
-        if (holmes.prototype.options.placeholder !== '') {
+        if (holmes.prototype.options.placeholder) {
           holmes.prototype.placeholderNode.classList.add(holmes.prototype.options.class.hidden);
         }
       }
-
-      holmes.prototype.prevValue = holmes.prototype.searchString;
     }
 
     // whether to start immediately or wait on the load of DOMContent
@@ -363,10 +378,12 @@
           holmes.prototype.input.removeEventListener('input', inputHandler);
 
           // remove placeholderNode
-          if (holmes.prototype.placeholderNode.parentNode) {
-            holmes.prototype.placeholderNode.parentNode.removeChild(holmes.prototype.placeholderNode);
-          } else {
-            throw new Error('The Holmes placeholderNode has no parent.');
+          if (holmes.prototype.options.placeholder) {
+            if (holmes.prototype.placeholderNode.parentNode) {
+              holmes.prototype.placeholderNode.parentNode.removeChild(holmes.prototype.placeholderNode);
+            } else {
+              throw new Error('The Holmes placeholderNode has no parent.');
+            }
           }
 
           // remove marks
@@ -390,13 +407,7 @@
      * This avoids having to send a new `input` event
      */
     holmes.prototype.clear = function () {
-      if (holmes.prototype.input instanceof HTMLInputElement) {
-        holmes.prototype.input.value = '';
-      } else if (holmes.prototype.input.contentEditable) {
-        holmes.prototype.input.textContent = '';
-      } else {
-        throw new Error('The Holmes input was no <input> or contenteditable.');
-      }
+      inputString.prototype.set('');
       // if a visible class is given, give it to everything
       if (holmes.prototype.options.class.visible) {
         holmes.prototype.elementsArray.forEach(function (element) {
@@ -408,7 +419,7 @@
           element.classList.remove(holmes.prototype.options.class.hidden);
         });
       }
-      if (holmes.prototype.options.placeholder !== '') {
+      if (holmes.prototype.options.placeholder) {
         holmes.prototype.placeholderNode.classList.add(holmes.prototype.options.class.hidden);
         if (holmes.prototype.options.class.visible) {
           holmes.prototype.placeholderNode.classList.remove(holmes.prototype.options.class.visible);
