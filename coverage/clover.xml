@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1477211082577" clover="3.2.0">
-  <project timestamp="1477211082577" name="All files">
+<coverage generated="1477211092198" clover="3.2.0">
+  <project timestamp="1477211092199" name="All files">
     <metrics statements="141" coveredstatements="103" conditionals="100" coveredconditionals="65" methods="22" coveredmethods="18" elements="263" coveredelements="186" complexity="0" loc="141" ncloc="141" packages="1" files="1" classes="1">
       <file name="holmes.js" path="/home/travis/build/Haroenv/holmes/js/holmes.js">
         <metrics statements="141" coveredstatements="103" conditionals="100" coveredconditionals="65" methods="22" coveredmethods="18"/>
