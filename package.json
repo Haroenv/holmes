@@ -37,7 +37,7 @@
   "devDependencies": {
     "coveralls": "^2.11.12",
     "eslint": "^3.4.0",
-    "eslint-config-xo-space": "^0.14.0",
+    "eslint-config-xo-space": "^0.15.0",
     "flow-bin": "^0.33.0",
     "hopsdoc": "^0.1.7",
     "jest": "^16.0.1",
