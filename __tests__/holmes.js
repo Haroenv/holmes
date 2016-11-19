@@ -128,6 +128,7 @@ describe('options', () => {
       dynamic: false,
       instant: false,
       minCharacters: 0,
+      hiddenAttr: false,
       onHidden: undefined,
       onVisible: undefined,
       onEmpty: undefined,
@@ -152,6 +153,54 @@ describe('options', () => {
 
     expect(all).toEqual(visible);
   });
+
+  describe('.hiddenAttr', () => {
+    test('hidden gets added', () => {
+      setStub();
+      const find = '.result';
+      Holmes({
+        find,
+        instant: true,
+        hiddenAttr: true
+      });
+      return input('Some text that will hide everything!').then(() => {
+        expect(document.querySelector(find).hidden).toBe(true);
+      });
+    });
+
+    test('default false', () => {
+      setStub();
+      const find = '.result';
+      Holmes({
+        find,
+        instant: true
+      });
+      return input('Some text that will hide everything!').then(() => {
+        expect(document.querySelector(find).hidden).toBe(false);
+      });
+    });
+
+    test('false doesn\'t add the attribute', () => {
+      setStub();
+      const find = '.result';
+      Holmes({
+        find,
+        instant: true,
+        hiddenAttr: false
+      });
+      return input('Some text that will hide everything!').then(() => {
+        expect(document.querySelector(find).hidden).toBe(false);
+      });
+    });
+  });
+
+
+  // test('.minCharacters', () => {
+  //   setStub();
+  // });
+  // test('.mark', () => {
+  //   setStub();
+  // });
 
   describe('.minCharacters', () => {
     test('less than minimum amount doesn\'t make anything happen', () => {
