@@ -64,7 +64,7 @@
    *   other situations), you can put this option on <code>true</code>.
    * @param {number} [options.minCharacters=0] The minimum amount of characters to be typed before
    *   Holmes starts searching. Beware that this also counts when backspacing.
-   * @param {boolean} [options.aria=true]
+   * @param {boolean} [options.hiddenAttr=true]
    *   Adds <code>hidden="true"</code> to hidden elements. interesting
    *   <a href="https://www.paciellogroup.com/blog/2012/05/html5-accessibility-chops-hidden-and-aria-hidden/">
    *   link</a> explaining its use.
@@ -97,6 +97,7 @@
      */
     holmes.prototype.options = {
       input: 'input[type=search]',
+      find: '',
       placeholder: '',
       placeholderNode: null,
       mark: false,
@@ -107,7 +108,7 @@
       dynamic: false,
       instant: false,
       minCharacters: 0,
-      find: ''
+      hiddenAttr: false
     };
 
     /**
@@ -227,7 +228,7 @@
           holmes.prototype.options.onHidden(element);
         }
       }
-      if (holmes.prototype.options.aria) {
+      if (holmes.prototype.options.hiddenAttr) {
         element.setAttribute('hidden', 'true');
       }
       if (holmes.prototype.options.mark) {
@@ -251,7 +252,7 @@
           holmes.prototype.options.onVisible(element);
         }
       }
-      if (holmes.prototype.options.aria) {
+      if (holmes.prototype.options.hiddenAttr) {
         element.removeAttribute('hidden');
       }
 
