@@ -1,14 +1,14 @@
 // @flow
-import {mergeObj} from './util.js';
+import {mergeObj, toFactory} from './util.js';
 
 /**
- * @alias holmes
+ * @alias Holmes
  */
-export default class holmes {
+class Holmes {
 
   /**
    * search for dom elements on your page
-   * @class holmes
+   * @class Holmes
    * @constructor
    * @param {string} [options.input='input[type=search]']
    *   A <code>querySelector</code> to find the <code>input</code>
@@ -58,12 +58,12 @@ export default class holmes {
     let empty = false;
 
     if (typeof options !== 'object') {
-      throw new Error('The options need to be given inside an object like this:\nholmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html');
+      throw new Error('The options need to be given inside an object like this:\nnew Holmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html');
     }
 
     // if this.options.find is missing, the searching won't work so we'll thrown an exceptions
     if (typeof options.find !== 'string') {
-      throw new Error('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nholmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html');
+      throw new Error('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nnew Holmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html');
     }
 
     /**
@@ -176,7 +176,7 @@ export default class holmes {
       // loop over all the elements
       // in case this should become dynamic, query for the elements here
       if (this.options.mark) {
-        this.regex = new RegExp(`(${this.searchString})(?![^<]*>)`, 'gi');
+        this._regex = new RegExp(`(${this.searchString})(?![^<]*>)`, 'gi');
       }
 
       this.elementsArray.forEach((element => {
@@ -273,7 +273,7 @@ export default class holmes {
     if (this.options.mark) {
       element.innerHTML = element.innerHTML.replace(/<\/?mark>/g, '');
       if (this.searchString.length) {
-        element.innerHTML = element.innerHTML.replace(this.regex, '<mark>$1</mark>');
+        element.innerHTML = element.innerHTML.replace(this._regex, '<mark>$1</mark>');
       }
     }
   }
@@ -322,7 +322,7 @@ export default class holmes {
     if (this.options.find) {
       this.elements = document.querySelectorAll(this.options.find);
     } else {
-      throw new Error('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nholmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html');
+      throw new Error('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nnew Holmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html');
     }
 
     /**
@@ -461,3 +461,6 @@ export default class holmes {
  * @memberOf holmes
  * @instance
  */
+const holmes = toFactory(Holmes);
+
+export default holmes;
