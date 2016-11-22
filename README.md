@@ -9,7 +9,7 @@
 [![Join the chat at https://gitter.im/Haroenv/holmes](https://badges.gitter.im/Haroenv/holmes.svg)](https://gitter.im/Haroenv/holmes?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![devDependencies Status](https://david-dm.org/haroenv/holmes/dev-status.svg)](https://david-dm.org/haroenv/holmes?type=dev)
 
-Holmes filters a list of elements based on the value of a `input` in just ~13KB (5KB minified).
+Holmes filters a list of elements based on the value of a `input` in just ~6KB.
 
 ## Installation
 
