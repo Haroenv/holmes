@@ -21,7 +21,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav class="main-nav">
-    <header class="nav-header"><h2><a href="index.html">Home</a></h2></header><header class="nav-header"><h3><span>Classes</span></h3></header><ul><li><a href="holmes.html">holmes</a><ul class='members'><li class='nav-type-header'>Members</li><li data-type='member'><a href="holmes.html#elements">elements</a></li><li data-type='member'><a href="holmes.html#elementsArray">elementsArray</a></li><li data-type='member'><a href="holmes.html#elementsLength">elementsLength</a></li><li data-type='member'><a href="holmes.html#hidden">hidden</a></li><li data-type='member'><a href="holmes.html#input">input</a></li><li data-type='member'><a href="holmes.html#options">options</a></li><li data-type='member'><a href="holmes.html#placeholderNode">placeholderNode</a></li></ul><ul class='methods'><li class='nav-type-header'>Methods</li><li data-type='method'><a href="holmes.html#_hideElement">_hideElement</a></li><li data-type='method'><a href="holmes.html#_inputHandler">_inputHandler</a></li><li data-type='method'><a href="holmes.html#_showElement">_showElement</a></li><li data-type='method'><a href="holmes.html#clear">clear</a></li><li data-type='method'><a href="holmes.html#count">count</a></li><li data-type='method'><a href="holmes.html#inputString">inputString</a></li><li data-type='method'><a href="holmes.html#setInput">setInput</a></li><li data-type='method'><a href="holmes.html#start">start</a></li><li data-type='method'><a href="holmes.html#stop">stop</a></li></ul><ul class='typedefs'><li class='nav-type-header'>Typedefs</li><li data-type='typedef'><a href="holmes.html#onChange">onChange</a></li></ul></li></ul>
+    <header class="nav-header"><h2><a href="index.html">Home</a></h2></header><header class="nav-header"><h3><span>Classes</span></h3></header><ul><li><a href="holmes.html">holmes</a><ul class='members'><li class='nav-type-header'>Members</li><li data-type='member'><a href="holmes.html#elements">elements</a></li><li data-type='member'><a href="holmes.html#elementsArray">elementsArray</a></li><li data-type='member'><a href="holmes.html#elementsLength">elementsLength</a></li><li data-type='member'><a href="holmes.html#hidden">hidden</a></li><li data-type='member'><a href="holmes.html#input">input</a></li><li data-type='member'><a href="holmes.html#options">options</a></li><li data-type='member'><a href="holmes.html#placeholderNode">placeholderNode</a></li></ul><ul class='methods'><li class='nav-type-header'>Methods</li><li data-type='method'><a href="holmes.html#clear">clear</a></li><li data-type='method'><a href="holmes.html#count">count</a></li><li data-type='method'><a href="holmes.html#inputString">inputString</a></li><li data-type='method'><a href="holmes.html#setInput">setInput</a></li><li data-type='method'><a href="holmes.html#start">start</a></li><li data-type='method'><a href="holmes.html#stop">stop</a></li></ul><ul class='typedefs'><li class='nav-type-header'>Typedefs</li><li data-type='typedef'><a href="holmes.html#onChange">onChange</a></li></ul></li></ul>
 </nav>
 
 <main id="main" class="main-content">
@@ -37,15 +37,19 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>// @flow
-import {mergeObj} from './util.js';
+import {mergeObj, toFactory} from './util.js';
 
 /**
  * @alias holmes
  */
-export default class holmes {
+class Holmes {
 
   /**
    * search for dom elements on your page
+   *
+   * For legacy reasons, this class is a &lt;code>function&lt;/code>, and thus doesn't have a capital
+   * You can fix this by using &lt;code>var Holmes = holmes&lt;/code> before doing &lt;code>new Holmes&lt;/code>.
+   *
    * @class holmes
    * @constructor
    * @param {string} [options.input='input[type=search]']
@@ -96,12 +100,12 @@ export default class holmes {
     let empty = false;
 
     if (typeof options !== 'object') {
-      throw new Error('The options need to be given inside an object like this:\nholmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html');
+      throw new Error('The options need to be given inside an object like this:\nnew Holmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html');
     }
 
     // if this.options.find is missing, the searching won't work so we'll thrown an exceptions
     if (typeof options.find !== 'string') {
-      throw new Error('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nholmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html');
+      throw new Error('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nnew Holmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html');
     }
 
     /**
@@ -182,6 +186,7 @@ export default class holmes {
      * @function _inputHandler
      * @memberOf holmes
      * @instance
+     * @private
      */
     this._inputHandler = () => {
       // by default the value isn't found
@@ -214,7 +219,7 @@ export default class holmes {
       // loop over all the elements
       // in case this should become dynamic, query for the elements here
       if (this.options.mark) {
-        this.regex = new RegExp(`(${this.searchString})(?![^&lt;]*>)`, 'gi');
+        this._regex = new RegExp(`(${this.searchString})(?![^&lt;]*>)`, 'gi');
       }
 
       this.elementsArray.forEach((element => {
@@ -262,6 +267,7 @@ export default class holmes {
    * @param  {HTMLElement} element the element to hide
    * @memberOf holmes
    * @instance
+   * @private
    */
   _hideElement(element) {
     if (this.options.class.visible) {
@@ -285,9 +291,11 @@ export default class holmes {
 
   /**
    * show an element
+   * @function _showElement
    * @param  {HTMLElement} element the element to show
    * @memberOf holmes
    * @instance
+   * @private
    */
   _showElement(element) {
     if (this.options.class.visible) {
@@ -311,13 +319,14 @@ export default class holmes {
     if (this.options.mark) {
       element.innerHTML = element.innerHTML.replace(/&lt;\/?mark>/g, '');
       if (this.searchString.length) {
-        element.innerHTML = element.innerHTML.replace(this.regex, '&lt;mark>$1&lt;/mark>');
+        element.innerHTML = element.innerHTML.replace(this._regex, '&lt;mark>$1&lt;/mark>');
       }
     }
   }
 
   /**
    * The current search input in lower case
+   * @function inputString
    * @return {String} the input as a string
    * @memberOf holmes
    * @instance
@@ -334,6 +343,7 @@ export default class holmes {
 
   /**
    * Sets an input string
+   * @function setInput
    * @param {string} value the string to set
    * @memberOf holmes
    * @instance
@@ -350,6 +360,7 @@ export default class holmes {
 
   /**
    * Start an event listener with the specified options
+   * @function start
    * @memberOf holmes
    * @instance
    */
@@ -360,7 +371,7 @@ export default class holmes {
     if (this.options.find) {
       this.elements = document.querySelectorAll(this.options.find);
     } else {
-      throw new Error('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nholmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html');
+      throw new Error('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nnew Holmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html');
     }
 
     /**
@@ -409,6 +420,7 @@ export default class holmes {
 
   /**
    * remove the current event listener
+   * @function stop
    * @see this.start
    * @return {Promise} resolves when the event is removed
    * @memberOf holmes
@@ -447,6 +459,7 @@ export default class holmes {
   /**
    * empty the search string programmatically.
    * This avoids having to send a new `input` event
+   * @function clear
    * @memberOf holmes
    * @instance
    */
@@ -475,6 +488,7 @@ export default class holmes {
 
   /**
    * Show the amount of elements, and those hidden and visible
+   * @function count
    * @return {object} all matching elements, the amount of hidden and the amount of visible elements
    * @memberOf holmes
    * @instance
@@ -499,6 +513,9 @@ export default class holmes {
  * @memberOf holmes
  * @instance
  */
+const holmes = toFactory(Holmes);
+
+export default holmes;
 </code></pre>
         </article>
     </section>
@@ -512,7 +529,7 @@ export default class holmes {
 
 
 <footer class="main-footer">
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Nov 22 2016 21:42:58 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Nov 22 2016 23:25:05 GMT+0100 (CET)
 </footer>
 
 <script>prettyPrint();</script>

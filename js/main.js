@@ -2,13 +2,17 @@
 import {mergeObj, toFactory} from './util.js';
 
 /**
- * @alias Holmes
+ * @alias holmes
  */
 class Holmes {
 
   /**
    * search for dom elements on your page
-   * @class Holmes
+   *
+   * For legacy reasons, this class is a <code>function</code>, and thus doesn't have a capital
+   * You can fix this by using <code>var Holmes = holmes</code> before doing <code>new Holmes</code>.
+   *
+   * @class holmes
    * @constructor
    * @param {string} [options.input='input[type=search]']
    *   A <code>querySelector</code> to find the <code>input</code>
@@ -144,6 +148,7 @@ class Holmes {
      * @function _inputHandler
      * @memberOf holmes
      * @instance
+     * @private
      */
     this._inputHandler = () => {
       // by default the value isn't found
@@ -224,6 +229,7 @@ class Holmes {
    * @param  {HTMLElement} element the element to hide
    * @memberOf holmes
    * @instance
+   * @private
    */
   _hideElement(element) {
     if (this.options.class.visible) {
@@ -247,9 +253,11 @@ class Holmes {
 
   /**
    * show an element
+   * @function _showElement
    * @param  {HTMLElement} element the element to show
    * @memberOf holmes
    * @instance
+   * @private
    */
   _showElement(element) {
     if (this.options.class.visible) {
@@ -280,6 +288,7 @@ class Holmes {
 
   /**
    * The current search input in lower case
+   * @function inputString
    * @return {String} the input as a string
    * @memberOf holmes
    * @instance
@@ -296,6 +305,7 @@ class Holmes {
 
   /**
    * Sets an input string
+   * @function setInput
    * @param {string} value the string to set
    * @memberOf holmes
    * @instance
@@ -312,6 +322,7 @@ class Holmes {
 
   /**
    * Start an event listener with the specified options
+   * @function start
    * @memberOf holmes
    * @instance
    */
@@ -371,6 +382,7 @@ class Holmes {
 
   /**
    * remove the current event listener
+   * @function stop
    * @see this.start
    * @return {Promise} resolves when the event is removed
    * @memberOf holmes
@@ -409,6 +421,7 @@ class Holmes {
   /**
    * empty the search string programmatically.
    * This avoids having to send a new `input` event
+   * @function clear
    * @memberOf holmes
    * @instance
    */
@@ -437,6 +450,7 @@ class Holmes {
 
   /**
    * Show the amount of elements, and those hidden and visible
+   * @function count
    * @return {object} all matching elements, the amount of hidden and the amount of visible elements
    * @memberOf holmes
    * @instance
