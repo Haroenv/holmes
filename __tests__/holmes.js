@@ -1,8 +1,8 @@
 /* eslint-env node, jest */
 const fs = require('fs');
 
-const Holmes = require('../js/holmes.js');
-const holmes = Holmes;
+import holmes from '../js/main.js';
+const Holmes = holmes; // capital mistake!
 
 /**
  * Set the html stub
@@ -43,7 +43,7 @@ describe('Instance-less usage', () => {
       holmes();
     }
 
-    expect(init).toThrowError('The options need to be given inside an object like this:\nholmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/module-holmes.html');
+    expect(init).toThrowError('The options need to be given inside an object like this:\nholmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html');
   });
 
   test('throws without .find', () => {
@@ -53,7 +53,7 @@ describe('Instance-less usage', () => {
       holmes({});
     }
 
-    expect(init).toThrowError('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nholmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/module-holmes.html');
+    expect(init).toThrowError('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nholmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html');
   });
 
   // test('throws when you remove .find', () => {
@@ -65,7 +65,7 @@ describe('Instance-less usage', () => {
   //
   //   return _h.stop().then(() => {
   //     _h.options = {};
-  //     expect(_h.start).toThrowError('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nholmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/module-holmes.html');
+  //     expect(_h.start).toThrowError('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nholmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html');
   //   });
   // });
 
@@ -542,16 +542,4 @@ describe('Usage with instance', () => {
   //   input(text, document.getElementById('contenteditable'));
   //   expect(_h.searchString).toEqual(text);
   // });
-});
-
-describe('meta tests', () => {
-  test('_mergeObj doesn\'t work when one of both isn\'t an object.', () => {
-    const _h = new Holmes({find: '.result'});
-    let first = {};
-    let second = 'string';
-    function merge() {
-      _h._mergeObj(first, second);
-    }
-    expect(merge).toThrowError('One of both arguments isn\'t an object.');
-  });
 });
