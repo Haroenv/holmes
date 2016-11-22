@@ -3,20 +3,24 @@
   "version": "1.13.5",
   "description": "Fast and easy searching inside a page.",
   "main": "js/holmes.js",
+  "jsnext:main": "js/main.js",
   "files": [
-    "js/holmes.js"
+    "js/holmes.js",
+    "js/main.js"
   ],
   "scripts": {
+    "build": "rollup -c",
     "test": "npm run lint && npm run flow && npm run jest",
-    "lint": "eslint js/holmes.js",
+    "lint": "eslint js/main.js",
     "flow": "flow",
     "jest": "jest --coverage",
-    "doc": "jsdoc -t node_modules/hopsdoc -R README.md -d doc js/holmes.js",
+    "doc": "jsdoc -t node_modules/hopsdoc -R README.md -d doc js/main.js",
     "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "keywords": [
     "search",
-    "dom"
+    "dom",
+    "filter"
   ],
   "author": "Haroen Viaene <hello@haroen.me>",
   "license": "Apache-2.0",
@@ -41,6 +45,9 @@
     "flow-bin": "^0.35.0",
     "hopsdoc": "^0.1.7",
     "jest": "^17.0.3",
-    "jsdoc": "^3.4.0"
+    "jsdoc": "^3.4.0",
+    "rollup": "^0.36.3",
+    "rollup-plugin-babel": "^2.6.1",
+    "rollup-plugin-uglify": "^1.0.1"
   }
 }

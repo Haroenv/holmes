@@ -279,6 +279,8 @@ Contributions are always welcome! Here are some loose guidelines:
 * explain why you want a feature
 * `npm run doc` to recreate the documentation
 
+Building to a UMD is done via rollup (`npm run build`).
+
 But I don't bite, if you have any questions or insecurities, hit me up for example on [gitter](https://gitter.im/Haroenv/holmes?utm_source=readme&utm_medium=link&utm_content=link).
 
 ## License
