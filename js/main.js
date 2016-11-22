@@ -6,6 +6,36 @@ import {mergeObj, toFactory} from './util.js';
  */
 class Holmes {
 
+  elements: NodeList<HTMLElement>;
+  elementsArray: Array<HTMLElement>;
+  elementsLength: number;
+  hidden: number;
+  input: HTMLElement;
+  options: {
+    input: string,
+    find: string,
+    placeholder: ?string,
+    mark: ?boolean,
+    class: {
+      visible: ?string,
+      hidden: string
+    },
+    dynamic: ?boolean,
+    instant: ?boolean,
+    minCharacters: ?number,
+    hiddenAttr: ?boolean,
+    onHidden: ?function,
+    onVisible: ?function,
+    onEmpty: ?function,
+    onFound: ?function,
+    onInput: ?function,
+  };
+  running: boolean;
+  placeholderNode: HTMLElement;
+  searchString: string;
+  _regex: RegExp;
+  _inputHandler: function;
+
   /**
    * search for dom elements on your page
    *
@@ -78,7 +108,7 @@ class Holmes {
      */
     this.options = {
       input: 'input[type=search]',
-      find: undefined,
+      find: '',
       placeholder: undefined,
       mark: false,
       class: {
@@ -115,7 +145,7 @@ class Holmes {
      * @memberOf holmes
      * @instance
      */
-    this.input = undefined;
+    this.input;
 
     /**
      * All of the elements that are searched
@@ -124,7 +154,7 @@ class Holmes {
      * @memberOf holmes
      * @instance
      */
-    this.elements = undefined;
+    this.elements;
 
     /**
      * Placeholder element
@@ -133,7 +163,16 @@ class Holmes {
      * @memberOf holmes
      * @instance
      */
-    this.placeholderNode = undefined;
+    this.placeholderNode;
+
+    /**
+     * Is the current instance running
+     * @member running
+     * @memberOf holmes
+     * @instance
+     * @type {Boolean}
+     */
+    this.running = false;
 
     if (this.options.instant) {
       this.start(options);
@@ -371,8 +410,9 @@ class Holmes {
 
     // if a visible class is given, give it to everything
     if (this.options.class.visible) {
+      const vis: string = this.options.class.visible;
       this.elementsArray.forEach((element => {
-        element.classList.add(this.options.class.visible);
+        element.classList.add(vis);
       }));
     }
 
@@ -429,16 +469,17 @@ class Holmes {
     this.setInput('');
     // if a visible class is given, give it to everything
     if (this.options.class.visible) {
+      const vis: string = this.options.class.visible;
       this.elementsArray.forEach(element => {
         element.classList.remove(this.options.class.hidden);
-        element.classList.add(this.options.class.visible);
+        element.classList.add(vis);
       });
     } else {
       this.elementsArray.forEach(element => {
         element.classList.remove(this.options.class.hidden);
       });
     }
-    if (this.options.placeholder) {
+    if (this.options.placeholder && this.options.class.hidden) {
       this.placeholderNode.classList.add(this.options.class.hidden);
       if (this.options.class.visible) {
         this.placeholderNode.classList.remove(this.options.class.visible);
