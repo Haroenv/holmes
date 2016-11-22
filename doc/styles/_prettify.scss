@@ -1,6 +1,6 @@
 .prettyprint {
   background: #fff;
-  font-family: Menlo, "Bitstream Vera Sans Mono", "DejaVu Sans Mono", Monaco, Consolas, monospace;
+  font-family: $monospace;
 
   &.linenums {
     padding: 0;
