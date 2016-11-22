@@ -21,7 +21,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav class="main-nav">
-    <header class="nav-header"><h2><a href="index.html">Home</a></h2></header><header class="nav-header"><h3><span>Classes</span></h3></header><ul><li><a href="holmes.html">holmes</a><ul class='members'><li class='nav-type-header'>Members</li><li data-type='member'><a href="holmes.html#.elements">elements</a></li><li data-type='member'><a href="holmes.html#.elementsArray">elementsArray</a></li><li data-type='member'><a href="holmes.html#.elementsLength">elementsLength</a></li><li data-type='member'><a href="holmes.html#.hidden">hidden</a></li><li data-type='member'><a href="holmes.html#.input">input</a></li><li data-type='member'><a href="holmes.html#.options">options</a></li><li data-type='member'><a href="holmes.html#.placeholderNode">placeholderNode</a></li></ul><ul class='methods'><li class='nav-type-header'>Methods</li><li data-type='method'><a href="holmes.html#._hideElement">_hideElement</a></li><li data-type='method'><a href="holmes.html#._inputHandler">_inputHandler</a></li><li data-type='method'><a href="holmes.html#._showElement">_showElement</a></li><li data-type='method'><a href="holmes.html#.clear">clear</a></li><li data-type='method'><a href="holmes.html#.count">count</a></li><li data-type='method'><a href="holmes.html#.inputString">inputString</a></li><li data-type='method'><a href="holmes.html#.setInput">setInput</a></li><li data-type='method'><a href="holmes.html#.start">start</a></li><li data-type='method'><a href="holmes.html#.stop">stop</a></li></ul><ul class='typedefs'><li class='nav-type-header'>Typedefs</li><li data-type='typedef'><a href="holmes.html#.onChange">onChange</a></li></ul></li></ul>
+    <header class="nav-header"><h2><a href="index.html">Home</a></h2></header><header class="nav-header"><h3><span>Classes</span></h3></header><ul><li><a href="holmes.html">holmes</a><ul class='members'><li class='nav-type-header'>Members</li><li data-type='member'><a href="holmes.html#elements">elements</a></li><li data-type='member'><a href="holmes.html#elementsArray">elementsArray</a></li><li data-type='member'><a href="holmes.html#elementsLength">elementsLength</a></li><li data-type='member'><a href="holmes.html#hidden">hidden</a></li><li data-type='member'><a href="holmes.html#input">input</a></li><li data-type='member'><a href="holmes.html#options">options</a></li><li data-type='member'><a href="holmes.html#placeholderNode">placeholderNode</a></li></ul><ul class='methods'><li class='nav-type-header'>Methods</li><li data-type='method'><a href="holmes.html#_hideElement">_hideElement</a></li><li data-type='method'><a href="holmes.html#_inputHandler">_inputHandler</a></li><li data-type='method'><a href="holmes.html#_showElement">_showElement</a></li><li data-type='method'><a href="holmes.html#clear">clear</a></li><li data-type='method'><a href="holmes.html#count">count</a></li><li data-type='method'><a href="holmes.html#inputString">inputString</a></li><li data-type='method'><a href="holmes.html#setInput">setInput</a></li><li data-type='method'><a href="holmes.html#start">start</a></li><li data-type='method'><a href="holmes.html#stop">stop</a></li></ul><ul class='typedefs'><li class='nav-type-header'>Typedefs</li><li data-type='typedef'><a href="holmes.html#onChange">onChange</a></li></ul></li></ul>
 </nav>
 
 <main id="main" class="main-content">
@@ -37,7 +37,7 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>// @flow
-import { mergeObj } from './util.js';
+import {mergeObj} from './util.js';
 
 /**
  * @alias holmes
@@ -108,6 +108,7 @@ export default class holmes {
      * @member options
      * @type {Object}
      * @memberOf holmes
+     * @instance
      */
     this.options = {
       input: 'input[type=search]',
@@ -116,7 +117,7 @@ export default class holmes {
       mark: false,
       class: {
         visible: undefined,
-          hidden: 'hidden'
+        hidden: 'hidden'
       },
       dynamic: false,
       instant: false,
@@ -137,6 +138,7 @@ export default class holmes {
      * @member hidden
      * @type {Number}
      * @memberOf holmes
+     * @instance
      */
     this.hidden = 0;
 
@@ -145,6 +147,7 @@ export default class holmes {
      * @member input
      * @type {NodeList}
      * @memberOf holmes
+     * @instance
      */
     this.input = undefined;
 
@@ -153,6 +156,7 @@ export default class holmes {
      * @member elements
      * @type {NodeList}
      * @memberOf holmes
+     * @instance
      */
     this.elements = undefined;
 
@@ -161,6 +165,7 @@ export default class holmes {
      * @member placeholderNode
      * @type {Element}
      * @memberOf holmes
+     * @instance
      */
     this.placeholderNode = undefined;
 
@@ -176,6 +181,7 @@ export default class holmes {
      * input event handler
      * @function _inputHandler
      * @memberOf holmes
+     * @instance
      */
     this._inputHandler = () => {
       // by default the value isn't found
@@ -214,9 +220,7 @@ export default class holmes {
       this.elementsArray.forEach((element => {
         // if the current element doesn't contain the search string
         // add the hidden class and remove the visbible class
-        if (!element.textContent.toLowerCase().includes(this.searchString)) {
-          this._hideElement(element);
-        } else {
+        if (element.textContent.toLowerCase().includes(this.searchString)) {
           this._showElement(element);
 
           if (empty &amp;&amp; typeof this.options.onFound === 'function') {
@@ -225,6 +229,8 @@ export default class holmes {
           empty = false;
           // the element is now found at least once
           found = true;
+        } else {
+          this._hideElement(element);
         }
       }));
 
@@ -247,7 +253,7 @@ export default class holmes {
           this.placeholderNode.classList.add(this.options.class.hidden);
         }
       }
-    }
+    };
   }
 
   /**
@@ -255,6 +261,7 @@ export default class holmes {
    * @function _hideElement
    * @param  {HTMLElement} element the element to hide
    * @memberOf holmes
+   * @instance
    */
   _hideElement(element) {
     if (this.options.class.visible) {
@@ -280,6 +287,7 @@ export default class holmes {
    * show an element
    * @param  {HTMLElement} element the element to show
    * @memberOf holmes
+   * @instance
    */
   _showElement(element) {
     if (this.options.class.visible) {
@@ -312,6 +320,7 @@ export default class holmes {
    * The current search input in lower case
    * @return {String} the input as a string
    * @memberOf holmes
+   * @instance
    */
   inputString() {
     if (this.input instanceof HTMLInputElement) {
@@ -327,6 +336,7 @@ export default class holmes {
    * Sets an input string
    * @param {string} value the string to set
    * @memberOf holmes
+   * @instance
    */
   setInput(value) {
     if (this.input instanceof HTMLInputElement) {
@@ -336,11 +346,12 @@ export default class holmes {
     } else {
       throw new Error('The Holmes input was no &lt;input> or contenteditable.');
     }
-  };
+  }
 
   /**
    * Start an event listener with the specified options
    * @memberOf holmes
+   * @instance
    */
   start() {
     this.running = true;
@@ -357,6 +368,7 @@ export default class holmes {
      * @member elementsLength
      * @type {Number}
      * @memberOf holmes
+     * @instance
      */
     this.elementsLength = this.elements.length;
 
@@ -365,6 +377,7 @@ export default class holmes {
      * @member elementsArray
      * @type {Array}
      * @memberOf holmes
+     * @instance
      */
     this.elementsArray = Array.prototype.slice.call(this.elements);
     this.hidden = 0;
@@ -399,6 +412,7 @@ export default class holmes {
    * @see this.start
    * @return {Promise} resolves when the event is removed
    * @memberOf holmes
+   * @instance
    */
   stop() {
     return new Promise((resolve, reject) => {
@@ -434,6 +448,7 @@ export default class holmes {
    * empty the search string programmatically.
    * This avoids having to send a new `input` event
    * @memberOf holmes
+   * @instance
    */
   clear() {
     this.setInput('');
@@ -462,6 +477,7 @@ export default class holmes {
    * Show the amount of elements, and those hidden and visible
    * @return {object} all matching elements, the amount of hidden and the amount of visible elements
    * @memberOf holmes
+   * @instance
    */
   count() {
     return {
@@ -481,6 +497,7 @@ export default class holmes {
  *   (or &lt;code>undefined&lt;/code>) for &lt;code>onEmpty&lt;/code> and
  *   &lt;code>onFound&lt;/code>.
  * @memberOf holmes
+ * @instance
  */
 </code></pre>
         </article>
@@ -495,7 +512,7 @@ export default class holmes {
 
 
 <footer class="main-footer">
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Nov 22 2016 21:08:10 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Nov 22 2016 21:42:58 GMT+0100 (CET)
 </footer>
 
 <script>prettyPrint();</script>

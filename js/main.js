@@ -70,6 +70,7 @@ export default class holmes {
      * @member options
      * @type {Object}
      * @memberOf holmes
+     * @instance
      */
     this.options = {
       input: 'input[type=search]',
@@ -99,6 +100,7 @@ export default class holmes {
      * @member hidden
      * @type {Number}
      * @memberOf holmes
+     * @instance
      */
     this.hidden = 0;
 
@@ -107,6 +109,7 @@ export default class holmes {
      * @member input
      * @type {NodeList}
      * @memberOf holmes
+     * @instance
      */
     this.input = undefined;
 
@@ -115,6 +118,7 @@ export default class holmes {
      * @member elements
      * @type {NodeList}
      * @memberOf holmes
+     * @instance
      */
     this.elements = undefined;
 
@@ -123,6 +127,7 @@ export default class holmes {
      * @member placeholderNode
      * @type {Element}
      * @memberOf holmes
+     * @instance
      */
     this.placeholderNode = undefined;
 
@@ -138,6 +143,7 @@ export default class holmes {
      * input event handler
      * @function _inputHandler
      * @memberOf holmes
+     * @instance
      */
     this._inputHandler = () => {
       // by default the value isn't found
@@ -217,6 +223,7 @@ export default class holmes {
    * @function _hideElement
    * @param  {HTMLElement} element the element to hide
    * @memberOf holmes
+   * @instance
    */
   _hideElement(element) {
     if (this.options.class.visible) {
@@ -242,6 +249,7 @@ export default class holmes {
    * show an element
    * @param  {HTMLElement} element the element to show
    * @memberOf holmes
+   * @instance
    */
   _showElement(element) {
     if (this.options.class.visible) {
@@ -274,6 +282,7 @@ export default class holmes {
    * The current search input in lower case
    * @return {String} the input as a string
    * @memberOf holmes
+   * @instance
    */
   inputString() {
     if (this.input instanceof HTMLInputElement) {
@@ -289,6 +298,7 @@ export default class holmes {
    * Sets an input string
    * @param {string} value the string to set
    * @memberOf holmes
+   * @instance
    */
   setInput(value) {
     if (this.input instanceof HTMLInputElement) {
@@ -303,6 +313,7 @@ export default class holmes {
   /**
    * Start an event listener with the specified options
    * @memberOf holmes
+   * @instance
    */
   start() {
     this.running = true;
@@ -319,6 +330,7 @@ export default class holmes {
      * @member elementsLength
      * @type {Number}
      * @memberOf holmes
+     * @instance
      */
     this.elementsLength = this.elements.length;
 
@@ -327,6 +339,7 @@ export default class holmes {
      * @member elementsArray
      * @type {Array}
      * @memberOf holmes
+     * @instance
      */
     this.elementsArray = Array.prototype.slice.call(this.elements);
     this.hidden = 0;
@@ -361,6 +374,7 @@ export default class holmes {
    * @see this.start
    * @return {Promise} resolves when the event is removed
    * @memberOf holmes
+   * @instance
    */
   stop() {
     return new Promise((resolve, reject) => {
@@ -396,6 +410,7 @@ export default class holmes {
    * empty the search string programmatically.
    * This avoids having to send a new `input` event
    * @memberOf holmes
+   * @instance
    */
   clear() {
     this.setInput('');
@@ -424,6 +439,7 @@ export default class holmes {
    * Show the amount of elements, and those hidden and visible
    * @return {object} all matching elements, the amount of hidden and the amount of visible elements
    * @memberOf holmes
+   * @instance
    */
   count() {
     return {
@@ -443,4 +459,5 @@ export default class holmes {
  *   (or <code>undefined</code>) for <code>onEmpty</code> and
  *   <code>onFound</code>.
  * @memberOf holmes
+ * @instance
  */
