@@ -28,6 +28,13 @@
     "type": "git",
     "url": "git+https://github.com/Haroenv/holmes.git"
   },
+  "babel": {
+    "presets": [
+      [
+        "es2015-rollup"
+      ]
+    ]
+  },
   "eslintConfig": {
     "env": {
       "es6": true
@@ -39,6 +46,7 @@
   },
   "homepage": "https://haroen.me/holmes/",
   "devDependencies": {
+    "babel-preset-es2015-rollup": "^1.2.0",
     "coveralls": "^2.11.12",
     "eslint": "^3.4.0",
     "eslint-config-xo-space": "^0.15.0",
