@@ -11,7 +11,13 @@ import type {OptionsType} from './types.js';
  *   (or <code>undefined</code>) for <code>onEmpty</code> and
  *   <code>onFound</code>.
  * @memberOf holmes
- * @instance
+ */
+
+/**
+ * Callback used for changes in input value
+ * @callback onInput
+ * @param {string} input The value that is currently in the search field
+ * @memberOf holmes
  */
 
 /**
@@ -79,7 +85,7 @@ class Holmes {
    *   Callback for when no items were found.
    * @param {onChange} [options.onFound]
    *   Callback for when items are found after being empty.
-   * @param {onChange} [options.onInput]
+   * @param {onInput} [options.onInput]
    *   Callback for every input.
    */
   constructor(options: OptionsType) {
@@ -98,7 +104,6 @@ class Holmes {
      * @member options
      * @type {Object}
      * @memberOf holmes
-     * @instance
      */
     this.options = {
       input: 'input[type=search]',
@@ -128,7 +133,6 @@ class Holmes {
      * @member hidden
      * @type {Number}
      * @memberOf holmes
-     * @instance
      */
     this.hidden = 0;
 
@@ -137,33 +141,26 @@ class Holmes {
      * @member input
      * @type {NodeList}
      * @memberOf holmes
-     * @instance
      */
-    // this.input;
 
     /**
      * All of the elements that are searched
      * @member elements
      * @type {NodeList}
      * @memberOf holmes
-     * @instance
      */
-    // this.elements;
 
     /**
      * Placeholder element
      * @member placeholderNode
      * @type {Element}
      * @memberOf holmes
-     * @instance
      */
-    // this.placeholderNode;
 
     /**
      * Is the current instance running
      * @member running
      * @memberOf holmes
-     * @instance
      * @type {Boolean}
      */
     this.running = false;
@@ -180,7 +177,6 @@ class Holmes {
      * input event handler
      * @function _inputHandler
      * @memberOf holmes
-     * @instance
      * @private
      */
     this._inputHandler = () => {
@@ -189,6 +185,8 @@ class Holmes {
 
       /**
        * Lowercase string holmes searces for
+       * @member searchString
+       * @memberOf holmes
        * @type {string}
        */
       this.searchString = this.inputString();
@@ -214,6 +212,13 @@ class Holmes {
       // loop over all the elements
       // in case this should become dynamic, query for the elements here
       if (this.options.mark) {
+        /**
+         * Regex to remove <mark>
+         * @member _regex
+         * @memberOf holmes
+         * @private
+         * @type {RegExp}
+         */
         this._regex = new RegExp(`(${this.searchString})(?![^<]*>)`, 'gi');
       }
 
@@ -261,7 +266,6 @@ class Holmes {
    * @function _hideElement
    * @param  {HTMLElement} element the element to hide
    * @memberOf holmes
-   * @instance
    * @private
    */
   _hideElement(element: HTMLElement) {
@@ -289,7 +293,6 @@ class Holmes {
    * @function _showElement
    * @param  {HTMLElement} element the element to show
    * @memberOf holmes
-   * @instance
    * @private
    */
   _showElement(element: HTMLElement) {
@@ -324,7 +327,6 @@ class Holmes {
    * @function inputString
    * @return {String} the input as a string
    * @memberOf holmes
-   * @instance
    */
   inputString(): string {
     if (this.input instanceof HTMLInputElement) {
@@ -341,7 +343,6 @@ class Holmes {
    * @function setInput
    * @param {string} value the string to set
    * @memberOf holmes
-   * @instance
    */
   setInput(value: string) {
     if (this.input instanceof HTMLInputElement) {
@@ -357,7 +358,6 @@ class Holmes {
    * Start an event listener with the specified options
    * @function start
    * @memberOf holmes
-   * @instance
    */
   start() {
     this.running = true;
@@ -374,7 +374,6 @@ class Holmes {
      * @member elementsLength
      * @type {Number}
      * @memberOf holmes
-     * @instance
      */
     this.elementsLength = this.elements.length;
 
@@ -383,7 +382,6 @@ class Holmes {
      * @member elementsArray
      * @type {Array}
      * @memberOf holmes
-     * @instance
      */
     this.elementsArray = Array.prototype.slice.call(this.elements);
     this.hidden = 0;
@@ -419,7 +417,6 @@ class Holmes {
    * @see this.start
    * @return {Promise} resolves when the event is removed
    * @memberOf holmes
-   * @instance
    */
   stop(): Promise<*> {
     return new Promise((resolve: *, reject: *) => {
@@ -456,7 +453,6 @@ class Holmes {
    * This avoids having to send a new `input` event
    * @function clear
    * @memberOf holmes
-   * @instance
    */
   clear() {
     this.setInput('');
@@ -487,7 +483,6 @@ class Holmes {
    * @function count
    * @return {object} all matching elements, the amount of hidden and the amount of visible elements
    * @memberOf holmes
-   * @instance
    */
   count(): {
     all: number,
