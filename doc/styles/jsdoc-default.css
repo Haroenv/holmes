@@ -424,7 +424,7 @@ h1, h2, h3, h4, h5, h6 {
     text-transform: initial;
     margin: 0;
     padding: .5rem 1rem;
-    font-family: Monacco, Consolas, monospace;
+    font-family: Monaco, Consolas, monospace;
     font-weight: normal;
     border-radius: 2px;
     background-color: #f7f7f7;
@@ -589,7 +589,7 @@ table {
     .main-nav li li > a {
       padding-left: 2rem;
       font-weight: normal;
-      font-family: Monacco, Consolas, monospace; }
+      font-family: Monaco, Consolas, monospace; }
       .main-nav li li > a:before {
         transform: scale(0.1, 1); }
     .main-nav li li li > a {
@@ -717,7 +717,7 @@ dl {
   margin: 2rem 1rem;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 2px 3px rgba(0, 0, 0, 0.35); }
   .card > h2 {
-    font-family: Monacco, Consolas, monospace; }
+    font-family: Monaco, Consolas, monospace; }
 
 .__tag {
   display: inline-flex;
@@ -732,7 +732,7 @@ dl {
   border-radius: 2px;
   vertical-align: baseline;
   font-size: 0.5rem;
-  font-family: Monacco, Consolas, monospace;
+  font-family: Monaco, Consolas, monospace;
   line-height: 1;
   font-weight: bold;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
@@ -744,7 +744,6 @@ dl {
     padding: 0.5em 1.5em;
     border-radius: inherit;
     color: currentColor;
-    width: calc(100% + 3em);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap; }
@@ -921,7 +920,7 @@ ol.linenums {
   margin-bottom: 0; }
 
 code {
-  font-family: Monacco, Consolas, monospace;
+  font-family: Monaco, Consolas, monospace;
   padding: 0 .5em;
   background: #fff;
   color: #000;
@@ -940,7 +939,7 @@ pre {
 
 .prettyprint {
   background: #fff;
-  font-family: Menlo, "Bitstream Vera Sans Mono", "DejaVu Sans Mono", Monaco, Consolas, monospace; }
+  font-family: Monaco, Consolas, monospace; }
   .prettyprint.linenums {
     padding: 0; }
 
