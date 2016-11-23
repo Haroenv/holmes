@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">65.65% </span>
+        <span class="strong">64.84% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>86/131</span>
+        <span class='fraction'>83/128</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">46.59% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>14/17</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">65.65% </span>
+        <span class="strong">64.84% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>86/131</span>
+        <span class='fraction'>83/128</span>
       </div>
     </div>
   </div>
@@ -550,46 +550,7 @@
 505
 506
 507
-508
-509
-510
-511
-512
-513
-514
-515
-516
-517
-518
-519
-520
-521
-522
-523
-524
-525
-526</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+508</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -730,7 +691,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -739,7 +699,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -748,7 +707,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -984,7 +945,6 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -1082,6 +1042,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1095,6 +1059,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// @flow
 import {mergeObj, toFactory} from './util.js';
+import type {OptionsType} from './types.js';
 &nbsp;
 /**
  * Callback used for changes in item en list states.
@@ -1107,36 +1072,14 @@ import {mergeObj, toFactory} from './util.js';
  * @memberOf holmes
  * @instance
  */
-type OnChangeType = (object: HTMLElement) =&gt; void;
-type OnInputType = (input: string) =&gt; void;
-&nbsp;
-type OptionsType = {
-  input: string,
-  find: string,
-  placeholder: ?string,
-  mark: ?boolean,
-  class: {
-    visible: ?string,
-    hidden: string
-  },
-  dynamic: ?boolean,
-  instant: ?boolean,
-  minCharacters: ?number,
-  hiddenAttr: ?boolean,
-  onHidden: ?OnChangeType,
-  onVisible: ?OnChangeType,
-  onEmpty: ?OnChangeType,
-  onFound: ?OnChangeType,
-  onInput: ?OnInputType
-};
 &nbsp;
 /**
  * @alias holmes
  */
 class Holmes {
   options: OptionsType;
-  elements: NodeList&lt;HTMLElement&gt;;
-  elementsArray: Array&lt;HTMLElement&gt;;
+  elements: NodeList&lt;HTMLElement&gt; ;
+  elementsArray: Array&lt;HTMLElement&gt; ;
   elementsLength: number;
   hidden: number;
   input: HTMLElement;
@@ -1255,7 +1198,7 @@ class Holmes {
      * @memberOf holmes
      * @instance
      */
-    this.input;
+    // this.input;
 &nbsp;
     /**
      * All of the elements that are searched
@@ -1264,7 +1207,7 @@ class Holmes {
      * @memberOf holmes
      * @instance
      */
-    this.elements;
+    // this.elements;
 &nbsp;
     /**
      * Placeholder element
@@ -1273,7 +1216,7 @@ class Holmes {
      * @memberOf holmes
      * @instance
      */
-    this.placeholderNode;
+    // this.placeholderNode;
 &nbsp;
     /**
      * Is the current instance running
@@ -1509,7 +1452,6 @@ class Holmes {
       this.placeholderNode = document.createElement('div');
       this.placeholderNode.id = 'holmes-placeholder';
       this.placeholderNode.classList.add(this.options.class.hidden);
-      /* $FlowIssue - flow assumes that placeholder can change here */
       this.placeholderNode.innerHTML = this.options.placeholder;
       if (this.elements[0].parentNode instanceof Element) {
         this.elements[0].parentNode.appendChild(this.placeholderNode);
@@ -1538,8 +1480,8 @@ class Holmes {
    * @memberOf holmes
    * @instance
    */
-  stop(): Promise&lt;any&gt; {
-    return new Promise((resolve: Function, reject: Function) =&gt; {
+  stop(): Promise&lt;*&gt; {
+    return new Promise((resolve: *, reject: *) =&gt; {
       try {
         this.input.removeEventListener('input', this._inputHandler);
 &nbsp;
@@ -1606,7 +1548,11 @@ class Holmes {
    * @memberOf holmes
    * @instance
    */
-  count(): {all: number, hidden: number, visible: number} {
+  count(): {
+    all: number,
+    hidden: number,
+    visible: number
+  } {
     return {
       all: this.elementsLength,
       hidden: this.hidden,
@@ -1624,7 +1570,7 @@ export default holmes;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Nov 23 2016 02:00:59 GMT+0100 (CET)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Nov 23 2016 02:24:05 GMT+0100 (CET)
 </div>
 </div>
 <script src="prettify.js"></script>

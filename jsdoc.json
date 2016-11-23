@@ -1,0 +1,6 @@
+{
+  "plugins": ["node_modules/jsdoc-babel"],
+  "babel": {
+    "plugins": ["transform-flow-strip-types"]
+  }
+}

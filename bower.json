@@ -27,6 +27,7 @@
     "install.json",
     "js/main.js",
     "js/microlight.js",
+    "js/types.js",
     "js/util.js",
     "node_modules"
   ]

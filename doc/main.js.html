@@ -21,7 +21,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav class="main-nav">
-    <header class="nav-header"><h2><a href="index.html">Home</a></h2></header><header class="nav-header"><h3><span>Classes</span></h3></header><ul><li><a href="holmes.html">holmes</a><ul class='members'><li class='nav-type-header'>Members</li><li data-type='member'><a href="holmes.html#elements">elements</a></li><li data-type='member'><a href="holmes.html#elementsArray">elementsArray</a></li><li data-type='member'><a href="holmes.html#elementsLength">elementsLength</a></li><li data-type='member'><a href="holmes.html#hidden">hidden</a></li><li data-type='member'><a href="holmes.html#input">input</a></li><li data-type='member'><a href="holmes.html#options">options</a></li><li data-type='member'><a href="holmes.html#placeholderNode">placeholderNode</a></li></ul><ul class='methods'><li class='nav-type-header'>Methods</li><li data-type='method'><a href="holmes.html#clear">clear</a></li><li data-type='method'><a href="holmes.html#count">count</a></li><li data-type='method'><a href="holmes.html#inputString">inputString</a></li><li data-type='method'><a href="holmes.html#setInput">setInput</a></li><li data-type='method'><a href="holmes.html#start">start</a></li><li data-type='method'><a href="holmes.html#stop">stop</a></li></ul><ul class='typedefs'><li class='nav-type-header'>Typedefs</li><li data-type='typedef'><a href="holmes.html#onChange">onChange</a></li></ul></li></ul>
+    <header class="nav-header"><h2><a href="index.html">Home</a></h2></header><header class="nav-header"><h3><span>Classes</span></h3></header><ul><li><a href="holmes.html">holmes</a><ul class='members'><li class='nav-type-header'>Members</li><li data-type='member'><a href="holmes.html#elements">elements</a></li><li data-type='member'><a href="holmes.html#elementsArray">elementsArray</a></li><li data-type='member'><a href="holmes.html#elementsLength">elementsLength</a></li><li data-type='member'><a href="holmes.html#hidden">hidden</a></li><li data-type='member'><a href="holmes.html#input">input</a></li><li data-type='member'><a href="holmes.html#options">options</a></li><li data-type='member'><a href="holmes.html#placeholderNode">placeholderNode</a></li><li data-type='member'><a href="holmes.html#running">running</a></li></ul><ul class='methods'><li class='nav-type-header'>Methods</li><li data-type='method'><a href="holmes.html#clear">clear</a></li><li data-type='method'><a href="holmes.html#count">count</a></li><li data-type='method'><a href="holmes.html#inputString">inputString</a></li><li data-type='method'><a href="holmes.html#setInput">setInput</a></li><li data-type='method'><a href="holmes.html#start">start</a></li><li data-type='method'><a href="holmes.html#stop">stop</a></li></ul><ul class='typedefs'><li class='nav-type-header'>Typedefs</li><li data-type='typedef'><a href="holmes.html#onChange">onChange</a></li></ul></li></ul>
 </nav>
 
 <main id="main" class="main-content">
@@ -38,11 +38,35 @@
         <article>
             <pre class="prettyprint source linenums"><code>// @flow
 import {mergeObj, toFactory} from './util.js';
+import type {OptionsType} from './types.js';
+
+/**
+ * Callback used for changes in item en list states.
+ * @callback onChange
+ * @param {object} [HTMLElement]
+ *   Element affected by the event. This is the item found by
+ *   &lt;code>onVisible&lt;/code> and &lt;code>onHidden&lt;/code> and the placeholder
+ *   (or &lt;code>undefined&lt;/code>) for &lt;code>onEmpty&lt;/code> and
+ *   &lt;code>onFound&lt;/code>.
+ * @memberOf holmes
+ * @instance
+ */
 
 /**
  * @alias holmes
  */
 class Holmes {
+  options: OptionsType;
+  elements: NodeList&lt;HTMLElement> ;
+  elementsArray: Array&lt;HTMLElement> ;
+  elementsLength: number;
+  hidden: number;
+  input: HTMLElement;
+  running: boolean;
+  placeholderNode: HTMLElement;
+  searchString: string;
+  _regex: RegExp;
+  _inputHandler: EventListener;
 
   /**
    * search for dom elements on your page
@@ -96,8 +120,8 @@ class Holmes {
    * @param {onChange} [options.onInput]
    *   Callback for every input.
    */
-  constructor(options) {
-    let empty = false;
+  constructor(options: OptionsType) {
+    let empty: boolean = false;
 
     if (typeof options !== 'object') {
       throw new Error('The options need to be given inside an object like this:\nnew Holmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html');
@@ -116,7 +140,7 @@ class Holmes {
      */
     this.options = {
       input: 'input[type=search]',
-      find: undefined,
+      find: '',
       placeholder: undefined,
       mark: false,
       class: {
@@ -153,7 +177,7 @@ class Holmes {
      * @memberOf holmes
      * @instance
      */
-    this.input = undefined;
+    // this.input;
 
     /**
      * All of the elements that are searched
@@ -162,7 +186,7 @@ class Holmes {
      * @memberOf holmes
      * @instance
      */
-    this.elements = undefined;
+    // this.elements;
 
     /**
      * Placeholder element
@@ -171,7 +195,16 @@ class Holmes {
      * @memberOf holmes
      * @instance
      */
-    this.placeholderNode = undefined;
+    // this.placeholderNode;
+
+    /**
+     * Is the current instance running
+     * @member running
+     * @memberOf holmes
+     * @instance
+     * @type {Boolean}
+     */
+    this.running = false;
 
     if (this.options.instant) {
       this.start(options);
@@ -190,7 +223,7 @@ class Holmes {
      */
     this._inputHandler = () => {
       // by default the value isn't found
-      let found = false;
+      let found: boolean = false;
 
       /**
        * Lowercase string holmes searces for
@@ -222,7 +255,7 @@ class Holmes {
         this._regex = new RegExp(`(${this.searchString})(?![^&lt;]*>)`, 'gi');
       }
 
-      this.elementsArray.forEach((element => {
+      this.elementsArray.forEach((element: HTMLElement) => {
         // if the current element doesn't contain the search string
         // add the hidden class and remove the visbible class
         if (element.textContent.toLowerCase().includes(this.searchString)) {
@@ -237,7 +270,7 @@ class Holmes {
         } else {
           this._hideElement(element);
         }
-      }));
+      });
 
       if (typeof this.options.onInput === 'function') {
         this.options.onInput(this.searchString);
@@ -269,7 +302,7 @@ class Holmes {
    * @instance
    * @private
    */
-  _hideElement(element) {
+  _hideElement(element: HTMLElement) {
     if (this.options.class.visible) {
       element.classList.remove(this.options.class.visible);
     }
@@ -297,7 +330,7 @@ class Holmes {
    * @instance
    * @private
    */
-  _showElement(element) {
+  _showElement(element: HTMLElement) {
     if (this.options.class.visible) {
       element.classList.add(this.options.class.visible);
     }
@@ -331,7 +364,7 @@ class Holmes {
    * @memberOf holmes
    * @instance
    */
-  inputString() {
+  inputString(): string {
     if (this.input instanceof HTMLInputElement) {
       return this.input.value.toLowerCase();
     }
@@ -348,7 +381,7 @@ class Holmes {
    * @memberOf holmes
    * @instance
    */
-  setInput(value) {
+  setInput(value: string) {
     if (this.input instanceof HTMLInputElement) {
       this.input.value = value;
     } else if (this.input.contentEditable) {
@@ -398,7 +431,6 @@ class Holmes {
       this.placeholderNode = document.createElement('div');
       this.placeholderNode.id = 'holmes-placeholder';
       this.placeholderNode.classList.add(this.options.class.hidden);
-      /* $FlowIssue - flow assumes that placeholder can change here */
       this.placeholderNode.innerHTML = this.options.placeholder;
       if (this.elements[0].parentNode instanceof Element) {
         this.elements[0].parentNode.appendChild(this.placeholderNode);
@@ -409,9 +441,10 @@ class Holmes {
 
     // if a visible class is given, give it to everything
     if (this.options.class.visible) {
-      this.elementsArray.forEach((element => {
-        element.classList.add(this.options.class.visible);
-      }));
+      const vis: string = this.options.class.visible;
+      this.elementsArray.forEach((element: HTMLElement) => {
+        element.classList.add(vis);
+      });
     }
 
     // listen for input
@@ -426,8 +459,8 @@ class Holmes {
    * @memberOf holmes
    * @instance
    */
-  stop() {
-    return new Promise((resolve, reject) => {
+  stop(): Promise&lt;*> {
+    return new Promise((resolve: *, reject: *) => {
       try {
         this.input.removeEventListener('input', this._inputHandler);
 
@@ -442,7 +475,7 @@ class Holmes {
 
         // remove marks
         if (this.options.mark) {
-          this.elementsArray.forEach(element => {
+          this.elementsArray.forEach((element: HTMLElement) => {
             element.innerHTML = element.innerHTML.replace(/&lt;\/?mark>/g, '');
           });
         }
@@ -467,16 +500,17 @@ class Holmes {
     this.setInput('');
     // if a visible class is given, give it to everything
     if (this.options.class.visible) {
-      this.elementsArray.forEach(element => {
+      const vis: string = this.options.class.visible;
+      this.elementsArray.forEach((element: HTMLElement) => {
         element.classList.remove(this.options.class.hidden);
-        element.classList.add(this.options.class.visible);
+        element.classList.add(vis);
       });
     } else {
-      this.elementsArray.forEach(element => {
+      this.elementsArray.forEach((element: HTMLElement) => {
         element.classList.remove(this.options.class.hidden);
       });
     }
-    if (this.options.placeholder) {
+    if (this.options.placeholder &amp;&amp; this.options.class.hidden) {
       this.placeholderNode.classList.add(this.options.class.hidden);
       if (this.options.class.visible) {
         this.placeholderNode.classList.remove(this.options.class.visible);
@@ -493,7 +527,11 @@ class Holmes {
    * @memberOf holmes
    * @instance
    */
-  count() {
+  count(): {
+    all: number,
+    hidden: number,
+    visible: number
+  } {
     return {
       all: this.elementsLength,
       hidden: this.hidden,
@@ -502,17 +540,6 @@ class Holmes {
   }
 }
 
-/**
- * Callback used for changes in item en list states.
- * @callback onChange
- * @param {object} [element]
- *   Element affected by the event. This is the item found by
- *   &lt;code>onVisible&lt;/code> and &lt;code>onHidden&lt;/code> and the placeholder
- *   (or &lt;code>undefined&lt;/code>) for &lt;code>onEmpty&lt;/code> and
- *   &lt;code>onFound&lt;/code>.
- * @memberOf holmes
- * @instance
- */
 const holmes = toFactory(Holmes);
 
 export default holmes;
@@ -529,7 +556,7 @@ export default holmes;
 
 
 <footer class="main-footer">
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Nov 22 2016 23:25:05 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Wed Nov 23 2016 02:21:38 GMT+0100 (CET)
 </footer>
 
 <script>prettyPrint();</script>

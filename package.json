@@ -14,7 +14,7 @@
     "lint": "eslint js/main.js",
     "flow": "flow",
     "jest": "jest --coverage",
-    "doc": "jsdoc -t node_modules/hopsdoc -R README.md -d doc js/main.js",
+    "doc": "jsdoc -t node_modules/hopsdoc -c jsdoc.json -R README.md -d doc js/main.js",
     "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "keywords": [
@@ -117,6 +117,7 @@
     "hopsdoc": "haroenv/hopsdoc#v0.1.9",
     "jest": "^15.0.1",
     "jsdoc": "^3.4.0",
+    "jsdoc-babel": "^0.2.1",
     "rollup": "^0.36.3",
     "rollup-plugin-babel": "^2.6.1",
     "rollup-plugin-flow": "^1.0.1",

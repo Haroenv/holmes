@@ -1,5 +1,6 @@
 // @flow
 import {mergeObj, toFactory} from './util.js';
+import type {OptionsType} from './types.js';
 
 /**
  * Callback used for changes in item en list states.
@@ -12,36 +13,14 @@ import {mergeObj, toFactory} from './util.js';
  * @memberOf holmes
  * @instance
  */
-type OnChangeType = (object: HTMLElement) => void;
-type OnInputType = (input: string) => void;
-
-type OptionsType = {
-  input: string,
-  find: string,
-  placeholder: ?string,
-  mark: ?boolean,
-  class: {
-    visible: ?string,
-    hidden: string
-  },
-  dynamic: ?boolean,
-  instant: ?boolean,
-  minCharacters: ?number,
-  hiddenAttr: ?boolean,
-  onHidden: ?OnChangeType,
-  onVisible: ?OnChangeType,
-  onEmpty: ?OnChangeType,
-  onFound: ?OnChangeType,
-  onInput: ?OnInputType
-};
 
 /**
  * @alias holmes
  */
 class Holmes {
   options: OptionsType;
-  elements: NodeList<HTMLElement>;
-  elementsArray: Array<HTMLElement>;
+  elements: NodeList<HTMLElement> ;
+  elementsArray: Array<HTMLElement> ;
   elementsLength: number;
   hidden: number;
   input: HTMLElement;
@@ -160,7 +139,7 @@ class Holmes {
      * @memberOf holmes
      * @instance
      */
-    this.input;
+    // this.input;
 
     /**
      * All of the elements that are searched
@@ -169,7 +148,7 @@ class Holmes {
      * @memberOf holmes
      * @instance
      */
-    this.elements;
+    // this.elements;
 
     /**
      * Placeholder element
@@ -178,7 +157,7 @@ class Holmes {
      * @memberOf holmes
      * @instance
      */
-    this.placeholderNode;
+    // this.placeholderNode;
 
     /**
      * Is the current instance running
@@ -414,7 +393,6 @@ class Holmes {
       this.placeholderNode = document.createElement('div');
       this.placeholderNode.id = 'holmes-placeholder';
       this.placeholderNode.classList.add(this.options.class.hidden);
-      /* $FlowIssue - flow assumes that placeholder can change here */
       this.placeholderNode.innerHTML = this.options.placeholder;
       if (this.elements[0].parentNode instanceof Element) {
         this.elements[0].parentNode.appendChild(this.placeholderNode);
@@ -444,7 +422,7 @@ class Holmes {
    * @instance
    */
   stop(): Promise<*> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: *, reject: *) => {
       try {
         this.input.removeEventListener('input', this._inputHandler);
 
@@ -511,7 +489,11 @@ class Holmes {
    * @memberOf holmes
    * @instance
    */
-  count(): {all: number, hidden: number, visible: number} {
+  count(): {
+    all: number,
+    hidden: number,
+    visible: number
+  } {
     return {
       all: this.elementsLength,
       hidden: this.hidden,
