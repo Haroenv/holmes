@@ -115,7 +115,9 @@ describe('Instance-less usage', () => {
 
 describe('options', () => {
   test('defaults are set', () => {
-    const _h = new Holmes({find: 'something'});
+    const _h = new Holmes({
+      find: 'something'
+    });
     expect(_h.options).toEqual({
       input: 'input[type=search]',
       find: 'something',
@@ -158,11 +160,12 @@ describe('options', () => {
     // test('hidden gets added', () => {
     //   setStub();
     //   const find = '.result';
-    //   Holmes({
+    //   holmes({
     //     find,
     //     instant: true,
     //     hiddenAttr: true
     //   });
+
     //   return input('Some text that will hide everything!').then(() => {
     //     expect(document.querySelector(find).hidden).toBe(true);
     //   });
@@ -175,6 +178,7 @@ describe('options', () => {
         find,
         instant: true
       });
+
       return input('Some text that will hide everything!').then(() => {
         expect(document.querySelector(find).hidden).toBe(false);
       });
@@ -188,6 +192,7 @@ describe('options', () => {
         instant: true,
         hiddenAttr: false
       });
+
       return input('Some text that will hide everything!').then(() => {
         expect(document.querySelector(find).hidden).toBe(false);
       });
@@ -196,9 +201,6 @@ describe('options', () => {
 
 
   // test('.minCharacters', () => {
-  //   setStub();
-  // });
-  // test('.mark', () => {
   //   setStub();
   // });
 
@@ -236,12 +238,12 @@ describe('options', () => {
     //   });
 
     //   // some short input that's surely not in the data
-    //   input('qsdfg');
+    //   return input('qsdfg').then(() => {
+    //     const all = document.querySelectorAll(find);
+    //     const hidden = document.querySelectorAll(find + '.hidden');
 
-    //   const all = document.querySelectorAll(find);
-    //   const hidden = document.querySelectorAll(find + '.hidden');
-
-    //   expect(all).toEqual(hidden);
+    //     expect(all).toEqual(hidden);
+    //   });
     // });
   });
 
@@ -253,12 +255,13 @@ describe('options', () => {
     //     find,
     //     mark: true
     //   });
-    //
+
     //   return input('special').then(() => {
     //     const specialContent = document.getElementById('contains-special').innerHTML;
     //     expect(specialContent).toContain('<mark>special</mark>');
     //   });
     // });
+
     // test('removes all of the <mark>s when there are no matches', () => {
     //   setStub();
     //   const find = '.result';
@@ -461,7 +464,29 @@ describe('Usage with instance', () => {
       expect(all).toEqual(visible);
     });
 
-    // test('removes placeholder', () => {});
+    test('removes placeholder', () => {
+      setStub();
+      const result = '.result';
+      const _h = new Holmes({
+        find: result,
+        instant: true,
+        class: {
+          visible: 'visible'
+        },
+        placeholder: 'nice holder 👌'
+      });
+
+      let placeholder = document.getElementById('holmes-placeholder');
+
+      expect(placeholder.innerHTML).toBe('nice holder 👌');
+
+      _h.stop();
+
+      let placeholderNew = document.getElementById('holmes-placeholder');
+
+      expect(placeholderNew).toBeNull();
+    });
+
     // test('removes marks', () => {});
   });
 
