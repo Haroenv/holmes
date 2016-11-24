@@ -468,7 +468,7 @@ class Holmes {
         element.classList.remove(this.options.class.hidden);
       });
     }
-    if (this.options.placeholder && this.options.class.hidden) {
+    if (this.options.placeholder) {
       this.placeholderNode.classList.add(this.options.class.hidden);
       if (this.options.class.visible) {
         this.placeholderNode.classList.remove(this.options.class.visible);
