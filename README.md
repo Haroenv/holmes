@@ -19,7 +19,7 @@ You can install Holmes with either `npm` or `bower` under the package name `holm
 $ npm install --save holmes.js
 ```
 
-After which you can add it in your page with i.e. browserify or loading the module in a different script tag.
+After which you can add it in your page with i.e. webpack, rollup, browserify or loading the module in a different script tag.
 
 You have to make sure that you have a `css` rule for the class `.hidden` that hides elements however you want. One option is to have this:
 
