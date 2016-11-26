@@ -157,19 +157,19 @@ describe('options', () => {
   });
 
   describe('.hiddenAttr', () => {
-    // test('hidden gets added', () => {
-    //   setStub();
-    //   const find = '.result';
-    //   holmes({
-    //     find,
-    //     instant: true,
-    //     hiddenAttr: true
-    //   });
+    test('hidden gets added', () => {
+      setStub();
+      const find = '.result';
+      holmes({
+        find,
+        instant: true,
+        hiddenAttr: true
+      }).start();
 
-    //   return input('Some text that will hide everything!').then(() => {
-    //     expect(document.querySelector(find).hidden).toBe(true);
-    //   });
-    // });
+      return input('Some text that will hide everything!').then(() => {
+        expect(document.querySelector(find).hidden).toBe(true);
+      });
+    });
 
     test('default false', () => {
       setStub();
@@ -199,7 +199,6 @@ describe('options', () => {
     });
   });
 
-
   // test('.minCharacters', () => {
   //   setStub();
   // });
@@ -225,130 +224,130 @@ describe('options', () => {
       expect(all).toEqual(visible);
     });
 
-    // test('over minimum does make things happen', () => {
-    //   setStub();
-    //   const find = '.result';
-    //   holmes({
-    //     find,
-    //     instant: true,
-    //     minCharacters: 5,
-    //     class: {
-    //       visible: 'visible'
-    //     }
-    //   });
+    test('over minimum does make things happen', () => {
+      setStub();
+      const find = '.result';
+      holmes({
+        find,
+        instant: true,
+        minCharacters: 5,
+        class: {
+          visible: 'visible'
+        }
+      }).start();
 
-    //   // some short input that's surely not in the data
-    //   return input('qsdfg').then(() => {
-    //     const all = document.querySelectorAll(find);
-    //     const hidden = document.querySelectorAll(find + '.hidden');
+      // some short input that's surely not in the data
+      return input('qsdfg').then(() => {
+        const all = document.querySelectorAll(find);
+        const hidden = document.querySelectorAll(find + '.hidden');
 
-    //     expect(all).toEqual(hidden);
-    //   });
-    // });
+        expect(all).toEqual(hidden);
+      });
+    });
   });
 
   describe('.mark', () => {
-    // test('adds mark around a matching word', () => {
-    //   setStub();
-    //   const find = '.result';
-    //   holmes({
-    //     find,
-    //     mark: true
-    //   });
+    test('adds mark around a matching word', () => {
+      setStub();
+      const find = '.result';
+      holmes({
+        find,
+        mark: true
+      }).start();
 
-    //   return input('special').then(() => {
-    //     const specialContent = document.getElementById('contains-special').innerHTML;
-    //     expect(specialContent).toContain('<mark>special</mark>');
-    //   });
-    // });
+      return input('special').then(() => {
+        const specialContent = document.getElementById('contains-special').innerHTML;
+        expect(specialContent).toContain('<mark>special</mark>');
+      });
+    });
 
-    // test('removes all of the <mark>s when there are no matches', () => {
-    //   setStub();
-    //   const find = '.result';
-    //   holmes({
-    //     find,
-    //     mark: true
-    //   });
-    //
-    //   return input('special')
-    //   .then(() => {
-    //     // input empty, this will remove all <mark>s
-    //     input('');
-    //   })
-    //   .then(() => {
-    //     const allContent = document.querySelector('ul').innerHTML;
-    //     expect(allContent).not.toContain('<mark>');
-    //     expect(allContent).not.toContain('</mark>');
-    //   });
-    // });
+    test('removes all of the <mark>s when there are no matches', () => {
+      setStub();
+      const find = '.result';
+      holmes({
+        find,
+        mark: true
+      }).start();
+
+      return input('special')
+      .then(() => {
+        // input empty, this will remove all <mark>s
+        input('');
+      })
+      .then(() => {
+        const allContent = document.querySelector('ul').innerHTML;
+        expect(allContent).not.toContain('<mark>');
+        expect(allContent).not.toContain('</mark>');
+      });
+    });
   });
 
   describe('callbacks', () => {
-    // test('onInput', () => {
-    //   setStub();
-    //   const callback = jest.fn();
-    //   holmes({
-    //     find: '.result',
-    //     onInput: callback
-    //   });
-    //   return input('some text that hides a lot').then(() => {
-    //     expect(callback).toBeCalled();
-    //   });
-    // });
-    // test('onVisible', () => {
-    //   setStub();
-    //   const callback = jest.fn();
-    //   holmes({
-    //     find: '.result',
-    //     onVisible: callback
-    //   });
-    //   return input('some text that hides a lot')
-    //   .then(() => {
-    //     // clears the input and makes everything visible
-    //     input('');
-    //   })
-    //   .then(() => {
-    //     expect(callback).toBeCalled();
-    //   });
-    // });
-    // test('onHidden', () => {
-    //   setStub();
-    //   const callback = jest.fn();
-    //   holmes({
-    //     find: '.result',
-    //     onHidden: callback
-    //   });
-    //   return input('some text that hides a lot').then(() => {
-    //     expect(callback).toBeCalled();
-    //   });
-    // });
-    // test('onEmpty', () => {
-    //   setStub();
-    //   const callback = jest.fn();
-    //   holmes({
-    //     find: '.result',
-    //     onEmpty: callback
-    //   });
-    //   return input('some text that hides everything').then(() => {
-    //     expect(callback).toBeCalled();
-    //   });
-    // });
-    // test('onFound', () => {
-    //   setStub();
-    //   const callback = jest.fn();
-    //   holmes({
-    //     find: '.result',
-    //     onFound: callback
-    //   });
-    //   return input('some text that hides everything')
-    //   .then(() => {
-    //     // clears the input and makes everything visible
-    //     input('');
-    //   })
-    //   .then(() => {
-    //     expect(callback).toBeCalled();
-    //   });
-    // });
+    test('onInput', () => {
+      setStub();
+      const callback = jest.fn();
+      holmes({
+        find: '.result',
+        onInput: callback
+      }).start();
+      return input('some text that hides a lot').then(() => {
+        expect(callback).toBeCalled();
+      });
+    });
+    test('onVisible', () => {
+      setStub();
+      const callback = jest.fn();
+      holmes({
+        find: '.result',
+        onVisible: callback
+      }).start();
+      return input('some text that hides a lot')
+      .then(() => {
+        // clears the input and makes everything visible
+        input('');
+      })
+      .then(() => {
+        expect(callback).toBeCalled();
+      });
+    });
+    test('onHidden', () => {
+      setStub();
+      const callback = jest.fn();
+      holmes({
+        find: '.result',
+        onHidden: callback
+      }).start();
+      return input('some text that hides a lot').then(() => {
+        expect(callback).toBeCalled();
+      });
+    });
+    test('onEmpty', () => {
+      setStub();
+      const callback = jest.fn();
+      holmes({
+        find: '.result',
+        onEmpty: callback
+      }).start();
+      return input('some text that hides everything').then(() => {
+        expect(callback).toBeCalled();
+      });
+    });
+    test('onFound', () => {
+      setStub();
+      const callback = jest.fn();
+      holmes({
+        find: '.result',
+        onFound: callback
+      }).start();
+      return input('some text that hides everything')
+      .then(() => {
+        // clears the input and makes everything visible
+        input('');
+      })
+      .then(() => {
+        expect(callback).toBeCalled();
+      });
+    });
   });
 
   describe('.placeholder', () => {
@@ -539,22 +538,24 @@ describe('Usage with instance', () => {
       });
     });
 
-    // test('updates on input', () => {
-    //   setStub();
-    //   const _h = new Holmes({
-    //     find: '.result',
-    //     instant: true
-    //   });
+    test('updates on input', () => {
+      setStub();
+      const _h = new Holmes({
+        find: '.result',
+        instant: true
+      });
+      _h.start();
 
-    //   input('special');
+      input('special');
 
-    //   expect(_h.count()).toEqual({
-    //     all: 50,
-    //     hidden: 49,
-    //     visible: 1
-    //   });
-    // });
+      expect(_h.count()).toEqual({
+        all: 50,
+        hidden: 49,
+        visible: 1
+      });
+    });
   });
+
 
   // test('input of a contenteditable is valid', () => {
   //   setStub();
