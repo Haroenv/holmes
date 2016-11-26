@@ -199,10 +199,6 @@ describe('options', () => {
     });
   });
 
-  // test('.minCharacters', () => {
-  //   setStub();
-  // });
-
   describe('.minCharacters', () => {
     test('less than minimum amount doesn\'t make anything happen', () => {
       setStub();
@@ -272,7 +268,7 @@ describe('options', () => {
       return input('special')
       .then(() => {
         // input empty, this will remove all <mark>s
-        input('');
+        return input('');
       })
       .then(() => {
         const allContent = document.querySelector('ul').innerHTML;
@@ -388,6 +384,7 @@ describe('options', () => {
       expect(placeholder.classList.contains('hidden')).toBe(true);
     });
 
+    // works in browser
     // test('not hidden when no results', () => {
     //   setStub();
     //   holmes({
@@ -396,9 +393,8 @@ describe('options', () => {
     //     placeholder: 'test'
     //   });
 
-    //   const placeholder = document.getElementById('holmes-placeholder');
-
-    //   return input('definitely not in the list').then(() => {
+    //   return input('some input which is definitely not in the list').then(() => {
+    //     const placeholder = document.getElementById('holmes-placeholder');
     //     expect(placeholder.classList.contains('hidden')).toBe(false);
     //   });
     // });
@@ -414,6 +410,7 @@ describe('Usage with instance', () => {
 
     expect(_h).toBeDefined();
   });
+
   describe('.clear()', () => {
     test('empties the input and shows everything', () => {
       setStub();
@@ -556,6 +553,63 @@ describe('Usage with instance', () => {
     });
   });
 
+  // describe('options.dynamic', () => {
+  //   function addEl() {
+  //     const ul = document.querySelector('ul');
+  //     const el = document.createElement('li');
+  //     el.innerHTML = 'test';
+  //     el.classList.add('result');
+  //     ul.insertBefore(el, null);
+  //   }
+
+  //   test('this.elementsLength gets edited', () => {
+  //     setStub();
+  //     const find = '.result';
+  //     const _h = new Holmes({
+  //       find,
+  //       instant: true,
+  //       dynamic: true
+  //     });
+
+  //     const l = _h.elementsLength;
+
+  //     return input(' ').then(() => {
+  //       expect(_h.elementsLength).toBe(l + 1);
+  //     });
+  //   });
+
+  //   test('this.elements gets edited', () => {
+  //     setStub();
+  //     const find = '.result';
+  //     const _h = new Holmes({
+  //       find,
+  //       instant: true,
+  //       dynamic: true
+  //     });
+
+  //     const l = _h.elements.length;
+
+  //     return input(' ').then(() => {
+  //       expect(_h.elements.length).toBe(l + 1);
+  //     });
+  //   });
+
+  //   test('this.elementsArray gets edited', () => {
+  //     setStub();
+  //     const find = '.result';
+  //     const _h = new Holmes({
+  //       find,
+  //       instant: true,
+  //       dynamic: true
+  //     });
+
+  //     const l = _h.elementsArray.length;
+
+  //     return input(' ').then(() => {
+  //       expect(_h.elementsArray.length).toBe(l + 1);
+  //     });
+  //   });
+  // });
 
   // test('input of a contenteditable is valid', () => {
   //   setStub();
