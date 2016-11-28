@@ -402,6 +402,7 @@ describe('options', () => {
 });
 
 describe('Usage with instance', () => {
+
   test('Initialisation works', () => {
     setStub();
     const _h = new Holmes({
@@ -409,6 +410,24 @@ describe('Usage with instance', () => {
     });
 
     expect(_h).toBeDefined();
+  });
+
+  test('starts on DOMContentLoaded', () => {
+    setStub();
+
+    const _h = new Holmes({
+      find: '.result',
+    });
+
+    const mockStart = jest.fn();
+
+    _h.start = mockStart;
+
+    const DOMContentLoaded_event = document.createEvent("Event");
+    DOMContentLoaded_event.initEvent("DOMContentLoaded", true, true);
+    document.dispatchEvent(DOMContentLoaded_event);
+
+    expect(mockStart).toBeCalled();
   });
 
   describe('.clear()', () => {
