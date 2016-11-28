@@ -212,12 +212,12 @@ describe('options', () => {
         }
       });
       // some short input that's surely not in the data
-      input('qsdf');
+      return input('qsdf').then(() => {
+        const all = document.querySelectorAll(find);
+        const visible = document.querySelectorAll(find + '.visible');
 
-      const all = document.querySelectorAll(find);
-      const visible = document.querySelectorAll(find + '.visible');
-
-      expect(all).toEqual(visible);
+        expect(all).toEqual(visible);
+      });
     });
 
     test('over minimum does make things happen', () => {
@@ -427,8 +427,27 @@ describe('Usage with instance', () => {
     DOMContentLoaded_event.initEvent("DOMContentLoaded", true, true);
     document.dispatchEvent(DOMContentLoaded_event);
 
-    expect(mockStart).toBeCalled();
+    expect(mockStart).toHaveBeenCalledTimes(1);
   });
+
+  // describe('.minCharacters', () => {
+  //   test('less than minimum amount returns undefined', () => {
+  //     setStub();
+  //     const find = '.result';
+  //     const _h = new Holmes({
+  //       find,
+  //       instant: true,
+  //       minCharacters: 5
+  //     });
+
+  //     _h._inputHandler = jest.fn();
+
+  //     // some short input that's surely not in the data
+  //     return input('qsdf').then(() => {
+  //       expect(_h._inputHandler).toBeUndefined(); // somehow this should be the last return value of ._inputHandler
+  //     });
+  //   });
+  // });
 
   describe('.clear()', () => {
     test('empties the input and shows everything', () => {
@@ -502,7 +521,20 @@ describe('Usage with instance', () => {
       expect(placeholderNew).toBeNull();
     });
 
-    // test('removes marks', () => {});
+    test('removes marks', () => {
+      setStub();
+      const _h = new Holmes({
+        find: '.result',
+        instant: true,
+        mark: true
+      });
+
+      return _h.stop().then(() => {
+        const allContent = document.querySelector('ul').innerHTML;
+        expect(allContent).not.toContain('<mark>');
+        expect(allContent).not.toContain('</mark>');
+      });
+    });
   });
 
   test('.start() after .stop() resumes normal activity', () => {

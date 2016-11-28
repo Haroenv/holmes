@@ -196,7 +196,7 @@ class Holmes {
       if (this.options.minCharacters) {
         if (this.searchString.length !== 0) {
           if (this.options.minCharacters > this.searchString.length) {
-            return;
+            return undefined;
           }
         }
       }
