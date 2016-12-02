@@ -246,14 +246,14 @@ class Holmes {
         empty = true;
 
         if (this.options.placeholder) {
-          this.placeholderNode.classList.remove(this.options.class.hidden);
+          this._showElement(this.placeholderNode);
         }
         if (typeof this.options.onEmpty === 'function') {
           this.options.onEmpty(this.placeholderNode);
         }
       } else if (!empty) {
         if (this.options.placeholder) {
-          this.placeholderNode.classList.add(this.options.class.hidden);
+          this._showElement(this.placeholderNode);
         }
       }
     };
@@ -387,7 +387,7 @@ class Holmes {
     if (this.options.placeholder) {
       this.placeholderNode = document.createElement('div');
       this.placeholderNode.id = 'holmes-placeholder';
-      this.placeholderNode.classList.add(this.options.class.hidden);
+      this._hideElement(this.placeholderNode);
       this.placeholderNode.innerHTML = this.options.placeholder;
       if (this.elements[0].parentNode instanceof Element) {
         this.elements[0].parentNode.appendChild(this.placeholderNode);
@@ -453,23 +453,13 @@ class Holmes {
    */
   clear() {
     this.setInput('');
-    // if a visible class is given, give it to everything
-    if (this.options.class.visible) {
-      const vis: string = this.options.class.visible;
-      this.elementsArray.forEach((element: HTMLElement) => {
-        element.classList.remove(this.options.class.hidden);
-        element.classList.add(vis);
-      });
-    } else {
-      this.elementsArray.forEach((element: HTMLElement) => {
-        element.classList.remove(this.options.class.hidden);
-      });
-    }
+
+    this.elementsArray.forEach((element: HTMLElement) => {
+      this._showElement(element);
+    });
+
     if (this.options.placeholder) {
-      this.placeholderNode.classList.add(this.options.class.hidden);
-      if (this.options.class.visible) {
-        this.placeholderNode.classList.remove(this.options.class.visible);
-      }
+      this._hideElement(this.placeholderNode);
     }
 
     this.hidden = 0;
