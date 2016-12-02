@@ -1,5 +1,5 @@
 // @flow
-import {mergeObj, toFactory} from './util.js';
+import {toFactory} from './util.js';
 import type {OptionsType} from './types.js';
 
 /**
@@ -67,6 +67,7 @@ class Holmes {
    *   not. By default it's assumed that it's <code>&lt;input&gt;</code>, <code>true</code> here
    *   will use <code>&lt;div contenteditable&gt;</code>
    * @param {boolean} [options.instant=false]
+   *   DEPRECATED!!, after v1.13.3 use <code>holmes({}).start();</code> instead
    *   By default Holmes waits for the <code>DOMContentLoaded</code> event to fire
    *   before listening. This is to make sure that all content is available. However
    *   if you exactly know when all your content is available (ajax, your own event or
@@ -100,12 +101,7 @@ class Holmes {
       throw new Error('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nnew Holmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html');
     }
 
-    /**
-     * @member options
-     * @type {Object}
-     * @memberOf holmes
-     */
-    this.options = {
+    const defaults = {
       input: 'input[type=search]',
       find: '',
       placeholder: undefined,
@@ -115,7 +111,6 @@ class Holmes {
         hidden: 'hidden'
       },
       dynamic: false,
-      instant: false,
       minCharacters: 0,
       hiddenAttr: false,
       onHidden: undefined,
@@ -125,8 +120,13 @@ class Holmes {
       onInput: undefined
     };
 
-    // set default options
-    this.options = mergeObj(this.options, options);
+    /**
+     * @member options
+     * @type {Object}
+     * @memberOf holmes
+     */
+    this.options = Object.assign({}, defaults, options);
+    this.options.class = Object.assign({}, defaults.class, options.class);
 
     /**
      * The amount of elements that are hidden
@@ -165,13 +165,9 @@ class Holmes {
      */
     this.running = false;
 
-    if (this.options.instant) {
-      this.start(options);
-    } else {
-      window.addEventListener('DOMContentLoaded', () => {
-        this.start(options);
-      });
-    }
+    window.addEventListener('DOMContentLoaded', () => {
+      this.start();
+    });
 
     /**
      * input event handler
@@ -180,6 +176,9 @@ class Holmes {
      * @private
      */
     this._inputHandler = () => {
+      // input has started to be listened to
+      this.running = true;
+
       // by default the value isn't found
       let found: boolean = false;
 
@@ -209,8 +208,6 @@ class Holmes {
         this.elementsArray = Array.prototype.slice.call(this.elements);
       }
 
-      // loop over all the elements
-      // in case this should become dynamic, query for the elements here
       if (this.options.mark) {
         /**
          * Regex to remove <mark>
@@ -222,6 +219,7 @@ class Holmes {
         this._regex = new RegExp(`(${this.searchString})(?![^<]*>)`, 'gi');
       }
 
+      // loop over all the elements
       this.elementsArray.forEach((element: HTMLElement) => {
         // if the current element doesn't contain the search string
         // add the hidden class and remove the visbible class
@@ -360,13 +358,12 @@ class Holmes {
    * @memberOf holmes
    */
   start() {
-    this.running = true;
     this.input = document.querySelector(this.options.input);
 
     if (this.options.find) {
       this.elements = document.querySelectorAll(this.options.find);
     } else {
-      throw new Error('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nnew Holmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html');
+      throw new Error('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like:\nnew Holmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html');
     }
 
     /**

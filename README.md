@@ -91,8 +91,19 @@ Enable this option if you want Holmes to query the value of the `.find` at every
 
 **examples**: `true`, `false`
 
-### `instant`
+### `instant` :warning: DEPRECATED
 **default**: `false`
+
+This option is deprecated. To use Holmes in an async environment, initialise it with:
+
+```js
+holmes(options).start();
+// or
+const h = new holmes(options);
+h.start();
+```
+
+This way it'll start immediately, just like it used to do with `instant: true`. Sorry for the inconvenience.
 
 By default Holmes will wait on a `DOMContentLoaded` event to start searching. If you're loading the elements by `AJAX` for example this event comes too early. In that case you can enable `instant`, and start Holmes when your content is ready.
 

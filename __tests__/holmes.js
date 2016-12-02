@@ -56,6 +56,7 @@ describe('Instance-less usage', () => {
     expect(init).toThrowError('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nnew Holmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html');
   });
 
+  // not sure if this is possible
   // test('throws when you remove .find', () => {
   //   setStub();
   //   const _h = new Holmes({
@@ -76,6 +77,7 @@ describe('Instance-less usage', () => {
     });
   });
 
+  // works in browser?
   // test('throws when .input you can\'t type in is given', () => {
   //   setStub();
   //   function init() {
@@ -95,13 +97,12 @@ describe('Instance-less usage', () => {
   test('works with contenteditable', () => {
     setStub();
     holmes({
-      instant: true,
       find: '.result',
       input: '#contenteditable',
       class: {
         visible: 'visible'
       }
-    });
+    }).start();
 
     return input('special', document.getElementById('contenteditable')).then(() => {
       const special = document.getElementById('contains-special');
@@ -128,7 +129,6 @@ describe('options', () => {
         hidden: 'hidden'
       },
       dynamic: false,
-      instant: false,
       minCharacters: 0,
       hiddenAttr: false,
       onHidden: undefined,
@@ -144,11 +144,10 @@ describe('options', () => {
     const find = '.result';
     holmes({
       find,
-      instant: true,
       class: {
         visible: 'visible'
       }
-    });
+    }).start();
 
     const all = document.querySelectorAll(find);
     const visible = document.querySelectorAll(find + '.visible');
@@ -162,7 +161,6 @@ describe('options', () => {
       const find = '.result';
       holmes({
         find,
-        instant: true,
         hiddenAttr: true
       }).start();
 
@@ -174,10 +172,9 @@ describe('options', () => {
     test('default false', () => {
       setStub();
       const find = '.result';
-      Holmes({
+      holmes({
         find,
-        instant: true
-      });
+      }).start();
 
       return input('Some text that will hide everything!').then(() => {
         expect(document.querySelector(find).hidden).toBe(false);
@@ -189,9 +186,8 @@ describe('options', () => {
       const find = '.result';
       Holmes({
         find,
-        instant: true,
         hiddenAttr: false
-      });
+      }).start();
 
       return input('Some text that will hide everything!').then(() => {
         expect(document.querySelector(find).hidden).toBe(false);
@@ -205,12 +201,12 @@ describe('options', () => {
       const find = '.result';
       holmes({
         find,
-        instant: true,
         minCharacters: 5,
         class: {
           visible: 'visible'
         }
-      });
+      }).start();
+
       // some short input that's surely not in the data
       return input('qsdf').then(() => {
         const all = document.querySelectorAll(find);
@@ -225,7 +221,6 @@ describe('options', () => {
       const find = '.result';
       holmes({
         find,
-        instant: true,
         minCharacters: 5,
         class: {
           visible: 'visible'
@@ -236,8 +231,7 @@ describe('options', () => {
       return input('qsdfg').then(() => {
         const all = document.querySelectorAll(find);
         const hidden = document.querySelectorAll(find + '.hidden');
-
-        expect(all).toEqual(hidden);
+        expect(hidden.length).toEqual(all.length);
       });
     });
   });
@@ -286,6 +280,7 @@ describe('options', () => {
         find: '.result',
         onInput: callback
       }).start();
+
       return input('some text that hides a lot').then(() => {
         expect(callback).toBeCalled();
       });
@@ -297,14 +292,15 @@ describe('options', () => {
         find: '.result',
         onVisible: callback
       }).start();
+
       return input('some text that hides a lot')
-      .then(() => {
-        // clears the input and makes everything visible
-        input('');
-      })
-      .then(() => {
-        expect(callback).toBeCalled();
-      });
+        .then(() => {
+          // clears the input and makes everything visible
+          input('');
+        })
+        .then(() => {
+          expect(callback).toBeCalled();
+        });
     });
     test('onHidden', () => {
       setStub();
@@ -313,6 +309,7 @@ describe('options', () => {
         find: '.result',
         onHidden: callback
       }).start();
+
       return input('some text that hides a lot').then(() => {
         expect(callback).toBeCalled();
       });
@@ -324,6 +321,7 @@ describe('options', () => {
         find: '.result',
         onEmpty: callback
       }).start();
+
       return input('some text that hides everything').then(() => {
         expect(callback).toBeCalled();
       });
@@ -335,25 +333,26 @@ describe('options', () => {
         find: '.result',
         onFound: callback
       }).start();
+
       return input('some text that hides everything')
-      .then(() => {
-        // clears the input and makes everything visible
-        input('');
-      })
-      .then(() => {
-        expect(callback).toBeCalled();
-      });
+        .then(() => {
+          // clears the input and makes everything visible
+          return input('');
+        })
+        .then(() => {
+          expect(callback).toBeCalled();
+        });
     });
   });
 
+
   describe('.placeholder', () => {
-    setStub();
     test('gets added', () => {
+      setStub();
       holmes({
         find: '.result',
-        instant: true,
         placeholder: 'test'
-      });
+      }).start();
 
       const placeholder = document.getElementById('holmes-placeholder');
 
@@ -361,12 +360,12 @@ describe('options', () => {
     });
 
     test('can\'t be added when there\'s no parent of the elements', () => {
+      setStub();
       function start() {
         holmes({
           find: 'html',
-          instant: true,
           placeholder: 'impossible'
-        });
+        }).start();
       }
       expect(start).toThrowError('The Holmes placeholder could\'t be put; the elements had no parent.');
     });
@@ -375,29 +374,26 @@ describe('options', () => {
       setStub();
       holmes({
         find: '.result',
-        instant: true,
         placeholder: 'test'
-      });
+      }).start();
 
       const placeholder = document.getElementById('holmes-placeholder');
 
       expect(placeholder.classList.contains('hidden')).toBe(true);
     });
 
-    // works in browser
-    // test('not hidden when no results', () => {
-    //   setStub();
-    //   holmes({
-    //     find: '.result',
-    //     instant: true,
-    //     placeholder: 'test'
-    //   });
+    test('not hidden when no results', () => {
+      setStub();
+      holmes({
+        find: '.result',
+        placeholder: 'test'
+      }).start();
 
-    //   return input('some input which is definitely not in the list').then(() => {
-    //     const placeholder = document.getElementById('holmes-placeholder');
-    //     expect(placeholder.classList.contains('hidden')).toBe(false);
-    //   });
-    // });
+      return input('some input which is definitely not in the list').then(() => {
+        const placeholder = document.getElementById('holmes-placeholder');
+        expect(placeholder.classList.contains('hidden')).toBe(false);
+      });
+    });
   });
 });
 
@@ -430,15 +426,16 @@ describe('Usage with instance', () => {
     expect(mockStart).toHaveBeenCalledTimes(1);
   });
 
+  // figure out how to get the last output of a jest.fn()
   // describe('.minCharacters', () => {
   //   test('less than minimum amount returns undefined', () => {
   //     setStub();
   //     const find = '.result';
   //     const _h = new Holmes({
   //       find,
-  //       instant: true,
   //       minCharacters: 5
   //     });
+  //     _h.start();
 
   //     _h._inputHandler = jest.fn();
 
@@ -455,11 +452,11 @@ describe('Usage with instance', () => {
       const result = '.result';
       const _h = new Holmes({
         find: result,
-        instant: true,
         class: {
           visible: 'visible'
         }
       });
+      _h.start();
 
       input('something');
 
@@ -482,20 +479,20 @@ describe('Usage with instance', () => {
       const result = '.result';
       const _h = new Holmes({
         find: result,
-        instant: true,
         class: {
           visible: 'visible'
         }
       });
+      _h.start();
 
       _h.stop();
 
-      input('something');
+      return input('something').then(() => {
+        const all = document.querySelectorAll(result);
+        const visible = document.querySelectorAll(result + '.visible');
 
-      const all = document.querySelectorAll(result);
-      const visible = document.querySelectorAll(result + '.visible');
-
-      expect(all).toEqual(visible);
+        expect(all).toEqual(visible);
+      });
     });
 
     test('removes placeholder', () => {
@@ -503,12 +500,12 @@ describe('Usage with instance', () => {
       const result = '.result';
       const _h = new Holmes({
         find: result,
-        instant: true,
         class: {
           visible: 'visible'
         },
         placeholder: 'nice holder 👌'
       });
+      _h.start();
 
       let placeholder = document.getElementById('holmes-placeholder');
 
@@ -525,9 +522,9 @@ describe('Usage with instance', () => {
       setStub();
       const _h = new Holmes({
         find: '.result',
-        instant: true,
         mark: true
       });
+      _h.start();
 
       return _h.stop().then(() => {
         const allContent = document.querySelector('ul').innerHTML;
@@ -541,11 +538,11 @@ describe('Usage with instance', () => {
     setStub();
     const _h = new Holmes({
       find: '.result',
-      instant: true,
       class: {
         visible: 'visible'
       }
     });
+    _h.start();
 
     const special = document.getElementById('contains-special');
     const notSpecial = document.querySelectorAll('.result:not(#contains-special)');
@@ -554,21 +551,21 @@ describe('Usage with instance', () => {
 
     _h.stop();
 
-    input('special');
+    return input('special').then(()=> {
+      expect(special.classList.contains('visible')).toEqual(true);
+      notSpecialHidden = document.querySelectorAll('.result:not(#contains-special).hidden');
+      notSpecialVisible = document.querySelectorAll('.result:not(#contains-special).visible');
+      expect(notSpecial.length).toEqual(notSpecialVisible.length);
 
-    expect(special.classList.contains('visible')).toEqual(true);
-    notSpecialHidden = document.querySelectorAll('.result:not(#contains-special).hidden');
-    notSpecialVisible = document.querySelectorAll('.result:not(#contains-special).visible');
-    expect(notSpecial).toEqual(notSpecialVisible);
+      _h.start();
 
-    _h.start();
-
-    input('special');
-
-    expect(special.classList.contains('visible')).toEqual(true);
-    notSpecialHidden = document.querySelectorAll('.result:not(#contains-special).hidden');
-    notSpecialVisible = document.querySelectorAll('.result:not(#contains-special).visible');
-    expect(notSpecial).toEqual(notSpecialHidden);
+      return input('special');
+    }).then(() => {
+      expect(special.classList.contains('visible')).toEqual(true);
+      notSpecialHidden = document.querySelectorAll('.result:not(#contains-special).hidden');
+      notSpecialVisible = document.querySelectorAll('.result:not(#contains-special).visible');
+      expect(notSpecialHidden.length).toEqual(notSpecial.length);
+    });
   });
 
   describe('.count()', () => {
@@ -576,8 +573,8 @@ describe('Usage with instance', () => {
       setStub();
       const _h = new Holmes({
         find: '.result',
-        instant: true
       });
+      _h.start();
 
       expect(_h.count()).toEqual({
         all: 50,
@@ -590,7 +587,6 @@ describe('Usage with instance', () => {
       setStub();
       const _h = new Holmes({
         find: '.result',
-        instant: true
       });
       _h.start();
 
@@ -604,6 +600,7 @@ describe('Usage with instance', () => {
     });
   });
 
+  // works in browser
   // describe('options.dynamic', () => {
   //   function addEl() {
   //     const ul = document.querySelector('ul');
@@ -618,9 +615,9 @@ describe('Usage with instance', () => {
   //     const find = '.result';
   //     const _h = new Holmes({
   //       find,
-  //       instant: true,
   //       dynamic: true
   //     });
+  //     _h.start();
 
   //     const l = _h.elementsLength;
 
@@ -634,9 +631,9 @@ describe('Usage with instance', () => {
   //     const find = '.result';
   //     const _h = new Holmes({
   //       find,
-  //       instant: true,
   //       dynamic: true
   //     });
+  //     _h.start();
 
   //     const l = _h.elements.length;
 
@@ -650,9 +647,9 @@ describe('Usage with instance', () => {
   //     const find = '.result';
   //     const _h = new Holmes({
   //       find,
-  //       instant: true,
   //       dynamic: true
   //     });
+  //     _h.start();
 
   //     const l = _h.elementsArray.length;
 
@@ -665,12 +662,14 @@ describe('Usage with instance', () => {
   // test('input of a contenteditable is valid', () => {
   //   setStub();
   //   const _h = new Holmes({
-  //     instant: true,
   //     find: '.result',
   //     input: '#contenteditable'
   //   });
+  //   _h.start();
   //   const text = 'something';
-  //   input(text, document.getElementById('contenteditable'));
-  //   expect(_h.searchString).toEqual(text);
+
+  //   return input(text, document.getElementById('contenteditable')).then(() => {
+  //     expect(_h.searchString).toEqual(text);
+  //   });
   // });
 });
