@@ -12,21 +12,19 @@ import type {OptionsType} from './types.js';
  *   <code>onFound</code>.
  * @memberOf holmes
  */
-
 /**
  * Callback used for changes in input value
  * @callback onInput
  * @param {string} input The value that is currently in the search field
  * @memberOf holmes
  */
-
 /**
  * @alias holmes
  */
 class Holmes {
   options: OptionsType;
-  elements: NodeList<HTMLElement> ;
-  elementsArray: Array<HTMLElement> ;
+  elements: NodeList<HTMLElement>;
+  elementsArray: Array<HTMLElement>;
   elementsLength: number;
   hidden: number;
   input: HTMLElement;
@@ -93,12 +91,16 @@ class Holmes {
     let empty: boolean = false;
 
     if (typeof options !== 'object') {
-      throw new Error('The options need to be given inside an object like this:\nnew Holmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html');
+      throw new Error(
+        'The options need to be given inside an object like this:\nnew Holmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html'
+      );
     }
 
     // if this.options.find is missing, the searching won't work so we'll thrown an exceptions
     if (typeof options.find !== 'string') {
-      throw new Error('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nnew Holmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html');
+      throw new Error(
+        'A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nnew Holmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html'
+      );
     }
 
     const defaults = {
@@ -142,21 +144,18 @@ class Holmes {
      * @type {NodeList}
      * @memberOf holmes
      */
-
     /**
      * All of the elements that are searched
      * @member elements
      * @type {NodeList}
      * @memberOf holmes
      */
-
     /**
      * Placeholder element
      * @member placeholderNode
      * @type {Element}
      * @memberOf holmes
      */
-
     /**
      * Is the current instance running
      * @member running
@@ -315,7 +314,10 @@ class Holmes {
     if (this.options.mark) {
       element.innerHTML = element.innerHTML.replace(/<\/?mark>/g, '');
       if (this.searchString.length) {
-        element.innerHTML = element.innerHTML.replace(this._regex, '<mark>$1</mark>');
+        element.innerHTML = element.innerHTML.replace(
+          this._regex,
+          '<mark>$1</mark>'
+        );
       }
     }
   }
@@ -363,7 +365,9 @@ class Holmes {
     if (this.options.find) {
       this.elements = document.querySelectorAll(this.options.find);
     } else {
-      throw new Error('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like:\nnew Holmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html');
+      throw new Error(
+        'A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like:\nnew Holmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html'
+      );
     }
 
     /**
@@ -392,7 +396,9 @@ class Holmes {
       if (this.elements[0].parentNode instanceof Element) {
         this.elements[0].parentNode.appendChild(this.placeholderNode);
       } else {
-        throw new Error('The Holmes placeholder could\'t be put; the elements had no parent.');
+        throw new Error(
+          'The Holmes placeholder could\'t be put; the elements had no parent.'
+        );
       }
     }
 
@@ -471,11 +477,7 @@ class Holmes {
    * @return {object} all matching elements, the amount of hidden and the amount of visible elements
    * @memberOf holmes
    */
-  count(): {
-    all: number,
-    hidden: number,
-    visible: number
-  } {
+  count(): { all: number, hidden: number, visible: number } {
     return {
       all: this.elementsLength,
       hidden: this.hidden,
