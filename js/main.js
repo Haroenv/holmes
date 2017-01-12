@@ -228,7 +228,6 @@ class Holmes {
           if (empty && typeof this.options.onFound === 'function') {
             this.options.onFound(this.placeholderNode);
           }
-          empty = false;
           // the element is now found at least once
           found = true;
         } else {
@@ -241,18 +240,30 @@ class Holmes {
       }
 
       // No results were found and last time we checked it wasn't empty
-      if (!found && !empty) {
-        empty = true;
+      if (found) {
+        if (this.options.placeholder) {
+          this._hideElement(this.placeholderNode);
+          if (typeof this.options.onHidden === 'function') {
+            this.options.onHidden(this.placeholderNode);
+          }
+        }
+      } else {
+        if (this.options.placeholder) {
+          this._showElement(this.placeholderNode);
+          if (typeof this.options.onVisible === 'function') {
+            this.options.onVisible(this.placeholderNode);
+          }
+        }
 
-        if (this.options.placeholder) {
-          this._showElement(this.placeholderNode);
-        }
-        if (typeof this.options.onEmpty === 'function') {
-          this.options.onEmpty(this.placeholderNode);
-        }
-      } else if (!empty) {
-        if (this.options.placeholder) {
-          this._showElement(this.placeholderNode);
+        // empty means that there are no results
+        // if the situation isn't yet empty
+        // so it's the first time seeing the placeholder
+        // we'll emit the onEmpty function
+        if (empty === false) {
+          empty = true;
+          if (typeof this.options.onEmpty === 'function') {
+            this.options.onEmpty(this.placeholderNode);
+          }
         }
       }
     };
