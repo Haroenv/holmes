@@ -326,6 +326,7 @@ class Holmes {
    * The current search input in lower case
    * @function inputString
    * @return {String} the input as a string
+   * @throws {Error} If The current <code>input</code> is no <code>&lt;input&gt;</code> or <code>contenteditable</code>
    * @memberOf holmes
    */
   inputString(): string {
@@ -342,6 +343,7 @@ class Holmes {
    * Sets an input string
    * @function setInput
    * @param {string} value the string to set
+   * @throws {Error} If The current <code>input</code> is no <code>&lt;input&gt;</code> or <code>contenteditable</code>
    * @memberOf holmes
    */
   setInput(value: string) {
@@ -357,6 +359,8 @@ class Holmes {
   /**
    * Start an event listener with the specified options
    * @function start
+   * @throws {Error} If a there was no options.find
+   * @throws {Error} If the placeholder couldn't be inserted
    * @memberOf holmes
    */
   start() {
@@ -419,6 +423,7 @@ class Holmes {
    * @function stop
    * @see this.start
    * @return {Promise} resolves when the event is removed
+   * @throws {Error} If the placeholder couldn't be removed because it has no parent
    * @memberOf holmes
    */
   stop(): Promise<*> {
