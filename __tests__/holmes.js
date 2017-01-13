@@ -648,6 +648,22 @@ describe('Usage with instance', () => {
     });
   });
 
+  describe('.placeholder', () => {
+    test('gets hidden when there are results', () => {
+      const _h = new Holmes({
+        find: '.result',
+        placeholder: 'test'
+      });
+      _h.start();
+      _h._hideElement = jest.fn();
+      input('all-hiding input string')
+        .then(input('special'))
+        .then(() => {
+          expect(_h._hideElement).toHaveBeenLastCalledWith(_h.placeholderNode);
+        })
+    });
+  });
+
   // works in browser
   // describe('options.dynamic', () => {
   //   function addEl() {
