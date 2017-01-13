@@ -377,7 +377,7 @@ class Holmes {
   start() {
     this.input = document.querySelector(this.options.input);
 
-    if (this.options.find) {
+    if (typeof this.options.find === 'string') {
       this.elements = document.querySelectorAll(this.options.find);
     } else {
       throw new Error(

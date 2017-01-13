@@ -56,19 +56,18 @@ describe('Instance-less usage', () => {
     expect(init).toThrowError('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nnew Holmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html');
   });
 
-  // not sure if this is possible
-  // test('throws when you remove .find', () => {
-  //   setStub();
-  //   const _h = new Holmes({
-  //     find: '.result',
-  //     instant: true
-  //   });
-  //
-  //   return _h.stop().then(() => {
-  //     _h.options = {};
-  //     expect(_h.start).toThrowError('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nholmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html');
-  //   });
-  // });
+  test('throws when you edit .find to be invalid', () => {
+    setStub();
+    const _h = new Holmes({
+      find: '.result',
+      instant: true
+    });
+
+    _h.stop().then(() => {
+      _h.options.find = false; // not a string, so not a querySelectorAll
+      expect(_h.start).toThrowError('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nholmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html');
+    });
+  });
 
   test('doesn\'t throw with .find given', () => {
     setStub();
@@ -207,7 +206,6 @@ describe('options', () => {
         .then(input('special'))
         .then(() => {
           const special = document.getElementById('contains-special');
-          console.log(special, special.hidden);
           expect(special.hidden).toBe(false);
         });
     });
