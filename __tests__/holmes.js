@@ -664,7 +664,6 @@ describe('Usage with instance', () => {
     });
   });
 
-  // works in browser
   describe('options.dynamic', () => {
     function addEl() {
       const ul = document.querySelector('ul');
@@ -729,6 +728,7 @@ describe('Usage with instance', () => {
     });
   });
 
+  // searchString isn't in the prototype
   // test('input of a contenteditable is valid', () => {
   //   setStub();
   //   const _h = new Holmes({
