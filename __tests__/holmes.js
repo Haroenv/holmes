@@ -468,6 +468,21 @@ describe('Usage with instance', () => {
       const visible = document.querySelectorAll(result + '.visible');
 
       expect(all).toEqual(visible);
+
+      setStub();
+      const __h = new Holmes({
+        find: result,
+        class: {
+          visible: 'visible'
+        },
+        placeholder: 'test holder'
+      });
+      __h.start();
+
+      input('bla bla');
+      __h._hideElement = jest.fn();
+      __h.clear();
+      expect(__h._hideElement).toHaveBeenLastCalledWith(__h.placeholderNode);
     });
 
     // test('hides placeholder', () => {});
