@@ -447,7 +447,7 @@ describe('Usage with instance', () => {
   // });
 
   describe('.clear()', () => {
-    test('empties the input and shows everything', () => {
+    test('empties the input', () => {
       setStub();
       const result = '.result';
       const _h = new Holmes({
@@ -463,29 +463,46 @@ describe('Usage with instance', () => {
       _h.clear();
 
       expect(document.getElementById('search').value).toBe('');
+    });
+
+    test('shows all items', () => {
+      setStub();
+      const result = '.result';
+      const _h = new Holmes({
+        find: result,
+        class: {
+          visible: 'visible'
+        }
+      });
+      _h.start();
+
+      input('something');
+
+      _h.clear();
 
       const all = document.querySelectorAll(result);
       const visible = document.querySelectorAll(result + '.visible');
 
       expect(all).toEqual(visible);
+    });
 
+    test('hides placeholder', () => {
       setStub();
-      const __h = new Holmes({
+      const result = '.result';
+      const _h = new Holmes({
         find: result,
         class: {
           visible: 'visible'
         },
         placeholder: 'test holder'
       });
-      __h.start();
+      _h.start();
 
       input('bla bla');
-      __h._hideElement = jest.fn();
+      _h._hideElement = jest.fn();
       __h.clear();
-      expect(__h._hideElement).toHaveBeenLastCalledWith(__h.placeholderNode);
+      expect(_h._hideElement).toHaveBeenLastCalledWith(_h.placeholderNode);
     });
-
-    // test('hides placeholder', () => {});
   });
 
   describe('.stop()', () => {
