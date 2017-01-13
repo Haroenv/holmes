@@ -193,6 +193,24 @@ describe('options', () => {
         expect(document.querySelector(find).hidden).toBe(false);
       });
     });
+
+    test('hidden gets removed after the fact', () => {
+      setStub();
+      const find = '.result';
+      holmes({
+        find,
+        hiddenAttr: true
+      }).start();
+
+
+      return input('Some text that will hide everything!')
+        .then(input('special'))
+        .then(() => {
+          const special = document.getElementById('contains-special');
+          console.log(special, special.hidden);
+          expect(special.hidden).toBe(false);
+        });
+    });
   });
 
   describe('.minCharacters', () => {
@@ -500,7 +518,7 @@ describe('Usage with instance', () => {
 
       input('bla bla');
       _h._hideElement = jest.fn();
-      __h.clear();
+      _h.clear();
       expect(_h._hideElement).toHaveBeenLastCalledWith(_h.placeholderNode);
     });
   });
