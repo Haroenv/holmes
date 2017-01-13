@@ -228,7 +228,6 @@ class Holmes {
           if (empty && typeof this.options.onFound === 'function') {
             this.options.onFound(this.placeholderNode);
           }
-          empty = false;
           // the element is now found at least once
           found = true;
         } else {
@@ -241,18 +240,24 @@ class Holmes {
       }
 
       // No results were found and last time we checked it wasn't empty
-      if (!found && !empty) {
-        empty = true;
+      if (found) {
+        if (this.options.placeholder) {
+          this._hideElement(this.placeholderNode);
+        }
+      } else {
+        if (this.options.placeholder) {
+          this._showElement(this.placeholderNode);
+        }
 
-        if (this.options.placeholder) {
-          this._showElement(this.placeholderNode);
-        }
-        if (typeof this.options.onEmpty === 'function') {
-          this.options.onEmpty(this.placeholderNode);
-        }
-      } else if (!empty) {
-        if (this.options.placeholder) {
-          this._showElement(this.placeholderNode);
+        // empty means that there are no results
+        // if the situation isn't yet empty
+        // so it's the first time seeing the placeholder
+        // we'll emit the onEmpty function
+        if (empty === false) {
+          empty = true;
+          if (typeof this.options.onEmpty === 'function') {
+            this.options.onEmpty(this.placeholderNode);
+          }
         }
       }
     };
@@ -326,6 +331,7 @@ class Holmes {
    * The current search input in lower case
    * @function inputString
    * @return {String} the input as a string
+   * @throws {Error} If The current <code>input</code> is no <code>&lt;input&gt;</code> or <code>contenteditable</code>
    * @memberOf holmes
    */
   inputString(): string {
@@ -342,6 +348,7 @@ class Holmes {
    * Sets an input string
    * @function setInput
    * @param {string} value the string to set
+   * @throws {Error} If The current <code>input</code> is no <code>&lt;input&gt;</code> or <code>contenteditable</code>
    * @memberOf holmes
    */
   setInput(value: string) {
@@ -357,12 +364,14 @@ class Holmes {
   /**
    * Start an event listener with the specified options
    * @function start
+   * @throws {Error} If a there was no options.find
+   * @throws {Error} If the placeholder couldn't be inserted
    * @memberOf holmes
    */
   start() {
     this.input = document.querySelector(this.options.input);
 
-    if (this.options.find) {
+    if (typeof this.options.find === 'string') {
       this.elements = document.querySelectorAll(this.options.find);
     } else {
       throw new Error(
@@ -419,6 +428,7 @@ class Holmes {
    * @function stop
    * @see this.start
    * @return {Promise} resolves when the event is removed
+   * @throws {Error} If the placeholder couldn't be removed because it has no parent
    * @memberOf holmes
    */
   stop(): Promise<*> {

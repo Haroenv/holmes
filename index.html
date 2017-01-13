@@ -244,6 +244,21 @@ holmes({
     class: {
       visible: 'visible',
       hidden: 'hidden'
+    },
+    onHidden(el) {
+      console.log('hidden', el);
+    },
+    onFound(el) {
+      console.log('found', el);
+    },
+    onInput(el) {
+      console.log('input', el);
+    },
+    onVisible(el) {
+      console.log('visible', el);
+    },
+    onEmpty(el) {
+      console.log('empty', el);
     }
   });
 

@@ -56,19 +56,18 @@ describe('Instance-less usage', () => {
     expect(init).toThrowError('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nnew Holmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html');
   });
 
-  // not sure if this is possible
-  // test('throws when you remove .find', () => {
-  //   setStub();
-  //   const _h = new Holmes({
-  //     find: '.result',
-  //     instant: true
-  //   });
-  //
-  //   return _h.stop().then(() => {
-  //     _h.options = {};
-  //     expect(_h.start).toThrowError('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nholmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html');
-  //   });
-  // });
+  test('throws when you edit .find to be invalid', () => {
+    setStub();
+    const _h = new Holmes({
+      find: '.result',
+      instant: true
+    });
+
+    _h.stop().then(() => {
+      _h.options.find = false; // not a string, so not a querySelectorAll
+      expect(_h.start).toThrowError('A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nholmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html');
+    });
+  });
 
   test('doesn\'t throw with .find given', () => {
     setStub();
@@ -192,6 +191,23 @@ describe('options', () => {
       return input('Some text that will hide everything!').then(() => {
         expect(document.querySelector(find).hidden).toBe(false);
       });
+    });
+
+    test('hidden gets removed after the fact', () => {
+      setStub();
+      const find = '.result';
+      holmes({
+        find,
+        hiddenAttr: true
+      }).start();
+
+
+      return input('Some text that will hide everything!')
+        .then(input('special'))
+        .then(() => {
+          const special = document.getElementById('contains-special');
+          expect(special.hidden).toBe(false);
+        });
     });
   });
 
@@ -447,7 +463,7 @@ describe('Usage with instance', () => {
   // });
 
   describe('.clear()', () => {
-    test('empties the input and shows everything', () => {
+    test('empties the input', () => {
       setStub();
       const result = '.result';
       const _h = new Holmes({
@@ -463,6 +479,22 @@ describe('Usage with instance', () => {
       _h.clear();
 
       expect(document.getElementById('search').value).toBe('');
+    });
+
+    test('shows all items', () => {
+      setStub();
+      const result = '.result';
+      const _h = new Holmes({
+        find: result,
+        class: {
+          visible: 'visible'
+        }
+      });
+      _h.start();
+
+      input('something');
+
+      _h.clear();
 
       const all = document.querySelectorAll(result);
       const visible = document.querySelectorAll(result + '.visible');
@@ -470,7 +502,23 @@ describe('Usage with instance', () => {
       expect(all).toEqual(visible);
     });
 
-    // test('hides placeholder', () => {});
+    test('hides placeholder', () => {
+      setStub();
+      const result = '.result';
+      const _h = new Holmes({
+        find: result,
+        class: {
+          visible: 'visible'
+        },
+        placeholder: 'test holder'
+      });
+      _h.start();
+
+      input('bla bla');
+      _h._hideElement = jest.fn();
+      _h.clear();
+      expect(_h._hideElement).toHaveBeenLastCalledWith(_h.placeholderNode);
+    });
   });
 
   describe('.stop()', () => {
@@ -600,65 +648,87 @@ describe('Usage with instance', () => {
     });
   });
 
-  // works in browser
-  // describe('options.dynamic', () => {
-  //   function addEl() {
-  //     const ul = document.querySelector('ul');
-  //     const el = document.createElement('li');
-  //     el.innerHTML = 'test';
-  //     el.classList.add('result');
-  //     ul.insertBefore(el, null);
-  //   }
+  describe('.placeholder', () => {
+    test('gets hidden when there are results', () => {
+      const _h = new Holmes({
+        find: '.result',
+        placeholder: 'test'
+      });
+      _h.start();
+      _h._hideElement = jest.fn();
+      input('all-hiding input string')
+        .then(input('special'))
+        .then(() => {
+          expect(_h._hideElement).toHaveBeenLastCalledWith(_h.placeholderNode);
+        })
+    });
+  });
 
-  //   test('this.elementsLength gets edited', () => {
-  //     setStub();
-  //     const find = '.result';
-  //     const _h = new Holmes({
-  //       find,
-  //       dynamic: true
-  //     });
-  //     _h.start();
+  describe('options.dynamic', () => {
+    function addEl() {
+      const ul = document.querySelector('ul');
+      const el = document.createElement('li');
+      el.innerHTML = 'test';
+      el.classList.add('result');
+      ul.insertBefore(el, null);
+    }
 
-  //     const l = _h.elementsLength;
+    test('this.elementsLength gets edited', () => {
+      setStub();
+      const find = '.result';
+      const _h = new Holmes({
+        find,
+        dynamic: true
+      });
+      _h.start();
 
-  //     return input(' ').then(() => {
-  //       expect(_h.elementsLength).toBe(l + 1);
-  //     });
-  //   });
+      const l = _h.elementsLength;
 
-  //   test('this.elements gets edited', () => {
-  //     setStub();
-  //     const find = '.result';
-  //     const _h = new Holmes({
-  //       find,
-  //       dynamic: true
-  //     });
-  //     _h.start();
+      addEl();
 
-  //     const l = _h.elements.length;
+      return input(' ').then(() => {
+        expect(_h.elementsLength).toBe(l + 1);
+      });
+    });
 
-  //     return input(' ').then(() => {
-  //       expect(_h.elements.length).toBe(l + 1);
-  //     });
-  //   });
+    test('this.elements gets edited', () => {
+      setStub();
+      const find = '.result';
+      const _h = new Holmes({
+        find,
+        dynamic: true
+      });
+      _h.start();
 
-  //   test('this.elementsArray gets edited', () => {
-  //     setStub();
-  //     const find = '.result';
-  //     const _h = new Holmes({
-  //       find,
-  //       dynamic: true
-  //     });
-  //     _h.start();
+      const l = _h.elements.length;
 
-  //     const l = _h.elementsArray.length;
+      addEl();
 
-  //     return input(' ').then(() => {
-  //       expect(_h.elementsArray.length).toBe(l + 1);
-  //     });
-  //   });
-  // });
+      return input(' ').then(() => {
+        expect(_h.elements.length).toBe(l + 1);
+      });
+    });
 
+    test('this.elementsArray gets edited', () => {
+      setStub();
+      const find = '.result';
+      const _h = new Holmes({
+        find,
+        dynamic: true
+      });
+      _h.start();
+
+      const l = _h.elementsArray.length;
+
+      addEl();
+
+      return input(' ').then(() => {
+        expect(_h.elementsArray.length).toBe(l + 1);
+      });
+    });
+  });
+
+  // searchString isn't in the prototype
   // test('input of a contenteditable is valid', () => {
   //   setStub();
   //   const _h = new Holmes({
