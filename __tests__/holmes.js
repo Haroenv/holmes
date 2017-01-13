@@ -665,63 +665,69 @@ describe('Usage with instance', () => {
   });
 
   // works in browser
-  // describe('options.dynamic', () => {
-  //   function addEl() {
-  //     const ul = document.querySelector('ul');
-  //     const el = document.createElement('li');
-  //     el.innerHTML = 'test';
-  //     el.classList.add('result');
-  //     ul.insertBefore(el, null);
-  //   }
+  describe('options.dynamic', () => {
+    function addEl() {
+      const ul = document.querySelector('ul');
+      const el = document.createElement('li');
+      el.innerHTML = 'test';
+      el.classList.add('result');
+      ul.insertBefore(el, null);
+    }
 
-  //   test('this.elementsLength gets edited', () => {
-  //     setStub();
-  //     const find = '.result';
-  //     const _h = new Holmes({
-  //       find,
-  //       dynamic: true
-  //     });
-  //     _h.start();
+    test('this.elementsLength gets edited', () => {
+      setStub();
+      const find = '.result';
+      const _h = new Holmes({
+        find,
+        dynamic: true
+      });
+      _h.start();
 
-  //     const l = _h.elementsLength;
+      const l = _h.elementsLength;
 
-  //     return input(' ').then(() => {
-  //       expect(_h.elementsLength).toBe(l + 1);
-  //     });
-  //   });
+      addEl();
 
-  //   test('this.elements gets edited', () => {
-  //     setStub();
-  //     const find = '.result';
-  //     const _h = new Holmes({
-  //       find,
-  //       dynamic: true
-  //     });
-  //     _h.start();
+      return input(' ').then(() => {
+        expect(_h.elementsLength).toBe(l + 1);
+      });
+    });
 
-  //     const l = _h.elements.length;
+    test('this.elements gets edited', () => {
+      setStub();
+      const find = '.result';
+      const _h = new Holmes({
+        find,
+        dynamic: true
+      });
+      _h.start();
 
-  //     return input(' ').then(() => {
-  //       expect(_h.elements.length).toBe(l + 1);
-  //     });
-  //   });
+      const l = _h.elements.length;
 
-  //   test('this.elementsArray gets edited', () => {
-  //     setStub();
-  //     const find = '.result';
-  //     const _h = new Holmes({
-  //       find,
-  //       dynamic: true
-  //     });
-  //     _h.start();
+      addEl();
 
-  //     const l = _h.elementsArray.length;
+      return input(' ').then(() => {
+        expect(_h.elements.length).toBe(l + 1);
+      });
+    });
 
-  //     return input(' ').then(() => {
-  //       expect(_h.elementsArray.length).toBe(l + 1);
-  //     });
-  //   });
-  // });
+    test('this.elementsArray gets edited', () => {
+      setStub();
+      const find = '.result';
+      const _h = new Holmes({
+        find,
+        dynamic: true
+      });
+      _h.start();
+
+      const l = _h.elementsArray.length;
+
+      addEl();
+
+      return input(' ').then(() => {
+        expect(_h.elementsArray.length).toBe(l + 1);
+      });
+    });
+  });
 
   // test('input of a contenteditable is valid', () => {
   //   setStub();
