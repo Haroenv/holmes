@@ -76,7 +76,18 @@ describe('Instance-less usage', () => {
     });
   });
 
-  // works in browser?
+  test('Throws when you try an input that doens\'t exist', () => {
+    function init() {
+      setStub();
+      holmes({
+        find: '.result',
+        input: 'meme-container' // will not exist
+      }).start();
+    }
+
+    expect(init).toThrowError('Your Holmes.input didn\'t match a querySelector');
+  });
+
   // test('throws when .input you can\'t type in is given', () => {
   //   setStub();
   //   function init() {
@@ -85,11 +96,9 @@ describe('Instance-less usage', () => {
   //       find: '.result',
   //       instant: true,
   //       input: qs
-  //     });
-  //
+  //     }).start();
   //     input('bla', document.querySelector(qs));
   //   }
-  //
   //   expect(init).toThrowError('The Holmes input was no <input> or contenteditable.');
   // });
 

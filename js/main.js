@@ -366,10 +366,16 @@ class Holmes {
    * @function start
    * @throws {Error} If a there was no options.find
    * @throws {Error} If the placeholder couldn't be inserted
+   * @throws {Error} If the .input isn't valid
    * @memberOf holmes
    */
   start() {
-    this.input = document.querySelector(this.options.input);
+    const _input = document.querySelector(this.options.input);
+    if (_input instanceof HTMLElement) {
+      this.input = _input;
+    } else {
+      throw new Error('Your Holmes.input didn\'t match a querySelector');
+    }
 
     if (typeof this.options.find === 'string') {
       this.elements = document.querySelectorAll(this.options.find);

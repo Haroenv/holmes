@@ -36,67 +36,15 @@
     "plugins": [
       "flowtype"
     ],
-    "rules": {
-      "flowtype/boolean-style": [
-        2,
-        "boolean"
-      ],
-      "flowtype/define-flow-type": 1,
-      "flowtype/delimiter-dangle": [
-        2,
-        "never"
-      ],
-      "flowtype/generic-spacing": [
-        2,
-        "never"
-      ],
-      "flowtype/no-weak-types": 2,
-      "flowtype/object-type-delimiter": [
-        2,
-        "comma"
-      ],
-      "flowtype/require-parameter-type": 2,
-      "flowtype/require-return-type": [
-        2,
-        "always",
-        {
-          "annotateUndefined": "never"
-        }
-      ],
-      "flowtype/require-valid-file-annotation": 2,
-      "flowtype/semi": [
-        2,
-        "always"
-      ],
-      "flowtype/space-after-type-colon": [
-        2,
-        "always"
-      ],
-      "flowtype/space-before-generic-bracket": [
-        2,
-        "never"
-      ],
-      "flowtype/space-before-type-colon": [
-        2,
-        "never"
-      ],
-      "flowtype/type-id-match": [
-        2,
-        "^([A-Z][a-z0-9]+)+Type$"
-      ],
-      "flowtype/union-intersection-spacing": [
-        2,
-        "always"
-      ],
-      "flowtype/use-flow-type": 1,
-      "flowtype/valid-syntax": 1
-    },
     "settings": {
       "flowtype": {
         "onlyFilesWithFlowAnnotation": true
       }
     },
-    "extends": "xo-space/browser"
+    "extends": [
+      "plugin:flowtype/recommended",
+      "xo-space/browser"
+    ]
   },
   "bugs": {
     "url": "https://github.com/Haroenv/holmes/issues"
@@ -112,13 +60,13 @@
     "coveralls": "^2.11.12",
     "eslint": "^3.13.1",
     "eslint-config-xo-space": "^0.15.0",
-    "eslint-plugin-flowtype": "^2.29.2",
-    "flow-bin": "^0.36.0",
+    "eslint-plugin-flowtype": "^2.30.0",
+    "flow-bin": "^0.37.0",
     "hopsdoc": "haroenv/hopsdoc#v0.1.9",
     "jest": "^18.1.0",
     "jsdoc": "^3.4.0",
     "jsdoc-babel": "^0.2.1",
-    "rollup": "^0.41.1",
+    "rollup": "^0.41.4",
     "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-flow": "^1.1.1",
     "rollup-plugin-uglify": "^1.0.1"
