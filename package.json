@@ -112,7 +112,7 @@
     "coveralls": "^2.11.12",
     "eslint": "^3.13.1",
     "eslint-config-xo-space": "^0.15.0",
-    "eslint-plugin-flowtype": "^2.29.2",
+    "eslint-plugin-flowtype": "^2.30.0",
     "flow-bin": "^0.37.0",
     "hopsdoc": "haroenv/hopsdoc#v0.1.9",
     "jest": "^18.1.0",
