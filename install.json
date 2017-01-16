@@ -5,7 +5,7 @@
       "src": "js/holmes.js"
     }, {
       "type": "script",
-      "contents": "holmes(INSTALL_OPTIONS)"
+      "contents": "var h = new holmes(INSTALL_OPTIONS)"
     }]
   },
   "options": {
@@ -45,15 +45,20 @@
         "default": false,
         "description": "if true, this will refresh the content every search"
       },
-      "contenteditable": {
+      "mark": {
         "type": "boolean",
         "default": false,
-        "description": "needs to be true if the input is a contenteditable field instead of an input"
+        "description": "highlight the matching text"
       },
-      "instant": {
+      "minCharacters": {
+        "type": "number",
+        "default": 0,
+        "description": "minimum amount of characters needed for Holmes to start matching"
+      },
+      "hiddenAttr": {
         "type": "boolean",
-        "default": true,
-        "description": "in case you don't want to wait for DOMContentLoaded before starting Holmes"
+        "default": false,
+        "description": "use [hidden] as well to hide non-matching elements without css changes"
       }
     }
   }
