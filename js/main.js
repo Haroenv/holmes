@@ -1,5 +1,5 @@
 // @flow
-import {toFactory} from './util.js';
+import {toFactory, stringIncludes} from './util.js';
 import type {OptionsType} from './types.js';
 
 /**
@@ -222,7 +222,7 @@ class Holmes {
       this.elementsArray.forEach((element: HTMLElement) => {
         // if the current element doesn't contain the search string
         // add the hidden class and remove the visbible class
-        if (element.textContent.toLowerCase().includes(this.searchString)) {
+        if (stringIncludes(element.textContent.toLowerCase(), this.searchString)) {
           this._showElement(element);
 
           if (empty && typeof this.options.onFound === 'function') {
