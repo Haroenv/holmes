@@ -67,7 +67,6 @@
     "jsdoc-babel": "^0.2.1",
     "rollup": "^0.41.4",
     "rollup-plugin-babel": "^2.7.1",
-    "rollup-plugin-flow": "^1.1.1",
     "rollup-plugin-uglify": "^1.0.1"
   }
 }
