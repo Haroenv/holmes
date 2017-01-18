@@ -3,7 +3,6 @@
   "version": "1.16.2",
   "description": "Fast and easy searching inside a page.",
   "main": "js/holmes.js",
-  "jsnext:main": "js/main.js",
   "files": [
     "js/holmes.js",
     "js/main.js"
