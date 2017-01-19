@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<!-- @author Haroen <hello@haroen.me> -->
+<html lang="en">
+
+<head>
+  <title>Holmes</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+  <link href='https://fonts.googleapis.com/css?family=Vidaloka' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <header>
+    <h1>
+      <a href="https://github.com/Haroenv/holmes/">Holmes</a>
+      <img src="images/holmes_logo-hover.svg" alt="Holmes Logo">
+    </h1>
+    <p>Fast and easy searching inside a page.</p>
+  </header>
+  <span class="separator" data-category="Installation"></span>
+  <pre><code class="microlight">
+$ npm install holmes.js
+    </code></pre>
+  <pre><code class="microlight">
+holmes({
+  find: '.results blockquote'
+});
+    </code></pre>
+    <pre><code class="microlight hidden" id="full-doc">
+holmes({
+  // queryselector for the input
+  input: '.search input',
+  // queryselector for element to search in
+  find: '.results article',
+  // (optional) text to show when no results
+  placeholder: 'no results',
+  class: {
+    // (optional) class to add to matched elements
+    visible: 'visible',
+    // (optional) class to add to non-matched elements
+    hidden: 'hidden'
+  },
+  // (optional) if true, this will refresh the content every search
+  dynamic: false,
+  // (optional) in case you don't want to wait for DOMContentLoaded before starting Holmes:
+  instant: true,
+  // (optional) if you want to start searching after a certain amount of characters are typed
+  minCharacters: 5
+});
+    </code></pre>
+  <a href="doc/holmes.html" id="more">more options</a> and <a href="doc/holmes.html">full documentation</a>
+  <span class="separator" data-category="Demo"></span>
+
+  <div class="search">
+    <input type="search" placeholder="search here" required>
+
+    <div class="controls">
+      <button class="visible" data-tooltip="Use of the .visible class"><span class="icon">visible</span></button>
+      <button class="mark" data-tooltip="Mark / highlight mode"><span class="icon">highlight</span></button>
+    </div>
+  </div>
+  <div class="results">
+    <blockquote>
+      ‘My name is Sherlock Holmes. It is my business to know what other people don’t know.’
+      <cite> — The Adventure of the Blue Carbuncle</cite>
+    </blockquote>
+    <blockquote>
+      ‘I am the last and highest court of appeal in detection.’
+      <cite> — The Sign of Four Chapter 1: “The Science of Deduction”</cite>
+    </blockquote>
+    <blockquote>
+      ‘There is nothing like first-hand evidence.’
+      <cite> — A Study in Scarlet</cite>
+    </blockquote>
+    <blockquote>
+      “The world is full of obvious things which nobody by any chance ever observes.”
+      <cite> — The Hound of the Baskervilles Chapter 3: “The Problem”</cite>
+    </blockquote>
+    <blockquote>
+      ‘You see, but you do not observe. The distinction is clear.’
+      <cite> — A Scandal in Bohemia</cite>
+    </blockquote>
+    <blockquote>
+      ‘It is a capital mistake to theorize before one has data. Insensibly one begins to twist facts to suit theories, instead of theories to suit facts.’
+      <cite> — A Scandal in Bohemia</cite>
+    </blockquote>
+    <blockquote>
+      ‘I never guess. It is a shocking habit,—destructive to the logical faculty.’
+      <cite> — The Sign of Four Chapter 2: “The Science of Deduction”</cite>
+    </blockquote>
+    <blockquote>
+      ‘You know my method. It is founded upon the observation of trifles.’
+      <cite> — The Bascombe Valley Mystery</cite>
+    </blockquote>
+    <blockquote>
+      ‘There is nothing more deceptive than an obvious fact.’
+      <cite> — The Bascombe Valley Mystery</cite>
+    </blockquote>
+    <blockquote>
+      “‘Is there any point to which you would wish to draw my attention?’ ‘To the curious incident of the dog in the night-time.’ ‘The dog did nothing in the night-time.’ ‘That was the curious incident,’ remarked Sherlock Holmes.'” Exchange between Inspector Gregory &Sherlock Holmes
+      <cite> — Silver Blaze</cite>
+    </blockquote>
+    <blockquote>
+      ‘Eliminate all other factors, and the one which remains must be the truth.’
+      <cite> — The Sign of Four Chapter 1: “The Science of Deduction”</cite>
+    </blockquote>
+    <blockquote>
+      ‘How often have I said to you that when you have eliminated the impossible, whatever remains,however improbable, must be the truth?’
+      <cite> — The Sign of Four Chapter 6: “Sherlock Holmes Gives a Demonstration</cite>
+    </blockquote>
+    <blockquote>
+      ‘…when you have eliminated all which is impossible, then whatever remains, however improbable, must be the truth.’
+      <cite> — The Blanched Soldier</cite>
+    </blockquote>
+    <blockquote>
+      ‘It is an old maxim of mine that when you have excluded the impossible, whatever remains, however improbable, must be the truth.’
+      <cite> — The Beryl Coronet</cite>
+    </blockquote>
+    <blockquote>
+      ‘Come, Watson, come!’ he cried. ‘The game is afoot. Not a word! Into your clothes and come!’
+      <cite> — The Adventure of the The Abbey Grange</cite>
+    </blockquote>
+    <blockquote>
+      “Data! Data! Data!” he cried impatiently. “I can’t make bricks without clay.”
+      <cite> — The Adventure of the Copper Beeches</cite>
+    </blockquote>
+    <blockquote>
+      ‘I cannot live without brain-work. What else is there to live for?’
+      <cite> — The Sign of Four</cite>
+    </blockquote>
+    <blockquote>
+      ‘They say that genius is an infinite capacity for taking pains,’ he remarked with a smile. ‘It’s a very bad definition, but it does apply to detective work.’
+      <cite> — A Study in Scarlet</cite>
+    </blockquote>
+    <blockquote>
+      ‘There is nothing new under the sun. It has all been done before.’
+      <cite> — A Study in Scarlet</cite>
+    </blockquote>
+    <blockquote>
+      ‘I ought to know by this time that when a fact appears to be opposed to a long train of deductions it invariably proves to be capable of bearing some other interpretation.’
+      <cite> — A Study in Scarlet Chapter 3: “Light in the Darkness”</cite>
+    </blockquote>
+    <blockquote>
+      ‘Which is it today,’ I asked, ‘morphine or cocaine?’ He raised his eyes languidly from the old black-leather volume which he had opened. ‘It is cocaine,’ he said, ‘a seven-per-cent solution. Would you like to try it?’ Dr. Watson and
+      <cite> — The Sign of Four Chapter 1: “The Science of Deduction”</cite>
+    </blockquote>
+    <blockquote>
+      ‘I never make exceptions. An exception disproves the rule.’
+      <cite> — The Sign of Four Chapter 2: “The Statement of the Case’</cite>
+    </blockquote>
+    <blockquote>
+      Holmes took his revolver from his drawer and slipped it in his pocket. It was clear that he thought that our night’s work might be a serious one. Observation of Dr. Watson
+      <cite> — The Sign of Four Chapter 3: “In Quest of a Solution”</cite>
+    </blockquote>
+    <blockquote>
+      So silent and furtive were his movements, like those of a trained bloodhound picking out a scent, that I could not but think what a terrible criminal he would have made had he turned his energy and sagacity against the law instead of exerting them in its defence. Observation of Dr. Watson
+      <cite> — The Sign of Four Chapter 6: “Sherlock Holmes Gives a Demonstration”</cite>
+    </blockquote>
+    <blockquote>
+      ‘I listen to their story, they listen to my comments, and then I pocket my fee.’
+      <cite> — A Study in Scarlet Chapter 2: “The Science of Deduction”</cite>
+    </blockquote>
+    <blockquote>
+      ‘What one man can invent another can discover.’
+      <cite> — The Adventure of the Dancing Man</cite>
+    </blockquote>
+    <blockquote>
+      ‘The emotional qualities are atagonistic to clear reasoning.’
+      <cite> — The Sign of Four</cite>
+    </blockquote>
+    <blockquote>
+      ‘I think that there are certain crimes which the law cannot touch, and which therefore, to some extent, justify private revenge.’
+      <cite> — The Adventure of Charles Augustus Milverton</cite>
+    </blockquote>
+    <blockquote>
+      ‘What object is served by this circle of misery and violence and fear? It must tend to some end, or else our universe is ruled by chance, which is unthinkable.’
+      <cite> — The Cardboard Box</cite>
+    </blockquote>
+    <blockquote>
+      When I glanced again his face had resumed that red-Indian composure which had made so many regard him as a machine rather than a man. Dr. Watson Observing Sherlock Holmes
+      <cite> — The Crooked Man</cite>
+    </blockquote>
+    <blockquote>
+      ‘Having gathered these facts, Watson, I smoked several pipes over them, trying to separate those which were crucial from others which were merely incidental.’
+      <cite> — The Crooked Man</cite>
+    </blockquote>
+    <blockquote>
+      He [Holmes] loved to lie in the very centre of five millions of people, with his filaments stretching out and running through them, responsive to every little rumor or suspicion of unsolved crime. Dr. Watson’s Observation of Sherlock Holmes
+      <cite> — The Resident Patient</cite>
+    </blockquote>
+    <blockquote>
+      ‘My mind is like a racing engine, tearing itself to pieces because it is not connected up with the work for which it was built.’
+      <cite> — The Man with the Twisted Lip</cite>
+    </blockquote>
+    <blockquote>
+      “My mind,” he said, “rebels at stagnation. Give me problems, give me work, give me the most abstruse cryptogram or the most intricate analysis, and I am in my own proper atmosphere. I can dispense then with artificial stimulants. But I abhor the dull routine of existence. I crave for mental exaltation. That is why I have chosen my own particular profession,—or rather created it, for I am the only one in the world.”
+      <cite> — The Sign of Four Chapter 1: “The Science of Deduction”</cite>
+    </blockquote>
+    <blockquote>
+      ‘When a doctor does go wrong, he is the first of criminals. He has the nerve and he has the knowledge.’
+      <cite> — The Adventure of the Speckled Band</cite>
+    </blockquote>
+    <blockquote>
+      ‘Nothing clears up a case so much as stating it to another person.’
+      <cite> — Silver Blaze</cite>
+    </blockquote>
+    <blockquote>
+      ‘I think that you know me well enough, Watson, to understand that I am by no means a nervous man. At the same time, it is stupidity rather than courage to refuse to recognize danger when it is close upon you.’
+      <cite> — The Final Problem</cite>
+    </blockquote>
+    <blockquote>
+      ‘I confess that I have been blind as a mole, but it is better to learn wisdom late than never to learn it at all.’
+      <cite> — The Man with the Twisted Lip</cite>
+    </blockquote>
+    <blockquote>
+      ‘A man should keep his little brain attic stocked with all the furniture that he is likely to use, and the rest he can put away in the lumber-room of his library where he can get it if he wants.’
+      <cite> — The Five Orange Pips</cite>
+    </blockquote>
+    <blockquote>
+      ‘It has long been an axiom of mine that the little things are infinitely the most important.’
+      <cite> — A Case of Identity</cite>
+    </blockquote>
+    <blockquote>
+      ‘It is my belief, Watson, founded upon my experience, that the lowest and vilest alleys in London do not present a more dreadful record of sin than does the smiling and beautiful countryside.’
+      <cite> — The Copper Beeches</cite>
+    </blockquote>
+  </div>
+  <span class="separator"></span>
+  <footer>
+    <p><a target="_blank" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fharoen.me%2Fholmes&text=Holmes%3A+Fast+and+easy+searching+inside+a+page.&via=haroenv">share on twitter</a></p>
+    <p>Idea by <a href="https://haroen.me">Haroen Viaene</a> - Design by <a href="http://twitter.com/lukyvj">Lucas Bonomi</a> <span class="pull-right"><a href="https://github.com/Haroenv/holmes/blob/gh-pages/.credits">credits</a> - <a href="https://github.com/Haroenv/holmes/">github</a></span></p>
+  </footer>
+  <script src="js/microlight.js"></script>
+  <script type="module">
+  import holmes from './js/holmes.es.js';
+  // holmes setup
+  const h = new holmes({
+    input: '.search input',
+    find: '.results blockquote',
+    placeholder: '<h3>— No results, my dear Watson. —</h3>',
+    mark: false,
+    hiddenAttr: true,
+    class: {
+      visible: 'visible',
+      hidden: 'hidden'
+    },
+    onHidden(el) {
+      console.log('hidden', el);
+    },
+    onFound(el) {
+      console.log('found', el);
+    },
+    onInput(el) {
+      console.log('input', el);
+    },
+    onVisible(el) {
+      console.log('visible', el);
+    },
+    onEmpty(el) {
+      console.log('empty', el);
+    }
+  });
+
+  // show all of the options
+  document.getElementById('more').addEventListener('click',function(e){
+    e.preventDefault();
+    document.getElementById('full-doc').classList.toggle('hidden');
+  });
+
+  // Toggle clicked class
+  var actions = document.querySelectorAll('[data-tooltip]');
+
+  for (var i = 0; i < actions.length; i++ ) {
+    actions[i].addEventListener('click', function() {
+      if (this.classList.contains('clicked')) {
+        this.classList.remove('clicked')
+      } else {
+        this.classList.add('clicked')
+      }
+    })
+  }
+
+  // toggle for showing hidden elements
+  document.querySelector('.visible').addEventListener('click', function(e) {
+    document.querySelector('.results').classList.toggle('classes');
+  });
+
+  document.querySelector('.mark').addEventListener('click',function(){
+    h.stop().then(function(){
+      h.options.mark = !h.options.mark;
+      h.start();
+      // hack to make it run at button click
+      h.input.dispatchEvent(new Event('input'));
+    })
+  });
+  </script>
+</body>
+
+</html>
