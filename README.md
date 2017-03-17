@@ -277,9 +277,11 @@ I'd love to find out how people use my project, [let me know](https://github.com
 
 ### Questions?
 
-Compatible up to IE9. For support of older browsers you'll need to polyfill `classList`, `addEventListener` and the `input` event with for example [remy/polyfills](https://github.com/remy/polyfills). I haven't tried this myself yet, so let me know what you used if you support older browsers!
+Compatible up to IE11. For support of older browsers you'll need to polyfill `classList`, `addEventListener` and the `input` event with for example [remy/polyfills](https://github.com/remy/polyfills). I haven't tried this myself yet, so let me know what you used if you support older browsers!
 
-Let me know on twitter: [@haroenv](https://twitter.com/haroenv).
+For IE11 you need to polyfill `Object.assign` and `String.includes`, you can do that as described in [#90](https://github.com/Haroenv/holmes/issues/90)
+
+Let me know on twitter: [@haroenv](https://twitter.com/haroenv), or in an issue.
 
 ## Contributing
 
