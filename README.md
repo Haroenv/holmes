@@ -4,7 +4,7 @@
 
 [![Build Status](https://travis-ci.org/Haroenv/holmes.svg?branch=gh-pages)](https://travis-ci.org/Haroenv/holmes)
 [![Coverage Status](https://coveralls.io/repos/github/Haroenv/holmes/badge.svg)](https://coveralls.io/github/Haroenv/holmes)
-[![npm version](https://badge.fury.io/js/holmes.js.svg)](https://www.npmjs.com/package/holmes.js)
+[![npm version](https://badge.fury.io/js/holmes.js.svg)](https://yarnpkg.com/en/package/holmes.js)
 [![Bower version](https://badge.fury.io/bo/holmes.js.svg)](https://badge.fury.io/bo/holmes.js)
 [![Join the chat at https://gitter.im/Haroenv/holmes](https://badges.gitter.im/Haroenv/holmes.svg)](https://gitter.im/Haroenv/holmes?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![devDependencies Status](https://david-dm.org/haroenv/holmes/dev-status.svg)](https://david-dm.org/haroenv/holmes?type=dev)
