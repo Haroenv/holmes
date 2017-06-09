@@ -32,6 +32,7 @@
     padding: $padding-y $padding-x;
     border-radius: inherit;
     color: currentColor;
+    width: calc(100% + #{$padding-x * 2});
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
