@@ -5,12 +5,12 @@ export default {
   plugins: [
     babel({
       babelrc: false,
-      presets: ['es2015-rollup','babili'],
+      presets: ['es2015-rollup', 'babili'],
       plugins: ['transform-flow-strip-types']
     })
   ],
   targets: [
-    { dest: 'js/holmes.js', format: 'umd', moduleName: 'holmes' },
-    { dest: 'js/holmes.es.js', format: 'es' }
+    {dest: 'js/holmes.js', format: 'umd', moduleName: 'holmes'},
+    {dest: 'js/holmes.es.js', format: 'es'}
   ]
 };

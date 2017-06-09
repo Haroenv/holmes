@@ -1,3 +1,5 @@
+// @flow
+
 export type OnChangeType = (object: HTMLElement) => void;
 export type OnInputType = (input: string) => void;
 

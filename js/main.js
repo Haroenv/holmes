@@ -92,14 +92,26 @@ class Holmes {
 
     if (typeof options !== 'object') {
       throw new Error(
-        'The options need to be given inside an object like this:\nnew Holmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html'
+        `The options need to be given inside an object like this:
+
+new Holmes({
+  find:".result"
+});
+
+see also https://haroen.me/holmes/doc/holmes.html`
       );
     }
 
     // if this.options.find is missing, the searching won't work so we'll thrown an exceptions
     if (typeof options.find !== 'string') {
       throw new Error(
-        'A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like: \nnew Holmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html'
+        `A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like:
+
+new Holmes({
+  find:".result"
+});
+
+see also https://haroen.me/holmes/doc/holmes.html`
       );
     }
 
@@ -222,7 +234,9 @@ class Holmes {
       this.elementsArray.forEach((element: HTMLElement) => {
         // if the current element doesn't contain the search string
         // add the hidden class and remove the visbible class
-        if (stringIncludes(element.textContent.toLowerCase(), this.searchString)) {
+        if (
+          stringIncludes(element.textContent.toLowerCase(), this.searchString)
+        ) {
           this._showElement(element);
 
           if (empty && typeof this.options.onFound === 'function') {
@@ -374,14 +388,20 @@ class Holmes {
     if (_input instanceof HTMLElement) {
       this.input = _input;
     } else {
-      throw new Error('Your Holmes.input didn\'t match a querySelector');
+      throw new Error(`Your Holmes.input didn't match a querySelector`);
     }
 
     if (typeof this.options.find === 'string') {
       this.elements = document.querySelectorAll(this.options.find);
     } else {
       throw new Error(
-        'A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like:\nnew Holmes({\n\tfind:".result"\n});\nsee also https://haroen.me/holmes/doc/holmes.html'
+        `A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like:
+
+new Holmes({
+  find:".result"
+});
+
+see also https://haroen.me/holmes/doc/holmes.html`
       );
     }
 
@@ -403,16 +423,17 @@ class Holmes {
     this.hidden = 0;
 
     // create a container for a placeholder if needed
-    if (this.options.placeholder) {
+    if (typeof this.options.placeholder === 'string') {
+      const holder: string = this.options.placeholder;
       this.placeholderNode = document.createElement('div');
       this.placeholderNode.id = 'holmes-placeholder';
       this._hideElement(this.placeholderNode);
-      this.placeholderNode.innerHTML = this.options.placeholder;
+      this.placeholderNode.innerHTML = holder;
       if (this.elements[0].parentNode instanceof Element) {
         this.elements[0].parentNode.appendChild(this.placeholderNode);
       } else {
         throw new Error(
-          'The Holmes placeholder could\'t be put; the elements had no parent.'
+          `The Holmes placeholder couldn't be put; the elements had no parent.`
         );
       }
     }
@@ -493,7 +514,7 @@ class Holmes {
    * @return {object} all matching elements, the amount of hidden and the amount of visible elements
    * @memberOf holmes
    */
-  count(): { all: number, hidden: number, visible: number } {
+  count(): {all: number, hidden: number, visible: number} {
     return {
       all: this.elementsLength,
       hidden: this.hidden,

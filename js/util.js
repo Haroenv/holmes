@@ -1,25 +1,28 @@
-const _global = typeof window !== 'undefined' ? window : global;
+// @flow
+
+const _global = typeof window === 'undefined' ? global : window;
 
 /**
  * makes sure that a class can be used as a function
  * @param  {class} Class    The class to transform
  * @return {function}       Transformed class
  */
-export function toFactory(Class) {
+// $FlowIssue something weird here
+export function toFactory(_class: Class): Function {
+  // eslint-disable-next-line space-before-function-paren
   const Factory = function(...args) {
     let result;
-    if (typeof this !== 'undefined' && this !== (_global)) {
-      result = Class.call(this, ...args);
+    if (typeof this !== 'undefined' && this !== _global) {
+      result = _class.call(this, ...args);
     } else {
-      result = new Class(...args)
+      result = new _class(...args);
     }
     return result;
-  }
-  Factory.__proto__ = Class
-  Factory.prototype = Class.prototype
-  return Factory
+  };
+  Factory.__proto__ = _class;
+  Factory.prototype = _class.prototype;
+  return Factory;
 }
 
-export const stringIncludes = (str: string, search: string) => {
-  return str.indexOf(search) !== -1;
-};
+export const stringIncludes = (str: string, search: string) =>
+  str.indexOf(search) !== -1;
