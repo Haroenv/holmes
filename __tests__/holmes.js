@@ -2,21 +2,21 @@
 const fs = require('fs');
 
 import holmes from '../js/main.js';
-const Holmes = holmes; // capital 😡
+const Holmes = holmes; // capital >:(
 
 /**
  * Set the html stub
- */ const stub = fs
-  .readFileSync('./__tests__/stub.html')
-  .toString();
+ */
+const stub = fs.readFileSync('./__tests__/stub.html').toString();
 
 function setStub() {
   document.body.innerHTML = stub;
-} /**
+}
+/**
  * Enter a string into this Holmes input
  * @param  {string}      text text to input
  * @param  {HTMLElement} element to input in (optional)
- * @return {Promise}     resolves when the input has been doen
+ * @return {Promise}     resolves when the input has been done
  */
 function input(text, input) {
   let holmesInput = document.getElementById('search');
