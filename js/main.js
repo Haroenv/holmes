@@ -176,9 +176,7 @@ see also https://haroen.me/holmes/doc/holmes.html`
      */
     this.running = false;
 
-    window.addEventListener('DOMContentLoaded', () => {
-      this.start();
-    });
+    window.addEventListener('DOMContentLoaded', () => this.start());
 
     /**
      * Input event handler
@@ -194,7 +192,7 @@ see also https://haroen.me/holmes/doc/holmes.html`
       let found: boolean = false;
 
       /**
-       * Lowercase string holmes searces for
+       * Lowercase string holmes searches for
        * @member searchString
        * @memberOf holmes
        * @type {string}
@@ -233,7 +231,7 @@ see also https://haroen.me/holmes/doc/holmes.html`
       // Loop over all the elements
       this.elementsArray.forEach((element: HTMLElement) => {
         // If the current element doesn't contain the search string
-        // add the hidden class and remove the visbible class
+        // add the hidden class and remove the visible class
         if (
           stringIncludes(element.textContent.toLowerCase(), this.searchString)
         ) {
@@ -458,8 +456,8 @@ see also https://haroen.me/holmes/doc/holmes.html`
    * @throws {Error} If the placeholder couldn't be removed because it has no parent
    * @memberOf holmes
    */
-  stop(): Promise<*> {
-    return new Promise((resolve: *, reject: *) => {
+  stop(): Promise<string | Error> {
+    return new Promise((resolve: string => void, reject: Error => void) => {
       try {
         this.input.removeEventListener('input', this._inputHandler);
 
@@ -468,7 +466,7 @@ see also https://haroen.me/holmes/doc/holmes.html`
           if (this.placeholderNode.parentNode) {
             this.placeholderNode.parentNode.removeChild(this.placeholderNode);
           } else {
-            throw new Error('The Holmes placeholderNode has no parent.');
+            reject(new Error('The Holmes placeholderNode has no parent.'));
           }
         }
 

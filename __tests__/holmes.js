@@ -95,7 +95,7 @@ see also https://haroen.me/holmes/doc/holmes.html`
     });
   });
 
-  test("Throws when you try an input that doens't exist", () => {
+  test("Throws when you try an input that doesn't exist", () => {
     function init() {
       setStub();
       holmes({
