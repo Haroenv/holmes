@@ -1,9 +1,9 @@
 // @flow
 
-const _global = typeof window === 'undefined' ? global : window;
+const _global = typeof window === 'undefined' ? global : window; // eslint-disable-line no-undef
 
 /**
- * makes sure that a class can be used as a function
+ * Makes sure that a class can be used as a function
  * @param  {class} Class    The class to transform
  * @return {function}       Transformed class
  */
@@ -19,7 +19,7 @@ export function toFactory(_class: Class): Function {
     }
     return result;
   };
-  Factory.__proto__ = _class;
+  Factory.__proto__ = _class; // eslint-disable-line no-proto
   Factory.prototype = _class.prototype;
   return Factory;
 }

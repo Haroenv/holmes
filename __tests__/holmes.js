@@ -2,7 +2,7 @@
 const fs = require('fs');
 
 import holmes from '../js/main.js';
-const Holmes = holmes; // capital >:(
+const Holmes = holmes; // Capital >:(
 
 /**
  * Set the html stub
@@ -75,7 +75,7 @@ see also https://haroen.me/holmes/doc/holmes.html`);
     });
 
     _h.stop().then(() => {
-      _h.options.find = false; // not a string, so not a querySelectorAll
+      _h.options.find = false; // Not a string, so not a querySelectorAll
       expect(_h.start).toThrowError(
         `A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like:
 
@@ -100,13 +100,13 @@ see also https://haroen.me/holmes/doc/holmes.html`
       setStub();
       holmes({
         find: '.result',
-        input: 'meme-container' // will not exist
+        input: 'meme-container' // Will not exist
       }).start();
     }
     expect(init).toThrowError("Your Holmes.input didn't match a querySelector");
   });
 
-  // test('throws when .input you can\'t type in is given', () => {
+  // Test('throws when .input you can\'t type in is given', () => {
   //   setStub();
   //   function init() {
   //     const qs = '.result';
@@ -214,7 +214,7 @@ describe('options', () => {
     test("false doesn't add the attribute", () => {
       setStub();
       const find = '.result';
-      Holmes({
+      holmes({
         find,
         hiddenAttr: false
       }).start();
@@ -253,7 +253,7 @@ describe('options', () => {
         }
       }).start();
 
-      // some short input that's surely not in the data
+      // Some short input that's surely not in the data
       return input('qsdf').then(() => {
         const all = document.querySelectorAll(find);
         const visible = document.querySelectorAll(find + '.visible');
@@ -273,7 +273,7 @@ describe('options', () => {
         }
       }).start();
 
-      // some short input that's surely not in the data
+      // Some short input that's surely not in the data
       return input('qsdfg').then(() => {
         const all = document.querySelectorAll(find);
         const hidden = document.querySelectorAll(find + '.hidden');
@@ -308,7 +308,7 @@ describe('options', () => {
 
       return input('special')
         .then(() => {
-          // input empty, this will remove all <mark>s
+          // Input empty, this will remove all <mark>s
           return input('');
         })
         .then(() => {
@@ -342,7 +342,7 @@ describe('options', () => {
 
       return input('some text that hides a lot')
         .then(() => {
-          // clears the input and makes everything visible
+          // Clears the input and makes everything visible
           input('');
         })
         .then(() => {
@@ -383,7 +383,7 @@ describe('options', () => {
 
       return input('some text that hides everything')
         .then(() => {
-          // clears the input and makes everything visible
+          // Clears the input and makes everything visible
           return input('');
         })
         .then(() => {
@@ -468,14 +468,14 @@ describe('Usage with instance', () => {
 
     _h.start = mockStart;
 
-    const DOMContentLoaded_event = document.createEvent('Event');
-    DOMContentLoaded_event.initEvent('DOMContentLoaded', true, true);
-    document.dispatchEvent(DOMContentLoaded_event);
+    const DOMContentLoadedEvent = document.createEvent('Event');
+    DOMContentLoadedEvent.initEvent('DOMContentLoaded', true, true);
+    document.dispatchEvent(DOMContentLoadedEvent);
 
     expect(mockStart).toHaveBeenCalledTimes(1);
   });
 
-  // figure out how to get the last output of a jest.fn()
+  // Figure out how to get the last output of a jest.fn()
   // describe('.minCharacters', () => {
   //   test('less than minimum amount returns undefined', () => {
   //     setStub();
@@ -738,5 +738,5 @@ describe('Usage with instance', () => {
         expect(_h.elementsArray.length).toBe(l + 1);
       });
     });
-  }); // searchString isn't in the prototype // test('input of a contenteditable is valid', () => { //   setStub(); //   const _h = new Holmes({ //     find: '.result', //     input: '#contenteditable' //   }); //   _h.start(); //   const text = 'something'; //   return input(text, document.getElementById('contenteditable')).then(() => { //     expect(_h.searchString).toEqual(text); //   }); // });
+  }); // SearchString isn't in the prototype // test('input of a contenteditable is valid', () => { //   setStub(); //   const _h = new Holmes({ //     find: '.result', //     input: '#contenteditable' //   }); //   _h.start(); //   const text = 'something'; //   return input(text, document.getElementById('contenteditable')).then(() => { //     expect(_h.searchString).toEqual(text); //   }); // });
 });

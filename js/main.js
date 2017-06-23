@@ -35,7 +35,7 @@ class Holmes {
   _inputHandler: EventListener;
 
   /**
-   * search for dom elements on your page
+   * Search for dom elements on your page
    *
    * For legacy reasons, this class is a <code>function</code>, and thus doesn't have a capital
    * You can fix this by using <code>var Holmes = holmes</code> before doing <code>new Holmes</code>.
@@ -102,7 +102,7 @@ see also https://haroen.me/holmes/doc/holmes.html`
       );
     }
 
-    // if this.options.find is missing, the searching won't work so we'll thrown an exceptions
+    // If this.options.find is missing, the searching won't work so we'll thrown an exceptions
     if (typeof options.find !== 'string') {
       throw new Error(
         `A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like:
@@ -181,16 +181,16 @@ see also https://haroen.me/holmes/doc/holmes.html`
     });
 
     /**
-     * input event handler
+     * Input event handler
      * @function _inputHandler
      * @memberOf holmes
      * @private
      */
     this._inputHandler = () => {
-      // input has started to be listened to
+      // Input has started to be listened to
       this.running = true;
 
-      // by default the value isn't found
+      // By default the value isn't found
       let found: boolean = false;
 
       /**
@@ -201,7 +201,7 @@ see also https://haroen.me/holmes/doc/holmes.html`
        */
       this.searchString = this.inputString();
 
-      // if a minimum of characters is required
+      // If a minimum of characters is required
       // check if that limit has been reached
       if (this.options.minCharacters) {
         if (this.searchString.length !== 0) {
@@ -211,7 +211,7 @@ see also https://haroen.me/holmes/doc/holmes.html`
         }
       }
 
-      // if the dynamic option is enabled, then we should query
+      // If the dynamic option is enabled, then we should query
       // for the contents of `elements` on every input
       if (this.options.dynamic) {
         this.elements = document.querySelectorAll(this.options.find);
@@ -230,9 +230,9 @@ see also https://haroen.me/holmes/doc/holmes.html`
         this._regex = new RegExp(`(${this.searchString})(?![^<]*>)`, 'gi');
       }
 
-      // loop over all the elements
+      // Loop over all the elements
       this.elementsArray.forEach((element: HTMLElement) => {
-        // if the current element doesn't contain the search string
+        // If the current element doesn't contain the search string
         // add the hidden class and remove the visbible class
         if (
           stringIncludes(element.textContent.toLowerCase(), this.searchString)
@@ -242,7 +242,7 @@ see also https://haroen.me/holmes/doc/holmes.html`
           if (empty && typeof this.options.onFound === 'function') {
             this.options.onFound(this.placeholderNode);
           }
-          // the element is now found at least once
+          // The element is now found at least once
           found = true;
         } else {
           this._hideElement(element);
@@ -263,7 +263,7 @@ see also https://haroen.me/holmes/doc/holmes.html`
           this._showElement(this.placeholderNode);
         }
 
-        // empty means that there are no results
+        // Empty means that there are no results
         // if the situation isn't yet empty
         // so it's the first time seeing the placeholder
         // we'll emit the onEmpty function
@@ -278,7 +278,7 @@ see also https://haroen.me/holmes/doc/holmes.html`
   }
 
   /**
-   * hide an element
+   * Hide an element
    * @function _hideElement
    * @param  {HTMLElement} element the element to hide
    * @memberOf holmes
@@ -305,7 +305,7 @@ see also https://haroen.me/holmes/doc/holmes.html`
   }
 
   /**
-   * show an element
+   * Show an element
    * @function _showElement
    * @param  {HTMLElement} element the element to show
    * @memberOf holmes
@@ -327,7 +327,7 @@ see also https://haroen.me/holmes/doc/holmes.html`
       element.removeAttribute('hidden');
     }
 
-    // if we need to mark it:
+    // If we need to mark it:
     // remove all <mark> tags
     // add new <mark> tags around the text
     if (this.options.mark) {
@@ -406,7 +406,7 @@ see also https://haroen.me/holmes/doc/holmes.html`
     }
 
     /**
-     * amount of elements to search
+     * Amount of elements to search
      * @member elementsLength
      * @type {Number}
      * @memberOf holmes
@@ -414,7 +414,7 @@ see also https://haroen.me/holmes/doc/holmes.html`
     this.elementsLength = this.elements.length;
 
     /**
-     * all of the elements that are searched as an array
+     * All of the elements that are searched as an array
      * @member elementsArray
      * @type {Array}
      * @memberOf holmes
@@ -422,7 +422,7 @@ see also https://haroen.me/holmes/doc/holmes.html`
     this.elementsArray = Array.prototype.slice.call(this.elements);
     this.hidden = 0;
 
-    // create a container for a placeholder if needed
+    // Create a container for a placeholder if needed
     if (typeof this.options.placeholder === 'string') {
       const holder: string = this.options.placeholder;
       this.placeholderNode = document.createElement('div');
@@ -438,7 +438,7 @@ see also https://haroen.me/holmes/doc/holmes.html`
       }
     }
 
-    // if a visible class is given, give it to everything
+    // If a visible class is given, give it to everything
     if (this.options.class.visible) {
       const vis: string = this.options.class.visible;
       this.elementsArray.forEach((element: HTMLElement) => {
@@ -446,12 +446,12 @@ see also https://haroen.me/holmes/doc/holmes.html`
       });
     }
 
-    // listen for input
+    // Listen for input
     this.input.addEventListener('input', this._inputHandler);
   }
 
   /**
-   * remove the current event listener
+   * Remove the current event listener
    * @function stop
    * @see this.start
    * @return {Promise} resolves when the event is removed
@@ -463,7 +463,7 @@ see also https://haroen.me/holmes/doc/holmes.html`
       try {
         this.input.removeEventListener('input', this._inputHandler);
 
-        // remove placeholderNode
+        // Remove placeholderNode
         if (this.options.placeholder) {
           if (this.placeholderNode.parentNode) {
             this.placeholderNode.parentNode.removeChild(this.placeholderNode);
@@ -472,14 +472,14 @@ see also https://haroen.me/holmes/doc/holmes.html`
           }
         }
 
-        // remove marks
+        // Remove marks
         if (this.options.mark) {
           this.elementsArray.forEach((element: HTMLElement) => {
             element.innerHTML = element.innerHTML.replace(/<\/?mark>/g, '');
           });
         }
 
-        // done
+        // Done
         this.running = false;
         resolve('This instance of Holmes has been stopped.');
       } catch (err) {
@@ -489,7 +489,7 @@ see also https://haroen.me/holmes/doc/holmes.html`
   }
 
   /**
-   * empty the search string programmatically.
+   * Empty the search string programmatically.
    * This avoids having to send a new `input` event
    * @function clear
    * @memberOf holmes
