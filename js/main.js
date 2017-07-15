@@ -2,6 +2,26 @@
 import {toFactory, stringIncludes} from './util.js';
 import type {OptionsType} from './types.js';
 
+const errors = {
+  invalidInput: 'The Holmes input was no <input> or contenteditable.',
+  optionsObject: `The options need to be given inside an object like this:
+
+new Holmes({
+  find:".result"
+});
+
+see also https://haroen.me/holmes/doc/holmes.html`,
+  findOption: `A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like:
+
+new Holmes({
+  find:".result"
+});
+
+see also https://haroen.me/holmes/doc/holmes.html`,
+  noInput: `Your Holmes.input didn't match a querySelector`,
+  impossiblePlaceholder: `The Holmes placeholder couldn't be put; the elements had no parent.`
+};
+
 /**
  * Callback used for changes in item en list states.
  * @callback onChange
@@ -12,12 +32,14 @@ import type {OptionsType} from './types.js';
  *   <code>onFound</code>.
  * @memberOf holmes
  */
+
 /**
  * Callback used for changes in input value
  * @callback onInput
  * @param {string} input The value that is currently in the search field
  * @memberOf holmes
  */
+
 /**
  * @alias holmes
  */
@@ -91,28 +113,12 @@ class Holmes {
     let empty: boolean = false;
 
     if (typeof options !== 'object') {
-      throw new Error(
-        `The options need to be given inside an object like this:
-
-new Holmes({
-  find:".result"
-});
-
-see also https://haroen.me/holmes/doc/holmes.html`
-      );
+      throw new Error(errors.optionsObject);
     }
 
     // If this.options.find is missing, the searching won't work so we'll thrown an exceptions
     if (typeof options.find !== 'string') {
-      throw new Error(
-        `A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like:
-
-new Holmes({
-  find:".result"
-});
-
-see also https://haroen.me/holmes/doc/holmes.html`
-      );
+      throw new Error(errors.findOption);
     }
 
     const defaults = {
@@ -353,7 +359,7 @@ see also https://haroen.me/holmes/doc/holmes.html`
     if (this.input.contentEditable) {
       return this.input.textContent.toLowerCase();
     }
-    throw new Error('The Holmes input was no <input> or contenteditable.');
+    throw new Error(errors.invalidInput);
   }
 
   /**
@@ -369,7 +375,7 @@ see also https://haroen.me/holmes/doc/holmes.html`
     } else if (this.input.contentEditable) {
       this.input.textContent = value;
     } else {
-      throw new Error('The Holmes input was no <input> or contenteditable.');
+      throw new Error(errors.invalidInput);
     }
   }
 
@@ -386,21 +392,13 @@ see also https://haroen.me/holmes/doc/holmes.html`
     if (_input instanceof HTMLElement) {
       this.input = _input;
     } else {
-      throw new Error(`Your Holmes.input didn't match a querySelector`);
+      throw new Error(errors.noInput);
     }
 
     if (typeof this.options.find === 'string') {
       this.elements = document.querySelectorAll(this.options.find);
     } else {
-      throw new Error(
-        `A find argument is needed. That should be a querySelectorAll for each of the items you want to match individually. You should have something like:
-
-new Holmes({
-  find:".result"
-});
-
-see also https://haroen.me/holmes/doc/holmes.html`
-      );
+      throw new Error(errors.findOption);
     }
 
     /**
@@ -430,9 +428,7 @@ see also https://haroen.me/holmes/doc/holmes.html`
       if (this.elements[0].parentNode instanceof Element) {
         this.elements[0].parentNode.appendChild(this.placeholderNode);
       } else {
-        throw new Error(
-          `The Holmes placeholder couldn't be put; the elements had no parent.`
-        );
+        throw new Error(errors.impossiblePlaceholder);
       }
     }
 
@@ -466,7 +462,7 @@ see also https://haroen.me/holmes/doc/holmes.html`
           if (this.placeholderNode.parentNode) {
             this.placeholderNode.parentNode.removeChild(this.placeholderNode);
           } else {
-            reject(new Error('The Holmes placeholderNode has no parent.'));
+            reject(new Error(errors.impossiblePlaceholder));
           }
         }
 
