@@ -65,16 +65,16 @@
     "babel-preset-es2015-rollup": "^3.0.0",
     "babili": "^0.1.4",
     "coveralls": "^2.13.1",
-    "eslint": "^4.0.0",
-    "eslint-config-prettier": "^2.2.0",
+    "eslint": "^4.2.0",
+    "eslint-config-prettier": "^2.3.0",
     "eslint-config-xo-space": "^0.16.0",
-    "eslint-plugin-flowtype": "^2.34.0",
-    "flow-bin": "^0.48.0",
+    "eslint-plugin-flowtype": "^2.35.0",
+    "flow-bin": "^0.50.0",
     "hopsdoc": "^0.1.7",
     "jest": "^20.0.4",
-    "jsdoc": "^3.4.0",
+    "jsdoc": "^3.5.3",
     "jsdoc-babel": "^0.3.0",
-    "rollup": "^0.43.0",
+    "rollup": "^0.45.2",
     "rollup-plugin-babel": "^2.7.1"
   }
 }
