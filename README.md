@@ -16,8 +16,8 @@ Holmes filters a list of elements based on the value of a `input` in just ~2KB.
 
 You can install Holmes with either `npm` or `bower` under the package name `holmes.js`. For `npm` that looks like this:
 
-```
-$ npm install --save holmes.js
+```sh
+$ yarn add holmes.js # or via npm
 ```
 
 After which you can add it in your page with i.e. webpack, rollup, browserify or loading the module in a different script tag.
