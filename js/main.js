@@ -54,7 +54,7 @@ class Holmes {
   placeholderNode: HTMLElement;
   searchString: string;
   _regex: RegExp;
-  _inputHandler: EventListener;
+  search: () => any;
 
   /**
    * Search for dom elements on your page
@@ -185,12 +185,11 @@ class Holmes {
     window.addEventListener('DOMContentLoaded', () => this.start());
 
     /**
-     * Input event handler
-     * @function _inputHandler
+     * Execute a search, this can be used in combination with .setInput()
+     * @function search
      * @memberOf holmes
-     * @private
      */
-    this._inputHandler = () => {
+    this.search = () => {
       // Input has started to be listened to
       this.running = true;
 
@@ -345,6 +344,11 @@ class Holmes {
     }
   }
 
+  _inputHandler() {
+    console.warn('You can now directly call .search() to refresh the results');
+    this.search();
+  }
+
   /**
    * The current search input in lower case
    * @function inputString
@@ -441,7 +445,7 @@ class Holmes {
     }
 
     // Listen for input
-    this.input.addEventListener('input', this._inputHandler);
+    this.input.addEventListener('input', this.search);
   }
 
   /**
@@ -455,7 +459,7 @@ class Holmes {
   stop(): Promise<string | Error> {
     return new Promise((resolve: string => void, reject: Error => void) => {
       try {
-        this.input.removeEventListener('input', this._inputHandler);
+        this.input.removeEventListener('input', this.search);
 
         // Remove placeholderNode
         if (this.options.placeholder) {
