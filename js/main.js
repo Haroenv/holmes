@@ -1,6 +1,6 @@
 // @flow
-import {toFactory, stringIncludes} from './util.js';
-import type {OptionsType} from './types.js';
+import { toFactory, stringIncludes } from './util.js';
+import type { OptionsType } from './types.js';
 
 const errors = {
   invalidInput: 'The Holmes input was no <input> or contenteditable.',
@@ -19,7 +19,7 @@ new Holmes({
 
 see also https://haroen.me/holmes/doc/holmes.html`,
   noInput: `Your Holmes.input didn't match a querySelector`,
-  impossiblePlaceholder: `The Holmes placeholder couldn't be put; the elements had no parent.`
+  impossiblePlaceholder: `The Holmes placeholder couldn't be put; the elements had no parent.`,
 };
 
 /**
@@ -128,7 +128,7 @@ class Holmes {
       mark: false,
       class: {
         visible: undefined,
-        hidden: 'hidden'
+        hidden: 'hidden',
       },
       dynamic: false,
       minCharacters: 0,
@@ -137,7 +137,7 @@ class Holmes {
       onVisible: undefined,
       onEmpty: undefined,
       onFound: undefined,
-      onInput: undefined
+      onInput: undefined,
     };
 
     /**
@@ -508,11 +508,11 @@ class Holmes {
    * @return {object} all matching elements, the amount of hidden and the amount of visible elements
    * @memberOf holmes
    */
-  count(): {all: number, hidden: number, visible: number} {
+  count(): { all: number, hidden: number, visible: number } {
     return {
       all: this.elementsLength,
       hidden: this.hidden,
-      visible: this.elementsLength - this.hidden
+      visible: this.elementsLength - this.hidden,
     };
   }
 }
