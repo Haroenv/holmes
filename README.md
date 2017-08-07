@@ -36,6 +36,19 @@ but this could be any `css` you want.
 
 [demo](https://haroen.me/holmes/)
 
+### When should I use it?
+
+You should use Holmes when 
+
+- you have a limited amount of items
+- you don't need typo-tolerance
+- you only want to add a really small library
+- all items are already visible on the page
+
+In cases where you have a more complicated expectation, I'd suggest using a service like [Algolia](https://github.com/algolia/instantsearch.js).
+
+> Fair disclosure: I currently work at Algolia, does it seem interesting? [Join us!](https://algolia.com/careers)
+
 ### Simple example
 
 ```js
