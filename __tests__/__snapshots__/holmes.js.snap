@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`options defaults are set 1`] = `
+Object {
+  "class": Object {
+    "hidden": "hidden",
+    "visible": undefined,
+  },
+  "dynamic": false,
+  "find": "something",
+  "hiddenAttr": false,
+  "input": "input[type=search]",
+  "mark": false,
+  "minCharacters": 0,
+  "onEmpty": undefined,
+  "onFound": undefined,
+  "onHidden": undefined,
+  "onInput": undefined,
+  "onVisible": undefined,
+  "placeholder": undefined,
+  "shouldShow": [Function],
+}
+`;

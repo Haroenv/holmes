@@ -33,6 +33,7 @@ function input(text, input) {
     resolve('input dispatched.');
   });
 }
+
 describe('Instance-less usage', () => {
   test('throws without options', () => {
     setStub();
@@ -106,19 +107,23 @@ see also https://haroen.me/holmes/doc/holmes.html`
     expect(init).toThrowError("Your Holmes.input didn't match a querySelector");
   });
 
-  // Test('throws when .input you can\'t type in is given', () => {
-  //   setStub();
-  //   function init() {
-  //     const qs = '.result';
-  //     holmes({
-  //       find: '.result',
-  //       instant: true,
-  //       input: qs
-  //     }).start();
-  //     input('bla', document.querySelector(qs));
-  //   }
-  //   expect(init).toThrowError('The Holmes input was no <input> or contenteditable.');
-  // });
+  test.skip("throws when .input you can't type in is given", () => {
+    setStub();
+    function init() {
+      const qs = '.result';
+      holmes({
+        find: '.result',
+        instant: true,
+        input: qs
+      }).start();
+
+      input('bla', document.querySelector(qs));
+    }
+    expect(init).toThrowError(
+      'The Holmes input was no <input> or contenteditable.'
+    );
+  });
+
   test('works with contenteditable', () => {
     setStub();
     holmes({
@@ -149,24 +154,7 @@ describe('options', () => {
     const _h = new Holmes({
       find: 'something'
     });
-    expect(_h.options).toEqual({
-      input: 'input[type=search]',
-      find: 'something',
-      placeholder: undefined,
-      mark: false,
-      class: {
-        visible: undefined,
-        hidden: 'hidden'
-      },
-      dynamic: false,
-      minCharacters: 0,
-      hiddenAttr: false,
-      onHidden: undefined,
-      onVisible: undefined,
-      onEmpty: undefined,
-      onFound: undefined,
-      onInput: undefined
-    });
+    expect(_h.options).toMatchSnapshot();
   });
 
   test('.visible on initialisation', () => {
@@ -445,6 +433,28 @@ describe('options', () => {
       });
     });
   });
+
+  test.skip('.shouldShow which hides everything', () => {
+    setStub();
+    holmes({
+      shouldShow(t, v) {
+        console.log(t, v);
+        return false;
+      },
+      class: {
+        visible: 'visible',
+        hidden: 'hidden'
+      },
+      find: '.result'
+    });
+
+    return input(' ').then(() => {
+      const results = document.querySelectorAll('.result');
+      results.forEach(el => {
+        expect(el.classList.contains('hidden')).toBe(true);
+      });
+    });
+  });
 });
 
 describe('Usage with instance', () => {
@@ -476,22 +486,26 @@ describe('Usage with instance', () => {
   });
 
   // Figure out how to get the last output of a jest.fn()
-  // describe('.minCharacters', () => {
-  //   test('less than minimum amount returns undefined', () => {
-  //     setStub();
-  //     const find = '.result';
-  //     const _h = new Holmes({
-  //       find,
-  //       minCharacters: 5
-  //     });
-  //     _h.start();
-  //     _h._inputHandler = jest.fn();
-  //     // some short input that's surely not in the data
-  //     return input('qsdf').then(() => {
-  //       expect(_h._inputHandler).toBeUndefined(); // somehow this should be the last return value of ._inputHandler
-  //     });
-  //   });
-  // });
+  describe('.minCharacters', () => {
+    test.skip('less than minimum amount returns undefined', () => {
+      setStub();
+      const find = '.result';
+      const _h = new Holmes({
+        find,
+        minCharacters: 5
+      });
+      _h.start();
+      _h._inputHandler = jest.fn();
+      console.log(_h._inputHandler.mock.calls);
+      // Some short input that's surely not in the data
+      return input('qsdf').then(() => {
+        // Somehow this should be the last return value of ._inputHandler
+        const calls = _h._inputHandler.mock.calls;
+        expect(calls[calls.length]).toBeUndefined();
+      });
+    });
+  });
+
   describe('.clear()', () => {
     test('empties the input', () => {
       setStub();
@@ -738,5 +752,18 @@ describe('Usage with instance', () => {
         expect(_h.elementsArray.length).toBe(l + 1);
       });
     });
-  }); // SearchString isn't in the prototype // test('input of a contenteditable is valid', () => { //   setStub(); //   const _h = new Holmes({ //     find: '.result', //     input: '#contenteditable' //   }); //   _h.start(); //   const text = 'something'; //   return input(text, document.getElementById('contenteditable')).then(() => { //     expect(_h.searchString).toEqual(text); //   }); // });
+  });
+  // Skipped because jsDom doesn't implement contenteditable
+  test.skip('input of a contenteditable is valid', () => {
+    setStub();
+    const _h = new Holmes({
+      find: '.result',
+      input: '#contenteditable'
+    });
+    _h.start();
+    const text = 'something';
+    return input(text, document.getElementById('contenteditable')).then(() => {
+      expect(_h.inputString()).toEqual(text);
+    });
+  });
 });
