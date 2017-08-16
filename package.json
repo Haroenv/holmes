@@ -1,6 +1,6 @@
 {
   "name": "holmes.js",
-  "version": "1.17.1",
+  "version": "1.17.2",
   "description": "Fast and easy searching inside a page.",
   "main": "js/holmes.js",
   "jsnext:main": "js/holmes.es.js",
