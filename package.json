@@ -55,26 +55,26 @@
   },
   "homepage": "https://haroen.me/holmes/",
   "devDependencies": {
-    "babel-core": "^6.25.0",
+    "babel-core": "^6.26.0",
     "babel-eslint": "^7.2.3",
     "babel-jest": "^20.0.3",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
-    "babel-polyfill": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-babili": "^0.1.4",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-es2015-rollup": "^3.0.0",
     "babili": "^0.1.4",
     "coveralls": "^2.13.1",
-    "eslint": "^4.2.0",
+    "eslint": "^4.4.1",
     "eslint-config-prettier": "^2.3.0",
     "eslint-config-xo-space": "^0.16.0",
     "eslint-plugin-flowtype": "^2.35.0",
-    "flow-bin": "^0.50.0",
+    "flow-bin": "^0.53.0",
     "hopsdoc": "^0.1.7",
     "jest": "^20.0.4",
-    "jsdoc": "^3.5.3",
+    "jsdoc": "^3.5.4",
     "jsdoc-babel": "^0.3.0",
-    "rollup": "^0.45.2",
-    "rollup-plugin-babel": "^2.7.1"
+    "rollup": "^0.47.4",
+    "rollup-plugin-babel": "^3.0.2"
   }
 }
