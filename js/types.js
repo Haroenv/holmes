@@ -6,19 +6,20 @@ export type OnInputType = (input: string) => void;
 export type OptionsType = {
   input: string,
   find: string,
-  placeholder: ?string,
-  mark: ?boolean,
+  placeholder?: string,
+  mark?: boolean,
   class: {
-    visible: ?string,
+    visible?: string,
     hidden: string
   },
-  dynamic: ?boolean,
-  instant: ?boolean,
-  minCharacters: ?number,
-  hiddenAttr: ?boolean,
-  onHidden: ?OnChangeType,
-  onVisible: ?OnChangeType,
-  onEmpty: ?OnChangeType,
-  onFound: ?OnChangeType,
-  onInput: ?OnInputType
+  dynamic?: boolean,
+  instant?: boolean,
+  minCharacters?: number,
+  hiddenAttr?: boolean,
+  shouldShow: (string, string) => boolean,
+  onHidden?: OnChangeType,
+  onVisible?: OnChangeType,
+  onEmpty?: OnChangeType,
+  onFound?: OnChangeType,
+  onInput?: OnInputType
 };

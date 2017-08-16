@@ -1,6 +1,6 @@
 // @flow
-import { toFactory, stringIncludes } from './util.js';
-import type { OptionsType } from './types.js';
+import {toFactory, stringIncludes} from './util.js';
+import type {OptionsType} from './types.js';
 
 const errors = {
   invalidInput: 'The Holmes input was no <input> or contenteditable.',
@@ -19,7 +19,7 @@ new Holmes({
 
 see also https://haroen.me/holmes/doc/holmes.html`,
   noInput: `Your Holmes.input didn't match a querySelector`,
-  impossiblePlaceholder: `The Holmes placeholder couldn't be put; the elements had no parent.`,
+  impossiblePlaceholder: `The Holmes placeholder couldn't be put; the elements had no parent.`
 };
 
 /**
@@ -98,6 +98,10 @@ class Holmes {
    *   Adds <code>hidden="true"</code> to hidden elements. interesting
    *   <a href="https://www.paciellogroup.com/blog/2012/05/html5-accessibility-chops-hidden-and-aria-hidden/">
    *   link</a> explaining its use.
+   * @param {function} [shouldShow]
+   *   A custom matching function to be called with as first argument the text of an element,
+   *   and as second argument the current input text. This should return true if you want the
+   *   element to show, and false if it needs to be hidden
    * @param {onChange} [options.onHidden]
    *   Callback for when an item is hidden.
    * @param {onChange} [options.onVisible]
@@ -128,16 +132,17 @@ class Holmes {
       mark: false,
       class: {
         visible: undefined,
-        hidden: 'hidden',
+        hidden: 'hidden'
       },
       dynamic: false,
       minCharacters: 0,
       hiddenAttr: false,
+      shouldShow: stringIncludes,
       onHidden: undefined,
       onVisible: undefined,
       onEmpty: undefined,
       onFound: undefined,
-      onInput: undefined,
+      onInput: undefined
     };
 
     /**
@@ -238,7 +243,10 @@ class Holmes {
         // If the current element doesn't contain the search string
         // add the hidden class and remove the visible class
         if (
-          stringIncludes(element.textContent.toLowerCase(), this.searchString)
+          this.options.shouldShow(
+            element.textContent.toLowerCase(),
+            this.searchString
+          )
         ) {
           this._showElement(element);
 
@@ -360,7 +368,7 @@ class Holmes {
     if (this.input instanceof HTMLInputElement) {
       return this.input.value.toLowerCase();
     }
-    if (this.input.contentEditable) {
+    if (this.input.isContentEditable) {
       return this.input.textContent.toLowerCase();
     }
     throw new Error(errors.invalidInput);
@@ -376,7 +384,7 @@ class Holmes {
   setInput(value: string) {
     if (this.input instanceof HTMLInputElement) {
       this.input.value = value;
-    } else if (this.input.contentEditable) {
+    } else if (this.input.isContentEditable) {
       this.input.textContent = value;
     } else {
       throw new Error(errors.invalidInput);
@@ -512,11 +520,11 @@ class Holmes {
    * @return {object} all matching elements, the amount of hidden and the amount of visible elements
    * @memberOf holmes
    */
-  count(): { all: number, hidden: number, visible: number } {
+  count(): {all: number, hidden: number, visible: number} {
     return {
       all: this.elementsLength,
       hidden: this.hidden,
-      visible: this.elementsLength - this.hidden,
+      visible: this.elementsLength - this.hidden
     };
   }
 }
