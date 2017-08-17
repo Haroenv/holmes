@@ -149,6 +149,34 @@ To start showing the result in a `<mark>` tag inside the `.find`, you should ena
 
 Adds `hidden="true"` to hidden elements. [Interesting link](https://www.paciellogroup.com/blog/2012/05/html5-accessibility-chops-hidden-and-aria-hidden/) explaining its use.
 
+### `shouldShow`
+
+default match judgment is a partial match of the input value.
+
+```js
+function(htmlText, search) {
+  return htmlText.indexOf(search) !== -1;
+}
+```
+
+A custom matching function to be called with as first argument the text of an element,
+and as second argument the current input text. This should return true if you want the
+element to show, and false if it needs to be hidden.
+
+```js
+var customMatching = function(htmlText, search) {
+  return search.split(/\s+/).every(function(v, i) {
+    if (htmlText.indexOf(v) === -1) {
+      return false;
+    }
+    return true;
+  });
+}
+holmes({
+  shouldShow: customMatching
+})
+```
+
 ### `onHidden`
 
 Callback for when an item is hidden.
