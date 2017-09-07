@@ -9,6 +9,7 @@
 [![Join the chat at https://gitter.im/Haroenv/holmes](https://badges.gitter.im/Haroenv/holmes.svg)](https://gitter.im/Haroenv/holmes?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![devDependencies Status](https://david-dm.org/haroenv/holmes/dev-status.svg)](https://david-dm.org/haroenv/holmes?type=dev)
 [![gzipped size](http://img.badgesize.io/https://unpkg.com/holmes.js?compression=gzip)](https://unpkg.com/holmes.js)
+[![CDNJS version](https://img.shields.io/cdnjs/v/holmes.js.svg?colorB=green)](https://cdnjs.com/libraries/holmes.js)
 
 Holmes filters a list of elements based on the value of a `input` in just ~2KB.
 
