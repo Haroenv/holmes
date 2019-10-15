@@ -250,15 +250,16 @@ class Holmes {
         ) {
           this._showElement(element);
 
-          if (empty && typeof this.options.onFound === 'function') {
-            this.options.onFound(this.placeholderNode);
-          }
           // The element is now found at least once
           found = true;
         } else {
           this._hideElement(element);
         }
       });
+
+      if (found && empty && typeof this.options.onFound === 'function') {
+        this.options.onFound(this.placeholderNode);
+      }
 
       if (typeof this.options.onInput === 'function') {
         this.options.onInput(this.searchString);
