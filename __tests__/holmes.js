@@ -375,7 +375,7 @@ describe('options', () => {
           return input('');
         })
         .then(() => {
-          expect(callback).toHaveBeenCalledTimes(1);
+          expect(callback).toBeCalled();
         });
     });
   });
